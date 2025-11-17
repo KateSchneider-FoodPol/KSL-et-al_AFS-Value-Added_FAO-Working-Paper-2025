@@ -1,0 +1,2728 @@
+Energy Usage (TJ)	Natural Gas	
+Energy Usage (TJ)	Coal	
+Energy Usage (TJ)	Petroleum	
+Energy Usage (TJ)	Nuclear Electricity	
+Energy Usage (TJ)	Hydroelectric Electricity	
+Energy Usage (TJ)	Geothermal Electricity	
+Energy Usage (TJ)	Wind Electricity	
+Energy Usage (TJ)	Solar, Tide and Wave Electricity	
+Energy Usage (TJ)	Biomass and Waste Electricity	
+I-GHG-CO2 emissions (Gg)	Public electricity and heat production	
+I-GHG-CO2 emissions (Gg)	Other Energy Industries	
+I-GHG-CO2 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-CO2 emissions (Gg)	Domestic aviation	
+I-GHG-CO2 emissions (Gg)	Road transportation	
+I-GHG-CO2 emissions (Gg)	Rail transportation	
+I-GHG-CO2 emissions (Gg)	Inland navigation	
+I-GHG-CO2 emissions (Gg)	Other transportation	
+I-GHG-CO2 emissions (Gg)	Residential and other sectors	
+I-GHG-CO2 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-CO2 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-CO2 emissions (Gg)	Memo: International aviation	
+I-GHG-CO2 emissions (Gg)	Memo: International navigation	
+I-GHG-CO2 emissions (Gg)	Production of minerals	
+I-GHG-CO2 emissions (Gg)	Cement production	
+I-GHG-CO2 emissions (Gg)	Lime production	
+I-GHG-CO2 emissions (Gg)	Production of chemicals	
+I-GHG-CO2 emissions (Gg)	Production of metals	
+I-GHG-CO2 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-CO2 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-CO2 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-CO2 emissions (Gg)	Foam Blowing	
+I-GHG-CO2 emissions (Gg)	Fire Extinguishers	
+I-GHG-CO2 emissions (Gg)	Aerosols	
+I-GHG-CO2 emissions (Gg)	F-gas as Solvent	
+I-GHG-CO2 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-CO2 emissions (Gg)	Electrical Equipment	
+I-GHG-CO2 emissions (Gg)	Other F-gas use	
+I-GHG-CO2 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-CO2 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-CO2 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-CO2 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-CO2 emissions (Gg)	Solvent and other product use: other	
+I-GHG-CO2 emissions (Gg)	Enteric fermentation	
+I-GHG-CO2 emissions (Gg)	Manure management	
+I-GHG-CO2 emissions (Gg)	Rice cultivation	
+I-GHG-CO2 emissions (Gg)	Direct soil emissions	
+I-GHG-CO2 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-CO2 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-CO2 emissions (Gg)	Other direct soil emissions	
+I-GHG-CO2 emissions (Gg)	Savanna burning	
+I-GHG-CO2 emissions (Gg)	Agricultural waste burning	
+I-GHG-CO2 emissions (Gg)	Forest fires	
+I-GHG-CO2 emissions (Gg)	Grassland fires	
+I-GHG-CO2 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-CO2 emissions (Gg)	Other vegetation fires	
+I-GHG-CO2 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-CO2 emissions (Gg)	Solid waste disposal on land	
+I-GHG-CO2 emissions (Gg)	Wastewater handling	
+I-GHG-CO2 emissions (Gg)	Waste incineration	
+I-GHG-CO2 emissions (Gg)	Other waste handling	
+I-GHG-CO2 emissions (Gg)	Fossil fuel fires	
+I-GHG-CO2 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-CO2 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-CO2 emissions (Gg)	Other sources	
+I-GHG-CO2b emissions (Gg)	Public electricity and heat production	
+I-GHG-CO2b emissions (Gg)	Other Energy Industries	
+I-GHG-CO2b emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-CO2b emissions (Gg)	Domestic aviation	
+I-GHG-CO2b emissions (Gg)	Road transportation	
+I-GHG-CO2b emissions (Gg)	Rail transportation	
+I-GHG-CO2b emissions (Gg)	Inland navigation	
+I-GHG-CO2b emissions (Gg)	Other transportation	
+I-GHG-CO2b emissions (Gg)	Residential and other sectors	
+I-GHG-CO2b emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-CO2b emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-CO2b emissions (Gg)	Memo: International aviation	
+I-GHG-CO2b emissions (Gg)	Memo: International navigation	
+I-GHG-CO2b emissions (Gg)	Production of minerals	
+I-GHG-CO2b emissions (Gg)	Cement production	
+I-GHG-CO2b emissions (Gg)	Lime production	
+I-GHG-CO2b emissions (Gg)	Production of chemicals	
+I-GHG-CO2b emissions (Gg)	Production of metals	
+I-GHG-CO2b emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-CO2b emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-CO2b emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-CO2b emissions (Gg)	Foam Blowing	
+I-GHG-CO2b emissions (Gg)	Fire Extinguishers	
+I-GHG-CO2b emissions (Gg)	Aerosols	
+I-GHG-CO2b emissions (Gg)	F-gas as Solvent	
+I-GHG-CO2b emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-CO2b emissions (Gg)	Electrical Equipment	
+I-GHG-CO2b emissions (Gg)	Other F-gas use	
+I-GHG-CO2b emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-CO2b emissions (Gg)	Solvent and other product use: paint	
+I-GHG-CO2b emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-CO2b emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-CO2b emissions (Gg)	Solvent and other product use: other	
+I-GHG-CO2b emissions (Gg)	Enteric fermentation	
+I-GHG-CO2b emissions (Gg)	Manure management	
+I-GHG-CO2b emissions (Gg)	Rice cultivation	
+I-GHG-CO2b emissions (Gg)	Direct soil emissions	
+I-GHG-CO2b emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-CO2b emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-CO2b emissions (Gg)	Other direct soil emissions	
+I-GHG-CO2b emissions (Gg)	Savanna burning	
+I-GHG-CO2b emissions (Gg)	Agricultural waste burning	
+I-GHG-CO2b emissions (Gg)	Forest fires	
+I-GHG-CO2b emissions (Gg)	Grassland fires	
+I-GHG-CO2b emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-CO2b emissions (Gg)	Other vegetation fires	
+I-GHG-CO2b emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-CO2b emissions (Gg)	Solid waste disposal on land	
+I-GHG-CO2b emissions (Gg)	Wastewater handling	
+I-GHG-CO2b emissions (Gg)	Waste incineration	
+I-GHG-CO2b emissions (Gg)	Other waste handling	
+I-GHG-CO2b emissions (Gg)	Fossil fuel fires	
+I-GHG-CO2b emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-CO2b emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-CO2b emissions (Gg)	Other sources	
+I-GHG-CH4 emissions (Gg)	Public electricity and heat production	
+I-GHG-CH4 emissions (Gg)	Other Energy Industries	
+I-GHG-CH4 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-CH4 emissions (Gg)	Domestic aviation	
+I-GHG-CH4 emissions (Gg)	Road transportation	
+I-GHG-CH4 emissions (Gg)	Rail transportation	
+I-GHG-CH4 emissions (Gg)	Inland navigation	
+I-GHG-CH4 emissions (Gg)	Other transportation	
+I-GHG-CH4 emissions (Gg)	Residential and other sectors	
+I-GHG-CH4 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-CH4 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-CH4 emissions (Gg)	Memo: International aviation	
+I-GHG-CH4 emissions (Gg)	Memo: International navigation	
+I-GHG-CH4 emissions (Gg)	Production of minerals	
+I-GHG-CH4 emissions (Gg)	Cement production	
+I-GHG-CH4 emissions (Gg)	Lime production	
+I-GHG-CH4 emissions (Gg)	Production of chemicals	
+I-GHG-CH4 emissions (Gg)	Production of metals	
+I-GHG-CH4 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-CH4 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-CH4 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-CH4 emissions (Gg)	Foam Blowing	
+I-GHG-CH4 emissions (Gg)	Fire Extinguishers	
+I-GHG-CH4 emissions (Gg)	Aerosols	
+I-GHG-CH4 emissions (Gg)	F-gas as Solvent	
+I-GHG-CH4 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-CH4 emissions (Gg)	Electrical Equipment	
+I-GHG-CH4 emissions (Gg)	Other F-gas use	
+I-GHG-CH4 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-CH4 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-CH4 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-CH4 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-CH4 emissions (Gg)	Solvent and other product use: other	
+I-GHG-CH4 emissions (Gg)	Enteric fermentation	
+I-GHG-CH4 emissions (Gg)	Manure management	
+I-GHG-CH4 emissions (Gg)	Rice cultivation	
+I-GHG-CH4 emissions (Gg)	Direct soil emissions	
+I-GHG-CH4 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-CH4 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-CH4 emissions (Gg)	Other direct soil emissions	
+I-GHG-CH4 emissions (Gg)	Savanna burning	
+I-GHG-CH4 emissions (Gg)	Agricultural waste burning	
+I-GHG-CH4 emissions (Gg)	Forest fires	
+I-GHG-CH4 emissions (Gg)	Grassland fires	
+I-GHG-CH4 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-CH4 emissions (Gg)	Other vegetation fires	
+I-GHG-CH4 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-CH4 emissions (Gg)	Solid waste disposal on land	
+I-GHG-CH4 emissions (Gg)	Wastewater handling	
+I-GHG-CH4 emissions (Gg)	Waste incineration	
+I-GHG-CH4 emissions (Gg)	Other waste handling	
+I-GHG-CH4 emissions (Gg)	Fossil fuel fires	
+I-GHG-CH4 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-CH4 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-CH4 emissions (Gg)	Other sources	
+I-GHG-N2O emissions (Gg)	Public electricity and heat production	
+I-GHG-N2O emissions (Gg)	Other Energy Industries	
+I-GHG-N2O emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-N2O emissions (Gg)	Domestic aviation	
+I-GHG-N2O emissions (Gg)	Road transportation	
+I-GHG-N2O emissions (Gg)	Rail transportation	
+I-GHG-N2O emissions (Gg)	Inland navigation	
+I-GHG-N2O emissions (Gg)	Other transportation	
+I-GHG-N2O emissions (Gg)	Residential and other sectors	
+I-GHG-N2O emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-N2O emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-N2O emissions (Gg)	Memo: International aviation	
+I-GHG-N2O emissions (Gg)	Memo: International navigation	
+I-GHG-N2O emissions (Gg)	Production of minerals	
+I-GHG-N2O emissions (Gg)	Cement production	
+I-GHG-N2O emissions (Gg)	Lime production	
+I-GHG-N2O emissions (Gg)	Production of chemicals	
+I-GHG-N2O emissions (Gg)	Production of metals	
+I-GHG-N2O emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-N2O emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-N2O emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-N2O emissions (Gg)	Foam Blowing	
+I-GHG-N2O emissions (Gg)	Fire Extinguishers	
+I-GHG-N2O emissions (Gg)	Aerosols	
+I-GHG-N2O emissions (Gg)	F-gas as Solvent	
+I-GHG-N2O emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-N2O emissions (Gg)	Electrical Equipment	
+I-GHG-N2O emissions (Gg)	Other F-gas use	
+I-GHG-N2O emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-N2O emissions (Gg)	Solvent and other product use: paint	
+I-GHG-N2O emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-N2O emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-N2O emissions (Gg)	Solvent and other product use: other	
+I-GHG-N2O emissions (Gg)	Enteric fermentation	
+I-GHG-N2O emissions (Gg)	Manure management	
+I-GHG-N2O emissions (Gg)	Rice cultivation	
+I-GHG-N2O emissions (Gg)	Direct soil emissions	
+I-GHG-N2O emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-N2O emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-N2O emissions (Gg)	Other direct soil emissions	
+I-GHG-N2O emissions (Gg)	Savanna burning	
+I-GHG-N2O emissions (Gg)	Agricultural waste burning	
+I-GHG-N2O emissions (Gg)	Forest fires	
+I-GHG-N2O emissions (Gg)	Grassland fires	
+I-GHG-N2O emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-N2O emissions (Gg)	Other vegetation fires	
+I-GHG-N2O emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-N2O emissions (Gg)	Solid waste disposal on land	
+I-GHG-N2O emissions (Gg)	Wastewater handling	
+I-GHG-N2O emissions (Gg)	Waste incineration	
+I-GHG-N2O emissions (Gg)	Other waste handling	
+I-GHG-N2O emissions (Gg)	Fossil fuel fires	
+I-GHG-N2O emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-N2O emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-N2O emissions (Gg)	Other sources	
+I-GHG-HFC125 emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC125 emissions (Gg)	Other Energy Industries	
+I-GHG-HFC125 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC125 emissions (Gg)	Domestic aviation	
+I-GHG-HFC125 emissions (Gg)	Road transportation	
+I-GHG-HFC125 emissions (Gg)	Rail transportation	
+I-GHG-HFC125 emissions (Gg)	Inland navigation	
+I-GHG-HFC125 emissions (Gg)	Other transportation	
+I-GHG-HFC125 emissions (Gg)	Residential and other sectors	
+I-GHG-HFC125 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC125 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC125 emissions (Gg)	Memo: International aviation	
+I-GHG-HFC125 emissions (Gg)	Memo: International navigation	
+I-GHG-HFC125 emissions (Gg)	Production of minerals	
+I-GHG-HFC125 emissions (Gg)	Cement production	
+I-GHG-HFC125 emissions (Gg)	Lime production	
+I-GHG-HFC125 emissions (Gg)	Production of chemicals	
+I-GHG-HFC125 emissions (Gg)	Production of metals	
+I-GHG-HFC125 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC125 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC125 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC125 emissions (Gg)	Foam Blowing	
+I-GHG-HFC125 emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC125 emissions (Gg)	Aerosols	
+I-GHG-HFC125 emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC125 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC125 emissions (Gg)	Electrical Equipment	
+I-GHG-HFC125 emissions (Gg)	Other F-gas use	
+I-GHG-HFC125 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC125 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC125 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC125 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC125 emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC125 emissions (Gg)	Enteric fermentation	
+I-GHG-HFC125 emissions (Gg)	Manure management	
+I-GHG-HFC125 emissions (Gg)	Rice cultivation	
+I-GHG-HFC125 emissions (Gg)	Direct soil emissions	
+I-GHG-HFC125 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC125 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC125 emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC125 emissions (Gg)	Savanna burning	
+I-GHG-HFC125 emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC125 emissions (Gg)	Forest fires	
+I-GHG-HFC125 emissions (Gg)	Grassland fires	
+I-GHG-HFC125 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC125 emissions (Gg)	Other vegetation fires	
+I-GHG-HFC125 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC125 emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC125 emissions (Gg)	Wastewater handling	
+I-GHG-HFC125 emissions (Gg)	Waste incineration	
+I-GHG-HFC125 emissions (Gg)	Other waste handling	
+I-GHG-HFC125 emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC125 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC125 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC125 emissions (Gg)	Other sources	
+I-GHG-HFC134a emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC134a emissions (Gg)	Other Energy Industries	
+I-GHG-HFC134a emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC134a emissions (Gg)	Domestic aviation	
+I-GHG-HFC134a emissions (Gg)	Road transportation	
+I-GHG-HFC134a emissions (Gg)	Rail transportation	
+I-GHG-HFC134a emissions (Gg)	Inland navigation	
+I-GHG-HFC134a emissions (Gg)	Other transportation	
+I-GHG-HFC134a emissions (Gg)	Residential and other sectors	
+I-GHG-HFC134a emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC134a emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC134a emissions (Gg)	Memo: International aviation	
+I-GHG-HFC134a emissions (Gg)	Memo: International navigation	
+I-GHG-HFC134a emissions (Gg)	Production of minerals	
+I-GHG-HFC134a emissions (Gg)	Cement production	
+I-GHG-HFC134a emissions (Gg)	Lime production	
+I-GHG-HFC134a emissions (Gg)	Production of chemicals	
+I-GHG-HFC134a emissions (Gg)	Production of metals	
+I-GHG-HFC134a emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC134a emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC134a emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC134a emissions (Gg)	Foam Blowing	
+I-GHG-HFC134a emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC134a emissions (Gg)	Aerosols	
+I-GHG-HFC134a emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC134a emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC134a emissions (Gg)	Electrical Equipment	
+I-GHG-HFC134a emissions (Gg)	Other F-gas use	
+I-GHG-HFC134a emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC134a emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC134a emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC134a emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC134a emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC134a emissions (Gg)	Enteric fermentation	
+I-GHG-HFC134a emissions (Gg)	Manure management	
+I-GHG-HFC134a emissions (Gg)	Rice cultivation	
+I-GHG-HFC134a emissions (Gg)	Direct soil emissions	
+I-GHG-HFC134a emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC134a emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC134a emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC134a emissions (Gg)	Savanna burning	
+I-GHG-HFC134a emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC134a emissions (Gg)	Forest fires	
+I-GHG-HFC134a emissions (Gg)	Grassland fires	
+I-GHG-HFC134a emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC134a emissions (Gg)	Other vegetation fires	
+I-GHG-HFC134a emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC134a emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC134a emissions (Gg)	Wastewater handling	
+I-GHG-HFC134a emissions (Gg)	Waste incineration	
+I-GHG-HFC134a emissions (Gg)	Other waste handling	
+I-GHG-HFC134a emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC134a emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC134a emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC134a emissions (Gg)	Other sources	
+I-GHG-HFC143a emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC143a emissions (Gg)	Other Energy Industries	
+I-GHG-HFC143a emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC143a emissions (Gg)	Domestic aviation	
+I-GHG-HFC143a emissions (Gg)	Road transportation	
+I-GHG-HFC143a emissions (Gg)	Rail transportation	
+I-GHG-HFC143a emissions (Gg)	Inland navigation	
+I-GHG-HFC143a emissions (Gg)	Other transportation	
+I-GHG-HFC143a emissions (Gg)	Residential and other sectors	
+I-GHG-HFC143a emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC143a emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC143a emissions (Gg)	Memo: International aviation	
+I-GHG-HFC143a emissions (Gg)	Memo: International navigation	
+I-GHG-HFC143a emissions (Gg)	Production of minerals	
+I-GHG-HFC143a emissions (Gg)	Cement production	
+I-GHG-HFC143a emissions (Gg)	Lime production	
+I-GHG-HFC143a emissions (Gg)	Production of chemicals	
+I-GHG-HFC143a emissions (Gg)	Production of metals	
+I-GHG-HFC143a emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC143a emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC143a emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC143a emissions (Gg)	Foam Blowing	
+I-GHG-HFC143a emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC143a emissions (Gg)	Aerosols	
+I-GHG-HFC143a emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC143a emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC143a emissions (Gg)	Electrical Equipment	
+I-GHG-HFC143a emissions (Gg)	Other F-gas use	
+I-GHG-HFC143a emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC143a emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC143a emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC143a emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC143a emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC143a emissions (Gg)	Enteric fermentation	
+I-GHG-HFC143a emissions (Gg)	Manure management	
+I-GHG-HFC143a emissions (Gg)	Rice cultivation	
+I-GHG-HFC143a emissions (Gg)	Direct soil emissions	
+I-GHG-HFC143a emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC143a emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC143a emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC143a emissions (Gg)	Savanna burning	
+I-GHG-HFC143a emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC143a emissions (Gg)	Forest fires	
+I-GHG-HFC143a emissions (Gg)	Grassland fires	
+I-GHG-HFC143a emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC143a emissions (Gg)	Other vegetation fires	
+I-GHG-HFC143a emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC143a emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC143a emissions (Gg)	Wastewater handling	
+I-GHG-HFC143a emissions (Gg)	Waste incineration	
+I-GHG-HFC143a emissions (Gg)	Other waste handling	
+I-GHG-HFC143a emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC143a emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC143a emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC143a emissions (Gg)	Other sources	
+I-GHG-HFC152a emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC152a emissions (Gg)	Other Energy Industries	
+I-GHG-HFC152a emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC152a emissions (Gg)	Domestic aviation	
+I-GHG-HFC152a emissions (Gg)	Road transportation	
+I-GHG-HFC152a emissions (Gg)	Rail transportation	
+I-GHG-HFC152a emissions (Gg)	Inland navigation	
+I-GHG-HFC152a emissions (Gg)	Other transportation	
+I-GHG-HFC152a emissions (Gg)	Residential and other sectors	
+I-GHG-HFC152a emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC152a emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC152a emissions (Gg)	Memo: International aviation	
+I-GHG-HFC152a emissions (Gg)	Memo: International navigation	
+I-GHG-HFC152a emissions (Gg)	Production of minerals	
+I-GHG-HFC152a emissions (Gg)	Cement production	
+I-GHG-HFC152a emissions (Gg)	Lime production	
+I-GHG-HFC152a emissions (Gg)	Production of chemicals	
+I-GHG-HFC152a emissions (Gg)	Production of metals	
+I-GHG-HFC152a emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC152a emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC152a emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC152a emissions (Gg)	Foam Blowing	
+I-GHG-HFC152a emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC152a emissions (Gg)	Aerosols	
+I-GHG-HFC152a emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC152a emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC152a emissions (Gg)	Electrical Equipment	
+I-GHG-HFC152a emissions (Gg)	Other F-gas use	
+I-GHG-HFC152a emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC152a emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC152a emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC152a emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC152a emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC152a emissions (Gg)	Enteric fermentation	
+I-GHG-HFC152a emissions (Gg)	Manure management	
+I-GHG-HFC152a emissions (Gg)	Rice cultivation	
+I-GHG-HFC152a emissions (Gg)	Direct soil emissions	
+I-GHG-HFC152a emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC152a emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC152a emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC152a emissions (Gg)	Savanna burning	
+I-GHG-HFC152a emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC152a emissions (Gg)	Forest fires	
+I-GHG-HFC152a emissions (Gg)	Grassland fires	
+I-GHG-HFC152a emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC152a emissions (Gg)	Other vegetation fires	
+I-GHG-HFC152a emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC152a emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC152a emissions (Gg)	Wastewater handling	
+I-GHG-HFC152a emissions (Gg)	Waste incineration	
+I-GHG-HFC152a emissions (Gg)	Other waste handling	
+I-GHG-HFC152a emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC152a emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC152a emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC152a emissions (Gg)	Other sources	
+I-GHG-HFC227ea emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC227ea emissions (Gg)	Other Energy Industries	
+I-GHG-HFC227ea emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC227ea emissions (Gg)	Domestic aviation	
+I-GHG-HFC227ea emissions (Gg)	Road transportation	
+I-GHG-HFC227ea emissions (Gg)	Rail transportation	
+I-GHG-HFC227ea emissions (Gg)	Inland navigation	
+I-GHG-HFC227ea emissions (Gg)	Other transportation	
+I-GHG-HFC227ea emissions (Gg)	Residential and other sectors	
+I-GHG-HFC227ea emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC227ea emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC227ea emissions (Gg)	Memo: International aviation	
+I-GHG-HFC227ea emissions (Gg)	Memo: International navigation	
+I-GHG-HFC227ea emissions (Gg)	Production of minerals	
+I-GHG-HFC227ea emissions (Gg)	Cement production	
+I-GHG-HFC227ea emissions (Gg)	Lime production	
+I-GHG-HFC227ea emissions (Gg)	Production of chemicals	
+I-GHG-HFC227ea emissions (Gg)	Production of metals	
+I-GHG-HFC227ea emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC227ea emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC227ea emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC227ea emissions (Gg)	Foam Blowing	
+I-GHG-HFC227ea emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC227ea emissions (Gg)	Aerosols	
+I-GHG-HFC227ea emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC227ea emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC227ea emissions (Gg)	Electrical Equipment	
+I-GHG-HFC227ea emissions (Gg)	Other F-gas use	
+I-GHG-HFC227ea emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC227ea emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC227ea emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC227ea emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC227ea emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC227ea emissions (Gg)	Enteric fermentation	
+I-GHG-HFC227ea emissions (Gg)	Manure management	
+I-GHG-HFC227ea emissions (Gg)	Rice cultivation	
+I-GHG-HFC227ea emissions (Gg)	Direct soil emissions	
+I-GHG-HFC227ea emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC227ea emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC227ea emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC227ea emissions (Gg)	Savanna burning	
+I-GHG-HFC227ea emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC227ea emissions (Gg)	Forest fires	
+I-GHG-HFC227ea emissions (Gg)	Grassland fires	
+I-GHG-HFC227ea emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC227ea emissions (Gg)	Other vegetation fires	
+I-GHG-HFC227ea emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC227ea emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC227ea emissions (Gg)	Wastewater handling	
+I-GHG-HFC227ea emissions (Gg)	Waste incineration	
+I-GHG-HFC227ea emissions (Gg)	Other waste handling	
+I-GHG-HFC227ea emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC227ea emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC227ea emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC227ea emissions (Gg)	Other sources	
+I-GHG-HFC23 emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC23 emissions (Gg)	Other Energy Industries	
+I-GHG-HFC23 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC23 emissions (Gg)	Domestic aviation	
+I-GHG-HFC23 emissions (Gg)	Road transportation	
+I-GHG-HFC23 emissions (Gg)	Rail transportation	
+I-GHG-HFC23 emissions (Gg)	Inland navigation	
+I-GHG-HFC23 emissions (Gg)	Other transportation	
+I-GHG-HFC23 emissions (Gg)	Residential and other sectors	
+I-GHG-HFC23 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC23 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC23 emissions (Gg)	Memo: International aviation	
+I-GHG-HFC23 emissions (Gg)	Memo: International navigation	
+I-GHG-HFC23 emissions (Gg)	Production of minerals	
+I-GHG-HFC23 emissions (Gg)	Cement production	
+I-GHG-HFC23 emissions (Gg)	Lime production	
+I-GHG-HFC23 emissions (Gg)	Production of chemicals	
+I-GHG-HFC23 emissions (Gg)	Production of metals	
+I-GHG-HFC23 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC23 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC23 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC23 emissions (Gg)	Foam Blowing	
+I-GHG-HFC23 emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC23 emissions (Gg)	Aerosols	
+I-GHG-HFC23 emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC23 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC23 emissions (Gg)	Electrical Equipment	
+I-GHG-HFC23 emissions (Gg)	Other F-gas use	
+I-GHG-HFC23 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC23 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC23 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC23 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC23 emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC23 emissions (Gg)	Enteric fermentation	
+I-GHG-HFC23 emissions (Gg)	Manure management	
+I-GHG-HFC23 emissions (Gg)	Rice cultivation	
+I-GHG-HFC23 emissions (Gg)	Direct soil emissions	
+I-GHG-HFC23 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC23 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC23 emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC23 emissions (Gg)	Savanna burning	
+I-GHG-HFC23 emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC23 emissions (Gg)	Forest fires	
+I-GHG-HFC23 emissions (Gg)	Grassland fires	
+I-GHG-HFC23 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC23 emissions (Gg)	Other vegetation fires	
+I-GHG-HFC23 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC23 emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC23 emissions (Gg)	Wastewater handling	
+I-GHG-HFC23 emissions (Gg)	Waste incineration	
+I-GHG-HFC23 emissions (Gg)	Other waste handling	
+I-GHG-HFC23 emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC23 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC23 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC23 emissions (Gg)	Other sources	
+I-GHG-HFC236fa emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC236fa emissions (Gg)	Other Energy Industries	
+I-GHG-HFC236fa emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC236fa emissions (Gg)	Domestic aviation	
+I-GHG-HFC236fa emissions (Gg)	Road transportation	
+I-GHG-HFC236fa emissions (Gg)	Rail transportation	
+I-GHG-HFC236fa emissions (Gg)	Inland navigation	
+I-GHG-HFC236fa emissions (Gg)	Other transportation	
+I-GHG-HFC236fa emissions (Gg)	Residential and other sectors	
+I-GHG-HFC236fa emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC236fa emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC236fa emissions (Gg)	Memo: International aviation	
+I-GHG-HFC236fa emissions (Gg)	Memo: International navigation	
+I-GHG-HFC236fa emissions (Gg)	Production of minerals	
+I-GHG-HFC236fa emissions (Gg)	Cement production	
+I-GHG-HFC236fa emissions (Gg)	Lime production	
+I-GHG-HFC236fa emissions (Gg)	Production of chemicals	
+I-GHG-HFC236fa emissions (Gg)	Production of metals	
+I-GHG-HFC236fa emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC236fa emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC236fa emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC236fa emissions (Gg)	Foam Blowing	
+I-GHG-HFC236fa emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC236fa emissions (Gg)	Aerosols	
+I-GHG-HFC236fa emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC236fa emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC236fa emissions (Gg)	Electrical Equipment	
+I-GHG-HFC236fa emissions (Gg)	Other F-gas use	
+I-GHG-HFC236fa emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC236fa emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC236fa emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC236fa emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC236fa emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC236fa emissions (Gg)	Enteric fermentation	
+I-GHG-HFC236fa emissions (Gg)	Manure management	
+I-GHG-HFC236fa emissions (Gg)	Rice cultivation	
+I-GHG-HFC236fa emissions (Gg)	Direct soil emissions	
+I-GHG-HFC236fa emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC236fa emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC236fa emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC236fa emissions (Gg)	Savanna burning	
+I-GHG-HFC236fa emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC236fa emissions (Gg)	Forest fires	
+I-GHG-HFC236fa emissions (Gg)	Grassland fires	
+I-GHG-HFC236fa emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC236fa emissions (Gg)	Other vegetation fires	
+I-GHG-HFC236fa emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC236fa emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC236fa emissions (Gg)	Wastewater handling	
+I-GHG-HFC236fa emissions (Gg)	Waste incineration	
+I-GHG-HFC236fa emissions (Gg)	Other waste handling	
+I-GHG-HFC236fa emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC236fa emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC236fa emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC236fa emissions (Gg)	Other sources	
+I-GHG-HFC245fa emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC245fa emissions (Gg)	Other Energy Industries	
+I-GHG-HFC245fa emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC245fa emissions (Gg)	Domestic aviation	
+I-GHG-HFC245fa emissions (Gg)	Road transportation	
+I-GHG-HFC245fa emissions (Gg)	Rail transportation	
+I-GHG-HFC245fa emissions (Gg)	Inland navigation	
+I-GHG-HFC245fa emissions (Gg)	Other transportation	
+I-GHG-HFC245fa emissions (Gg)	Residential and other sectors	
+I-GHG-HFC245fa emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC245fa emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC245fa emissions (Gg)	Memo: International aviation	
+I-GHG-HFC245fa emissions (Gg)	Memo: International navigation	
+I-GHG-HFC245fa emissions (Gg)	Production of minerals	
+I-GHG-HFC245fa emissions (Gg)	Cement production	
+I-GHG-HFC245fa emissions (Gg)	Lime production	
+I-GHG-HFC245fa emissions (Gg)	Production of chemicals	
+I-GHG-HFC245fa emissions (Gg)	Production of metals	
+I-GHG-HFC245fa emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC245fa emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC245fa emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC245fa emissions (Gg)	Foam Blowing	
+I-GHG-HFC245fa emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC245fa emissions (Gg)	Aerosols	
+I-GHG-HFC245fa emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC245fa emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC245fa emissions (Gg)	Electrical Equipment	
+I-GHG-HFC245fa emissions (Gg)	Other F-gas use	
+I-GHG-HFC245fa emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC245fa emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC245fa emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC245fa emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC245fa emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC245fa emissions (Gg)	Enteric fermentation	
+I-GHG-HFC245fa emissions (Gg)	Manure management	
+I-GHG-HFC245fa emissions (Gg)	Rice cultivation	
+I-GHG-HFC245fa emissions (Gg)	Direct soil emissions	
+I-GHG-HFC245fa emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC245fa emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC245fa emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC245fa emissions (Gg)	Savanna burning	
+I-GHG-HFC245fa emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC245fa emissions (Gg)	Forest fires	
+I-GHG-HFC245fa emissions (Gg)	Grassland fires	
+I-GHG-HFC245fa emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC245fa emissions (Gg)	Other vegetation fires	
+I-GHG-HFC245fa emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC245fa emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC245fa emissions (Gg)	Wastewater handling	
+I-GHG-HFC245fa emissions (Gg)	Waste incineration	
+I-GHG-HFC245fa emissions (Gg)	Other waste handling	
+I-GHG-HFC245fa emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC245fa emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC245fa emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC245fa emissions (Gg)	Other sources	
+I-GHG-HFC32 emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC32 emissions (Gg)	Other Energy Industries	
+I-GHG-HFC32 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC32 emissions (Gg)	Domestic aviation	
+I-GHG-HFC32 emissions (Gg)	Road transportation	
+I-GHG-HFC32 emissions (Gg)	Rail transportation	
+I-GHG-HFC32 emissions (Gg)	Inland navigation	
+I-GHG-HFC32 emissions (Gg)	Other transportation	
+I-GHG-HFC32 emissions (Gg)	Residential and other sectors	
+I-GHG-HFC32 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC32 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC32 emissions (Gg)	Memo: International aviation	
+I-GHG-HFC32 emissions (Gg)	Memo: International navigation	
+I-GHG-HFC32 emissions (Gg)	Production of minerals	
+I-GHG-HFC32 emissions (Gg)	Cement production	
+I-GHG-HFC32 emissions (Gg)	Lime production	
+I-GHG-HFC32 emissions (Gg)	Production of chemicals	
+I-GHG-HFC32 emissions (Gg)	Production of metals	
+I-GHG-HFC32 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC32 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC32 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC32 emissions (Gg)	Foam Blowing	
+I-GHG-HFC32 emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC32 emissions (Gg)	Aerosols	
+I-GHG-HFC32 emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC32 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC32 emissions (Gg)	Electrical Equipment	
+I-GHG-HFC32 emissions (Gg)	Other F-gas use	
+I-GHG-HFC32 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC32 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC32 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC32 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC32 emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC32 emissions (Gg)	Enteric fermentation	
+I-GHG-HFC32 emissions (Gg)	Manure management	
+I-GHG-HFC32 emissions (Gg)	Rice cultivation	
+I-GHG-HFC32 emissions (Gg)	Direct soil emissions	
+I-GHG-HFC32 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC32 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC32 emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC32 emissions (Gg)	Savanna burning	
+I-GHG-HFC32 emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC32 emissions (Gg)	Forest fires	
+I-GHG-HFC32 emissions (Gg)	Grassland fires	
+I-GHG-HFC32 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC32 emissions (Gg)	Other vegetation fires	
+I-GHG-HFC32 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC32 emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC32 emissions (Gg)	Wastewater handling	
+I-GHG-HFC32 emissions (Gg)	Waste incineration	
+I-GHG-HFC32 emissions (Gg)	Other waste handling	
+I-GHG-HFC32 emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC32 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC32 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC32 emissions (Gg)	Other sources	
+I-GHG-HFC365mfc emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC365mfc emissions (Gg)	Other Energy Industries	
+I-GHG-HFC365mfc emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC365mfc emissions (Gg)	Domestic aviation	
+I-GHG-HFC365mfc emissions (Gg)	Road transportation	
+I-GHG-HFC365mfc emissions (Gg)	Rail transportation	
+I-GHG-HFC365mfc emissions (Gg)	Inland navigation	
+I-GHG-HFC365mfc emissions (Gg)	Other transportation	
+I-GHG-HFC365mfc emissions (Gg)	Residential and other sectors	
+I-GHG-HFC365mfc emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC365mfc emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC365mfc emissions (Gg)	Memo: International aviation	
+I-GHG-HFC365mfc emissions (Gg)	Memo: International navigation	
+I-GHG-HFC365mfc emissions (Gg)	Production of minerals	
+I-GHG-HFC365mfc emissions (Gg)	Cement production	
+I-GHG-HFC365mfc emissions (Gg)	Lime production	
+I-GHG-HFC365mfc emissions (Gg)	Production of chemicals	
+I-GHG-HFC365mfc emissions (Gg)	Production of metals	
+I-GHG-HFC365mfc emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC365mfc emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC365mfc emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC365mfc emissions (Gg)	Foam Blowing	
+I-GHG-HFC365mfc emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC365mfc emissions (Gg)	Aerosols	
+I-GHG-HFC365mfc emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC365mfc emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC365mfc emissions (Gg)	Electrical Equipment	
+I-GHG-HFC365mfc emissions (Gg)	Other F-gas use	
+I-GHG-HFC365mfc emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC365mfc emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC365mfc emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC365mfc emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC365mfc emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC365mfc emissions (Gg)	Enteric fermentation	
+I-GHG-HFC365mfc emissions (Gg)	Manure management	
+I-GHG-HFC365mfc emissions (Gg)	Rice cultivation	
+I-GHG-HFC365mfc emissions (Gg)	Direct soil emissions	
+I-GHG-HFC365mfc emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC365mfc emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC365mfc emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC365mfc emissions (Gg)	Savanna burning	
+I-GHG-HFC365mfc emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC365mfc emissions (Gg)	Forest fires	
+I-GHG-HFC365mfc emissions (Gg)	Grassland fires	
+I-GHG-HFC365mfc emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC365mfc emissions (Gg)	Other vegetation fires	
+I-GHG-HFC365mfc emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC365mfc emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC365mfc emissions (Gg)	Wastewater handling	
+I-GHG-HFC365mfc emissions (Gg)	Waste incineration	
+I-GHG-HFC365mfc emissions (Gg)	Other waste handling	
+I-GHG-HFC365mfc emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC365mfc emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC365mfc emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC365mfc emissions (Gg)	Other sources	
+I-GHG-HFC4310mee emissions (Gg)	Public electricity and heat production	
+I-GHG-HFC4310mee emissions (Gg)	Other Energy Industries	
+I-GHG-HFC4310mee emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-HFC4310mee emissions (Gg)	Domestic aviation	
+I-GHG-HFC4310mee emissions (Gg)	Road transportation	
+I-GHG-HFC4310mee emissions (Gg)	Rail transportation	
+I-GHG-HFC4310mee emissions (Gg)	Inland navigation	
+I-GHG-HFC4310mee emissions (Gg)	Other transportation	
+I-GHG-HFC4310mee emissions (Gg)	Residential and other sectors	
+I-GHG-HFC4310mee emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-HFC4310mee emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-HFC4310mee emissions (Gg)	Memo: International aviation	
+I-GHG-HFC4310mee emissions (Gg)	Memo: International navigation	
+I-GHG-HFC4310mee emissions (Gg)	Production of minerals	
+I-GHG-HFC4310mee emissions (Gg)	Cement production	
+I-GHG-HFC4310mee emissions (Gg)	Lime production	
+I-GHG-HFC4310mee emissions (Gg)	Production of chemicals	
+I-GHG-HFC4310mee emissions (Gg)	Production of metals	
+I-GHG-HFC4310mee emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-HFC4310mee emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-HFC4310mee emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-HFC4310mee emissions (Gg)	Foam Blowing	
+I-GHG-HFC4310mee emissions (Gg)	Fire Extinguishers	
+I-GHG-HFC4310mee emissions (Gg)	Aerosols	
+I-GHG-HFC4310mee emissions (Gg)	F-gas as Solvent	
+I-GHG-HFC4310mee emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-HFC4310mee emissions (Gg)	Electrical Equipment	
+I-GHG-HFC4310mee emissions (Gg)	Other F-gas use	
+I-GHG-HFC4310mee emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-HFC4310mee emissions (Gg)	Solvent and other product use: paint	
+I-GHG-HFC4310mee emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-HFC4310mee emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-HFC4310mee emissions (Gg)	Solvent and other product use: other	
+I-GHG-HFC4310mee emissions (Gg)	Enteric fermentation	
+I-GHG-HFC4310mee emissions (Gg)	Manure management	
+I-GHG-HFC4310mee emissions (Gg)	Rice cultivation	
+I-GHG-HFC4310mee emissions (Gg)	Direct soil emissions	
+I-GHG-HFC4310mee emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-HFC4310mee emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-HFC4310mee emissions (Gg)	Other direct soil emissions	
+I-GHG-HFC4310mee emissions (Gg)	Savanna burning	
+I-GHG-HFC4310mee emissions (Gg)	Agricultural waste burning	
+I-GHG-HFC4310mee emissions (Gg)	Forest fires	
+I-GHG-HFC4310mee emissions (Gg)	Grassland fires	
+I-GHG-HFC4310mee emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-HFC4310mee emissions (Gg)	Other vegetation fires	
+I-GHG-HFC4310mee emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-HFC4310mee emissions (Gg)	Solid waste disposal on land	
+I-GHG-HFC4310mee emissions (Gg)	Wastewater handling	
+I-GHG-HFC4310mee emissions (Gg)	Waste incineration	
+I-GHG-HFC4310mee emissions (Gg)	Other waste handling	
+I-GHG-HFC4310mee emissions (Gg)	Fossil fuel fires	
+I-GHG-HFC4310mee emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-HFC4310mee emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-HFC4310mee emissions (Gg)	Other sources	
+I-GHG-C2F6 emissions (Gg)	Public electricity and heat production	
+I-GHG-C2F6 emissions (Gg)	Other Energy Industries	
+I-GHG-C2F6 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-C2F6 emissions (Gg)	Domestic aviation	
+I-GHG-C2F6 emissions (Gg)	Road transportation	
+I-GHG-C2F6 emissions (Gg)	Rail transportation	
+I-GHG-C2F6 emissions (Gg)	Inland navigation	
+I-GHG-C2F6 emissions (Gg)	Other transportation	
+I-GHG-C2F6 emissions (Gg)	Residential and other sectors	
+I-GHG-C2F6 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-C2F6 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-C2F6 emissions (Gg)	Memo: International aviation	
+I-GHG-C2F6 emissions (Gg)	Memo: International navigation	
+I-GHG-C2F6 emissions (Gg)	Production of minerals	
+I-GHG-C2F6 emissions (Gg)	Cement production	
+I-GHG-C2F6 emissions (Gg)	Lime production	
+I-GHG-C2F6 emissions (Gg)	Production of chemicals	
+I-GHG-C2F6 emissions (Gg)	Production of metals	
+I-GHG-C2F6 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-C2F6 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-C2F6 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-C2F6 emissions (Gg)	Foam Blowing	
+I-GHG-C2F6 emissions (Gg)	Fire Extinguishers	
+I-GHG-C2F6 emissions (Gg)	Aerosols	
+I-GHG-C2F6 emissions (Gg)	F-gas as Solvent	
+I-GHG-C2F6 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-C2F6 emissions (Gg)	Electrical Equipment	
+I-GHG-C2F6 emissions (Gg)	Other F-gas use	
+I-GHG-C2F6 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-C2F6 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-C2F6 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-C2F6 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-C2F6 emissions (Gg)	Solvent and other product use: other	
+I-GHG-C2F6 emissions (Gg)	Enteric fermentation	
+I-GHG-C2F6 emissions (Gg)	Manure management	
+I-GHG-C2F6 emissions (Gg)	Rice cultivation	
+I-GHG-C2F6 emissions (Gg)	Direct soil emissions	
+I-GHG-C2F6 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-C2F6 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-C2F6 emissions (Gg)	Other direct soil emissions	
+I-GHG-C2F6 emissions (Gg)	Savanna burning	
+I-GHG-C2F6 emissions (Gg)	Agricultural waste burning	
+I-GHG-C2F6 emissions (Gg)	Forest fires	
+I-GHG-C2F6 emissions (Gg)	Grassland fires	
+I-GHG-C2F6 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-C2F6 emissions (Gg)	Other vegetation fires	
+I-GHG-C2F6 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-C2F6 emissions (Gg)	Solid waste disposal on land	
+I-GHG-C2F6 emissions (Gg)	Wastewater handling	
+I-GHG-C2F6 emissions (Gg)	Waste incineration	
+I-GHG-C2F6 emissions (Gg)	Other waste handling	
+I-GHG-C2F6 emissions (Gg)	Fossil fuel fires	
+I-GHG-C2F6 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-C2F6 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-C2F6 emissions (Gg)	Other sources	
+I-GHG-C3F8 emissions (Gg)	Public electricity and heat production	
+I-GHG-C3F8 emissions (Gg)	Other Energy Industries	
+I-GHG-C3F8 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-C3F8 emissions (Gg)	Domestic aviation	
+I-GHG-C3F8 emissions (Gg)	Road transportation	
+I-GHG-C3F8 emissions (Gg)	Rail transportation	
+I-GHG-C3F8 emissions (Gg)	Inland navigation	
+I-GHG-C3F8 emissions (Gg)	Other transportation	
+I-GHG-C3F8 emissions (Gg)	Residential and other sectors	
+I-GHG-C3F8 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-C3F8 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-C3F8 emissions (Gg)	Memo: International aviation	
+I-GHG-C3F8 emissions (Gg)	Memo: International navigation	
+I-GHG-C3F8 emissions (Gg)	Production of minerals	
+I-GHG-C3F8 emissions (Gg)	Cement production	
+I-GHG-C3F8 emissions (Gg)	Lime production	
+I-GHG-C3F8 emissions (Gg)	Production of chemicals	
+I-GHG-C3F8 emissions (Gg)	Production of metals	
+I-GHG-C3F8 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-C3F8 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-C3F8 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-C3F8 emissions (Gg)	Foam Blowing	
+I-GHG-C3F8 emissions (Gg)	Fire Extinguishers	
+I-GHG-C3F8 emissions (Gg)	Aerosols	
+I-GHG-C3F8 emissions (Gg)	F-gas as Solvent	
+I-GHG-C3F8 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-C3F8 emissions (Gg)	Electrical Equipment	
+I-GHG-C3F8 emissions (Gg)	Other F-gas use	
+I-GHG-C3F8 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-C3F8 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-C3F8 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-C3F8 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-C3F8 emissions (Gg)	Solvent and other product use: other	
+I-GHG-C3F8 emissions (Gg)	Enteric fermentation	
+I-GHG-C3F8 emissions (Gg)	Manure management	
+I-GHG-C3F8 emissions (Gg)	Rice cultivation	
+I-GHG-C3F8 emissions (Gg)	Direct soil emissions	
+I-GHG-C3F8 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-C3F8 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-C3F8 emissions (Gg)	Other direct soil emissions	
+I-GHG-C3F8 emissions (Gg)	Savanna burning	
+I-GHG-C3F8 emissions (Gg)	Agricultural waste burning	
+I-GHG-C3F8 emissions (Gg)	Forest fires	
+I-GHG-C3F8 emissions (Gg)	Grassland fires	
+I-GHG-C3F8 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-C3F8 emissions (Gg)	Other vegetation fires	
+I-GHG-C3F8 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-C3F8 emissions (Gg)	Solid waste disposal on land	
+I-GHG-C3F8 emissions (Gg)	Wastewater handling	
+I-GHG-C3F8 emissions (Gg)	Waste incineration	
+I-GHG-C3F8 emissions (Gg)	Other waste handling	
+I-GHG-C3F8 emissions (Gg)	Fossil fuel fires	
+I-GHG-C3F8 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-C3F8 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-C3F8 emissions (Gg)	Other sources	
+I-GHG-C4F10 emissions (Gg)	Public electricity and heat production	
+I-GHG-C4F10 emissions (Gg)	Other Energy Industries	
+I-GHG-C4F10 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-C4F10 emissions (Gg)	Domestic aviation	
+I-GHG-C4F10 emissions (Gg)	Road transportation	
+I-GHG-C4F10 emissions (Gg)	Rail transportation	
+I-GHG-C4F10 emissions (Gg)	Inland navigation	
+I-GHG-C4F10 emissions (Gg)	Other transportation	
+I-GHG-C4F10 emissions (Gg)	Residential and other sectors	
+I-GHG-C4F10 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-C4F10 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-C4F10 emissions (Gg)	Memo: International aviation	
+I-GHG-C4F10 emissions (Gg)	Memo: International navigation	
+I-GHG-C4F10 emissions (Gg)	Production of minerals	
+I-GHG-C4F10 emissions (Gg)	Cement production	
+I-GHG-C4F10 emissions (Gg)	Lime production	
+I-GHG-C4F10 emissions (Gg)	Production of chemicals	
+I-GHG-C4F10 emissions (Gg)	Production of metals	
+I-GHG-C4F10 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-C4F10 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-C4F10 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-C4F10 emissions (Gg)	Foam Blowing	
+I-GHG-C4F10 emissions (Gg)	Fire Extinguishers	
+I-GHG-C4F10 emissions (Gg)	Aerosols	
+I-GHG-C4F10 emissions (Gg)	F-gas as Solvent	
+I-GHG-C4F10 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-C4F10 emissions (Gg)	Electrical Equipment	
+I-GHG-C4F10 emissions (Gg)	Other F-gas use	
+I-GHG-C4F10 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-C4F10 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-C4F10 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-C4F10 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-C4F10 emissions (Gg)	Solvent and other product use: other	
+I-GHG-C4F10 emissions (Gg)	Enteric fermentation	
+I-GHG-C4F10 emissions (Gg)	Manure management	
+I-GHG-C4F10 emissions (Gg)	Rice cultivation	
+I-GHG-C4F10 emissions (Gg)	Direct soil emissions	
+I-GHG-C4F10 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-C4F10 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-C4F10 emissions (Gg)	Other direct soil emissions	
+I-GHG-C4F10 emissions (Gg)	Savanna burning	
+I-GHG-C4F10 emissions (Gg)	Agricultural waste burning	
+I-GHG-C4F10 emissions (Gg)	Forest fires	
+I-GHG-C4F10 emissions (Gg)	Grassland fires	
+I-GHG-C4F10 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-C4F10 emissions (Gg)	Other vegetation fires	
+I-GHG-C4F10 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-C4F10 emissions (Gg)	Solid waste disposal on land	
+I-GHG-C4F10 emissions (Gg)	Wastewater handling	
+I-GHG-C4F10 emissions (Gg)	Waste incineration	
+I-GHG-C4F10 emissions (Gg)	Other waste handling	
+I-GHG-C4F10 emissions (Gg)	Fossil fuel fires	
+I-GHG-C4F10 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-C4F10 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-C4F10 emissions (Gg)	Other sources	
+I-GHG-C5F12 emissions (Gg)	Public electricity and heat production	
+I-GHG-C5F12 emissions (Gg)	Other Energy Industries	
+I-GHG-C5F12 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-C5F12 emissions (Gg)	Domestic aviation	
+I-GHG-C5F12 emissions (Gg)	Road transportation	
+I-GHG-C5F12 emissions (Gg)	Rail transportation	
+I-GHG-C5F12 emissions (Gg)	Inland navigation	
+I-GHG-C5F12 emissions (Gg)	Other transportation	
+I-GHG-C5F12 emissions (Gg)	Residential and other sectors	
+I-GHG-C5F12 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-C5F12 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-C5F12 emissions (Gg)	Memo: International aviation	
+I-GHG-C5F12 emissions (Gg)	Memo: International navigation	
+I-GHG-C5F12 emissions (Gg)	Production of minerals	
+I-GHG-C5F12 emissions (Gg)	Cement production	
+I-GHG-C5F12 emissions (Gg)	Lime production	
+I-GHG-C5F12 emissions (Gg)	Production of chemicals	
+I-GHG-C5F12 emissions (Gg)	Production of metals	
+I-GHG-C5F12 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-C5F12 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-C5F12 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-C5F12 emissions (Gg)	Foam Blowing	
+I-GHG-C5F12 emissions (Gg)	Fire Extinguishers	
+I-GHG-C5F12 emissions (Gg)	Aerosols	
+I-GHG-C5F12 emissions (Gg)	F-gas as Solvent	
+I-GHG-C5F12 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-C5F12 emissions (Gg)	Electrical Equipment	
+I-GHG-C5F12 emissions (Gg)	Other F-gas use	
+I-GHG-C5F12 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-C5F12 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-C5F12 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-C5F12 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-C5F12 emissions (Gg)	Solvent and other product use: other	
+I-GHG-C5F12 emissions (Gg)	Enteric fermentation	
+I-GHG-C5F12 emissions (Gg)	Manure management	
+I-GHG-C5F12 emissions (Gg)	Rice cultivation	
+I-GHG-C5F12 emissions (Gg)	Direct soil emissions	
+I-GHG-C5F12 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-C5F12 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-C5F12 emissions (Gg)	Other direct soil emissions	
+I-GHG-C5F12 emissions (Gg)	Savanna burning	
+I-GHG-C5F12 emissions (Gg)	Agricultural waste burning	
+I-GHG-C5F12 emissions (Gg)	Forest fires	
+I-GHG-C5F12 emissions (Gg)	Grassland fires	
+I-GHG-C5F12 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-C5F12 emissions (Gg)	Other vegetation fires	
+I-GHG-C5F12 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-C5F12 emissions (Gg)	Solid waste disposal on land	
+I-GHG-C5F12 emissions (Gg)	Wastewater handling	
+I-GHG-C5F12 emissions (Gg)	Waste incineration	
+I-GHG-C5F12 emissions (Gg)	Other waste handling	
+I-GHG-C5F12 emissions (Gg)	Fossil fuel fires	
+I-GHG-C5F12 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-C5F12 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-C5F12 emissions (Gg)	Other sources	
+I-GHG-C6F14 emissions (Gg)	Public electricity and heat production	
+I-GHG-C6F14 emissions (Gg)	Other Energy Industries	
+I-GHG-C6F14 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-C6F14 emissions (Gg)	Domestic aviation	
+I-GHG-C6F14 emissions (Gg)	Road transportation	
+I-GHG-C6F14 emissions (Gg)	Rail transportation	
+I-GHG-C6F14 emissions (Gg)	Inland navigation	
+I-GHG-C6F14 emissions (Gg)	Other transportation	
+I-GHG-C6F14 emissions (Gg)	Residential and other sectors	
+I-GHG-C6F14 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-C6F14 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-C6F14 emissions (Gg)	Memo: International aviation	
+I-GHG-C6F14 emissions (Gg)	Memo: International navigation	
+I-GHG-C6F14 emissions (Gg)	Production of minerals	
+I-GHG-C6F14 emissions (Gg)	Cement production	
+I-GHG-C6F14 emissions (Gg)	Lime production	
+I-GHG-C6F14 emissions (Gg)	Production of chemicals	
+I-GHG-C6F14 emissions (Gg)	Production of metals	
+I-GHG-C6F14 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-C6F14 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-C6F14 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-C6F14 emissions (Gg)	Foam Blowing	
+I-GHG-C6F14 emissions (Gg)	Fire Extinguishers	
+I-GHG-C6F14 emissions (Gg)	Aerosols	
+I-GHG-C6F14 emissions (Gg)	F-gas as Solvent	
+I-GHG-C6F14 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-C6F14 emissions (Gg)	Electrical Equipment	
+I-GHG-C6F14 emissions (Gg)	Other F-gas use	
+I-GHG-C6F14 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-C6F14 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-C6F14 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-C6F14 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-C6F14 emissions (Gg)	Solvent and other product use: other	
+I-GHG-C6F14 emissions (Gg)	Enteric fermentation	
+I-GHG-C6F14 emissions (Gg)	Manure management	
+I-GHG-C6F14 emissions (Gg)	Rice cultivation	
+I-GHG-C6F14 emissions (Gg)	Direct soil emissions	
+I-GHG-C6F14 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-C6F14 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-C6F14 emissions (Gg)	Other direct soil emissions	
+I-GHG-C6F14 emissions (Gg)	Savanna burning	
+I-GHG-C6F14 emissions (Gg)	Agricultural waste burning	
+I-GHG-C6F14 emissions (Gg)	Forest fires	
+I-GHG-C6F14 emissions (Gg)	Grassland fires	
+I-GHG-C6F14 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-C6F14 emissions (Gg)	Other vegetation fires	
+I-GHG-C6F14 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-C6F14 emissions (Gg)	Solid waste disposal on land	
+I-GHG-C6F14 emissions (Gg)	Wastewater handling	
+I-GHG-C6F14 emissions (Gg)	Waste incineration	
+I-GHG-C6F14 emissions (Gg)	Other waste handling	
+I-GHG-C6F14 emissions (Gg)	Fossil fuel fires	
+I-GHG-C6F14 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-C6F14 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-C6F14 emissions (Gg)	Other sources	
+I-GHG-C7F16 emissions (Gg)	Public electricity and heat production	
+I-GHG-C7F16 emissions (Gg)	Other Energy Industries	
+I-GHG-C7F16 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-C7F16 emissions (Gg)	Domestic aviation	
+I-GHG-C7F16 emissions (Gg)	Road transportation	
+I-GHG-C7F16 emissions (Gg)	Rail transportation	
+I-GHG-C7F16 emissions (Gg)	Inland navigation	
+I-GHG-C7F16 emissions (Gg)	Other transportation	
+I-GHG-C7F16 emissions (Gg)	Residential and other sectors	
+I-GHG-C7F16 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-C7F16 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-C7F16 emissions (Gg)	Memo: International aviation	
+I-GHG-C7F16 emissions (Gg)	Memo: International navigation	
+I-GHG-C7F16 emissions (Gg)	Production of minerals	
+I-GHG-C7F16 emissions (Gg)	Cement production	
+I-GHG-C7F16 emissions (Gg)	Lime production	
+I-GHG-C7F16 emissions (Gg)	Production of chemicals	
+I-GHG-C7F16 emissions (Gg)	Production of metals	
+I-GHG-C7F16 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-C7F16 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-C7F16 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-C7F16 emissions (Gg)	Foam Blowing	
+I-GHG-C7F16 emissions (Gg)	Fire Extinguishers	
+I-GHG-C7F16 emissions (Gg)	Aerosols	
+I-GHG-C7F16 emissions (Gg)	F-gas as Solvent	
+I-GHG-C7F16 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-C7F16 emissions (Gg)	Electrical Equipment	
+I-GHG-C7F16 emissions (Gg)	Other F-gas use	
+I-GHG-C7F16 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-C7F16 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-C7F16 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-C7F16 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-C7F16 emissions (Gg)	Solvent and other product use: other	
+I-GHG-C7F16 emissions (Gg)	Enteric fermentation	
+I-GHG-C7F16 emissions (Gg)	Manure management	
+I-GHG-C7F16 emissions (Gg)	Rice cultivation	
+I-GHG-C7F16 emissions (Gg)	Direct soil emissions	
+I-GHG-C7F16 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-C7F16 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-C7F16 emissions (Gg)	Other direct soil emissions	
+I-GHG-C7F16 emissions (Gg)	Savanna burning	
+I-GHG-C7F16 emissions (Gg)	Agricultural waste burning	
+I-GHG-C7F16 emissions (Gg)	Forest fires	
+I-GHG-C7F16 emissions (Gg)	Grassland fires	
+I-GHG-C7F16 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-C7F16 emissions (Gg)	Other vegetation fires	
+I-GHG-C7F16 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-C7F16 emissions (Gg)	Solid waste disposal on land	
+I-GHG-C7F16 emissions (Gg)	Wastewater handling	
+I-GHG-C7F16 emissions (Gg)	Waste incineration	
+I-GHG-C7F16 emissions (Gg)	Other waste handling	
+I-GHG-C7F16 emissions (Gg)	Fossil fuel fires	
+I-GHG-C7F16 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-C7F16 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-C7F16 emissions (Gg)	Other sources	
+I-GHG-CF4 emissions (Gg)	Public electricity and heat production	
+I-GHG-CF4 emissions (Gg)	Other Energy Industries	
+I-GHG-CF4 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-CF4 emissions (Gg)	Domestic aviation	
+I-GHG-CF4 emissions (Gg)	Road transportation	
+I-GHG-CF4 emissions (Gg)	Rail transportation	
+I-GHG-CF4 emissions (Gg)	Inland navigation	
+I-GHG-CF4 emissions (Gg)	Other transportation	
+I-GHG-CF4 emissions (Gg)	Residential and other sectors	
+I-GHG-CF4 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-CF4 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-CF4 emissions (Gg)	Memo: International aviation	
+I-GHG-CF4 emissions (Gg)	Memo: International navigation	
+I-GHG-CF4 emissions (Gg)	Production of minerals	
+I-GHG-CF4 emissions (Gg)	Cement production	
+I-GHG-CF4 emissions (Gg)	Lime production	
+I-GHG-CF4 emissions (Gg)	Production of chemicals	
+I-GHG-CF4 emissions (Gg)	Production of metals	
+I-GHG-CF4 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-CF4 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-CF4 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-CF4 emissions (Gg)	Foam Blowing	
+I-GHG-CF4 emissions (Gg)	Fire Extinguishers	
+I-GHG-CF4 emissions (Gg)	Aerosols	
+I-GHG-CF4 emissions (Gg)	F-gas as Solvent	
+I-GHG-CF4 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-CF4 emissions (Gg)	Electrical Equipment	
+I-GHG-CF4 emissions (Gg)	Other F-gas use	
+I-GHG-CF4 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-CF4 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-CF4 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-CF4 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-CF4 emissions (Gg)	Solvent and other product use: other	
+I-GHG-CF4 emissions (Gg)	Enteric fermentation	
+I-GHG-CF4 emissions (Gg)	Manure management	
+I-GHG-CF4 emissions (Gg)	Rice cultivation	
+I-GHG-CF4 emissions (Gg)	Direct soil emissions	
+I-GHG-CF4 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-CF4 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-CF4 emissions (Gg)	Other direct soil emissions	
+I-GHG-CF4 emissions (Gg)	Savanna burning	
+I-GHG-CF4 emissions (Gg)	Agricultural waste burning	
+I-GHG-CF4 emissions (Gg)	Forest fires	
+I-GHG-CF4 emissions (Gg)	Grassland fires	
+I-GHG-CF4 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-CF4 emissions (Gg)	Other vegetation fires	
+I-GHG-CF4 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-CF4 emissions (Gg)	Solid waste disposal on land	
+I-GHG-CF4 emissions (Gg)	Wastewater handling	
+I-GHG-CF4 emissions (Gg)	Waste incineration	
+I-GHG-CF4 emissions (Gg)	Other waste handling	
+I-GHG-CF4 emissions (Gg)	Fossil fuel fires	
+I-GHG-CF4 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-CF4 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-CF4 emissions (Gg)	Other sources	
+I-GHG-cC4F8 emissions (Gg)	Public electricity and heat production	
+I-GHG-cC4F8 emissions (Gg)	Other Energy Industries	
+I-GHG-cC4F8 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-cC4F8 emissions (Gg)	Domestic aviation	
+I-GHG-cC4F8 emissions (Gg)	Road transportation	
+I-GHG-cC4F8 emissions (Gg)	Rail transportation	
+I-GHG-cC4F8 emissions (Gg)	Inland navigation	
+I-GHG-cC4F8 emissions (Gg)	Other transportation	
+I-GHG-cC4F8 emissions (Gg)	Residential and other sectors	
+I-GHG-cC4F8 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-cC4F8 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-cC4F8 emissions (Gg)	Memo: International aviation	
+I-GHG-cC4F8 emissions (Gg)	Memo: International navigation	
+I-GHG-cC4F8 emissions (Gg)	Production of minerals	
+I-GHG-cC4F8 emissions (Gg)	Cement production	
+I-GHG-cC4F8 emissions (Gg)	Lime production	
+I-GHG-cC4F8 emissions (Gg)	Production of chemicals	
+I-GHG-cC4F8 emissions (Gg)	Production of metals	
+I-GHG-cC4F8 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-cC4F8 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-cC4F8 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-cC4F8 emissions (Gg)	Foam Blowing	
+I-GHG-cC4F8 emissions (Gg)	Fire Extinguishers	
+I-GHG-cC4F8 emissions (Gg)	Aerosols	
+I-GHG-cC4F8 emissions (Gg)	F-gas as Solvent	
+I-GHG-cC4F8 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-cC4F8 emissions (Gg)	Electrical Equipment	
+I-GHG-cC4F8 emissions (Gg)	Other F-gas use	
+I-GHG-cC4F8 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-cC4F8 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-cC4F8 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-cC4F8 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-cC4F8 emissions (Gg)	Solvent and other product use: other	
+I-GHG-cC4F8 emissions (Gg)	Enteric fermentation	
+I-GHG-cC4F8 emissions (Gg)	Manure management	
+I-GHG-cC4F8 emissions (Gg)	Rice cultivation	
+I-GHG-cC4F8 emissions (Gg)	Direct soil emissions	
+I-GHG-cC4F8 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-cC4F8 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-cC4F8 emissions (Gg)	Other direct soil emissions	
+I-GHG-cC4F8 emissions (Gg)	Savanna burning	
+I-GHG-cC4F8 emissions (Gg)	Agricultural waste burning	
+I-GHG-cC4F8 emissions (Gg)	Forest fires	
+I-GHG-cC4F8 emissions (Gg)	Grassland fires	
+I-GHG-cC4F8 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-cC4F8 emissions (Gg)	Other vegetation fires	
+I-GHG-cC4F8 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-cC4F8 emissions (Gg)	Solid waste disposal on land	
+I-GHG-cC4F8 emissions (Gg)	Wastewater handling	
+I-GHG-cC4F8 emissions (Gg)	Waste incineration	
+I-GHG-cC4F8 emissions (Gg)	Other waste handling	
+I-GHG-cC4F8 emissions (Gg)	Fossil fuel fires	
+I-GHG-cC4F8 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-cC4F8 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-cC4F8 emissions (Gg)	Other sources	
+I-GHG-SF6 emissions (Gg)	Public electricity and heat production	
+I-GHG-SF6 emissions (Gg)	Other Energy Industries	
+I-GHG-SF6 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-SF6 emissions (Gg)	Domestic aviation	
+I-GHG-SF6 emissions (Gg)	Road transportation	
+I-GHG-SF6 emissions (Gg)	Rail transportation	
+I-GHG-SF6 emissions (Gg)	Inland navigation	
+I-GHG-SF6 emissions (Gg)	Other transportation	
+I-GHG-SF6 emissions (Gg)	Residential and other sectors	
+I-GHG-SF6 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-SF6 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-SF6 emissions (Gg)	Memo: International aviation	
+I-GHG-SF6 emissions (Gg)	Memo: International navigation	
+I-GHG-SF6 emissions (Gg)	Production of minerals	
+I-GHG-SF6 emissions (Gg)	Cement production	
+I-GHG-SF6 emissions (Gg)	Lime production	
+I-GHG-SF6 emissions (Gg)	Production of chemicals	
+I-GHG-SF6 emissions (Gg)	Production of metals	
+I-GHG-SF6 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-SF6 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-SF6 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-SF6 emissions (Gg)	Foam Blowing	
+I-GHG-SF6 emissions (Gg)	Fire Extinguishers	
+I-GHG-SF6 emissions (Gg)	Aerosols	
+I-GHG-SF6 emissions (Gg)	F-gas as Solvent	
+I-GHG-SF6 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-SF6 emissions (Gg)	Electrical Equipment	
+I-GHG-SF6 emissions (Gg)	Other F-gas use	
+I-GHG-SF6 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-SF6 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-SF6 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-SF6 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-SF6 emissions (Gg)	Solvent and other product use: other	
+I-GHG-SF6 emissions (Gg)	Enteric fermentation	
+I-GHG-SF6 emissions (Gg)	Manure management	
+I-GHG-SF6 emissions (Gg)	Rice cultivation	
+I-GHG-SF6 emissions (Gg)	Direct soil emissions	
+I-GHG-SF6 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-SF6 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-SF6 emissions (Gg)	Other direct soil emissions	
+I-GHG-SF6 emissions (Gg)	Savanna burning	
+I-GHG-SF6 emissions (Gg)	Agricultural waste burning	
+I-GHG-SF6 emissions (Gg)	Forest fires	
+I-GHG-SF6 emissions (Gg)	Grassland fires	
+I-GHG-SF6 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-SF6 emissions (Gg)	Other vegetation fires	
+I-GHG-SF6 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-SF6 emissions (Gg)	Solid waste disposal on land	
+I-GHG-SF6 emissions (Gg)	Wastewater handling	
+I-GHG-SF6 emissions (Gg)	Waste incineration	
+I-GHG-SF6 emissions (Gg)	Other waste handling	
+I-GHG-SF6 emissions (Gg)	Fossil fuel fires	
+I-GHG-SF6 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-SF6 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-SF6 emissions (Gg)	Other sources	
+I-GHG-NF3 emissions (Gg)	Public electricity and heat production	
+I-GHG-NF3 emissions (Gg)	Other Energy Industries	
+I-GHG-NF3 emissions (Gg)	Manufacturing Industries and Construction	
+I-GHG-NF3 emissions (Gg)	Domestic aviation	
+I-GHG-NF3 emissions (Gg)	Road transportation	
+I-GHG-NF3 emissions (Gg)	Rail transportation	
+I-GHG-NF3 emissions (Gg)	Inland navigation	
+I-GHG-NF3 emissions (Gg)	Other transportation	
+I-GHG-NF3 emissions (Gg)	Residential and other sectors	
+I-GHG-NF3 emissions (Gg)	Fugitive emissions from solid fuels	
+I-GHG-NF3 emissions (Gg)	Fugitive emissions from oil and gas	
+I-GHG-NF3 emissions (Gg)	Memo: International aviation	
+I-GHG-NF3 emissions (Gg)	Memo: International navigation	
+I-GHG-NF3 emissions (Gg)	Production of minerals	
+I-GHG-NF3 emissions (Gg)	Cement production	
+I-GHG-NF3 emissions (Gg)	Lime production	
+I-GHG-NF3 emissions (Gg)	Production of chemicals	
+I-GHG-NF3 emissions (Gg)	Production of metals	
+I-GHG-NF3 emissions (Gg)	Production of pulp/paper/food/drink	
+I-GHG-NF3 emissions (Gg)	Production of halocarbons and SF6	
+I-GHG-NF3 emissions (Gg)	Refrigeration and Air Conditioning	
+I-GHG-NF3 emissions (Gg)	Foam Blowing	
+I-GHG-NF3 emissions (Gg)	Fire Extinguishers	
+I-GHG-NF3 emissions (Gg)	Aerosols	
+I-GHG-NF3 emissions (Gg)	F-gas as Solvent	
+I-GHG-NF3 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-GHG-NF3 emissions (Gg)	Electrical Equipment	
+I-GHG-NF3 emissions (Gg)	Other F-gas use	
+I-GHG-NF3 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-GHG-NF3 emissions (Gg)	Solvent and other product use: paint	
+I-GHG-NF3 emissions (Gg)	Solvent and other product use: degrease	
+I-GHG-NF3 emissions (Gg)	Solvent and other product use: chemicals	
+I-GHG-NF3 emissions (Gg)	Solvent and other product use: other	
+I-GHG-NF3 emissions (Gg)	Enteric fermentation	
+I-GHG-NF3 emissions (Gg)	Manure management	
+I-GHG-NF3 emissions (Gg)	Rice cultivation	
+I-GHG-NF3 emissions (Gg)	Direct soil emissions	
+I-GHG-NF3 emissions (Gg)	Manure in pasture/range/paddock	
+I-GHG-NF3 emissions (Gg)	Indirect N2O from agriculture	
+I-GHG-NF3 emissions (Gg)	Other direct soil emissions	
+I-GHG-NF3 emissions (Gg)	Savanna burning	
+I-GHG-NF3 emissions (Gg)	Agricultural waste burning	
+I-GHG-NF3 emissions (Gg)	Forest fires	
+I-GHG-NF3 emissions (Gg)	Grassland fires	
+I-GHG-NF3 emissions (Gg)	Decay of wetlands/peatlands	
+I-GHG-NF3 emissions (Gg)	Other vegetation fires	
+I-GHG-NF3 emissions (Gg)	Forest Fires-Post burn decay	
+I-GHG-NF3 emissions (Gg)	Solid waste disposal on land	
+I-GHG-NF3 emissions (Gg)	Wastewater handling	
+I-GHG-NF3 emissions (Gg)	Waste incineration	
+I-GHG-NF3 emissions (Gg)	Other waste handling	
+I-GHG-NF3 emissions (Gg)	Fossil fuel fires	
+I-GHG-NF3 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-GHG-NF3 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-GHG-NF3 emissions (Gg)	Other sources	
+I-HANPP emissions (Gg)	Harvested primary crops	
+I-HANPP emissions (Gg)	Harvested crop residues	
+I-HANPP emissions (Gg)	Grazed biomass	
+I-HANPP emissions (Gg)	Wood removals (fao)	
+I-AIR-CO emissions (Gg)	Public electricity and heat production	
+I-AIR-CO emissions (Gg)	Other Energy Industries	
+I-AIR-CO emissions (Gg)	Manufacturing Industries and Construction	
+I-AIR-CO emissions (Gg)	Domestic aviation	
+I-AIR-CO emissions (Gg)	Road transportation	
+I-AIR-CO emissions (Gg)	Rail transportation	
+I-AIR-CO emissions (Gg)	Inland navigation	
+I-AIR-CO emissions (Gg)	Other transportation	
+I-AIR-CO emissions (Gg)	Residential and other sectors	
+I-AIR-CO emissions (Gg)	Fugitive emissions from solid fuels	
+I-AIR-CO emissions (Gg)	Fugitive emissions from oil and gas	
+I-AIR-CO emissions (Gg)	Memo: International aviation	
+I-AIR-CO emissions (Gg)	Memo: International navigation	
+I-AIR-CO emissions (Gg)	Production of minerals	
+I-AIR-CO emissions (Gg)	Cement production	
+I-AIR-CO emissions (Gg)	Lime production	
+I-AIR-CO emissions (Gg)	Production of chemicals	
+I-AIR-CO emissions (Gg)	Production of metals	
+I-AIR-CO emissions (Gg)	Production of pulp/paper/food/drink	
+I-AIR-CO emissions (Gg)	Production of halocarbons and SF6	
+I-AIR-CO emissions (Gg)	Refrigeration and Air Conditioning	
+I-AIR-CO emissions (Gg)	Foam Blowing	
+I-AIR-CO emissions (Gg)	Fire Extinguishers	
+I-AIR-CO emissions (Gg)	Aerosols	
+I-AIR-CO emissions (Gg)	F-gas as Solvent	
+I-AIR-CO emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-AIR-CO emissions (Gg)	Electrical Equipment	
+I-AIR-CO emissions (Gg)	Other F-gas use	
+I-AIR-CO emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-AIR-CO emissions (Gg)	Solvent and other product use: paint	
+I-AIR-CO emissions (Gg)	Solvent and other product use: degrease	
+I-AIR-CO emissions (Gg)	Solvent and other product use: chemicals	
+I-AIR-CO emissions (Gg)	Solvent and other product use: other	
+I-AIR-CO emissions (Gg)	Enteric fermentation	
+I-AIR-CO emissions (Gg)	Manure management	
+I-AIR-CO emissions (Gg)	Rice cultivation	
+I-AIR-CO emissions (Gg)	Direct soil emissions	
+I-AIR-CO emissions (Gg)	Manure in pasture/range/paddock	
+I-AIR-CO emissions (Gg)	Indirect N2O from agriculture	
+I-AIR-CO emissions (Gg)	Other direct soil emissions	
+I-AIR-CO emissions (Gg)	Savanna burning	
+I-AIR-CO emissions (Gg)	Agricultural waste burning	
+I-AIR-CO emissions (Gg)	Forest fires	
+I-AIR-CO emissions (Gg)	Grassland fires	
+I-AIR-CO emissions (Gg)	Decay of wetlands/peatlands	
+I-AIR-CO emissions (Gg)	Other vegetation fires	
+I-AIR-CO emissions (Gg)	Forest Fires-Post burn decay	
+I-AIR-CO emissions (Gg)	Solid waste disposal on land	
+I-AIR-CO emissions (Gg)	Wastewater handling	
+I-AIR-CO emissions (Gg)	Waste incineration	
+I-AIR-CO emissions (Gg)	Other waste handling	
+I-AIR-CO emissions (Gg)	Fossil fuel fires	
+I-AIR-CO emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-AIR-CO emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-AIR-CO emissions (Gg)	Other sources	
+I-AIR-NOx emissions (Gg)	Public electricity and heat production	
+I-AIR-NOx emissions (Gg)	Other Energy Industries	
+I-AIR-NOx emissions (Gg)	Manufacturing Industries and Construction	
+I-AIR-NOx emissions (Gg)	Domestic aviation	
+I-AIR-NOx emissions (Gg)	Road transportation	
+I-AIR-NOx emissions (Gg)	Rail transportation	
+I-AIR-NOx emissions (Gg)	Inland navigation	
+I-AIR-NOx emissions (Gg)	Other transportation	
+I-AIR-NOx emissions (Gg)	Residential and other sectors	
+I-AIR-NOx emissions (Gg)	Fugitive emissions from solid fuels	
+I-AIR-NOx emissions (Gg)	Fugitive emissions from oil and gas	
+I-AIR-NOx emissions (Gg)	Memo: International aviation	
+I-AIR-NOx emissions (Gg)	Memo: International navigation	
+I-AIR-NOx emissions (Gg)	Production of minerals	
+I-AIR-NOx emissions (Gg)	Cement production	
+I-AIR-NOx emissions (Gg)	Lime production	
+I-AIR-NOx emissions (Gg)	Production of chemicals	
+I-AIR-NOx emissions (Gg)	Production of metals	
+I-AIR-NOx emissions (Gg)	Production of pulp/paper/food/drink	
+I-AIR-NOx emissions (Gg)	Production of halocarbons and SF6	
+I-AIR-NOx emissions (Gg)	Refrigeration and Air Conditioning	
+I-AIR-NOx emissions (Gg)	Foam Blowing	
+I-AIR-NOx emissions (Gg)	Fire Extinguishers	
+I-AIR-NOx emissions (Gg)	Aerosols	
+I-AIR-NOx emissions (Gg)	F-gas as Solvent	
+I-AIR-NOx emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-AIR-NOx emissions (Gg)	Electrical Equipment	
+I-AIR-NOx emissions (Gg)	Other F-gas use	
+I-AIR-NOx emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-AIR-NOx emissions (Gg)	Solvent and other product use: paint	
+I-AIR-NOx emissions (Gg)	Solvent and other product use: degrease	
+I-AIR-NOx emissions (Gg)	Solvent and other product use: chemicals	
+I-AIR-NOx emissions (Gg)	Solvent and other product use: other	
+I-AIR-NOx emissions (Gg)	Enteric fermentation	
+I-AIR-NOx emissions (Gg)	Manure management	
+I-AIR-NOx emissions (Gg)	Rice cultivation	
+I-AIR-NOx emissions (Gg)	Direct soil emissions	
+I-AIR-NOx emissions (Gg)	Manure in pasture/range/paddock	
+I-AIR-NOx emissions (Gg)	Indirect N2O from agriculture	
+I-AIR-NOx emissions (Gg)	Other direct soil emissions	
+I-AIR-NOx emissions (Gg)	Savanna burning	
+I-AIR-NOx emissions (Gg)	Agricultural waste burning	
+I-AIR-NOx emissions (Gg)	Forest fires	
+I-AIR-NOx emissions (Gg)	Grassland fires	
+I-AIR-NOx emissions (Gg)	Decay of wetlands/peatlands	
+I-AIR-NOx emissions (Gg)	Other vegetation fires	
+I-AIR-NOx emissions (Gg)	Forest Fires-Post burn decay	
+I-AIR-NOx emissions (Gg)	Solid waste disposal on land	
+I-AIR-NOx emissions (Gg)	Wastewater handling	
+I-AIR-NOx emissions (Gg)	Waste incineration	
+I-AIR-NOx emissions (Gg)	Other waste handling	
+I-AIR-NOx emissions (Gg)	Fossil fuel fires	
+I-AIR-NOx emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-AIR-NOx emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-AIR-NOx emissions (Gg)	Other sources	
+I-AIR-NMVOC emissions (Gg)	Public electricity and heat production	
+I-AIR-NMVOC emissions (Gg)	Other Energy Industries	
+I-AIR-NMVOC emissions (Gg)	Manufacturing Industries and Construction	
+I-AIR-NMVOC emissions (Gg)	Domestic aviation	
+I-AIR-NMVOC emissions (Gg)	Road transportation	
+I-AIR-NMVOC emissions (Gg)	Rail transportation	
+I-AIR-NMVOC emissions (Gg)	Inland navigation	
+I-AIR-NMVOC emissions (Gg)	Other transportation	
+I-AIR-NMVOC emissions (Gg)	Residential and other sectors	
+I-AIR-NMVOC emissions (Gg)	Fugitive emissions from solid fuels	
+I-AIR-NMVOC emissions (Gg)	Fugitive emissions from oil and gas	
+I-AIR-NMVOC emissions (Gg)	Memo: International aviation	
+I-AIR-NMVOC emissions (Gg)	Memo: International navigation	
+I-AIR-NMVOC emissions (Gg)	Production of minerals	
+I-AIR-NMVOC emissions (Gg)	Cement production	
+I-AIR-NMVOC emissions (Gg)	Lime production	
+I-AIR-NMVOC emissions (Gg)	Production of chemicals	
+I-AIR-NMVOC emissions (Gg)	Production of metals	
+I-AIR-NMVOC emissions (Gg)	Production of pulp/paper/food/drink	
+I-AIR-NMVOC emissions (Gg)	Production of halocarbons and SF6	
+I-AIR-NMVOC emissions (Gg)	Refrigeration and Air Conditioning	
+I-AIR-NMVOC emissions (Gg)	Foam Blowing	
+I-AIR-NMVOC emissions (Gg)	Fire Extinguishers	
+I-AIR-NMVOC emissions (Gg)	Aerosols	
+I-AIR-NMVOC emissions (Gg)	F-gas as Solvent	
+I-AIR-NMVOC emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-AIR-NMVOC emissions (Gg)	Electrical Equipment	
+I-AIR-NMVOC emissions (Gg)	Other F-gas use	
+I-AIR-NMVOC emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-AIR-NMVOC emissions (Gg)	Solvent and other product use: paint	
+I-AIR-NMVOC emissions (Gg)	Solvent and other product use: degrease	
+I-AIR-NMVOC emissions (Gg)	Solvent and other product use: chemicals	
+I-AIR-NMVOC emissions (Gg)	Solvent and other product use: other	
+I-AIR-NMVOC emissions (Gg)	Enteric fermentation	
+I-AIR-NMVOC emissions (Gg)	Manure management	
+I-AIR-NMVOC emissions (Gg)	Rice cultivation	
+I-AIR-NMVOC emissions (Gg)	Direct soil emissions	
+I-AIR-NMVOC emissions (Gg)	Manure in pasture/range/paddock	
+I-AIR-NMVOC emissions (Gg)	Indirect N2O from agriculture	
+I-AIR-NMVOC emissions (Gg)	Other direct soil emissions	
+I-AIR-NMVOC emissions (Gg)	Savanna burning	
+I-AIR-NMVOC emissions (Gg)	Agricultural waste burning	
+I-AIR-NMVOC emissions (Gg)	Forest fires	
+I-AIR-NMVOC emissions (Gg)	Grassland fires	
+I-AIR-NMVOC emissions (Gg)	Decay of wetlands/peatlands	
+I-AIR-NMVOC emissions (Gg)	Other vegetation fires	
+I-AIR-NMVOC emissions (Gg)	Forest Fires-Post burn decay	
+I-AIR-NMVOC emissions (Gg)	Solid waste disposal on land	
+I-AIR-NMVOC emissions (Gg)	Wastewater handling	
+I-AIR-NMVOC emissions (Gg)	Waste incineration	
+I-AIR-NMVOC emissions (Gg)	Other waste handling	
+I-AIR-NMVOC emissions (Gg)	Fossil fuel fires	
+I-AIR-NMVOC emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-AIR-NMVOC emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-AIR-NMVOC emissions (Gg)	Other sources	
+I-AIR-NH3 emissions (Gg)	Public electricity and heat production	
+I-AIR-NH3 emissions (Gg)	Other Energy Industries	
+I-AIR-NH3 emissions (Gg)	Manufacturing Industries and Construction	
+I-AIR-NH3 emissions (Gg)	Domestic aviation	
+I-AIR-NH3 emissions (Gg)	Road transportation	
+I-AIR-NH3 emissions (Gg)	Rail transportation	
+I-AIR-NH3 emissions (Gg)	Inland navigation	
+I-AIR-NH3 emissions (Gg)	Other transportation	
+I-AIR-NH3 emissions (Gg)	Residential and other sectors	
+I-AIR-NH3 emissions (Gg)	Fugitive emissions from solid fuels	
+I-AIR-NH3 emissions (Gg)	Fugitive emissions from oil and gas	
+I-AIR-NH3 emissions (Gg)	Memo: International aviation	
+I-AIR-NH3 emissions (Gg)	Memo: International navigation	
+I-AIR-NH3 emissions (Gg)	Production of minerals	
+I-AIR-NH3 emissions (Gg)	Cement production	
+I-AIR-NH3 emissions (Gg)	Lime production	
+I-AIR-NH3 emissions (Gg)	Production of chemicals	
+I-AIR-NH3 emissions (Gg)	Production of metals	
+I-AIR-NH3 emissions (Gg)	Production of pulp/paper/food/drink	
+I-AIR-NH3 emissions (Gg)	Production of halocarbons and SF6	
+I-AIR-NH3 emissions (Gg)	Refrigeration and Air Conditioning	
+I-AIR-NH3 emissions (Gg)	Foam Blowing	
+I-AIR-NH3 emissions (Gg)	Fire Extinguishers	
+I-AIR-NH3 emissions (Gg)	Aerosols	
+I-AIR-NH3 emissions (Gg)	F-gas as Solvent	
+I-AIR-NH3 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-AIR-NH3 emissions (Gg)	Electrical Equipment	
+I-AIR-NH3 emissions (Gg)	Other F-gas use	
+I-AIR-NH3 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-AIR-NH3 emissions (Gg)	Solvent and other product use: paint	
+I-AIR-NH3 emissions (Gg)	Solvent and other product use: degrease	
+I-AIR-NH3 emissions (Gg)	Solvent and other product use: chemicals	
+I-AIR-NH3 emissions (Gg)	Solvent and other product use: other	
+I-AIR-NH3 emissions (Gg)	Enteric fermentation	
+I-AIR-NH3 emissions (Gg)	Manure management	
+I-AIR-NH3 emissions (Gg)	Rice cultivation	
+I-AIR-NH3 emissions (Gg)	Direct soil emissions	
+I-AIR-NH3 emissions (Gg)	Manure in pasture/range/paddock	
+I-AIR-NH3 emissions (Gg)	Indirect N2O from agriculture	
+I-AIR-NH3 emissions (Gg)	Other direct soil emissions	
+I-AIR-NH3 emissions (Gg)	Savanna burning	
+I-AIR-NH3 emissions (Gg)	Agricultural waste burning	
+I-AIR-NH3 emissions (Gg)	Forest fires	
+I-AIR-NH3 emissions (Gg)	Grassland fires	
+I-AIR-NH3 emissions (Gg)	Decay of wetlands/peatlands	
+I-AIR-NH3 emissions (Gg)	Other vegetation fires	
+I-AIR-NH3 emissions (Gg)	Forest Fires-Post burn decay	
+I-AIR-NH3 emissions (Gg)	Solid waste disposal on land	
+I-AIR-NH3 emissions (Gg)	Wastewater handling	
+I-AIR-NH3 emissions (Gg)	Waste incineration	
+I-AIR-NH3 emissions (Gg)	Other waste handling	
+I-AIR-NH3 emissions (Gg)	Fossil fuel fires	
+I-AIR-NH3 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-AIR-NH3 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-AIR-NH3 emissions (Gg)	Other sources	
+I-AIR-SO2 emissions (Gg)	Public electricity and heat production	
+I-AIR-SO2 emissions (Gg)	Other Energy Industries	
+I-AIR-SO2 emissions (Gg)	Manufacturing Industries and Construction	
+I-AIR-SO2 emissions (Gg)	Domestic aviation	
+I-AIR-SO2 emissions (Gg)	Road transportation	
+I-AIR-SO2 emissions (Gg)	Rail transportation	
+I-AIR-SO2 emissions (Gg)	Inland navigation	
+I-AIR-SO2 emissions (Gg)	Other transportation	
+I-AIR-SO2 emissions (Gg)	Residential and other sectors	
+I-AIR-SO2 emissions (Gg)	Fugitive emissions from solid fuels	
+I-AIR-SO2 emissions (Gg)	Fugitive emissions from oil and gas	
+I-AIR-SO2 emissions (Gg)	Memo: International aviation	
+I-AIR-SO2 emissions (Gg)	Memo: International navigation	
+I-AIR-SO2 emissions (Gg)	Production of minerals	
+I-AIR-SO2 emissions (Gg)	Cement production	
+I-AIR-SO2 emissions (Gg)	Lime production	
+I-AIR-SO2 emissions (Gg)	Production of chemicals	
+I-AIR-SO2 emissions (Gg)	Production of metals	
+I-AIR-SO2 emissions (Gg)	Production of pulp/paper/food/drink	
+I-AIR-SO2 emissions (Gg)	Production of halocarbons and SF6	
+I-AIR-SO2 emissions (Gg)	Refrigeration and Air Conditioning	
+I-AIR-SO2 emissions (Gg)	Foam Blowing	
+I-AIR-SO2 emissions (Gg)	Fire Extinguishers	
+I-AIR-SO2 emissions (Gg)	Aerosols	
+I-AIR-SO2 emissions (Gg)	F-gas as Solvent	
+I-AIR-SO2 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-AIR-SO2 emissions (Gg)	Electrical Equipment	
+I-AIR-SO2 emissions (Gg)	Other F-gas use	
+I-AIR-SO2 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-AIR-SO2 emissions (Gg)	Solvent and other product use: paint	
+I-AIR-SO2 emissions (Gg)	Solvent and other product use: degrease	
+I-AIR-SO2 emissions (Gg)	Solvent and other product use: chemicals	
+I-AIR-SO2 emissions (Gg)	Solvent and other product use: other	
+I-AIR-SO2 emissions (Gg)	Enteric fermentation	
+I-AIR-SO2 emissions (Gg)	Manure management	
+I-AIR-SO2 emissions (Gg)	Rice cultivation	
+I-AIR-SO2 emissions (Gg)	Direct soil emissions	
+I-AIR-SO2 emissions (Gg)	Manure in pasture/range/paddock	
+I-AIR-SO2 emissions (Gg)	Indirect N2O from agriculture	
+I-AIR-SO2 emissions (Gg)	Other direct soil emissions	
+I-AIR-SO2 emissions (Gg)	Savanna burning	
+I-AIR-SO2 emissions (Gg)	Agricultural waste burning	
+I-AIR-SO2 emissions (Gg)	Forest fires	
+I-AIR-SO2 emissions (Gg)	Grassland fires	
+I-AIR-SO2 emissions (Gg)	Decay of wetlands/peatlands	
+I-AIR-SO2 emissions (Gg)	Other vegetation fires	
+I-AIR-SO2 emissions (Gg)	Forest Fires-Post burn decay	
+I-AIR-SO2 emissions (Gg)	Solid waste disposal on land	
+I-AIR-SO2 emissions (Gg)	Wastewater handling	
+I-AIR-SO2 emissions (Gg)	Waste incineration	
+I-AIR-SO2 emissions (Gg)	Other waste handling	
+I-AIR-SO2 emissions (Gg)	Fossil fuel fires	
+I-AIR-SO2 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-AIR-SO2 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-AIR-SO2 emissions (Gg)	Other sources	
+I-AIR-PM10 emissions (Gg)	Public electricity and heat production	
+I-AIR-PM10 emissions (Gg)	Other Energy Industries	
+I-AIR-PM10 emissions (Gg)	Manufacturing Industries and Construction	
+I-AIR-PM10 emissions (Gg)	Domestic aviation	
+I-AIR-PM10 emissions (Gg)	Road transportation	
+I-AIR-PM10 emissions (Gg)	Rail transportation	
+I-AIR-PM10 emissions (Gg)	Inland navigation	
+I-AIR-PM10 emissions (Gg)	Other transportation	
+I-AIR-PM10 emissions (Gg)	Residential and other sectors	
+I-AIR-PM10 emissions (Gg)	Fugitive emissions from solid fuels	
+I-AIR-PM10 emissions (Gg)	Fugitive emissions from oil and gas	
+I-AIR-PM10 emissions (Gg)	Memo: International aviation	
+I-AIR-PM10 emissions (Gg)	Memo: International navigation	
+I-AIR-PM10 emissions (Gg)	Production of minerals	
+I-AIR-PM10 emissions (Gg)	Cement production	
+I-AIR-PM10 emissions (Gg)	Lime production	
+I-AIR-PM10 emissions (Gg)	Production of chemicals	
+I-AIR-PM10 emissions (Gg)	Production of metals	
+I-AIR-PM10 emissions (Gg)	Production of pulp/paper/food/drink	
+I-AIR-PM10 emissions (Gg)	Production of halocarbons and SF6	
+I-AIR-PM10 emissions (Gg)	Refrigeration and Air Conditioning	
+I-AIR-PM10 emissions (Gg)	Foam Blowing	
+I-AIR-PM10 emissions (Gg)	Fire Extinguishers	
+I-AIR-PM10 emissions (Gg)	Aerosols	
+I-AIR-PM10 emissions (Gg)	F-gas as Solvent	
+I-AIR-PM10 emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-AIR-PM10 emissions (Gg)	Electrical Equipment	
+I-AIR-PM10 emissions (Gg)	Other F-gas use	
+I-AIR-PM10 emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-AIR-PM10 emissions (Gg)	Solvent and other product use: paint	
+I-AIR-PM10 emissions (Gg)	Solvent and other product use: degrease	
+I-AIR-PM10 emissions (Gg)	Solvent and other product use: chemicals	
+I-AIR-PM10 emissions (Gg)	Solvent and other product use: other	
+I-AIR-PM10 emissions (Gg)	Enteric fermentation	
+I-AIR-PM10 emissions (Gg)	Manure management	
+I-AIR-PM10 emissions (Gg)	Rice cultivation	
+I-AIR-PM10 emissions (Gg)	Direct soil emissions	
+I-AIR-PM10 emissions (Gg)	Manure in pasture/range/paddock	
+I-AIR-PM10 emissions (Gg)	Indirect N2O from agriculture	
+I-AIR-PM10 emissions (Gg)	Other direct soil emissions	
+I-AIR-PM10 emissions (Gg)	Savanna burning	
+I-AIR-PM10 emissions (Gg)	Agricultural waste burning	
+I-AIR-PM10 emissions (Gg)	Forest fires	
+I-AIR-PM10 emissions (Gg)	Grassland fires	
+I-AIR-PM10 emissions (Gg)	Decay of wetlands/peatlands	
+I-AIR-PM10 emissions (Gg)	Other vegetation fires	
+I-AIR-PM10 emissions (Gg)	Forest Fires-Post burn decay	
+I-AIR-PM10 emissions (Gg)	Solid waste disposal on land	
+I-AIR-PM10 emissions (Gg)	Wastewater handling	
+I-AIR-PM10 emissions (Gg)	Waste incineration	
+I-AIR-PM10 emissions (Gg)	Other waste handling	
+I-AIR-PM10 emissions (Gg)	Fossil fuel fires	
+I-AIR-PM10 emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-AIR-PM10 emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-AIR-PM10 emissions (Gg)	Other sources	
+I-AIR-HCFC141b emissions (Gg)	Public electricity and heat production	
+I-AIR-HCFC141b emissions (Gg)	Other Energy Industries	
+I-AIR-HCFC141b emissions (Gg)	Manufacturing Industries and Construction	
+I-AIR-HCFC141b emissions (Gg)	Domestic aviation	
+I-AIR-HCFC141b emissions (Gg)	Road transportation	
+I-AIR-HCFC141b emissions (Gg)	Rail transportation	
+I-AIR-HCFC141b emissions (Gg)	Inland navigation	
+I-AIR-HCFC141b emissions (Gg)	Other transportation	
+I-AIR-HCFC141b emissions (Gg)	Residential and other sectors	
+I-AIR-HCFC141b emissions (Gg)	Fugitive emissions from solid fuels	
+I-AIR-HCFC141b emissions (Gg)	Fugitive emissions from oil and gas	
+I-AIR-HCFC141b emissions (Gg)	Memo: International aviation	
+I-AIR-HCFC141b emissions (Gg)	Memo: International navigation	
+I-AIR-HCFC141b emissions (Gg)	Production of minerals	
+I-AIR-HCFC141b emissions (Gg)	Cement production	
+I-AIR-HCFC141b emissions (Gg)	Lime production	
+I-AIR-HCFC141b emissions (Gg)	Production of chemicals	
+I-AIR-HCFC141b emissions (Gg)	Production of metals	
+I-AIR-HCFC141b emissions (Gg)	Production of pulp/paper/food/drink	
+I-AIR-HCFC141b emissions (Gg)	Production of halocarbons and SF6	
+I-AIR-HCFC141b emissions (Gg)	Refrigeration and Air Conditioning	
+I-AIR-HCFC141b emissions (Gg)	Foam Blowing	
+I-AIR-HCFC141b emissions (Gg)	Fire Extinguishers	
+I-AIR-HCFC141b emissions (Gg)	Aerosols	
+I-AIR-HCFC141b emissions (Gg)	F-gas as Solvent	
+I-AIR-HCFC141b emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-AIR-HCFC141b emissions (Gg)	Electrical Equipment	
+I-AIR-HCFC141b emissions (Gg)	Other F-gas use	
+I-AIR-HCFC141b emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-AIR-HCFC141b emissions (Gg)	Solvent and other product use: paint	
+I-AIR-HCFC141b emissions (Gg)	Solvent and other product use: degrease	
+I-AIR-HCFC141b emissions (Gg)	Solvent and other product use: chemicals	
+I-AIR-HCFC141b emissions (Gg)	Solvent and other product use: other	
+I-AIR-HCFC141b emissions (Gg)	Enteric fermentation	
+I-AIR-HCFC141b emissions (Gg)	Manure management	
+I-AIR-HCFC141b emissions (Gg)	Rice cultivation	
+I-AIR-HCFC141b emissions (Gg)	Direct soil emissions	
+I-AIR-HCFC141b emissions (Gg)	Manure in pasture/range/paddock	
+I-AIR-HCFC141b emissions (Gg)	Indirect N2O from agriculture	
+I-AIR-HCFC141b emissions (Gg)	Other direct soil emissions	
+I-AIR-HCFC141b emissions (Gg)	Savanna burning	
+I-AIR-HCFC141b emissions (Gg)	Agricultural waste burning	
+I-AIR-HCFC141b emissions (Gg)	Forest fires	
+I-AIR-HCFC141b emissions (Gg)	Grassland fires	
+I-AIR-HCFC141b emissions (Gg)	Decay of wetlands/peatlands	
+I-AIR-HCFC141b emissions (Gg)	Other vegetation fires	
+I-AIR-HCFC141b emissions (Gg)	Forest Fires-Post burn decay	
+I-AIR-HCFC141b emissions (Gg)	Solid waste disposal on land	
+I-AIR-HCFC141b emissions (Gg)	Wastewater handling	
+I-AIR-HCFC141b emissions (Gg)	Waste incineration	
+I-AIR-HCFC141b emissions (Gg)	Other waste handling	
+I-AIR-HCFC141b emissions (Gg)	Fossil fuel fires	
+I-AIR-HCFC141b emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-AIR-HCFC141b emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-AIR-HCFC141b emissions (Gg)	Other sources	
+I-AIR-HCFC142b emissions (Gg)	Public electricity and heat production	
+I-AIR-HCFC142b emissions (Gg)	Other Energy Industries	
+I-AIR-HCFC142b emissions (Gg)	Manufacturing Industries and Construction	
+I-AIR-HCFC142b emissions (Gg)	Domestic aviation	
+I-AIR-HCFC142b emissions (Gg)	Road transportation	
+I-AIR-HCFC142b emissions (Gg)	Rail transportation	
+I-AIR-HCFC142b emissions (Gg)	Inland navigation	
+I-AIR-HCFC142b emissions (Gg)	Other transportation	
+I-AIR-HCFC142b emissions (Gg)	Residential and other sectors	
+I-AIR-HCFC142b emissions (Gg)	Fugitive emissions from solid fuels	
+I-AIR-HCFC142b emissions (Gg)	Fugitive emissions from oil and gas	
+I-AIR-HCFC142b emissions (Gg)	Memo: International aviation	
+I-AIR-HCFC142b emissions (Gg)	Memo: International navigation	
+I-AIR-HCFC142b emissions (Gg)	Production of minerals	
+I-AIR-HCFC142b emissions (Gg)	Cement production	
+I-AIR-HCFC142b emissions (Gg)	Lime production	
+I-AIR-HCFC142b emissions (Gg)	Production of chemicals	
+I-AIR-HCFC142b emissions (Gg)	Production of metals	
+I-AIR-HCFC142b emissions (Gg)	Production of pulp/paper/food/drink	
+I-AIR-HCFC142b emissions (Gg)	Production of halocarbons and SF6	
+I-AIR-HCFC142b emissions (Gg)	Refrigeration and Air Conditioning	
+I-AIR-HCFC142b emissions (Gg)	Foam Blowing	
+I-AIR-HCFC142b emissions (Gg)	Fire Extinguishers	
+I-AIR-HCFC142b emissions (Gg)	Aerosols	
+I-AIR-HCFC142b emissions (Gg)	F-gas as Solvent	
+I-AIR-HCFC142b emissions (Gg)	Semiconductor/Electronics Manufacture	
+I-AIR-HCFC142b emissions (Gg)	Electrical Equipment	
+I-AIR-HCFC142b emissions (Gg)	Other F-gas use	
+I-AIR-HCFC142b emissions (Gg)	Non-energy use of lubricants/waxes (CO2)	
+I-AIR-HCFC142b emissions (Gg)	Solvent and other product use: paint	
+I-AIR-HCFC142b emissions (Gg)	Solvent and other product use: degrease	
+I-AIR-HCFC142b emissions (Gg)	Solvent and other product use: chemicals	
+I-AIR-HCFC142b emissions (Gg)	Solvent and other product use: other	
+I-AIR-HCFC142b emissions (Gg)	Enteric fermentation	
+I-AIR-HCFC142b emissions (Gg)	Manure management	
+I-AIR-HCFC142b emissions (Gg)	Rice cultivation	
+I-AIR-HCFC142b emissions (Gg)	Direct soil emissions	
+I-AIR-HCFC142b emissions (Gg)	Manure in pasture/range/paddock	
+I-AIR-HCFC142b emissions (Gg)	Indirect N2O from agriculture	
+I-AIR-HCFC142b emissions (Gg)	Other direct soil emissions	
+I-AIR-HCFC142b emissions (Gg)	Savanna burning	
+I-AIR-HCFC142b emissions (Gg)	Agricultural waste burning	
+I-AIR-HCFC142b emissions (Gg)	Forest fires	
+I-AIR-HCFC142b emissions (Gg)	Grassland fires	
+I-AIR-HCFC142b emissions (Gg)	Decay of wetlands/peatlands	
+I-AIR-HCFC142b emissions (Gg)	Other vegetation fires	
+I-AIR-HCFC142b emissions (Gg)	Forest Fires-Post burn decay	
+I-AIR-HCFC142b emissions (Gg)	Solid waste disposal on land	
+I-AIR-HCFC142b emissions (Gg)	Wastewater handling	
+I-AIR-HCFC142b emissions (Gg)	Waste incineration	
+I-AIR-HCFC142b emissions (Gg)	Other waste handling	
+I-AIR-HCFC142b emissions (Gg)	Fossil fuel fires	
+I-AIR-HCFC142b emissions (Gg)	Indirect N2O from non-agricultural NOx	
+I-AIR-HCFC142b emissions (Gg)	Indirect N2O from non-agricultural NH3	
+I-AIR-HCFC142b emissions (Gg)	Other sources	
+EFBUILT emissions (Gg)	Total	
+EFCROPLAND emissions (Gg)	Total	
+EFFISH emissions (Gg)	Total	
+EFFOREST emissions (Gg)	Total	
+EFGRAZING emissions (Gg)	Total	
+WF emissions (Gg) -Deprecated	Crop Water Use -Deprecated	
+WF emissions (Gg) -Deprecated	Blue Water -Deprecated	
+WF emissions (Gg) -Deprecated	Green Water -Deprecated	
+WF emissions (Gg) -Deprecated	Grey Water -Deprecated	
+WF emissions (Gg) -Deprecated	Total -Deprecated	
+Employment emissions (Gg)	Male	
+Employment emissions (Gg)	Female	
+DEPRECATED CO2 Emissions from Fossil Fuel Combusion (Gg), excluding Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Minerals, excluding Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Solvents, excluding Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Ag Burning, excluding Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Decay, excluding Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Waste, excluding Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Fires, Etc, excluding Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Fossil Fuel Combusion (Gg), including Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Minerals, including Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Solvents, including Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Ag Burning, including Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Decay, including Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Waste, including Biomass Burning	Total	
+DEPRECATED CO2 Emissions from Fires, Etc, including Biomass Burning	Total	
+DEPRECATED Total emissions of CO2-e (Gg)	Total	
+DEPRECATED Total emissions of CO2-e (Gg), excluding LULUCF	Total	
+DEPRECATED Total emissions of CO2-e (Gg), excluding LULUCF and biomass burning	Total	
+DEPRECATED Total emissions of CO2 (Gg), excluding LULUCF	Total	
+Value added, Total (000 USD)	Total	
+Value added, from wages (000 USD)	Total	
+Value added, from taxes (000 USD)	Total	
+Value added, from subsidies (000 USD)	Total	
+Value added from NOS (000 USD)	Total	
+Value added from NMI (000 USD)	Total	
+Value added from depreciation (000 USD)	Total	
+ DEPRECATED - Total energy use (TJ)	Total	
+Dummy stressor, all 1s	Total	
+Raw material inputs, itemized (t)	A.999 - TOTAL	
+Raw material inputs, itemized (t)	A.1.1.1 - Cereals	
+Raw material inputs, itemized (t)	A.1.1.10 - Other crops	
+Raw material inputs, itemized (t)	A.1.1.2 - Roots and tubers	
+Raw material inputs, itemized (t)	A.1.1.3 - Sugar crops	
+Raw material inputs, itemized (t)	A.1.1.4 - Pulses	
+Raw material inputs, itemized (t)	A.1.1.5 - Nuts	
+Raw material inputs, itemized (t)	A.1.1.6 - Oil bearing crops	
+Raw material inputs, itemized (t)	A.1.1.7 - Vegetables	
+Raw material inputs, itemized (t)	A.1.1.8 - Fruits	
+Raw material inputs, itemized (t)	A.1.1.9 - Fibres	
+Raw material inputs, itemized (t)	A.1.2.1 - Crop residues (used)	
+Raw material inputs, itemized (t)	A.1.2.2.2 - Grazed biomass	
+Raw material inputs, itemized (t)	A.1.3.1 - Timber (Industrial roundwood)	
+Raw material inputs, itemized (t)	A.1.3.2 - Wood fuel and other extraction	
+Raw material inputs, itemized (t)	A.2.1 - Iron Ores	
+Raw material inputs, itemized (t)	A.2.2.1 - Copper ores - gross ore	
+Raw material inputs, itemized (t)	A.2.2.2 - Nickel ores - gross ore	
+Raw material inputs, itemized (t)	A.2.2.3 - Lead ores - gross ore	
+Raw material inputs, itemized (t)	A.2.2.4 - Zinc ores - gross ore	
+Raw material inputs, itemized (t)	A.2.2.5 - Tin ores - gross ore	
+Raw material inputs, itemized (t)	A.2.2.6 - \Gold	
+Raw material inputs, itemized (t)	A.2.2.7 - Bauxite and other aluminium ores - gross ore	
+Raw material inputs, itemized (t)	A.2.2.8 - Uranium and thorium ores - gross ore	
+Raw material inputs, itemized (t)	A.2.2.9 - Other metal ores - gross ore	
+Raw material inputs, itemized (t)	A.3.1.1 - Ornamental or building stone	
+Raw material inputs, itemized (t)	A.3.1.2 - Chalk and dolomite	
+Raw material inputs, itemized (t)	A.3.1.4 - Chemical and fertilizer minerals	
+Raw material inputs, itemized (t)	A.3.1.5 - Salt	
+Raw material inputs, itemized (t)	A.3.1.6 - Other mining and quarrying products n.e.c	
+Raw material inputs, itemized (t)	A.3.2 - Non-Metallic minerals - primarily construction	
+Raw material inputs, itemized (t)	A.4.1.1 - Brown coal	
+Raw material inputs, itemized (t)	A.4.1.2 - Hard coal	
+Raw material inputs, itemized (t)	A.4.1.4 - Peat	
+Raw material inputs, itemized (t)	A.4.2.1 - Crude oil and  natural gas liquids	
+Raw material inputs, itemized (t)	A.4.2.2 - Natural gas	
+Raw material inputs, total biomass (t)	Total	
+Raw material inputs, total ores (t)	Total	
+Raw material inputs, total construction material (t)	Total	
+Raw material inputs, total fossil fuel (t)	Total	
+Crop production, production by crop (t)	abaca	
+Crop production, production by crop (t)	agave	
+Crop production, production by crop (t)	alfalfa	
+Crop production, production by crop (t)	almond	
+Crop production, production by crop (t)	aniseetc	
+Crop production, production by crop (t)	apple	
+Crop production, production by crop (t)	apricot	
+Crop production, production by crop (t)	areca	
+Crop production, production by crop (t)	artichoke	
+Crop production, production by crop (t)	asparagus	
+Crop production, production by crop (t)	avocado	
+Crop production, production by crop (t)	bambara	
+Crop production, production by crop (t)	banana	
+Crop production, production by crop (t)	barley	
+Crop production, production by crop (t)	bean	
+Crop production, production by crop (t)	beetfor	
+Crop production, production by crop (t)	berrynes	
+Crop production, production by crop (t)	blueberry	
+Crop production, production by crop (t)	brazil	
+Crop production, production by crop (t)	broadbean	
+Crop production, production by crop (t)	buckwheat	
+Crop production, production by crop (t)	cabbage	
+Crop production, production by crop (t)	cabbagefor	
+Crop production, production by crop (t)	canaryseed	
+Crop production, production by crop (t)	carob	
+Crop production, production by crop (t)	carrot	
+Crop production, production by crop (t)	carrotfor	
+Crop production, production by crop (t)	cashew	
+Crop production, production by crop (t)	cashewapple	
+Crop production, production by crop (t)	cassava	
+Crop production, production by crop (t)	castor	
+Crop production, production by crop (t)	cauliflower	
+Crop production, production by crop (t)	cerealnes	
+Crop production, production by crop (t)	cherry	
+Crop production, production by crop (t)	chestnut	
+Crop production, production by crop (t)	chickpea	
+Crop production, production by crop (t)	chicory	
+Crop production, production by crop (t)	chilleetc	
+Crop production, production by crop (t)	cinnamon	
+Crop production, production by crop (t)	citrusnes	
+Crop production, production by crop (t)	clove	
+Crop production, production by crop (t)	clover	
+Crop production, production by crop (t)	cocoa	
+Crop production, production by crop (t)	coconut	
+Crop production, production by crop (t)	coffee	
+Crop production, production by crop (t)	cotton	
+Crop production, production by crop (t)	cowpea	
+Crop production, production by crop (t)	cranberry	
+Crop production, production by crop (t)	cucumberetc	
+Crop production, production by crop (t)	currant	
+Crop production, production by crop (t)	date	
+Crop production, production by crop (t)	eggplant	
+Crop production, production by crop (t)	fibrenes	
+Crop production, production by crop (t)	fig	
+Crop production, production by crop (t)	flax	
+Crop production, production by crop (t)	fonio	
+Crop production, production by crop (t)	fornes	
+Crop production, production by crop (t)	fruitnes	
+Crop production, production by crop (t)	garlic	
+Crop production, production by crop (t)	ginger	
+Crop production, production by crop (t)	gooseberry	
+Crop production, production by crop (t)	grape	
+Crop production, production by crop (t)	grapefruitetc	
+Crop production, production by crop (t)	grassnes	
+Crop production, production by crop (t)	greenbean	
+Crop production, production by crop (t)	greenbroadbean	
+Crop production, production by crop (t)	greencorn	
+Crop production, production by crop (t)	greenonion	
+Crop production, production by crop (t)	greenpea	
+Crop production, production by crop (t)	groundnut	
+Crop production, production by crop (t)	hazelnut	
+Crop production, production by crop (t)	hemp	
+Crop production, production by crop (t)	hempseed	
+Crop production, production by crop (t)	hop	
+Crop production, production by crop (t)	jute	
+Crop production, production by crop (t)	jutelikefiber	
+Crop production, production by crop (t)	kapokfiber	
+Crop production, production by crop (t)	kapokseed	
+Crop production, production by crop (t)	karite	
+Crop production, production by crop (t)	kiwi	
+Crop production, production by crop (t)	kolanut	
+Crop production, production by crop (t)	legumenes	
+Crop production, production by crop (t)	lemonlime	
+Crop production, production by crop (t)	lentil	
+Crop production, production by crop (t)	lettuce	
+Crop production, production by crop (t)	linseed	
+Crop production, production by crop (t)	lupin	
+Crop production, production by crop (t)	maize	
+Crop production, production by crop (t)	maizefor	
+Crop production, production by crop (t)	mango	
+Crop production, production by crop (t)	mate	
+Crop production, production by crop (t)	melonetc	
+Crop production, production by crop (t)	melonseed	
+Crop production, production by crop (t)	millet	
+Crop production, production by crop (t)	mixedgrain	
+Crop production, production by crop (t)	mixedgrass	
+Crop production, production by crop (t)	mushroom	
+Crop production, production by crop (t)	mustard	
+Crop production, production by crop (t)	nutmeg	
+Crop production, production by crop (t)	nutnes	
+Crop production, production by crop (t)	oats	
+Crop production, production by crop (t)	oilpalm	
+Crop production, production by crop (t)	oilseedfor	
+Crop production, production by crop (t)	oilseednes	
+Crop production, production by crop (t)	okra	
+Crop production, production by crop (t)	olive	
+Crop production, production by crop (t)	onion	
+Crop production, production by crop (t)	orange	
+Crop production, production by crop (t)	papaya	
+Crop production, production by crop (t)	pea	
+Crop production, production by crop (t)	peachetc	
+Crop production, production by crop (t)	pear	
+Crop production, production by crop (t)	pepper	
+Crop production, production by crop (t)	peppermint	
+Crop production, production by crop (t)	persimmon	
+Crop production, production by crop (t)	pigeonpea	
+Crop production, production by crop (t)	pimento	
+Crop production, production by crop (t)	pineapple	
+Crop production, production by crop (t)	pistachio	
+Crop production, production by crop (t)	plantain	
+Crop production, production by crop (t)	plum	
+Crop production, production by crop (t)	poppy	
+Crop production, production by crop (t)	potato	
+Crop production, production by crop (t)	pulsenes	
+Crop production, production by crop (t)	pumpkinetc	
+Crop production, production by crop (t)	pyrethrum	
+Crop production, production by crop (t)	quince	
+Crop production, production by crop (t)	quinoa	
+Crop production, production by crop (t)	ramie	
+Crop production, production by crop (t)	rapeseed	
+Crop production, production by crop (t)	rasberry	
+Crop production, production by crop (t)	rice	
+Crop production, production by crop (t)	rootnes	
+Crop production, production by crop (t)	rubber	
+Crop production, production by crop (t)	rye	
+Crop production, production by crop (t)	ryefor	
+Crop production, production by crop (t)	safflower	
+Crop production, production by crop (t)	sesame	
+Crop production, production by crop (t)	sisal	
+Crop production, production by crop (t)	sorghum	
+Crop production, production by crop (t)	sorghumfor	
+Crop production, production by crop (t)	sourcherry	
+Crop production, production by crop (t)	soybean	
+Crop production, production by crop (t)	spicenes	
+Crop production, production by crop (t)	spinach	
+Crop production, production by crop (t)	stonefruitnes	
+Crop production, production by crop (t)	strawberry	
+Crop production, production by crop (t)	stringbean	
+Crop production, production by crop (t)	sugarbeet	
+Crop production, production by crop (t)	sugarcane	
+Crop production, production by crop (t)	sugarnes	
+Crop production, production by crop (t)	sunflower	
+Crop production, production by crop (t)	swedefor	
+Crop production, production by crop (t)	sweetpotato	
+Crop production, production by crop (t)	tangetc	
+Crop production, production by crop (t)	taro	
+Crop production, production by crop (t)	tea	
+Crop production, production by crop (t)	tobacco	
+Crop production, production by crop (t)	tomato	
+Crop production, production by crop (t)	triticale	
+Crop production, production by crop (t)	tropicalnes	
+Crop production, production by crop (t)	tung	
+Crop production, production by crop (t)	turnipfor	
+Crop production, production by crop (t)	vanilla	
+Crop production, production by crop (t)	vegetablenes	
+Crop production, production by crop (t)	vegfor	
+Crop production, production by crop (t)	vetch	
+Crop production, production by crop (t)	walnut	
+Crop production, production by crop (t)	watermelon	
+Crop production, production by crop (t)	wheat	
+Crop production, production by crop (t)	yam	
+Crop production, production by crop (t)	yautia	
+Crop production, area per crop (ha)	abaca	
+Crop production, area per crop (ha)	agave	
+Crop production, area per crop (ha)	alfalfa	
+Crop production, area per crop (ha)	almond	
+Crop production, area per crop (ha)	aniseetc	
+Crop production, area per crop (ha)	apple	
+Crop production, area per crop (ha)	apricot	
+Crop production, area per crop (ha)	areca	
+Crop production, area per crop (ha)	artichoke	
+Crop production, area per crop (ha)	asparagus	
+Crop production, area per crop (ha)	avocado	
+Crop production, area per crop (ha)	bambara	
+Crop production, area per crop (ha)	banana	
+Crop production, area per crop (ha)	barley	
+Crop production, area per crop (ha)	bean	
+Crop production, area per crop (ha)	beetfor	
+Crop production, area per crop (ha)	berrynes	
+Crop production, area per crop (ha)	blueberry	
+Crop production, area per crop (ha)	brazil	
+Crop production, area per crop (ha)	broadbean	
+Crop production, area per crop (ha)	buckwheat	
+Crop production, area per crop (ha)	cabbage	
+Crop production, area per crop (ha)	cabbagefor	
+Crop production, area per crop (ha)	canaryseed	
+Crop production, area per crop (ha)	carob	
+Crop production, area per crop (ha)	carrot	
+Crop production, area per crop (ha)	carrotfor	
+Crop production, area per crop (ha)	cashew	
+Crop production, area per crop (ha)	cashewapple	
+Crop production, area per crop (ha)	cassava	
+Crop production, area per crop (ha)	castor	
+Crop production, area per crop (ha)	cauliflower	
+Crop production, area per crop (ha)	cerealnes	
+Crop production, area per crop (ha)	cherry	
+Crop production, area per crop (ha)	chestnut	
+Crop production, area per crop (ha)	chickpea	
+Crop production, area per crop (ha)	chicory	
+Crop production, area per crop (ha)	chilleetc	
+Crop production, area per crop (ha)	cinnamon	
+Crop production, area per crop (ha)	citrusnes	
+Crop production, area per crop (ha)	clove	
+Crop production, area per crop (ha)	clover	
+Crop production, area per crop (ha)	cocoa	
+Crop production, area per crop (ha)	coconut	
+Crop production, area per crop (ha)	coffee	
+Crop production, area per crop (ha)	cotton	
+Crop production, area per crop (ha)	cowpea	
+Crop production, area per crop (ha)	cranberry	
+Crop production, area per crop (ha)	cucumberetc	
+Crop production, area per crop (ha)	currant	
+Crop production, area per crop (ha)	date	
+Crop production, area per crop (ha)	eggplant	
+Crop production, area per crop (ha)	fibrenes	
+Crop production, area per crop (ha)	fig	
+Crop production, area per crop (ha)	flax	
+Crop production, area per crop (ha)	fonio	
+Crop production, area per crop (ha)	fornes	
+Crop production, area per crop (ha)	fruitnes	
+Crop production, area per crop (ha)	garlic	
+Crop production, area per crop (ha)	ginger	
+Crop production, area per crop (ha)	gooseberry	
+Crop production, area per crop (ha)	grape	
+Crop production, area per crop (ha)	grapefruitetc	
+Crop production, area per crop (ha)	grassnes	
+Crop production, area per crop (ha)	greenbean	
+Crop production, area per crop (ha)	greenbroadbean	
+Crop production, area per crop (ha)	greencorn	
+Crop production, area per crop (ha)	greenonion	
+Crop production, area per crop (ha)	greenpea	
+Crop production, area per crop (ha)	groundnut	
+Crop production, area per crop (ha)	hazelnut	
+Crop production, area per crop (ha)	hemp	
+Crop production, area per crop (ha)	hempseed	
+Crop production, area per crop (ha)	hop	
+Crop production, area per crop (ha)	jute	
+Crop production, area per crop (ha)	jutelikefiber	
+Crop production, area per crop (ha)	kapokfiber	
+Crop production, area per crop (ha)	kapokseed	
+Crop production, area per crop (ha)	karite	
+Crop production, area per crop (ha)	kiwi	
+Crop production, area per crop (ha)	kolanut	
+Crop production, area per crop (ha)	legumenes	
+Crop production, area per crop (ha)	lemonlime	
+Crop production, area per crop (ha)	lentil	
+Crop production, area per crop (ha)	lettuce	
+Crop production, area per crop (ha)	linseed	
+Crop production, area per crop (ha)	lupin	
+Crop production, area per crop (ha)	maize	
+Crop production, area per crop (ha)	maizefor	
+Crop production, area per crop (ha)	mango	
+Crop production, area per crop (ha)	mate	
+Crop production, area per crop (ha)	melonetc	
+Crop production, area per crop (ha)	melonseed	
+Crop production, area per crop (ha)	millet	
+Crop production, area per crop (ha)	mixedgrain	
+Crop production, area per crop (ha)	mixedgrass	
+Crop production, area per crop (ha)	mushroom	
+Crop production, area per crop (ha)	mustard	
+Crop production, area per crop (ha)	nutmeg	
+Crop production, area per crop (ha)	nutnes	
+Crop production, area per crop (ha)	oats	
+Crop production, area per crop (ha)	oilpalm	
+Crop production, area per crop (ha)	oilseedfor	
+Crop production, area per crop (ha)	oilseednes	
+Crop production, area per crop (ha)	okra	
+Crop production, area per crop (ha)	olive	
+Crop production, area per crop (ha)	onion	
+Crop production, area per crop (ha)	orange	
+Crop production, area per crop (ha)	papaya	
+Crop production, area per crop (ha)	pea	
+Crop production, area per crop (ha)	peachetc	
+Crop production, area per crop (ha)	pear	
+Crop production, area per crop (ha)	pepper	
+Crop production, area per crop (ha)	peppermint	
+Crop production, area per crop (ha)	persimmon	
+Crop production, area per crop (ha)	pigeonpea	
+Crop production, area per crop (ha)	pimento	
+Crop production, area per crop (ha)	pineapple	
+Crop production, area per crop (ha)	pistachio	
+Crop production, area per crop (ha)	plantain	
+Crop production, area per crop (ha)	plum	
+Crop production, area per crop (ha)	poppy	
+Crop production, area per crop (ha)	potato	
+Crop production, area per crop (ha)	pulsenes	
+Crop production, area per crop (ha)	pumpkinetc	
+Crop production, area per crop (ha)	pyrethrum	
+Crop production, area per crop (ha)	quince	
+Crop production, area per crop (ha)	quinoa	
+Crop production, area per crop (ha)	ramie	
+Crop production, area per crop (ha)	rapeseed	
+Crop production, area per crop (ha)	rasberry	
+Crop production, area per crop (ha)	rice	
+Crop production, area per crop (ha)	rootnes	
+Crop production, area per crop (ha)	rubber	
+Crop production, area per crop (ha)	rye	
+Crop production, area per crop (ha)	ryefor	
+Crop production, area per crop (ha)	safflower	
+Crop production, area per crop (ha)	sesame	
+Crop production, area per crop (ha)	sisal	
+Crop production, area per crop (ha)	sorghum	
+Crop production, area per crop (ha)	sorghumfor	
+Crop production, area per crop (ha)	sourcherry	
+Crop production, area per crop (ha)	soybean	
+Crop production, area per crop (ha)	spicenes	
+Crop production, area per crop (ha)	spinach	
+Crop production, area per crop (ha)	stonefruitnes	
+Crop production, area per crop (ha)	strawberry	
+Crop production, area per crop (ha)	stringbean	
+Crop production, area per crop (ha)	sugarbeet	
+Crop production, area per crop (ha)	sugarcane	
+Crop production, area per crop (ha)	sugarnes	
+Crop production, area per crop (ha)	sunflower	
+Crop production, area per crop (ha)	swedefor	
+Crop production, area per crop (ha)	sweetpotato	
+Crop production, area per crop (ha)	tangetc	
+Crop production, area per crop (ha)	taro	
+Crop production, area per crop (ha)	tea	
+Crop production, area per crop (ha)	tobacco	
+Crop production, area per crop (ha)	tomato	
+Crop production, area per crop (ha)	triticale	
+Crop production, area per crop (ha)	tropicalnes	
+Crop production, area per crop (ha)	tung	
+Crop production, area per crop (ha)	turnipfor	
+Crop production, area per crop (ha)	vanilla	
+Crop production, area per crop (ha)	vegetablenes	
+Crop production, area per crop (ha)	vegfor	
+Crop production, area per crop (ha)	vetch	
+Crop production, area per crop (ha)	walnut	
+Crop production, area per crop (ha)	watermelon	
+Crop production, area per crop (ha)	wheat	
+Crop production, area per crop (ha)	yam	
+Crop production, area per crop (ha)	yautia	
+Crop production, average yield per crop (hg/ha)	abaca	
+Crop production, average yield per crop (hg/ha)	agave	
+Crop production, average yield per crop (hg/ha)	alfalfa	
+Crop production, average yield per crop (hg/ha)	almond	
+Crop production, average yield per crop (hg/ha)	aniseetc	
+Crop production, average yield per crop (hg/ha)	apple	
+Crop production, average yield per crop (hg/ha)	apricot	
+Crop production, average yield per crop (hg/ha)	areca	
+Crop production, average yield per crop (hg/ha)	artichoke	
+Crop production, average yield per crop (hg/ha)	asparagus	
+Crop production, average yield per crop (hg/ha)	avocado	
+Crop production, average yield per crop (hg/ha)	bambara	
+Crop production, average yield per crop (hg/ha)	banana	
+Crop production, average yield per crop (hg/ha)	barley	
+Crop production, average yield per crop (hg/ha)	bean	
+Crop production, average yield per crop (hg/ha)	beetfor	
+Crop production, average yield per crop (hg/ha)	berrynes	
+Crop production, average yield per crop (hg/ha)	blueberry	
+Crop production, average yield per crop (hg/ha)	brazil	
+Crop production, average yield per crop (hg/ha)	broadbean	
+Crop production, average yield per crop (hg/ha)	buckwheat	
+Crop production, average yield per crop (hg/ha)	cabbage	
+Crop production, average yield per crop (hg/ha)	cabbagefor	
+Crop production, average yield per crop (hg/ha)	canaryseed	
+Crop production, average yield per crop (hg/ha)	carob	
+Crop production, average yield per crop (hg/ha)	carrot	
+Crop production, average yield per crop (hg/ha)	carrotfor	
+Crop production, average yield per crop (hg/ha)	cashew	
+Crop production, average yield per crop (hg/ha)	cashewapple	
+Crop production, average yield per crop (hg/ha)	cassava	
+Crop production, average yield per crop (hg/ha)	castor	
+Crop production, average yield per crop (hg/ha)	cauliflower	
+Crop production, average yield per crop (hg/ha)	cerealnes	
+Crop production, average yield per crop (hg/ha)	cherry	
+Crop production, average yield per crop (hg/ha)	chestnut	
+Crop production, average yield per crop (hg/ha)	chickpea	
+Crop production, average yield per crop (hg/ha)	chicory	
+Crop production, average yield per crop (hg/ha)	chilleetc	
+Crop production, average yield per crop (hg/ha)	cinnamon	
+Crop production, average yield per crop (hg/ha)	citrusnes	
+Crop production, average yield per crop (hg/ha)	clove	
+Crop production, average yield per crop (hg/ha)	clover	
+Crop production, average yield per crop (hg/ha)	cocoa	
+Crop production, average yield per crop (hg/ha)	coconut	
+Crop production, average yield per crop (hg/ha)	coffee	
+Crop production, average yield per crop (hg/ha)	cotton	
+Crop production, average yield per crop (hg/ha)	cowpea	
+Crop production, average yield per crop (hg/ha)	cranberry	
+Crop production, average yield per crop (hg/ha)	cucumberetc	
+Crop production, average yield per crop (hg/ha)	currant	
+Crop production, average yield per crop (hg/ha)	date	
+Crop production, average yield per crop (hg/ha)	eggplant	
+Crop production, average yield per crop (hg/ha)	fibrenes	
+Crop production, average yield per crop (hg/ha)	fig	
+Crop production, average yield per crop (hg/ha)	flax	
+Crop production, average yield per crop (hg/ha)	fonio	
+Crop production, average yield per crop (hg/ha)	fornes	
+Crop production, average yield per crop (hg/ha)	fruitnes	
+Crop production, average yield per crop (hg/ha)	garlic	
+Crop production, average yield per crop (hg/ha)	ginger	
+Crop production, average yield per crop (hg/ha)	gooseberry	
+Crop production, average yield per crop (hg/ha)	grape	
+Crop production, average yield per crop (hg/ha)	grapefruitetc	
+Crop production, average yield per crop (hg/ha)	grassnes	
+Crop production, average yield per crop (hg/ha)	greenbean	
+Crop production, average yield per crop (hg/ha)	greenbroadbean	
+Crop production, average yield per crop (hg/ha)	greencorn	
+Crop production, average yield per crop (hg/ha)	greenonion	
+Crop production, average yield per crop (hg/ha)	greenpea	
+Crop production, average yield per crop (hg/ha)	groundnut	
+Crop production, average yield per crop (hg/ha)	hazelnut	
+Crop production, average yield per crop (hg/ha)	hemp	
+Crop production, average yield per crop (hg/ha)	hempseed	
+Crop production, average yield per crop (hg/ha)	hop	
+Crop production, average yield per crop (hg/ha)	jute	
+Crop production, average yield per crop (hg/ha)	jutelikefiber	
+Crop production, average yield per crop (hg/ha)	kapokfiber	
+Crop production, average yield per crop (hg/ha)	kapokseed	
+Crop production, average yield per crop (hg/ha)	karite	
+Crop production, average yield per crop (hg/ha)	kiwi	
+Crop production, average yield per crop (hg/ha)	kolanut	
+Crop production, average yield per crop (hg/ha)	legumenes	
+Crop production, average yield per crop (hg/ha)	lemonlime	
+Crop production, average yield per crop (hg/ha)	lentil	
+Crop production, average yield per crop (hg/ha)	lettuce	
+Crop production, average yield per crop (hg/ha)	linseed	
+Crop production, average yield per crop (hg/ha)	lupin	
+Crop production, average yield per crop (hg/ha)	maize	
+Crop production, average yield per crop (hg/ha)	maizefor	
+Crop production, average yield per crop (hg/ha)	mango	
+Crop production, average yield per crop (hg/ha)	mate	
+Crop production, average yield per crop (hg/ha)	melonetc	
+Crop production, average yield per crop (hg/ha)	melonseed	
+Crop production, average yield per crop (hg/ha)	millet	
+Crop production, average yield per crop (hg/ha)	mixedgrain	
+Crop production, average yield per crop (hg/ha)	mixedgrass	
+Crop production, average yield per crop (hg/ha)	mushroom	
+Crop production, average yield per crop (hg/ha)	mustard	
+Crop production, average yield per crop (hg/ha)	nutmeg	
+Crop production, average yield per crop (hg/ha)	nutnes	
+Crop production, average yield per crop (hg/ha)	oats	
+Crop production, average yield per crop (hg/ha)	oilpalm	
+Crop production, average yield per crop (hg/ha)	oilseedfor	
+Crop production, average yield per crop (hg/ha)	oilseednes	
+Crop production, average yield per crop (hg/ha)	okra	
+Crop production, average yield per crop (hg/ha)	olive	
+Crop production, average yield per crop (hg/ha)	onion	
+Crop production, average yield per crop (hg/ha)	orange	
+Crop production, average yield per crop (hg/ha)	papaya	
+Crop production, average yield per crop (hg/ha)	pea	
+Crop production, average yield per crop (hg/ha)	peachetc	
+Crop production, average yield per crop (hg/ha)	pear	
+Crop production, average yield per crop (hg/ha)	pepper	
+Crop production, average yield per crop (hg/ha)	peppermint	
+Crop production, average yield per crop (hg/ha)	persimmon	
+Crop production, average yield per crop (hg/ha)	pigeonpea	
+Crop production, average yield per crop (hg/ha)	pimento	
+Crop production, average yield per crop (hg/ha)	pineapple	
+Crop production, average yield per crop (hg/ha)	pistachio	
+Crop production, average yield per crop (hg/ha)	plantain	
+Crop production, average yield per crop (hg/ha)	plum	
+Crop production, average yield per crop (hg/ha)	poppy	
+Crop production, average yield per crop (hg/ha)	potato	
+Crop production, average yield per crop (hg/ha)	pulsenes	
+Crop production, average yield per crop (hg/ha)	pumpkinetc	
+Crop production, average yield per crop (hg/ha)	pyrethrum	
+Crop production, average yield per crop (hg/ha)	quince	
+Crop production, average yield per crop (hg/ha)	quinoa	
+Crop production, average yield per crop (hg/ha)	ramie	
+Crop production, average yield per crop (hg/ha)	rapeseed	
+Crop production, average yield per crop (hg/ha)	rasberry	
+Crop production, average yield per crop (hg/ha)	rice	
+Crop production, average yield per crop (hg/ha)	rootnes	
+Crop production, average yield per crop (hg/ha)	rubber	
+Crop production, average yield per crop (hg/ha)	rye	
+Crop production, average yield per crop (hg/ha)	ryefor	
+Crop production, average yield per crop (hg/ha)	safflower	
+Crop production, average yield per crop (hg/ha)	sesame	
+Crop production, average yield per crop (hg/ha)	sisal	
+Crop production, average yield per crop (hg/ha)	sorghum	
+Crop production, average yield per crop (hg/ha)	sorghumfor	
+Crop production, average yield per crop (hg/ha)	sourcherry	
+Crop production, average yield per crop (hg/ha)	soybean	
+Crop production, average yield per crop (hg/ha)	spicenes	
+Crop production, average yield per crop (hg/ha)	spinach	
+Crop production, average yield per crop (hg/ha)	stonefruitnes	
+Crop production, average yield per crop (hg/ha)	strawberry	
+Crop production, average yield per crop (hg/ha)	stringbean	
+Crop production, average yield per crop (hg/ha)	sugarbeet	
+Crop production, average yield per crop (hg/ha)	sugarcane	
+Crop production, average yield per crop (hg/ha)	sugarnes	
+Crop production, average yield per crop (hg/ha)	sunflower	
+Crop production, average yield per crop (hg/ha)	swedefor	
+Crop production, average yield per crop (hg/ha)	sweetpotato	
+Crop production, average yield per crop (hg/ha)	tangetc	
+Crop production, average yield per crop (hg/ha)	taro	
+Crop production, average yield per crop (hg/ha)	tea	
+Crop production, average yield per crop (hg/ha)	tobacco	
+Crop production, average yield per crop (hg/ha)	tomato	
+Crop production, average yield per crop (hg/ha)	triticale	
+Crop production, average yield per crop (hg/ha)	tropicalnes	
+Crop production, average yield per crop (hg/ha)	tung	
+Crop production, average yield per crop (hg/ha)	turnipfor	
+Crop production, average yield per crop (hg/ha)	vanilla	
+Crop production, average yield per crop (hg/ha)	vegetablenes	
+Crop production, average yield per crop (hg/ha)	vegfor	
+Crop production, average yield per crop (hg/ha)	vetch	
+Crop production, average yield per crop (hg/ha)	walnut	
+Crop production, average yield per crop (hg/ha)	watermelon	
+Crop production, average yield per crop (hg/ha)	wheat	
+Crop production, average yield per crop (hg/ha)	yam	
+Crop production, average yield per crop (hg/ha)	yautia	
+Total cropland area (ha)	Total	
+Total pasture area, per animal (ha)	Horses	
+Total pasture area, per animal (ha)	Cows	
+Total pasture area, per animal (ha)	Pigs	
+Total pasture area, per animal (ha)	Sheep	
+Total pasture area, per animal (ha)	Goats	
+Total pasture area, per animal (ha)	Poultry	
+NFertilizer emissions (kg)	Total	
+PFertilizer emissions (kg)	Total	
+NManure emissions (kg)	Total	
+PManure emissions (kg)	Total	
+N emissions from fertilizer and manure (kg)	Total	
+P emissions from fertilizer and manure (kg)	Total	
+Crop and pasture land, from FAO (1000 ha)	Agricultural land	
+Crop and pasture land, from FAO (1000 ha)	Agriculture	
+Crop and pasture land, from FAO (1000 ha)	Agriculture area actually irrigated	
+Crop and pasture land, from FAO (1000 ha)	Agriculture area certified organic	
+Crop and pasture land, from FAO (1000 ha)	Agriculture area under organic agric.	
+Crop and pasture land, from FAO (1000 ha)	Arable land	
+Crop and pasture land, from FAO (1000 ha)	Coastal waters	
+Crop and pasture land, from FAO (1000 ha)	Coastal waters used for aquac. or holding facilities	
+Crop and pasture land, from FAO (1000 ha)	Coastal waters used for capture fisheries	
+Crop and pasture land, from FAO (1000 ha)	Country area	
+Crop and pasture land, from FAO (1000 ha)	Cropland	
+Crop and pasture land, from FAO (1000 ha)	Cropland area actually irrigated	
+Crop and pasture land, from FAO (1000 ha)	Cropland area certified organic	
+Crop and pasture land, from FAO (1000 ha)	Cropland area under conservation tillage	
+Crop and pasture land, from FAO (1000 ha)	Cropland area under conventional tillage	
+Crop and pasture land, from FAO (1000 ha)	Cropland area under organic agric.	
+Crop and pasture land, from FAO (1000 ha)	Cropland area under zero or no tillage	
+Crop and pasture land, from FAO (1000 ha)	EEZ used for aquac. or holding facilities	
+Crop and pasture land, from FAO (1000 ha)	EEZ used for capture fisheries	
+Crop and pasture land, from FAO (1000 ha)	Exclusive Economic Zone (EEZ)	
+Crop and pasture land, from FAO (1000 ha)	Farm buildings & farmyards	
+Crop and pasture land, from FAO (1000 ha)	Forest land	
+Crop and pasture land, from FAO (1000 ha)	Forestry area actually irrigated	
+Crop and pasture land, from FAO (1000 ha)	Inland waters	
+Crop and pasture land, from FAO (1000 ha)	Inland waters used for aquac. or holding facilities	
+Crop and pasture land, from FAO (1000 ha)	Inland waters used for capture fisheries	
+Crop and pasture land, from FAO (1000 ha)	Land area	
+Crop and pasture land, from FAO (1000 ha)	Land area actually irrigated	
+Crop and pasture land, from FAO (1000 ha)	Land area equipped for irrigation	
+Crop and pasture land, from FAO (1000 ha)	Land under perm. meadows and pastures	
+Crop and pasture land, from FAO (1000 ha)	Land under permanent crops	
+Crop and pasture land, from FAO (1000 ha)	Land under protective cover	
+Crop and pasture land, from FAO (1000 ha)	Land under temp. meadows and pastures	
+Crop and pasture land, from FAO (1000 ha)	Land under temporary crops	
+Crop and pasture land, from FAO (1000 ha)	Land used for aquaculture	
+Crop and pasture land, from FAO (1000 ha)	Land with temporary fallow	
+Crop and pasture land, from FAO (1000 ha)	Naturally regenerating forest	
+Crop and pasture land, from FAO (1000 ha)	Other land	
+Crop and pasture land, from FAO (1000 ha)	Perm. meadows & pastures - Cultivated	
+Crop and pasture land, from FAO (1000 ha)	Perm. meadows & pastures - Nat. growing	
+Crop and pasture land, from FAO (1000 ha)	Perm. meadows & pastures area actually irrig.	
+Crop and pasture land, from FAO (1000 ha)	Perm. meadows & pastures area certified organic	
+Crop and pasture land, from FAO (1000 ha)	Perm. meadows & pastures area under organic agric.	
+Crop and pasture land, from FAO (1000 ha)	Planted Forest	
+Crop and pasture land, from FAO (1000 ha)	Primary Forest	
+Nitrogen emissions, itemzed (Gg)	N2O (Gg N) - All industries incl. ag and direct emissions	
+Nitrogen emissions, itemzed (Gg)	Total NFP (Gg N) - All industries incl. ag and direct emissions	
+Nitrogen emissions, itemzed (Gg)	NH3 (Gg N) - All industries incl. ag and direct emissions	
+Nitrogen emissions, itemzed (Gg)	NOx (Gg N) -All industries incl. ag and direct emissions	
+Nitrogen emissions, itemzed (Gg)	N exportable to water bodies (Gg N) - Ag and hhld waste water	
+DEPRECATED Water use by crops, total (m3)	Total	
+DEPRECATED Water use, blue water (m3)	Total	
+DEPRECATED Water use, green water (m3)	Total	
+DEPRECATED Water use, grey water (m3)	Total	
+DEPRECATED Water use, total (m3)	Total	
+DEPRECATED Scarcity-weighted water use, for crops (m3)	Total	
+DEPRECATED Scarcity-weighted water use, blue water (m3)	Total	
+DEPRECATED Scarcity-weighted water use, green water (m3)	Total	
+DEPRECATED Scarcity-weighted water use, grey water (m3)	Total	
+DEPRECATED Scarcity-weighted water use, total (m3)	Total	
+WFN: Water footprint of crop production* (Mm3/yr) - Green	Total	
+WFN: Water footprint of crop production* (Mm3/yr) - Blue	Total	
+WFN: Water footprint of crop production* (Mm3/yr) - Grey	Total	
+WFN: Water footprint of grazing** (Mm3/yr) - Green	Total	
+WFN: Water footprint of grazing** (Mm3/yr) - Blue	Total	
+WFN: Water footprint of grazing** (Mm3/yr) - Grey	Total	
+WFN: Water footprint of animal water supply** (Mm3/yr) - Green	Total	
+WFN: Water footprint of animal water supply** (Mm3/yr) - Blue	Total	
+WFN: Water footprint of animal water supply** (Mm3/yr) - Grey	Total	
+WFN: Water footprint of industrial production (Mm3/yr) - Green	Total	
+WFN: Water footprint of industrial production (Mm3/yr) - Blue	Total	
+WFN: Water footprint of industrial production (Mm3/yr) - Grey	Total	
+WFN: Water footprint of domestic water supply (Mm3/yr) - Green	Total	
+WFN: Water footprint of domestic water supply (Mm3/yr) - Blue	Total	
+WFN: Water footprint of domestic water supply (Mm3/yr) - Grey	Total	
+WFN: Total water footprint (Mm3/yr) - Green	Total	
+WFN: Total water footprint (Mm3/yr) - Blue	Total	
+WFN: Total water footprint (Mm3/yr) - Grey	Total	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC1|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC1A|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC1B|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC1B1|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC1B2|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC1B3|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC2|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC2B|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC2C|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC2D|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC2G|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC2H|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC3A|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC4|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPC5|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|TOTALexcludingLULUCF|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPCMAG|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CH4|IPCMAGELV|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC1|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC1A|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC1B|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC1B1|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC1B2|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC1B3|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC2|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC2A|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC2B|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC2C|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC2D|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC2G|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC2H|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC4|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPC5|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|TOTALexcludingLULUCF|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPCMAG|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|CO2|IPCMAGELV|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|FGASES|IPC2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|FGASES|TOTALexcludingLULUCF|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|FGASESAR4|IPC2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|FGASESAR4|TOTALexcludingLULUCF|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|HFCS|IPC2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|HFCS|TOTALexcludingLULUCF|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|HFCSAR4|IPC2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|HFCSAR4|TOTALexcludingLULUCF|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC1|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC1A|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC1B|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC1B1|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC1B2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC1B3|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC3A|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC4|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPC5|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|TOTALexcludingLULUCF|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPCMAG|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHG|IPCMAGELV|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC1|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC1A|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC1B|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC1B1|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC1B2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC1B3|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC3A|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC4|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPC5|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|TOTALexcludingLULUCF|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPCMAG|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|KYOTOGHGAR4|IPCMAGELV|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC1|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC1A|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC1B|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC1B1|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC1B2|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC1B3|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC2|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC2B|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC2C|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC2D|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC2G|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC2H|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC3A|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC4|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPC5|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|TOTALexcludingLULUCF|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPCMAG|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|N2O|IPCMAGELV|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|NF3|IPC2|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|NF3|TOTALexcludingLULUCF|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|PFCS|IPC2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|PFCS|TOTALexcludingLULUCF|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|PFCSAR4|IPC2|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|PFCSAR4|TOTALexcludingLULUCF|GgCO2eq	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|SF6|IPC2|Gg	
+GHG emissions (Gg) from PRIMAPHIST	PRIMAP|SF6|TOTALexcludingLULUCF|Gg	
+Total emissions of Kyoto GHGs excluding LULUCF CO2-e (Gg) using PRIMAPv2.1	Total	
+Total emissions of CO2 excluding LULUCF (Gg) using PRIMAPv2.1	Total	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|1|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|1.A|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|1.B|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|1.B.1|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|1.B.2|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|1.B.3|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|2|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|2.B|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|2.C|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|2.D|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|2.G|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|2.H|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|3.A|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|4|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|5|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|TOTALexcludingLULUCF|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|M.AG|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CH4|M.AG.ELV|CH4 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|1|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|1.A|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|1.B|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|1.B.1|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|1.B.2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|1.B.3|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|2.A|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|2.B|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|2.C|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|2.D|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|2.G|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|2.H|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|4|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|5|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|TOTALexcludingLULUCF|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|M.AG|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|CO2|M.AG.ELV|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|FGASES (AR4GWP100)|2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|FGASES (AR4GWP100)|TOTALexcludingLULUCF|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|FGASES (SARGWP100)|2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|FGASES (SARGWP100)|TOTALexcludingLULUCF|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|HFCS (AR4GWP100)|2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|HFCS (AR4GWP100)|TOTALexcludingLULUCF|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|HFCS (SARGWP100)|2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|HFCS (SARGWP100)|TOTALexcludingLULUCF|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|1|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|1.A|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|1.B|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|1.B.1|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|1.B.2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|1.B.3|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|3.A|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|4|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|5|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|TOTALexcludingLULUCF|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|M.AG|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (AR4GWP100)|M.AG.ELV|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|1|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|1.A|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|1.B|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|1.B.1|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|1.B.2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|1.B.3|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|3.A|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|4|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|5|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|TOTALexcludingLULUCF|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|M.AG|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|KYOTOGHG (SARGWP100)|M.AG.ELV|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|1|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|1.A|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|1.B|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|1.B.1|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|1.B.2|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|2|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|2.B|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|2.C|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|2.D|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|2.G|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|2.H|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|3.A|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|4|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|5|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|TOTALexcludingLULUCF|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|M.AG|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|N2O|M.AG.ELV|N2O * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|NF3|2|NF3 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|NF3|TOTALexcludingLULUCF|NF3 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|PFCS (AR4GWP100)|2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|PFCS (AR4GWP100)|TOTALexcludingLULUCF|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|PFCS (SARGWP100)|2|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|PFCS (SARGWP100)|TOTALexcludingLULUCF|CO2 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|SF6|2|SF6 * gigagram / a	
+GHG emissions (Gg) from PRIMAPHISTv2.4	PRIMAPv2.4|SF6|TOTALexcludingLULUCF|SF6 * gigagram / a	
+Total emissions of Kyoto GHGs excluding LULUCF CO2-e (Gg, AR4GWP100) using PRIMAPv2.4	Total	
+Total emissions of CO2 excluding LULUCF (Gg) using PRIMAPv2.4	Total	
+CO2 emissions (Gg) CDIACGgCO2FFuelCement from CDIAC	Total	
+CO2 emissions (Gg) CDIACGgCO2Bunkers from CDIAC	Total	
+Itemized CO2 emissions (Gg) from EDGAR	EDGAR|Buildings|GgFossilCO2	
+Itemized CO2 emissions (Gg) from EDGAR	EDGAR|Other industrial combustion|GgFossilCO2	
+Itemized CO2 emissions (Gg) from EDGAR	EDGAR|Other sectors|GgFossilCO2	
+Itemized CO2 emissions (Gg) from EDGAR	EDGAR|Power Industry|GgFossilCO2	
+Itemized CO2 emissions (Gg) from EDGAR	EDGAR|Transport|GgFossilCO2	
+Total CO2 emissions (Gg) from EDGAR	Total	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - CO2 emissions from international aviation bunkers	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - CO2 emissions from fuel combustion - Coal	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - CO2 emissions from fuel combustion - Gas	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - CO2 emissions from fuel combustion - Oil	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - CO2 emissions from fuel combustion	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - CO2 emissions from international marine bunkers	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - GDP using purchasing power parities	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - GDP using exchange rates	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - Population	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - Total primary energy supply (Mtoe)	
+IEA GHG emissions (Gg) and energy use	IEA - DEPRECATED - Total primary energy supply (PJ)	

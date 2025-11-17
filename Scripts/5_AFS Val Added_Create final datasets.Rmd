@@ -1,0 +1,977 @@
+---
+title: "Value Added in Agrifood Systems - Step 5: Merge datasets and create final output datasets"
+author: "Kate Schneider"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: "Agrifood Value Added.bib"
+---
+### *Summary of Script 5*
+
+This script merges the data sets created in scripts #1 to #4 into a final time series data set of agrifood system value added.
+
+```{r setup, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+### Setup required to knit this script into a markdown document
+
+    # Load the knitr package
+      library(knitr)
+    
+    # Set echo = FALSE for all code chunks will prevent the code from printing in the output file
+      knitr::opts_chunk$set(echo = FALSE)
+      
+# Set the root folder to the project root so that all file paths are relative to the main project folder
+    knitr::opts_knit$set('./')
+  
+# Set the treatment of numbers to numerical (avoids scientific notation from showing in results)
+    options(scipen = 999)
+
+# Load packages
+    # R studio should prompt the installation of any packages not loaded on the instance where this script has been opened
+    library(tidyverse)
+    library(Hmisc)
+    library(here)
+    library(haven)
+    library(readxl)
+    library(labelled)
+    library(data.table)
+    library(psych)
+    library(kableExtra)
+    library(citr) ## To install from github: devtools::install_github("crsh/citr")
+    library(testthat)
+    library(pals)
+    library(countrycode)
+
+# Set relative directory paths
+    data_in <- here::here("Input Data")
+    fig_out <- here::here("Figures")
+    support <- here::here("Support files and scripts")
+    data_out <- here::here("Output Datasets")
+
+# Create a "not in" operator
+    `%notin%` <- Negate(`%in%`) 
+    
+# Create a function to test that there are  no duplicates in the data frame
+    isUnique <- function(vector){
+           return(!any(duplicated(vector)))
+    }
+
+# Note: "$~$" adds line breaks in the html report in the knitting process.
+```
+
+### Merge data sets
+
+### Load datasets with the multiple series flag
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Create data frame of countries with multiple time series and add a quality flag
+    load(file = file.path(data_in, "multseries_latest3.RData"))
+    load(file = file.path(data_in, "multseries_longestlatest3.RData"))
+    load(file = file.path(data_in, "multseries_latest4.RData"))
+    load(file = file.path(data_in, "multseries_longestlatest4.RData"))
+    
+    multseries_latest3$multseries_flag <- "Latest shorter"
+    multseries_latest3$ISIC_Rev <- 3
+    multseries_longestlatest3$multseries_flag <- "Latest=longest"
+    multseries_longestlatest3$ISIC_Rev <- 3
+    multseries_latest4$multseries_flag <- "Latest shorter"
+    multseries_latest4$ISIC_Rev <- 4
+    multseries_longestlatest4$multseries_flag <- "Latest=longest"
+    multseries_longestlatest4$ISIC_Rev <- 4
+    multseries_flag <- rbind(multseries_latest3, multseries_longestlatest3, multseries_latest4, multseries_longestlatest4) %>%
+      arrange(country)
+    isUnique(multseries_flag)
+    # A few countries end up with duplicate rows because they have Rev 3 and Rev 4 data, delete the Rev 3 rows
+      multseries_flag <- multseries_flag %>%
+        mutate(dup_country = case_when(country == lead(country) & ISIC_Rev == 3 ~ 1,
+                                       TRUE ~ 0)) %>%
+        filter(dup_country == 0) %>% select(-c(dup_country))
+    
+    # Clean up
+    rm(multseries_latest3, multseries_longestlatest3, multseries_latest4, multseries_longestlatest4)
+```
+
+#### ISIC Revision 4
+We start with the data using ISIC Revision 4.
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# First select the main aggregates data
+    load(file = file.path(data_in, "AgriFood_sum_Rev4.RData"))
+    isUnique(AgriFood_sum_Rev4)
+    MainAggregates_Rev4 <- AgriFood_sum_Rev4 %>%
+      filter(!(ISIC_Item == "Equals: GROSS DOMESTIC PRODUCT")) %>% # filter out GDP as a row, will be added later as a column from the GDP series
+      select(c("country", "ISO", "m49_code", "Year", "ISIC_Item", "ValueAdded", "Is_AFS", "SNA93 Item Code")) %>%
+      # Make sure the years are within the period of analysis 
+      filter(Year <= 2021 & Year >= 1995)
+    isUnique(MainAggregates_Rev4)
+
+# Next select the manufacturing data (aggregated to the 2-digit level)
+    load(file = file.path(data_in, "ManufVA_Rev4_aggregate.RData"))
+    Manufacturing_Rev4 <- ManufVA_Rev4_aggregate %>%
+      filter(Is_AFS != 0) %>% # filter out the non-AFS categories
+      select(c("country", "ISO", "m49_code", "Year", "ISIC_Item", "value", "Is_AFS")) %>%
+      rename(ValueAdded = value) %>%
+      mutate(Year = as.character(Year)) %>%
+      mutate(Year = as.numeric(Year)) 
+    isUnique(Manufacturing_Rev4)
+
+```
+
+$~$
+
+Identify countries with no Revision 4 manufacturing data in the UNIDO database.
+
+**Table 1. Countries with no ISIC Rev 4 manufacturing sector disaggregated data in UNIDO database**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Use anti-join for identification
+    no_UNIDO_data_Rev4 <- anti_join(MainAggregates_Rev4[, c("country", "Year")], Manufacturing_Rev4[, c("country", "Year")], by = c("country", "Year")) %>% unique()
+
+# Create table
+    # kable(no_UNIDO_data_Rev4, "html", caption = "Countries with no ISIC Rev 4 manufacturing sector disaggregated data in UNIDO database") %>% 
+    #   kable_classic(full_width = F, html_font = "Cambria")
+```
+
+$~$
+
+Now remove manufacturing only for countries that HAVE the UNIDO data.
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Now remove manufacturing only for countries that HAVE the UNIDO data
+# Note that we will recreate an AFS only share of the total manufacturing main aggregate for these countries with the disaggregated UNIDO data for visualization later on in this script
+
+# We use the country-year list from the anti-join step above to identify these country-years.
+    no_UNIDO_data_Rev4$hasUNIDO <- 0 
+    MainAggregates_Rev4 <- left_join(MainAggregates_Rev4, no_UNIDO_data_Rev4, 
+                                     by = c("country", "Year")) %>%
+      mutate(hasUNIDO = case_when(is.na(hasUNIDO) ~ 1,
+                                   TRUE ~ hasUNIDO)) %>%
+      # Now drop the manufacturing main aggregate only where there are UNIDO data (hasUNIDO == 1) and also the aggregate manufacturing category if that was retained instead
+      filter(!((hasUNIDO == 1 & ISIC_Item == "Manufacturing") |
+               (hasUNIDO == 1 & ISIC_Item == "Manufacturing, mining and quarrying and other industrial activities")))
+
+# Now add the SNA93 Item Code variable to the manufacturing data set
+    # This is important because the SNA93 Item Code variable is used when we merge ISIC Rev 3 and Rev 4 data
+        Manufacturing_Rev4$"SNA93 Item Code" <- "C"
+        
+# Finally, we have to make sure we're not including manufacturing data for country-years that do not have main aggregates, so we repeat the anti-join. 
+    no_SNA_data_Rev4 <- anti_join(Manufacturing_Rev4[, c("country", "Year")], MainAggregates_Rev4[, c("country", "Year")], by = c("country", "Year")) %>% unique()
+
+# Create table
+    kable(no_SNA_data_Rev4, "html", caption = "Countries with no ISIC Rev 4 SNA data but do have UNIDO manufacturing data - excluded from final dataset for lack of Main Aggregates") %>% 
+      kable_classic(full_width = F, html_font = "Cambria")
+    
+    # Remove from manufacturing data frame
+    no_SNA_data_Rev4$hasSNA <- 0 
+    Manufacturing_Rev4 <- left_join(Manufacturing_Rev4, no_SNA_data_Rev4, 
+                                     by = c("country", "Year")) %>%
+      mutate(hasSNA = case_when(is.na(hasSNA) ~ 1,
+                                   TRUE ~ hasSNA)) %>%
+      filter(hasSNA == 1) 
+
+
+# Now append the manufacturing data to the main aggregates data for the country-years with UNIDO data at the ISIC Rev 4 level
+    MainAggregates_Rev4 <- MainAggregates_Rev4 %>% select(-c("hasUNIDO"))
+    Manufacturing_Rev4 <- Manufacturing_Rev4 %>% select(-c("hasSNA"))
+    AFSValAdded_Rev4 <- rbind(MainAggregates_Rev4, Manufacturing_Rev4) %>%
+      arrange(country, Year)
+    
+  isUnique(AFSValAdded_Rev4)
+
+```
+
+$~$
+
+**Table 2. ISIC Rev 4 Categories in Agrifood System at level where data are available**
+Note this table repeats from Script #2.
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Rename the ISIC_Item values to match the fractions
+    AFSValAdded_Rev4 %>% select(c("ISIC_Item")) %>%
+      unique() %>% mutate(ISIC_Item = as.factor(ISIC_Item)) %>% 
+      arrange(ISIC_Item) %>%
+      kable("html", caption = "ISIC Rev 4 Categories in Agrifood System at level where data are available") %>% 
+      kable_classic(full_width = F, html_font = "Cambria")
+```
+
+$~$
+
+**Merge in the fractions and calculate AFS shares.**
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>% 
+  mutate(fraction_name = case_when(str_detect(ISIC_Item, pattern = "(?i)mining") ~ "B_Mining",
+                               ISIC_Item == "Manufacturing" ~ "C_AFSManuf",
+                               str_detect(ISIC_Item, pattern = "(?i)textile") ~ "C13_Textiles",
+                               str_detect(ISIC_Item, pattern = "(?i)wearing apparel") ~ "C14_WearingApparel",
+                               str_detect(ISIC_Item, pattern = "(?i)leather") ~ "C15_Leather",
+                               str_detect(ISIC_Item, pattern = "(?i)chemicals") ~ "C20_Chemicals", 
+                               str_detect(ISIC_Item, pattern = "(?i)pharmaceuticals") ~ "C21_Pharma", 
+                               str_detect(ISIC_Item, pattern = "(?i)rubber") ~ "C22_Rubber", 
+                               str_detect(ISIC_Item, pattern = "(?i)machinery") ~ "C28_Machinery", 
+                               str_detect(ISIC_Item, pattern = "(?i)furniture") ~ "C31_Furniture",
+                               str_detect(ISIC_Item, pattern = "(?i)wholesale") ~ "G_Trade",
+                               str_detect(ISIC_Item, pattern = "(?i)electricity") ~ "D_Electric",
+                               str_detect(ISIC_Item, pattern = "(?i)water") ~ "E_Water",
+                               str_detect(ISIC_Item, pattern = "(?i)retail") ~ "G_Trade",
+                               str_detect(ISIC_Item, pattern = "(?i)accom") ~ "I_AccomFood",
+                               str_detect(ISIC_Item, pattern = "(?i)transport") ~ "H_Transport",
+                               str_detect(ISIC_Item, pattern = "(?i)professional") ~ "M_ProfSciTech",
+                               str_detect(ISIC_Item, pattern = "(?i)public administration") ~ "O_PubAdmin",
+                               Is_AFS == 1 ~ "1")) # Replace fraction = 1 for categories that are wholly AFS (Is_AFS = 1)
+
+  # Now revise which fraction is used for B+C+D+E aggregate when nothing better is available - use the manufacturing fraction (code above would lead to mining as the fraction because it appears earlier in the code)
+  AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+    mutate(fraction_name = case_when(ISIC_Item == "Manufacturing, mining and quarrying and other industrial activities" ~ "C_AFSManuf",
+                                   TRUE ~ fraction_name)) 
+
+# Now add the fractions
+    load(file = file.path(data_in, "fractions_Rev4.Rdata"))
+    AFSValAdded_Rev4 <- left_join(AFSValAdded_Rev4, fractions_Rev4, by = c("ISO", "Year", "fraction_name"))
+
+# Replace fraction = 1 for wholly AFS 
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      mutate(fraction_val = case_when(Is_AFS == 1 ~ 1,
+                                         TRUE ~ fraction_val))
+
+# Add in the second fraction for disaggregating manufacturing
+    C_AFSInputManuf <- fractions_Rev4 %>% filter(fraction_name == "C_AFSInputManuf") %>%
+      rename(C_AFSInputManuf = fraction_val) %>% select(-c(fraction_name))
+    AFSValAdded_Rev4 <- left_join(AFSValAdded_Rev4, C_AFSInputManuf, by = c('ISO', 'Year')) 
+
+# Sum the AFS Manufacturing fractions so that the share of manufacturing attributed to AFS is the share of manufacturing of AFS production AND the share of manufacturing that is inputs into AFS production
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      mutate(fraction_val = case_when(ISIC_Item == "Manufacturing" ~ (fraction_val + C_AFSInputManuf), TRUE ~ fraction_val)) %>%
+      select(-c("C_AFSInputManuf"))
+
+# Create a flag variable to indicate which country-years have only 2 disaggregations for manufacturing (AFS-based products, AFS production inputs), which are in other words the country-years where we use the fraction method to disaggregate. This flag is important because no country-years will have data for the estimated disaggregations if it had data in the UNIDO data base and vice versa, so we will need to accommodate for this in the visualizations if combining across the estimated and observed manufacturing disaggregates. 
+    flag <- AFSValAdded_Rev4 %>%
+      select(c("country", "Year", "fraction_name", "ISIC_Item", "SNA93 Item Code")) %>%
+      filter(grepl("^C", fraction_name) | grepl("+C", 'SNA93 Item Code')) %>%
+      mutate(manufacturing_flag = case_when(fraction_name == "C_AFSManuf" ~ "Estimated", TRUE ~ "UNIDO Observed")) %>%
+        unique()
+  
+    # Merge manufacturing method flag back into the AFSValAdded_Rev4 data frame
+        AFSValAdded_Rev4 <- left_join(AFSValAdded_Rev4, flag, by = c("country", "Year", "fraction_name", "ISIC_Item", "SNA93 Item Code"))
+
+# Calculate AFS Value added
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      mutate(ValueAdded_LCU = ValueAdded * fraction_val) %>%
+      select(-c(ValueAdded))
+
+# Merge in GDP and population
+    load(file = file.path(data_in, "BasicInfo_GDP.Rdata"))
+    gdp_pop_info <- BasicInfo_GDP %>% 
+      filter(GDP_breakdown == "Gross Domestic Product (GDP)") %>%
+      rename(GDP = value,
+             Year = year) %>%
+      mutate(Year = as.numeric(Year)) %>%
+      select(-c("GDP_breakdown"))
+    
+    # Join
+        AFSValAdded_Rev4 <- left_join(AFSValAdded_Rev4, gdp_pop_info, by = c("ISO", "country", "m49_code", "Year"))
+
+# Merge in exchange rates
+    load(file = file.path(data_in, "ExchangeRates.Rdata"))
+    ExRates <- ExchangeRates %>%
+      mutate(Year = as.numeric(year)) %>%
+      select(c(1,4,5,7,17))
+    
+    # Join 
+    AFSValAdded_Rev4 <- left_join(AFSValAdded_Rev4, ExRates, by = c("country", "Year",  "ISO")) %>%
+      rename(IMF_rate = "IMF based exchange rate",
+             AMA_rate = "AMA exchange rate")
+
+# Confirm year range
+    range(AFSValAdded_Rev4$Year)
+    
+  isUnique(AFSValAdded_Rev4)
+  duplicate_rows <- AFSValAdded_Rev4[duplicated(AFSValAdded_Rev4), ]
+  
+  AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>% unique()
+  isUnique(AFSValAdded_Rev4)
+
+
+```
+
+$~$
+
+Next, following the harmonization rules documented in the "ISIC3_ISIC4" data frame (from the "Classifications and metadata.xlsx" spreadsheet) we aggregate 1) food manufacturing with beverage manufacturing, and 2) electricity with water supply because these are grouped into single categories in ISIC Revision 3. 
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Rename the ISIC Items to combine the categories necessary to aggregate to harmonize across ISIC Revisions
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      # Rename the ISIC_Item to the harmonized name
+          mutate(ISIC_Item = case_when(str_detect(ISIC_Item, pattern = "(?i)manufacture of food") ~ "Manufacture of food products and beverages",
+                                       str_detect(ISIC_Item, pattern = "(?i)manufacture of beverages") ~ "Manufacture of food products and beverages",
+                                       str_detect(ISIC_Item, pattern = "(?i)electricity") ~ "Electricity, gas, water",
+                                       str_detect(ISIC_Item, pattern = "(?i)water supply") ~ "Electricity, gas, water",
+                                            TRUE ~ ISIC_Item)) %>%
+      # Rename the fraction so that we can combine the rows (the fraction value used is the same for both rows even though they were named separately)
+          mutate(fraction_name = case_when(fraction_name == "D_Electric" ~ "DE_ElectricWater", 
+                                           fraction_name == "E_Water" ~ "DE_ElectricWater", 
+                                           TRUE ~ fraction_name)) %>%
+      # Rename the SNA93 code
+          mutate(`SNA93 Item Code` = case_when(fraction_name == "DE_ElectricWater" ~ "D+E",
+                                               str_detect(ISIC_Item, pattern = "(?i)Manufacture of food products and beverages") ~ "C15", 
+                                                          TRUE ~ `SNA93 Item Code`))
+  # Now summarize ValueAdded_LCU by every other variable so that only the rows we want to sum together will be summed because the only value that differs on any variable between those two rows is the value added value (in other words: everything else is the same for the ones we want to combine except the value added)
+    toaggregate <- AFSValAdded_Rev4 %>% 
+        group_by(across(1:8)) %>%
+        mutate(tosum = case_when(n() >1 ~ "sum", TRUE ~ "do nothing")) %>% 
+        ungroup
+    mostrows <- toaggregate %>%
+      filter(tosum == "do nothing") %>%
+      relocate(ValueAdded_LCU, .before = "Currency") %>%
+      select(-c(tosum))
+    addup <- toaggregate %>%
+      filter(tosum == "sum") %>%
+      group_by(across(-ValueAdded_LCU)) %>%
+      summarise(ValueAdded_LCU = sum(ValueAdded_LCU, na.rm = TRUE), .groups = 'drop') %>%
+      relocate(ValueAdded_LCU, .before = "Currency") %>%
+      select(-tosum)    
+    AFSValAdded_Rev4 <- rbind(mostrows, addup) 
+  
+  # Make sure the summation and recombination worked correctly - there should be no duplicates
+    isUnique(AFSValAdded_Rev4)
+    
+  # Reorder the data
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      arrange("country", "year")
+
+```
+
+$~$
+
+**Convert to current US dollars for comparison across countries.**
+
+First, determine which exchange rate to apply. We check exchange rate discrepancies between the IMF and AMA rate to investigate when AMA rate should be used. See [@unitednationsstatisticsdivisionMethodologyNationalAccounts2008] for explanation of AMA rates and how they are used to adjust the exchange rate for economies undergoing rapid change where the IMF average period rate does not sufficiently account for this change (e.g., former Soviet states 1991-1994).
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Test for discrepancies between IMF and AMA rate
+    unit_test <- AFSValAdded_Rev4 %>%
+      select(c("country", "ISO", "Currency", "Year", "AMA_rate", "IMF_rate")) %>%
+      mutate(test = case_when(IMF_rate == AMA_rate ~ 1,
+                              TRUE ~ 0)) %>%
+    filter(test == 0 & !(is.na(AMA_rate))) 
+
+# Check range of the unit test to confirm it operates correctly
+    range(unit_test$test)
+
+# Add a variable to indicate when the AMA rate should be used:
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      mutate(rate_to_use = case_when(IMF_rate == AMA_rate ~ "IMF",
+                                      TRUE ~ "AMA"))
+```
+
+$~$
+
+**Table 3. Country-years using alternative AMA exchange rate**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create table to show country-years where UN Stats has used an alternate exchange rate (AMA = Analysis of Main Aggregates, i.e., an exchange rate corrected for the purposes of accurate national accounts main aggregate statistics)
+    AFSValAdded_Rev4 %>% select(c("country", "rate_to_use", "Year", "Currency")) %>%
+      relocate("rate_to_use", .after = "Currency") %>%
+      filter(rate_to_use != "IMF") %>%
+      select(-c("rate_to_use")) %>%
+      unique() %>% 
+      group_by(country, Currency) %>%
+      summarise(From = min(Year),
+                To = max(Year)) %>%
+    kable(col.names = c("Country/area", "Currency", "Years from", "to"), format = "html", caption = "Country-years using alternative AMA exchange rate") %>% kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+**Finally, we create indicators for analysis and visualization.**
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Now create a variable that sums all the sectors
+    AFSValAdded_sum_Rev4 <- AFSValAdded_Rev4 %>%
+      group_by(country, m49_code, ISO, Year) %>%
+      summarise(ValueAdded_AFS_LCU_Total = sum(ValueAdded_LCU, na.rm = TRUE))
+
+# And merge back into the long data set (long by sectors/sub-sectors)
+    AFSValAdded_Rev4 <- left_join(AFSValAdded_Rev4, AFSValAdded_sum_Rev4, by = c("country", "m49_code",  "ISO", "Year"))
+
+# Now create sector and total value added as a share of GDP
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>% 
+      mutate(VA_per_GDP = (ValueAdded_LCU / GDP)*100)
+
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      mutate(VA_per_GDP_TOTAL = (ValueAdded_AFS_LCU_Total / GDP)*100) 
+
+# Now convert to current US$ using the IMF exchange rate
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      mutate(ValueAdded_cUSD = case_when(rate_to_use == "IMF" ~ (ValueAdded_LCU / IMF_rate),
+                                         rate_to_use == "AMA" ~ (ValueAdded_LCU / AMA_rate)),
+             ValueAdded_AFS_cUSD_Total = case_when(rate_to_use == "IMF" ~ (ValueAdded_AFS_LCU_Total / IMF_rate),
+                                         rate_to_use == "AMA" ~ (ValueAdded_AFS_LCU_Total / AMA_rate)),
+             GDP_cUSD = case_when(rate_to_use == "IMF" ~ (GDP / IMF_rate),
+                                  rate_to_use == "AMA" ~ (GDP / AMA_rate)))
+
+# Now create per capita variables in cUSD
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      mutate(ValueAdded_cUSD_pc = (ValueAdded_cUSD / population),
+             ValueAdded_AFS_cUSD_Total_pc = (ValueAdded_AFS_cUSD_Total / population))
+
+# Reorganize the dataset
+    groupA <- c("country", "ISO", "m49_code", "UN_continental_region")
+    groupB <- c("Year", "ISIC_Item", "Is_AFS", "fraction_val")
+    groupC <- c("GDP", "GDP_cUSD", "population", "IMF_rate", "AMA_rate", "rate_to_use")
+    groupD <- c("ValueAdded_LCU", "ValueAdded_cUSD", "ValueAdded_cUSD_pc", "VA_per_GDP", 
+                   "ValueAdded_AFS_LCU_Total", "ValueAdded_AFS_cUSD_Total", "ValueAdded_AFS_cUSD_Total_pc", "VA_per_GDP_TOTAL")
+
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      relocate(groupD, .before = "country")
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      relocate(groupC, .before = "ValueAdded_LCU")
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      relocate(groupB, .before = "GDP")
+    AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+      relocate(groupA, .before = "Year")
+
+isUnique(AFSValAdded_Rev4)
+
+    # Now filter value added = NA so that the correct ISIC Revision by country-year will be selected
+      # For example, China is in the UNIDO Rev 4 dataset for 2008-2017 but actually has only the 
+      # Main aggregate as non-missing
+      AFSValAdded_Rev4 <- AFSValAdded_Rev4 %>%
+        filter(!(is.na(ValueAdded_LCU)))
+
+```
+
+$~$
+
+#### ISIC Revision 3
+
+Next, we repeat the merging of SNA and UNIDO data for ISIC Revision 3
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# First select the main aggregates data
+    load(file = file.path(data_in, "AgriFood_sum_Rev3.RData"))
+    isUnique(AgriFood_sum_Rev3)
+    
+    MainAggregates_Rev3 <- AgriFood_sum_Rev3 %>%
+      filter(SNA_Item != "Equals: GROSS DOMESTIC PRODUCT") %>% # filter out GDP as a row
+      # Now rename the ISIC_Item column usng the harmonized category name (see the ISIC3_ISIC4 crosswalk)
+      mutate(ISIC_Item = case_when(is.na(ISIC_Item) & str_detect(SNA_Item, pattern = "(?i)Agriculture") ~ "Agriculture, forestry and fishing",
+                                   is.na(ISIC_Item) & str_detect(SNA_Item, pattern = "(?i)Land transport") ~ "Transportation and storage",
+                                   TRUE ~ ISIC_Item)) %>%
+      select(c("country", "ISO", "m49_code", "Year", "ISIC_Item", "ValueAdded", "Is_AFS", "SNA93 Item Code")) %>%
+      filter(!(Is_AFS = 0)) %>%
+      # Make sure the country names are correct
+          mutate(country = case_when(country == "Venezuela, Bolivarian Republic of" ~ "Venezuela (Bolivarian Republic of)",
+                               country == "Côte D'Ivoire" ~ "Côte d'Ivoire",
+                               TRUE ~ country))
+  isUnique(MainAggregates_Rev3)
+
+# Next select the manufacturing data
+    load(file = file.path(data_in, "ManufVA_Rev3.RData"))
+    isUnique(ManufVA_Rev3)
+      
+    Manufacturing_Rev3 <- ManufVA_Rev3 %>%
+      filter(Is_AFS != 0) %>% # filter out the non-AFS categories
+      select(c("country", "ISO", "m49_code", "Year", "ISIC_Item", "value", "Is_AFS")) %>%
+      unique() %>%
+      rename(ValueAdded = value) %>%
+      filter(ISIC_Item != "Manufacturing") %>% ## Remove aggregate
+      # Drop Recycling as there is no fraction to estimate the disaggregation - note this limitation
+      filter(ISIC_Item != "Recycling") %>%
+      mutate(Year = as.character(Year)) %>%
+      mutate(Year = as.numeric(Year)) 
+    
+  isUnique(Manufacturing_Rev3)
+  dups <- Manufacturing_Rev3[duplicated(Manufacturing_Rev3),]
+  
+```
+
+$~$
+
+**Table 4. Countries with no ISIC Rev 3 manufacturing sector disaggregated data in UNIDO database**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Identify countries with no manufacturing data in the UNIDO database
+    no_UNIDO_data_Rev3 <- anti_join(MainAggregates_Rev3[, c("country", "Year")], Manufacturing_Rev3[, c("country", "Year")],
+                               by = c("country", "Year")) %>% unique()
+
+# Create table
+    kable(no_UNIDO_data_Rev3, "html", caption = "Countries with no ISIC Rev 3 manufacturing sector disaggregated data in UNIDO database") %>% 
+      kable_classic(full_width = F, html_font = "Cambria")
+```
+
+$~$
+
+Now remove manufacturing only for countries that HAVE the UNIDO data.
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Now remove manufacturing only for countries that HAVE the UNIDO data
+# We use the country list from the anti-join step above to identify these countries.
+    no_UNIDO_data_Rev3$hasUNIDO <- 0
+    MainAggregates_Rev3 <- left_join(MainAggregates_Rev3, no_UNIDO_data_Rev3, by = c("country", "Year")) %>%
+      mutate(hasUNIDO = case_when(is.na(hasUNIDO) ~ 1,
+                                   TRUE ~ hasUNIDO))
+      
+    MainAggregates_Rev3 <- MainAggregates_Rev3 %>%
+      filter(!(hasUNIDO == 1 & ISIC_Item == "Manufacturing")) 
+    
+# Now add the SNA93 Item Code variable to the manufacturing data set
+    Manufacturing_Rev3$"SNA93 Item Code" <- "D"
+    
+# Finally, we have to make sure we're not including manufacturing data for country-years that do not have main aggregates, so we repeat the anti-join. 
+    no_SNA_data_Rev3 <- anti_join(Manufacturing_Rev3[, c("country", "Year")], MainAggregates_Rev3[, c("country", "Year")], by = c("country", "Year")) %>% unique()
+
+# Create table
+    kable(no_SNA_data_Rev3, "html", caption = "Countries with no ISIC Rev 3 SNA data but do have UNIDO manufacturing data") %>% 
+      kable_classic(full_width = F, html_font = "Cambria")
+    
+    # Remove from manufacturing data frame
+    no_SNA_data_Rev3$hasSNA <- 0 
+    Manufacturing_Rev3 <- left_join(Manufacturing_Rev3, no_SNA_data_Rev3, 
+                                     by = c("country", "Year")) %>%
+      mutate(hasSNA = case_when(is.na(hasSNA) ~ 1,
+                                   TRUE ~ hasSNA)) %>%
+      filter(hasSNA == 1) 
+
+
+# Now append the manufacturing data to the main aggregates data for the country-years with UNIDO data at the ISIC Rev 3 level
+    MainAggregates_Rev3 <- MainAggregates_Rev3 %>% select(-c("hasUNIDO"))
+    Manufacturing_Rev3 <- Manufacturing_Rev3 %>% select(-c("hasSNA"))
+    AFSValAdded_Rev3 <- rbind(MainAggregates_Rev3, Manufacturing_Rev3) %>%
+      arrange(country, Year)
+    isUnique(AFSValAdded_Rev3)
+```
+
+$~$
+
+**Table 5. ISIC Categories in Agrifood System at level where data are available - ISIC Rev 3**
+Note, this table repeats from Script #2
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Rename the ISIC_Item values to match the fractions
+    AFSValAdded_Rev3 %>% select(c("ISIC_Item")) %>%
+      unique() %>% mutate(ISIC_Item = as.factor(ISIC_Item)) %>% 
+      arrange(ISIC_Item) %>%
+      kable("html", caption = "ISIC Categories in Agrifood System at level where data are available") %>% 
+      kable_classic(full_width = F, html_font = "Cambria")
+```
+
+**Merge in the fractions and calculate AFS shares.**
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Rename the ISIC Items required for the join
+    isUnique(AFSValAdded_Rev3)
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>% 
+      mutate(fraction_name = case_when(str_detect(ISIC_Item, pattern = "(?i)mining") ~ "C_Mining",
+                                   ISIC_Item == "Manufacturing" ~ "D_AFSManuf",
+                                   str_detect(ISIC_Item, pattern = "(?i)textile") ~ "D17_Textiles",
+                                   str_detect(ISIC_Item, pattern = "(?i)wearing apparel") ~ "D18_WearingApparel",
+                                   str_detect(ISIC_Item, pattern = "(?i)leather") ~ "D19_Leather",
+                                   str_detect(ISIC_Item, pattern = "(?i)chemicals") ~ "D24_Chemicals", 
+                                   str_detect(ISIC_Item, pattern = "(?i)rubber") ~ "D25_Rubber", 
+                                   str_detect(ISIC_Item, pattern = "(?i)machinery") ~ "D29_Machinery", 
+                                   str_detect(ISIC_Item, pattern = "(?i)furniture") ~ "D36_Furniture",
+                                   str_detect(ISIC_Item, pattern = "(?i)wholesale") ~ "G_Trade",
+                                   str_detect(ISIC_Item, pattern = "(?i)Electricity") ~ "E_Electric",
+                                   str_detect(ISIC_Item, pattern = "(?i)retail") ~ "G_Trade",
+                                   str_detect(ISIC_Item, pattern = "(?i)hotels") ~ "H_HotelsRestaurants",
+                                   str_detect(ISIC_Item, pattern = "(?i)transport") ~ "I_Transport",
+                                   str_detect(ISIC_Item, pattern = "(?i)renting") ~ "K_Rentals",
+                                   str_detect(ISIC_Item, pattern = "(?i)public administration") ~ "L_PubAdmin",
+                                   str_detect(ISIC_Item, pattern = "(?i)health") ~ "N_HealthSocWork",
+                               Is_AFS == 1 ~ "1")) # Replace fraction = 1 for categories that are wholly AFS (Is_AFS = 1)
+    isUnique(AFSValAdded_Rev3)
+
+# Now add the fractions
+    load(file = file.path(data_in, "fractions_Rev3.Rdata"))
+    
+      # Quick fix removing duplicates - need to go back to where they are created to fix
+        # Diagnose:
+          # fractions_Rev3 <- fractions_Rev3 %>%
+          #   distinct(ISO, Year, fraction_name, .keep_all = TRUE)
+          # duplicates <- fractions_Rev3 %>%
+          #   group_by(across(everything())) %>%  # Group by all columns
+          #   filter(n() > 1) %>%                  # Keep only groups with duplicates
+          #   ungroup()
+      fractions_Rev3 <- fractions_Rev3 %>% unique()
+      isUnique(fractions_Rev3)
+
+    AFSValAdded_Rev3 <- left_join(AFSValAdded_Rev3, fractions_Rev3, by = c("ISO", "Year", "fraction_name"))
+    isUnique(AFSValAdded_Rev3)
+
+# Replace fraction = 1 for wholly AFS 
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      mutate(fraction_val = case_when(Is_AFS == 1 ~ 1,
+                                         TRUE ~ fraction_val))
+    isUnique(AFSValAdded_Rev3)
+    
+# Add in the second fraction for disaggregating manufacturing
+    D_AFSInputManuf <- fractions_Rev3 %>% filter(fraction_name == "D_AFSInputManuf") %>%
+      rename(D_AFSInputManuf = fraction_val) %>% select(-c(fraction_name))
+    AFSValAdded_Rev3 <- left_join(AFSValAdded_Rev3, D_AFSInputManuf, by = c('ISO', 'Year')) 
+    isUnique(AFSValAdded_Rev3)
+
+# Sum the AFS Manufacturing fractions so that the share of manufacturing attributed to AFS is the share of manufacturing of AFS production AND the share of manufacturing that is inputs into AFS production
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      mutate(fraction_val = case_when(ISIC_Item == "Manufacturing" ~ (fraction_val + D_AFSInputManuf), TRUE ~ fraction_val)) %>%
+      select(-c("D_AFSInputManuf"))
+    isUnique(AFSValAdded_Rev3)
+
+# Create a flag variable to indicate which country-years have only 2 disaggregations for manufacturing (AFS-based products, AFS production inputs), which are in other words the country-years where we use the fraction method to disaggregate. This flag is important because no country-years will have data for the estimated disaggregations if it had data in the UNIDO data base and vice versa, so we will need to accommodate for this in the visualizations if combining across the estimated and observed manufacturing disaggregates. 
+    flag <- AFSValAdded_Rev3 %>%
+      select(c("country", "Year", "fraction_name", "ISIC_Item", "SNA93 Item Code")) %>%
+      filter(grepl("^D", fraction_name) | grepl("+D", 'SNA93 Item Code')) %>%
+      mutate(manufacturing_flag = case_when(fraction_name == "D_AFSManuf" ~ "Estimated",
+                                            TRUE ~ "UNIDO Observed")) %>%
+        unique()
+  
+    # Merge manufacturing method flag back into the AFSValAdded_Rev3 data frame
+        AFSValAdded_Rev3 <- left_join(AFSValAdded_Rev3, flag, by = c("country", "Year", "fraction_name",    "ISIC_Item", "SNA93 Item Code"))
+
+# Calculate AFS Value added
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      mutate(ValueAdded_LCU = ValueAdded * fraction_val) %>%
+      select(-c(ValueAdded))
+    isUnique(AFSValAdded_Rev3)
+
+# Merge in GDP and population
+    AFSValAdded_Rev3 <- left_join(AFSValAdded_Rev3, gdp_pop_info, by = c("ISO", "country", "m49_code", "Year")) 
+    # This creates duplicates of Sudan, remove before proceeding with unique()
+      AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>% unique()
+    isUnique(AFSValAdded_Rev3)
+
+# Merge in exchange rates
+    AFSValAdded_Rev3 <- left_join(AFSValAdded_Rev3, ExRates, by = c("country", "Year", "ISO")) %>%
+      rename(IMF_rate = "IMF based exchange rate",
+             AMA_rate = "AMA exchange rate") %>%
+      unique()
+
+# Drop years outside of 1995-2021, that is the only period in the EORA data
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>% filter(Year >= 1995) %>% 
+      filter(Year <= 2021) 
+   isUnique(AFSValAdded_Rev3)   
+   
+```
+
+$~$
+
+**Convert to current US dollars for comparison across countries.**
+First, determine which exchange rate to apply. We check exchange rate discrepancies between the IMF and AMA rate to investigate when AMA rate should be used. See [@unitednationsstatisticsdivisionMethodologyNationalAccounts2008] for explanation of AMA rates and how they are used to adjust the exchange rate for economies undergoing rapid change where the IMF average period rate does not sufficiently account for this change (e.g., former Soviet states 1991-1994).
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Test for discrepancies between IMF and AMA rate
+    unit_test <- AFSValAdded_Rev3 %>%
+      select(c("country", "ISO", "Currency", "Year", "AMA_rate", "IMF_rate")) %>%
+      mutate(test = case_when(IMF_rate == AMA_rate ~ 1,
+                              TRUE ~ 0)) %>%
+    filter(test == 0 & !(is.na(AMA_rate))) 
+    range(unit_test$test) 
+
+# Add a variable to indicate when the AMA rate should be used:
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      mutate(rate_to_use = case_when(IMF_rate == AMA_rate ~ "IMF",
+                                      TRUE ~ "AMA"))
+```
+
+$~$
+
+**Table 6. Country-years using alternative AMA exchange rate, ISIC Rev 3**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create table to rate to use
+    AFSValAdded_Rev3 %>% select(c("country", "rate_to_use", "Year", "Currency")) %>%
+      relocate("rate_to_use", .after = "Currency") %>%
+      filter(rate_to_use != "IMF") %>% 
+      select(-c("rate_to_use")) %>%
+      unique() %>% 
+      group_by(country, Currency) %>%
+      summarise(From = min(Year),
+                To = max(Year)) %>%
+    kable(col.names = c("Country/area", "Currency", "Years from", "to"), format = "html", caption = "Country-years using alternative AMA exchange rate") %>% kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+**Finally, we create indicators for analysis and visualization.**
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Now create a variable that sums all the sectors
+    AFSValAdded_sum_Rev3 <- AFSValAdded_Rev3 %>%
+      group_by(country, m49_code, ISO, Year) %>%
+      summarise(ValueAdded_AFS_LCU_Total = sum(ValueAdded_LCU, na.rm = TRUE))
+    isUnique(AFSValAdded_sum_Rev3)
+
+# And merge back into the long dataset
+    AFSValAdded_Rev3 <- left_join(AFSValAdded_Rev3, AFSValAdded_sum_Rev3, by = c("country", "m49_code", "ISO", "Year"))
+    isUnique(AFSValAdded_Rev3)
+
+# Now create sector and total value added as a share of GDP
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>% 
+      mutate(VA_per_GDP = (ValueAdded_LCU / GDP)*100)
+    
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      mutate(VA_per_GDP_TOTAL = (ValueAdded_AFS_LCU_Total / GDP)*100) 
+
+# Now convert to current US$ using the IMF exchange rate
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      mutate(ValueAdded_cUSD = case_when(rate_to_use == "IMF" ~ (ValueAdded_LCU / IMF_rate),
+                                         rate_to_use == "AMA" ~ (ValueAdded_LCU / AMA_rate)),
+             ValueAdded_AFS_cUSD_Total = case_when(rate_to_use == "IMF" ~ (ValueAdded_AFS_LCU_Total / IMF_rate),
+                                         rate_to_use == "AMA" ~ (ValueAdded_AFS_LCU_Total / AMA_rate)),
+             GDP_cUSD = case_when(rate_to_use == "IMF" ~ (GDP / IMF_rate),
+                                  rate_to_use == "AMA" ~ (GDP / AMA_rate)))
+
+# Now create per capita variables in cUSD
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      mutate(ValueAdded_cUSD_pc = (ValueAdded_cUSD / population),
+             ValueAdded_AFS_cUSD_Total_pc = (ValueAdded_AFS_cUSD_Total / population))
+
+# Reorganize the dataset
+    groupA <- c("country", "ISO", "m49_code", "UN_continental_region")
+    groupB <- c("Year", "ISIC_Item", "Is_AFS", "fraction_val")
+    groupC <- c("GDP", "GDP_cUSD", "population", "IMF_rate", "AMA_rate", "rate_to_use")
+    groupD <- c("ValueAdded_LCU", "ValueAdded_cUSD", "ValueAdded_cUSD_pc", "VA_per_GDP", 
+                   "ValueAdded_AFS_LCU_Total", "ValueAdded_AFS_cUSD_Total", "ValueAdded_AFS_cUSD_Total_pc", "VA_per_GDP_TOTAL")
+
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      relocate(groupD, .before = "country")
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      relocate(groupC, .before = "ValueAdded_LCU")
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      relocate(groupB, .before = "GDP")
+    AFSValAdded_Rev3 <- AFSValAdded_Rev3 %>%
+      relocate(groupA, .before = "Year")
+
+    isUnique(AFSValAdded_Rev3)
+    
+```
+
+$~$
+
+#### Create the combined time series based on both ISIC Revision 3 and ISIC Revision 4 data
+In order to get to a final time series with one set of observations per country-year (either ISIC Rev 3 OR ISIC Rev 4 for any given country-year) we need to identify the overlapping observations (which are country-years with data for both ISIC Rev 3 and ISIC Rev 4). Where there are both ISIC Revisions, we want to keep only ISIC Rev 4 in our final dataset, unless ISIC Rev 3 has UNIDO data and ISIC Rev 4 does not have UNIDO data. This leads to a multi-step merge process:
+
+-   Step 1: Identify country-years with ISIC Rev 3 that do not have ISIC Rev 4 data
+-   Step 2: Identify country-years without ISIC Rev 4 data but that do have ISIC Rev 3 UNIDO data
+-   Step 3: Build the final dataset as:
+    -   ISIC Rev 3 where there are no ISIC Rev 4 data or no ISIC Rev 4 UNIDO data
+    -   ISIC Rev 4 where there are Rev 4 main aggregates and UNIDO data
+    -   ISIC Rev 4 where there is no Rev 3 main aggregates even though there are no UNIDO data
+    
+Note: China in 2020 has only Revision 4 main aggregate data and only Revision 3 manufacturing data. Following the data selection process below would result in only Revision 3 manufacturing data in the final dataset. We manually ensure that Revision 4 main aggregate data for China in 2020 are included and use the manufacturing estimate instead, following the principle of not mixing ISIC Revisions within country-year across the two data sources.    
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# First we add an identifying variable to each data frame to indicate the ISIC Revision that was used for that record
+    AFSValAdded_Rev3$ISIC_Revision <- 3
+    AFSValAdded_Rev4$ISIC_Revision <- 4
+    
+# We use anti_join to identify the ISIC Revision 3 data that are not duplicate country-years with ISIC Revision 4
+    # This drops any records from the AFSValAdded_Rev3 data frame that are for country-years also present in the AFSValAdded_Rev4 data frame.
+    AFSValAdded_Rev3_unique <- anti_join(AFSValAdded_Rev3, AFSValAdded_Rev4, 
+                                         by = c("country", "Year")) 
+    
+# Now we identify country-years where there is Rev 4 data for the main aggregates but no UNIDO data
+    AFSValAdded_Rev4_noUNIDO <- AFSValAdded_Rev4 %>% 
+      filter(is.na(manufacturing_flag) | manufacturing_flag == "Estimated")
+    AFSValAdded_Rev3_wUNIDO <- AFSValAdded_Rev3 %>%
+      filter(manufacturing_flag == "UNIDO Observed")
+    # Now use an inner join to keep only the country-years that are estimated in Rev 4 but have UNIDO data in Rev 3
+    AFSValAdded_useRev3forthese <- inner_join(AFSValAdded_Rev3_wUNIDO,
+                                              AFSValAdded_Rev4_noUNIDO, 
+                                              by = c("country", "Year")) %>%
+      select(c("country","Year")) %>% unique()
+    AFSValAdded_useRev3forthese$Rev3 <- 1
+
+# Now remove from the Rev 4 data the country-years where Rev 3 is preferred
+    AFSValAdded_Rev4_selected <- left_join(AFSValAdded_Rev4, AFSValAdded_useRev3forthese, by = c("country", "Year")) %>%
+      filter(is.na(Rev3)) %>% select(-c(Rev3))
+
+# Now re-run the anti-join to keep only the Rev 3 observations that are country-years not in the final selection of country-years using Rev 4
+    AFSValAdded_Rev3_unique <- anti_join(AFSValAdded_Rev3, AFSValAdded_Rev4_selected, by = c("country", "Year")) 
+```
+
+$~$
+
+**Carry out remaining harmonization actions.**
+Finally, we carry out the remaining harmonization actions and then append the ISIC Revision 3 data set to ISIC Rev 4.
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# We use the AFSValAdded_Rev3_unique data frame for Revision 3 so that we do not introduce any country-year records included in the Rev 4 data set
+
+# Harmonize ISIC Item names
+    AFSValAdded_Rev3_unique <- AFSValAdded_Rev3_unique %>%
+      mutate(ISIC_Item = case_when(str_detect(ISIC_Item, pattern = "(?i)wearing apparel") ~ "Manufacture of wearing apparel",
+                                   str_detect(ISIC_Item, pattern = "(?i)leather") ~ "Manufacture of leather and related products",
+                                   str_detect(ISIC_Item, pattern = "(?i)manufacture of wood") ~ "Manufacture of wood and wood products",
+                                   str_detect(ISIC_Item, pattern = "(?i)manufacture of furniture") ~ "Manufacture of furniture",
+                                   str_detect(ISIC_Item, pattern = "(?i)transport") ~ "Transportation and storage",
+                                   str_detect(ISIC_Item, pattern = "(?i)electricity") ~ "Electricity, gas, water",
+                                   str_detect(ISIC_Item, pattern = "(?i)wholesale and retail trade") ~ "Wholesale and retail trade",
+                                   str_detect(ISIC_Item, pattern = "(?i)hotels") ~ "Food service",
+                                   str_detect(ISIC_Item, pattern = "(?i)real estate") ~ "Professional, scientific and technical activities",
+                                   ISIC_Item == "Professional, scientific, technical, administrative and support service activities" ~ "Professional, scientific and technical activities",
+                                   str_detect(ISIC_Item, pattern = "(?i)public administration") ~ "Public administration",
+                                   TRUE ~ ISIC_Item))
+
+    AFSValAdded_Rev4_selected <- AFSValAdded_Rev4_selected %>%
+      mutate(ISIC_Item = case_when(str_detect(ISIC_Item, pattern = "(?i)manufacture of wood") ~ "Manufacture of wood and wood products",
+                                   str_detect(ISIC_Item, pattern = "(?i)manufacture of basic pharmaceutical") ~ "Manufacture of pharmaceuticals",
+                                   str_detect(ISIC_Item, pattern = "(?i)wholesale and retail trade") ~ "Wholesale and retail trade",
+                                   str_detect(ISIC_Item, pattern = "(?i)accommodation and food") ~ "Food service",
+                                   str_detect(ISIC_Item, pattern = "(?i)real estate") ~ "Professional, scientific and technical activities",
+                                   str_detect(ISIC_Item, pattern = "(?i)public administration") ~ "Public administration",
+                                   ISIC_Item == "Professional, scientific, technical, administrative and support service activities" ~ "Professional, scientific and technical activities",
+                                TRUE ~ ISIC_Item))
+
+    AFS_ValueAdded <- rbind(AFSValAdded_Rev4_selected, AFSValAdded_Rev3_unique) %>%
+      arrange(country, Year)
+    
+    isUnique(AFS_ValueAdded)
+
+# Now drop areas that are not UN Member states
+  # Confirm all UN Member state information is correctly matched
+      AFS_ValueAdded %>% select(c("country", "UNmemberstate")) %>% unique() %>%
+        filter(is.na(UNmemberstate)) %>%
+        kable(col.names = c("Country/area", "member state"), format = "html", caption = "Check for UN Member state identification") %>%
+        kable_classic(full_width = T, html_font = "Cambria")
+    
+    AFS_ValueAdded <- AFS_ValueAdded %>% filter(UNmemberstate == "Yes")
+      AFS_ValueAdded %>% select(c("country", "UNmemberstate")) %>% unique() %>%
+        kable(col.names = c("Country/area", "member state"), format = "html", caption = "Check for UN Member state identification") %>%
+        kable_classic(full_width = T, html_font = "Cambria")
+
+# Remove the unused factor levels in the ISIC_Item variable
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      mutate(ISIC_Item = as.factor(ISIC_Item)) %>%
+      droplevels("ISIC_Item")
+    levels(AFS_ValueAdded$ISIC_Item)
+```
+
+$~$
+
+Now we confirm there are no duplicates. Note that there are some countries that have gaps in ISIC Revision 4 where ISIC Rev 3 is used, in other words the individual country series switches from Rev 4 to 3 and back again. This can be observed in the duplicates data set, for example see Albania 2016 and 2021 use Rev 3, whereas the years before and between them use Revision 4. 
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+isUnique(AFS_ValueAdded)
+
+```
+
+$~$
+
+**Country-year ISIC Revision**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Set up the data
+    tabledata <- AFS_ValueAdded %>% 
+      select(c(country, Year, ISIC_Revision)) %>%
+      rename(Country = country) %>%
+      unique() 
+
+# Print it as a heatmap
+    ggplot(tabledata, 
+           aes(y = factor(Country, levels = rev(levels(factor(Country)))), 
+               x = factor(Year), fill = factor(ISIC_Revision))) +
+      geom_tile() +
+      scale_fill_brewer(palette = "Paired", na.value = "white") +
+      theme_classic() +
+      theme(axis.text.x = element_text(size = 6, angle = 90, vjust = 0.5),
+            axis.text.y = element_text(size = 4),
+            legend.position = "bottom") +
+      labs(x = "", y = "", fill = "ISIC Revision") 
+```
+
+$~$
+
+**Table 7. ISIC Item Codes and Remaining Combined categories by country and ISIC Revision**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Document the ISIC Items, and note the remaining combined categories
+    AFS_ValueAdded %>% select(c("country", "Year", "ISIC_Item", "SNA93 Item Code", "ISIC_Revision")) %>%
+      unique() %>% 
+      relocate(Year, .after = "ISIC_Revision") %>%
+      group_by(country, ISIC_Item, `SNA93 Item Code`, ISIC_Revision) %>%
+      summarise(From = min(Year),
+                To = max(Year)) %>%
+    kable(col.names = c("Country", "ISIC Item", "SNA93 Item Code", "ISIC_Revision", "Years from", "to"), format = "html", caption = "ISIC Item Codes and Remaining Combined categories by country and ISIC Revision") %>% kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+**Table 8. Number of observations (countries) per year**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Countries per year
+    AFS_ValueAdded %>% select(c("country", "Year")) %>%
+      unique() %>% relocate(Year, .before = country) %>%
+      group_by(Year) %>%
+      summarise(n = n()) %>%
+    kable(col.names = c("Year", "Number of Countries"), format = "html", caption = "Number of countries per year in the data set") %>%
+    kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+**Data quality checks**
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Remove the "Other community, social and personal service activities" ISIC category which was not dropped successfully earlier
+    AFS_ValueAdded <- AFS_ValueAdded %>% filter(ISIC_Item != "Other community, social and personal service activities")
+    isUnique(AFS_ValueAdded)
+
+# Identify any cases where the AFS value added as a share of GDP is >100
+improbable_cases <- AFS_ValueAdded %>% filter(VA_per_GDP_TOTAL >100) %>% 
+  select(c(country, Year, ValueAdded_AFS_cUSD_Total_pc, VA_per_GDP_TOTAL, rate_to_use)) %>% unique() %>%
+  filter(!(is.na(ValueAdded_AFS_cUSD_Total_pc)))
+
+# Identify any cases with negative value added
+negative_valadded <- AFS_ValueAdded %>% filter(ValueAdded_LCU < 0 & !(is.na(ValueAdded_LCU))) 
+
+# Create table
+    kable(improbable_cases, format = "html", caption = "Improbable cases") %>%
+      kable_classic(full_width = T, html_font = "Cambria")
+    
+# Replace improbable cases as NA
+    # First document the improbable total AFS value added as a share of GDP in an improbable case variable  
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      mutate(improbable_VAperGDPtotal = case_when((country == "Belarus" & Year %in% 1995:2013) | 
+                                                    (country == "Ukraine" & Year == 1995) |
+                                                    (country == "Kyrgyzstan" & Year == 1995) |
+                                                    (country == "Uzbekistan" & Year == 1995) |
+                                                    (country == "Sao Tome and Principe" & Year %in% 2001:2020) |
+                                                    (country == "Ghana" & Year %in% 1995:1999) |
+                                                    (country == "Turkmenistan" & Year %in% 1995:2003) |
+                                                    (country == "Venezuela (Bolivarian Republic of)" & Year %in% 2005:2019) ~ VA_per_GDP_TOTAL, 
+               TRUE ~ NA))
+    
+    # Now mutate across the columns of value added and related indicators to replace improbably country-years with NA
+        AFS_ValueAdded <- AFS_ValueAdded %>%
+            mutate(across(15:22, ~ ifelse(country == "Belarus" & Year %in% 1995:2013, NA, .)),
+                   across(15:22, ~ ifelse(country == "Sao Tome and Principe" & Year %in% 2001:2020, 
+                                          NA, .)),
+                   across(15:22, ~ ifelse(country == "Ukraine" & Year==1995, 
+                                          NA, .)),
+                   across(15:22, ~ ifelse(country == "Kyrgyzstan" & Year==1995, 
+                                          NA, .)),
+                   across(15:22, ~ ifelse(country == "Uzbekistan" & Year==1995, 
+                                          NA, .)),
+                   across(15:22, ~ ifelse(country == "Ghana" & Year %in% 1995:1999, 
+                                          NA, .)),
+                   across(15:22, ~ ifelse(country == "Turkmenistan" & Year %in% 1995:2003, NA, .)),
+                   across(15:22, ~ ifelse(country == "Venezuela (Bolivarian Republic of)" & Year %in% 2005:2019, NA, .)))
+    isUnique(AFS_ValueAdded)
+
+# Now add in the quality flag related to multiple series
+    multseries_flag <- multseries_flag %>% unique()
+    AFS_ValueAdded <- left_join(AFS_ValueAdded, multseries_flag, by = "country")
+   isUnique(AFS_ValueAdded)
+ 
+# Finally factor variables
+    cols <- c(1:2,14,23:26,35,37)
+    AFS_ValueAdded <- AFS_ValueAdded %>% 
+      mutate(across(cols, as.factor))
+        
+check <- AFS_ValueAdded %>%
+  select(c(country, Year)) %>% unique()
+summary(check)
+unique(check$country)
+
+# Ensure unique 
+  isUnique(AFS_ValueAdded)
+
+# Save the final data set
+    save(AFS_ValueAdded, file = file.path(data_out, "AFS_ValueAdded.RData"))
+    
+    # Write to .xlsx to port to other software
+      writexl::write_xlsx(AFS_ValueAdded, path = file.path(data_out, "AFS_ValueAdded.xlsx"))
+    
+# Clean up
+rm(check, improbable_cases, multseries_flag)
+    
+```
+Note: the following observations have been replaced as missing due to improbable value added (total value added from AFS multiple times GDP):
+
+-   Belarus: 1995-2013
+-   Ghana: 1995-1999
+-   Sao Tome and Principe: 2001-2020
+-   Turkmenistan: 1995-2003
+-   Venezuela: 2005-2019 -- FAOSTAT also does not report value added from agriculture as a share of GDP for Venezuela.
+-   Syria: 2000 has negative 
+
+$~$
+
+**References**

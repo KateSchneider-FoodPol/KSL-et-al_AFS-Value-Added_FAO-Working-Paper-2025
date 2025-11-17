@@ -1,0 +1,1499 @@
+---
+title: "Value Added in Agrifood Systems - Step 4b: Eora-26 Process Harmonized Input-Output tables Inter-Industry Transaction data, trade and transportation margins, and compute fractions to disaggregate value added by ISIC main aggregates and 2-digit codes into agrifood and non-agrifood"
+author: "Kate Schneider"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: "Agrifood Value Added.bib"
+---
+
+#### Summary of Script 4
+
+This script relies on input-output inter-industry transaction tables that aggregate all imports and exports into a single row by country-industry. This makes the data much smaller and is all we need to extract the fractions of interest for the value added analysis. The replication file for this step is provided in the file "4a_Eora Extraction". To run the Eora-26 extraction requires first balancing raw input-output Eora-26 MRIO tables. The raw data is licensed and must be acquired by the user. Balancing MRIO tables is the first step to using these data and replication of our approach can proceed from there. Script 4a takes the balanced tables as the input data.
+
+Next, we take the simplified inter-industry transaction matrix output from the balanced raw Eora-26 data to extract the inter-industry transactions (input from sector A into sector B) relative to gross sector output (of A or B) that best approximates the fraction of the aggregate ISIC sector for which we have value added data that can be attributed to the agrifood system. The inter-industry transactions use data from the Eora-26 harmonized multi-region input-output tables, which aggregates detailed country input-output tables into 26 harmonized sectors [@lenzenAggregationDisaggregationInput2011][@lenzenBuildingEORAGlobal2013]. We include the margins for trade and transportation in these calculations, as described in Script 4a. The alignment between the Eora-26 sectors and the ISIC Classification is shown in Table 1 below.
+
+```{r setup, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+### Setup required to knit this script into a markdown document
+
+    # Load the knitr package
+      library(knitr)
+    
+    # Set echo = FALSE for all code chunks will prevent the code from printing in the output file
+      knitr::opts_chunk$set(echo = FALSE)
+      
+# Set the root folder to the project root so that all file paths are relative to the main project folder
+    knitr::opts_knit$set('./')
+  
+# Set the treatment of numbers to numerical (avoids scientific notation from showing in results)
+    options(scipen = 999)
+
+# Load packages
+    # R studio should prompt the installation of any packages not loaded on the instance where this script has been opened
+    library(tidyverse)
+    library(Hmisc)
+    library(haven)
+    library(readxl)
+    library(labelled)
+    library(data.table)
+    library(psych)
+    library(kableExtra)
+    library(citr) ## To install from github: devtools::install_github("crsh/citr")
+    library(testthat)
+    library(pals)
+
+# Set relative directory paths
+    data_in <- here::here("Input Data")
+    fig_out <- here::here("Figures")
+    support <- here::here("Support files and scripts")
+    data_out <- here::here("Output Datasets")
+
+# Create a "not in" operator
+    `%notin%` <- Negate(`%in%`) 
+
+# Note: "$~$" adds line breaks in the html report in the knitting process.
+```
+
+$~$
+
+### *Input data set 5: Eora Input-Output table extractions for inter-industry relationships*
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# ISIC Codes and classification to agrifood systems
+    load(file = file.path(data_in, "EORA_ISIC.RData"))
+    EORA_ISIC <- EORA_ISIC %>% select(c(1:4)) %>% filter(!(is.na(ISIC_Rev3_Code)))
+```
+
+$~$
+
+**Table 1. ISIC-Eora Sector Crosswalk**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Show table of Eora to ISIC Crosswalk
+    colnames <- c("Eora Code", "Eora Description", "ISIC 2-digit Code", "ISIC Description") 
+    EORA_ISIC %>% 
+      kable(., col.names = colnames, "html", caption = "Eora-26 Sector Crosswalk with ISIC Codes") %>% kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+The relationships used for each disaggregation fraction are taken from the "Classifications and metadata.xlsx" spreadsheet (in the "Input Data" folder).
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Load data
+# ISIC Codes and classification to agrifood systems - ISIC Revision 3
+    load(file = file.path(data_in, "transactions_Rev3.RData"))
+
+# ISIC Codes and classification to agrifood systems - ISIC Revision 4
+    load(file = file.path(data_in, "transactions_Rev4.RData"))
+```
+
+$~$
+
+**Table 2. Inter-industry transactions and fraction construction to estimate the portion of aggregate sectors attributable to agrifood systems, ISIC Revision 3**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Show table of main aggregates and 2-digit categories with classification to AFS
+    transactions_Rev3 %>% 
+      kable(., "html", caption = "Inter-industry transactions and fraction construction to estimate the portion of aggregate sectors attributable to agrifood systems, ISIC Revision 3") %>% kable_classic(full_width = T, html_font = "Cambria") %>% landscape(margin = c('1cm')) 
+  
+```
+
+$~$
+
+**Table 3. Inter-industry transactions and fraction construction to estimate the portion of aggregate sectors attributable to agrifood systems, ISIC Revision 4**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Show table of main aggregates and 2-digit categories with classification to AFS
+    transactions_Rev4 %>% 
+      kable(., "html", caption = "Inter-industry transactions and fraction construction to estimate the portion of aggregate sectors attributable to agrifood systems, ISIC Revision 4") %>% kable_classic(full_width = T, html_font = "Cambria") %>% landscape(margin = c('1cm')) 
+```
+
+$~$
+
+Import the Eora-26 inter-industry transaction processed data set (see Python script for the generation of these data sets). Note that this code takes quite a while to run (\~10-30 minutes depending on computing power) due to the size of the data set. There is no error, it just needs to be left to run.
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# There is a separate data set for each year (due to the structure of the IO matrices), using a loop to append the tables into a data frame:
+
+# We start with the first data set which contains domestic and imported inputs and aggregate (domestic and exported) output
+    IO_data <- read.csv(file = file.path(data_in, "Yi_InputOutput_CodeData/transactions_ 1995 .csv"), sep = ",")
+    
+    # Use a loop to load and join all the years of data
+        years = 1995:2021
+        for (i in years) {
+          filename = paste("transactions_", i, ".csv")
+          folder = "Yi_InputOutput_CodeData"
+          file = file.path(data_in, folder, filename)
+          outfile = paste("IO_data_", i, sep = "")
+          outfile <- read.csv(file, sep = ",")
+          IO_data <- rbind(IO_data, outfile)
+        } 
+
+# Now we revise the column names and reorganize the data set
+    IO_data <- IO_data %>%
+      separate(COL, c("To", "COL"), sep = "_", remove = FALSE) %>%
+      separate(ROW, c("From", "ROW"), sep = "_", remove = FALSE) %>%
+      mutate(ISO = To) %>%
+      relocate(ISO, .before = "Year")
+
+# Merge in the sector names
+    # Create a list of the Eora codes and names
+        EORA_names <- EORA_ISIC %>% select(c(1:2)) %>% unique()
+    
+    # Join all
+        IO_data <- left_join(IO_data, EORA_names, by = c("ROW" = "EORA26_Code")) %>%
+          rename(Row_Name = "EORA26_Name") 
+        IO_data <- left_join(IO_data, EORA_names, by = c("COL" = "EORA26_Code")) %>%
+         rename(Col_Name = "EORA26_Name") 
+        IO_data <- IO_data %>% mutate(Row_Name = as.factor(Row_Name),
+                                      Col_Name = as.factor(Col_Name))
+        
+# Next we add in the trade and transportation margins. The margins file in the IO data reflects the additional value added from trade and transportation in final consumption. Without including these margins, we would be underestimating the value added from trade and transportation. Margins for exported goods that go into final agrifood consumption in another country are credited as value added to the exporter under the assumption that they generate the value added from the transportation.
+
+    # Import data
+    transport_marginvalues <- readxl::read_excel(file.path(data_in, "Yi_InputOutput_CodeData", "transportation1995.xlsx"))
+    # Now add a column for year
+    transport_marginvalues <- transport_marginvalues %>%
+      mutate(Year = 1995) 
+    
+    # Use a loop to load and join all the years of data
+        years = 1995:2021
+        for (i in years) {
+          filename = paste("transportation", i, ".xlsx", sep = "")
+          folder = "Yi_InputOutput_CodeData"
+          file = file.path(data_in, folder, filename)
+          outfile = paste("transport_marginvalues", i, sep = "")
+          outfile <- readxl::read_excel(file)
+          outfile <- outfile %>%
+            mutate(Year = i) 
+          transport_marginvalues <- rbind(transport_marginvalues, outfile)
+        } 
+
+    # Now make the data columns match the IO data
+      transport_marginvalues$From <- substr(transport_marginvalues$Trans_Provider, start = 1, stop = 3)
+      transport_marginvalues$ROW <- substr(transport_marginvalues$Trans_Provider, start = 5, stop = 7)
+      transport_marginvalues$To <- substr(transport_marginvalues$COL, start = 1, stop = 3)
+      transport_marginvalues$COL <- substr(transport_marginvalues$COL, start = 5, stop = 7)
+      transport_marginvalues$ISO <- transport_marginvalues$From
+      transport_marginvalues <- transport_marginvalues %>% select(-c("Importer/Domestic"))
+      colorder <- c("ISO", "Year", "From", "ROW", "To", "COL", "Margin_Trans")
+      transport_marginvalues <- transport_marginvalues[, colorder]
+    
+  # Now join with the IO data to increase the Gross Output of the transportation ROW to include this additional value added
+    IO_data <- left_join(IO_data, transport_marginvalues, 
+                         by = c("ISO", "Year", "From", "ROW", "To", "COL"))
+  # # Sum the additional value added from transport to sectors that provide final consumption on agrifood by the tranport provider (credited to the exporter of the agrifood goods)
+    IO_data <- IO_data %>%
+      mutate(Value = case_when(!(is.na(Margin_Trans)) ~ (Value + Margin_Trans),
+                                         TRUE ~ Value))
+    
+  # Now we can remove the margins columns
+    IO_data <- IO_data %>% select(-c(Margin_Trans))
+    
+  # Repeat for the trade margins where wholesale value added is credited to the exporter and retail value added is credited to the exporter
+    # Note that this is additional transaction value that is only related to trade in primary ag production (because further down the supply chain is already accounted for in our methods).
+    
+    #Import data 
+    trade_marginvalues <- readxl::read_excel(file.path(data_in, "Yi_InputOutput_CodeData", "trade1995.xlsx"))
+    # Now add a column for year
+    trade_marginvalues <- trade_marginvalues %>%
+      mutate(Year = 1995) 
+ 
+    # Use a loop to load and join all the years of data
+        years = 1995:2021
+        for (i in years) {
+          filename = paste("trade", i, ".xlsx", sep = "")
+          folder = "Yi_InputOutput_CodeData"
+          file = file.path(data_in, folder, filename)
+          outfile = paste("trade_marginvalues", i, sep = "")
+          outfile <- readxl::read_excel(file)
+          outfile <- outfile %>%
+            mutate(Year = i) 
+          trade_marginvalues <- rbind(trade_marginvalues, outfile)
+        }
+        
+    # Make the columns match the IO data
+        # Interpreting the trade data frame: ROW = ABW_A01, COL = ABW, reflects the total trade value addition related to the ABW household consumption of ABW_A01. Below we allocate this between wholesale and retail A16 and A17 based on the trade shares in final consumption. 
+        
+      trade_marginvalues$From <- substr(trade_marginvalues$ROW, start = 1, stop = 3)
+      trade_marginvalues$ROW <- substr(trade_marginvalues$ROW, start = 5, stop = 7)
+      trade_marginvalues$To <- substr(trade_marginvalues$COL, start = 1, stop = 3)
+      trade_marginvalues$COL <- trade_marginvalues$To
+      trade_marginvalues$ISO <- trade_marginvalues$From
+      colorder <- c("ISO", "Year", "From", "ROW", "To", "COL", "Margin_Trade")
+      
+      # Now we need two separate data frames for ROW_A16 (Wholesale - value added goes to exporter) and ROW_A17 (Retail - value added goes to importer)
+      trade_marginvalues_A16 <- trade_marginvalues[, colorder]
+      trade_marginvalues_A17 <- trade_marginvalues[, colorder]
+        trade_marginvalues_A17 <- trade_marginvalues_A17 %>% 
+          mutate(ROW = "A17")
+
+    # Now we need to divide the margins into wholesale and retail using shares data from final demand
+      tradeshares <- readxl::read_excel(file.path(data_in, "Yi_InputOutput_CodeData", "1995_Shr.xlsx"))
+    # Now add a column for year
+      tradeshares <- tradeshares %>%
+        mutate(Year = 1995)
+ 
+    # Use a loop to load and join all the years of data
+        years = 1995:2021
+        for (i in years) {
+          filename = paste(i, "_Shr.xlsx", sep = "")
+          folder = "Yi_InputOutput_CodeData"
+          file = file.path(data_in, folder, filename)
+          outfile = paste("tradeshares", i, sep = "")
+          outfile <- readxl::read_excel(file)
+          outfile <- outfile %>%
+            mutate(Year = i) 
+          tradeshares <- rbind(tradeshares, outfile)
+        }
+
+    # Now merge the trade margin values with the shares to disaggregate wholesale and retail
+    trade_marginvalues_A16 <- left_join(trade_marginvalues_A16, tradeshares, 
+                                    by = c("From" = "Country", "Year"))
+    trade_marginvalues_A16 <- trade_marginvalues_A16 %>% unique() %>%
+      mutate(Margin_Trade = Margin_Trade*A16_share)
+    trade_marginvalues_A17 <- left_join(trade_marginvalues_A17, tradeshares, 
+                                    by = c("To" = "Country", "Year"))
+    trade_marginvalues_A17 <- trade_marginvalues_A17 %>% unique() %>%
+      mutate(Margin_Trade = Margin_Trade*A17_share) %>%
+      mutate(ISO = To)
+    
+    # Now we manipulate the From ISO so that we credit the retail margin to the importer's retail value added
+    trade_marginvalues_A17 <- trade_marginvalues_A17 %>%
+      mutate(From = To)
+    
+    # Now append A16 and A17 rows together
+    trade_marginvalues_A16 <- trade_marginvalues_A16 %>%
+      select(-c(A16_share, A17_share)) %>%
+      mutate(ROW = "A16")
+    trade_marginvalues_A17 <- trade_marginvalues_A17 %>%
+      select(-c(A16_share, A17_share)) %>%
+      mutate(ROW = "A17")
+    trade_marginvalues <- rbind(trade_marginvalues_A16, trade_marginvalues_A17)
+    rm(trade_marginvalues_A16, trade_marginvalues_A17)
+    trade_marginvalues <- trade_marginvalues %>%
+      # And we fake the column to merge with the IO data in a way that will result in correct treatment of the margins in the subsequent calculation of the trade fraction by assigning the trade margin value added as additional value added from trade into agriculture
+      mutate(COL = "A01")
+    
+  # Now join with the IO data to increase the Value of the wholesale and retail ROWs to include this additional value added
+    IO_data <- left_join(IO_data, trade_marginvalues,
+                         by = c("ISO", "Year", "From", "ROW", "To", "COL"))
+  # Increase the gross output of the row by adding in the transportation margin
+    IO_data <- IO_data %>%
+      mutate(Value = case_when(!(is.na(Margin_Trade)) ~ (Value + Margin_Trade),
+                                         TRUE ~ Value))
+
+  # Now we can remove the margins columns
+    IO_data <- IO_data %>% select(-c(Margin_Trade))
+
+# Next, we move to the second dataset which disaggregates output into domestic and exports. 
+    # Again, we first use a loop to combine the single year data sets into one data frame. 
+        IO_data_exp <- read.csv(file = file.path(data_in, "Yi_InputOutput_CodeData/exp1995.csv"), sep = "|")
+    
+        # Add a column for the year (not included as a column in the data frame)
+            IO_data_exp <- IO_data_exp %>%
+              mutate(Year = 1995)
+
+        for (i in years) {
+        filename = paste("exp", i, ".csv", sep = "")
+        folder = "Yi_InputOutput_CodeData"
+        file = file.path(data_in, folder, filename)
+        outfile = paste("IO_data_exp", i, sep = "")
+        outfile <- read.csv(file, sep = "|")
+        outfile <- outfile %>%
+          mutate(Year = i)
+        IO_data_exp <- rbind(IO_data_exp, outfile)
+      } 
+  
+# Rename the columns and import labels
+      IO_data_exp <- IO_data_exp %>%
+        separate(COLNew, c("To", "COL"), sep = "_", remove = FALSE) %>%
+        separate(ROW, c("From", "ROW"), sep = "_", remove = FALSE) %>%
+        mutate(ISO = From) %>%
+        relocate(ISO, .before = "X")
+        IO_data_exp <- IO_data_exp %>%
+          relocate(Year, .after = ISO)
+          # Merge in the sector names
+          IO_data_exp <- left_join(IO_data_exp, EORA_names, by = c("ROW" = "EORA26_Code")) %>%
+            rename(Row_Name = "EORA26_Name") 
+          IO_data_exp <- left_join(IO_data_exp, EORA_names, by = c("COL" = "EORA26_Code")) %>%
+            rename(Col_Name = "EORA26_Name") 
+          IO_data <- IO_data %>% mutate(Row_Name = as.factor(Row_Name),
+                                        Col_Name = as.factor(Col_Name))
+          
+    # Add the transportation margins to the Value
+  # Now join with the IO data to increase the value of the transportation ROW to include this additional value added
+    IO_data_exp <- left_join(IO_data_exp, transport_marginvalues, 
+                         by = c("ISO", "Year", "From", "ROW", "To", "COL"))
+  # Increase the gross output of the row by adding in the transportation margin
+    IO_data_exp <- IO_data_exp %>%
+      mutate(Value = case_when(!(is.na(Margin_Trans)) ~ (Value + Margin_Trans),
+                                         TRUE ~ Value))
+  # Repeat for trade
+    IO_data_exp <- left_join(IO_data_exp, trade_marginvalues,
+                         by = c("ISO", "Year", "From", "ROW", "To", "COL"))
+  # Increase the gross output of the row by adding in the transportation margin
+    IO_data_exp <- IO_data_exp %>%
+      mutate(Value = case_when(!(is.na(Margin_Trade)) ~ (Value + Margin_Trade),
+                                         TRUE ~ Value))
+
+  # Now we can remove the margins columns
+    IO_data_exp <- IO_data_exp %>% select(-c(Margin_Trans, Margin_Trade))
+  
+# Create another data frame that sums Domestic inputs with Imported inputs
+    IO_summed_inputs <- IO_data %>%
+      aggregate(cbind(Value, GrossOutput_Row) ~ ISO + Year + ROW + COL + To, FUN = sum)
+    
+    # Merge back in the GrossOutput_Col (repeated in long IO_data)
+        GrossOutput_COL <- IO_data %>% filter(From != "imp") %>%
+          select(ISO, Year, COL, GrossOutput_Col, Col_Name) %>%
+          distinct()
+    # Join
+        IO_summed_inputs <- left_join(IO_summed_inputs, GrossOutput_COL, by = c("ISO", "Year", "COL"))
+
+# Create another data frame that sums Domestic outputs with exports
+    # Create column gross output domestic and export
+        IO_disaggregated_outputs <- IO_data_exp %>%
+    
+    # Group by the values of the ROW column to get aggregate output
+        aggregate(Value ~ ISO + Year + ROW + From + To, FUN = sum) %>%
+        arrange(ISO, Year, ROW) 
+    
+    # Check - aggregate output should sum to the GrossOutput_Col from the main dataset
+        IO_summed_outputs <- IO_data_exp %>%
+          aggregate(Value ~ ISO + Year + ROW + From, FUN = sum) %>%
+          arrange(ISO, Year, ROW)
+
+# Merge disaggregated output into IO_data and IO_summed_inputs data frames
+    IO_disaggregated_outputs <- IO_disaggregated_outputs %>%
+      mutate(To = case_when(To == From ~ "GrossOutput_Col_Domestic",
+                            To == "Exp" ~ "GrossOutput_Col_Export")) %>%
+      pivot_wider(names_from = To, values_from = Value) %>%
+      rename(COL = ROW) %>% ## Align variable name for correct merge
+      select(-c(From)) %>%
+      mutate(Year = as.numeric(Year))
+    
+    # Join into separate data frames one with disaggregated outputs and the other also adding the summed inputs
+        IO_data <- left_join(IO_data, IO_disaggregated_outputs, by = c("ISO", "Year", "COL"))
+        IO_summed_inputs <- left_join(IO_summed_inputs, IO_disaggregated_outputs, by = c("ISO", "Year", "COL"))
+
+# Save the IO data for use directly in analysis
+saveRDS(IO_data, file.path(data_out, "IO_data.rds"))
+saveRDS(IO_summed_inputs, file.path(data_out, "IO_summed_inputs.rds"))
+saveRDS(IO_summed_outputs, file.path(data_out, "IO_summed_outputs.rds"))
+
+# Load the data
+IO_data <- readRDS(file.path(data_out, "IO_data.rds"))
+IO_summed_inputs <- readRDS(file.path(data_out, "IO_summed_inputs.rds"))
+IO_summed_outputs <- readRDS(file.path(data_out, "IO_summed_outputs.rds"))
+
+# Clean up
+rm(GrossOutput_COL, outfile, transport_marginvalues, IO_data_exp, IO_disaggregated_outputs, outfile)
+
+```
+
+$~$ 
+
+Create a version of the IO matrix without the margins for the purpose of visualizing transactions
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# There is a separate data set for each year (due to the structure of the IO matrices), using a loop to append the tables into a data frame:
+
+# We start with the first data set which contains domestic and imported inputs and aggregate (domestic and exported) output
+    IO_data2 <- read.csv(file = file.path(data_in, "Yi_InputOutput_CodeData/transactions_ 1995 .csv"), sep = ",")
+    
+    # Use a loop to load and join all the years of data
+        years = 1995:2021
+        for (i in years) {
+          filename = paste("transactions_", i, ".csv")
+          folder = "Yi_InputOutput_CodeData"
+          file = file.path(data_in, folder, filename)
+          outfile = paste("IO_data2_", i, sep = "")
+          outfile <- read.csv(file, sep = ",")
+          IO_data2 <- rbind(IO_data2, outfile)
+        } 
+
+# Now we revise the column names and reorganize the data set
+    IO_data2 <- IO_data2 %>%
+      separate(COL, c("To", "COL"), sep = "_", remove = FALSE) %>%
+      separate(ROW, c("From", "ROW"), sep = "_", remove = FALSE) %>%
+      mutate(ISO = To) %>%
+      relocate(ISO, .before = "Year")
+
+# Merge in the sector names
+    # Create a list of the Eora codes and names
+        EORA_names <- EORA_ISIC %>% select(c(1:2)) %>% unique()
+    
+    # Join all
+        IO_data2 <- left_join(IO_data2, EORA_names, by = c("ROW" = "EORA26_Code")) %>%
+          rename(Row_Name = "EORA26_Name") 
+        IO_data2 <- left_join(IO_data2, EORA_names, by = c("COL" = "EORA26_Code")) %>%
+         rename(Col_Name = "EORA26_Name") 
+        IO_data2 <- IO_data2 %>% mutate(Row_Name = as.factor(Row_Name),
+                                      Col_Name = as.factor(Col_Name))
+        
+# Next, we move to the second dataset which disaggregates output into domestic and exports. 
+    # Again, we first use a loop to combine the single year data sets into one data frame. 
+        IO_data2_exp <- read.csv(file = file.path(data_in, "Yi_InputOutput_CodeData/exp1995.csv"), sep = "|")
+    
+        # Add a column for the year (not included as a column in the data frame)
+            IO_data2_exp <- IO_data2_exp %>%
+              mutate(Year = 1995)
+
+        for (i in years) {
+        filename = paste("exp", i, ".csv", sep = "")
+        folder = "Yi_InputOutput_CodeData"
+        file = file.path(data_in, folder, filename)
+        outfile = paste("IO_data2_exp", i, sep = "")
+        outfile <- read.csv(file, sep = "|")
+        outfile <- outfile %>%
+          mutate(Year = i)
+        IO_data2_exp <- rbind(IO_data2_exp, outfile)
+      } 
+  
+# Rename the columns and import labels
+      IO_data2_exp <- IO_data2_exp %>%
+        separate(COLNew, c("To", "COL"), sep = "_", remove = FALSE) %>%
+        separate(ROW, c("From", "ROW"), sep = "_", remove = FALSE) %>%
+        mutate(ISO = From) %>%
+        relocate(ISO, .before = "X")
+        IO_data2_exp <- IO_data2_exp %>%
+          relocate(Year, .after = ISO)
+          # Merge in the sector names
+          IO_data2_exp <- left_join(IO_data2_exp, EORA_names, by = c("ROW" = "EORA26_Code")) %>%
+            rename(Row_Name = "EORA26_Name") 
+          IO_data2_exp <- left_join(IO_data2_exp, EORA_names, by = c("COL" = "EORA26_Code")) %>%
+            rename(Col_Name = "EORA26_Name") 
+          IO_data2 <- IO_data2 %>% mutate(Row_Name = as.factor(Row_Name),
+                                        Col_Name = as.factor(Col_Name))
+          
+
+# Create another data frame that sums Domestic inputs with Imported inputs
+    IO_summed_inputs2 <- IO_data2 %>%
+      aggregate(cbind(Value, GrossOutput_Row) ~ ISO + Year + ROW + COL + To, FUN = sum)
+    
+    # Merge back in the GrossOutput_Col (repeated in long IO_data2)
+        GrossOutput_COL <- IO_data2 %>% filter(From != "imp") %>%
+          select(ISO, Year, COL, GrossOutput_Col, Col_Name) %>%
+          distinct()
+    # Join
+        IO_summed_inputs2 <- left_join(IO_summed_inputs2, GrossOutput_COL, by = c("ISO", "Year", "COL"))
+
+# Create another data frame that sums Domestic outputs with exports
+    # Create column gross output domestic and export
+        IO_disaggregated_outputs2 <- IO_data2_exp %>%
+    
+    # Group by the values of the ROW column to get aggregate output
+        aggregate(Value ~ ISO + Year + ROW + From + To, FUN = sum) %>%
+        arrange(ISO, Year, ROW) 
+    
+    # Check - aggregate output should sum to the GrossOutput_Col from the main dataset
+        IO_summed_outputs2 <- IO_data2_exp %>%
+          aggregate(Value ~ ISO + Year + ROW + From, FUN = sum) %>%
+          arrange(ISO, Year, ROW)
+
+# Merge disaggregated output into IO_data2 and IO_summed_inputs2 data frames
+    IO_disaggregated_outputs2 <- IO_disaggregated_outputs2 %>%
+      mutate(To = case_when(To == From ~ "GrossOutput_Col_Domestic",
+                            To == "Exp" ~ "GrossOutput_Col_Export")) %>%
+      pivot_wider(names_from = To, values_from = Value) %>%
+      rename(COL = ROW) %>% ## Align variable name for correct merge
+      select(-c(From)) %>%
+      mutate(Year = as.numeric(Year))
+    
+    # Join into separate data frames one with disaggregated outputs and the other also adding the summed inputs
+        IO_data2 <- left_join(IO_data2, IO_disaggregated_outputs2, by = c("ISO", "Year", "COL"))
+        IO_summed_inputs2 <- left_join(IO_summed_inputs2, IO_disaggregated_outputs2, by = c("ISO", "Year", "COL"))
+
+# Save the IO data for use directly in analysis
+saveRDS(IO_data2, file.path(data_out, "IO_data_nomargins.rds"))
+
+# Clean up
+rm(GrossOutput_COL, outfile, transport_marginvalues, IO_data_exp, IO_disaggregated_outputs, outfile)
+
+```
+
+$~$
+
+Now extract the fractions. We start with ISIC Revision 3 and place each fraction initially into a separate data frame, as defined in the "Classifications and metadata.xlsx" file and listed in the table above.
+
+Mining
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# C_Mining
+# Extract fractions to separate data frames 
+## Note: ROW and COL values refer to the Eora values (see EORA_ISIC data frame) and follow the fractions defined in the "transactions" data frame
+    C_Mining <- IO_data %>%
+      filter(ROW == "A03" & COL == "A01" & From != "Imp") %>%
+      select(c(ISO, Year, ROW, COL, Value, GrossOutput_Row)) %>%
+      mutate(frac_Row = Value / GrossOutput_Row) %>% # Recalculate fraction with summed output
+      as.data.frame()
+    C_Mining$C_Mining <- C_Mining$frac_Row # Create a redundant variable for extraction to compiled dataset
+```
+
+$~$
+
+**Figure 1. Share of mining attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(C_Mining$frac_Row, main="Share of mining attributable to AFS",
+         xlab="Fraction")
+```
+
+$~$
+
+Now we develop a fraction for the whole of the manufacturing main aggregate to be used for countries that do not have the more disaggregated 2-digit level data in the UNIDO database. This is done by combining the outcomes of two fractions (summation of the value added done in later step in Script #5, here we compute the two relevant fractions): the share of manufacturing that is downstream from agrifood primary production (e.g., food processing, wood, textiles) and second, the share of manufacturing that produces inputs used in primary production (e.g., fertilizer, agrochemicals).
+
+Manufacturing aggregate
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Manufacturing of agrifood products:
+    D_Manufacturing <- IO_summed_inputs %>%
+      # Select the rows and columns needed for the specific transaction fraction
+      filter((ROW == "A01" | ROW == "A02") & (COL == "A04" | COL == "A05" | COL == "A06" | COL == "A07" | COL == "A11")) %>%
+          # Sum the output of all the columns
+          aggregate(cbind(Value, GrossOutput_Col) ~ ISO + Year + ROW, FUN = sum)   %>% 
+          # Sum the input of the two rows
+          aggregate(Value ~ ISO + Year + GrossOutput_Col, FUN = sum) %>%
+          # Calculate the fraction
+          mutate(frac_Col = Value / GrossOutput_Col) %>%
+          as.data.frame()
+
+    D_Manufacturing$D_AFSManuf <- D_Manufacturing$frac_Col # Create a redundant variable for extraction to compiled data set
+```
+
+$~$
+
+**Figure 2. Share of manufacturing attributable to the processing of AFS products, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(D_Manufacturing$D_AFSManuf, main="Share of manufacturing attributable to the processing of AFS products",
+         xlab="Fraction")
+```
+
+$~$
+
+Agrochemicals
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# D24: Agrochemicals
+    D24_Chemicals <- IO_summed_inputs %>%
+      filter(ROW == "A07" & (COL == "A01" | COL == "A02")) %>%
+      select(c(ISO, Year, ROW, COL, Value, GrossOutput_Row)) %>%
+      # Sum columns
+      aggregate(Value ~ ISO + Year + ROW + GrossOutput_Row, FUN = sum) %>% 
+      # Calculate fraction
+      mutate(frac_Row = Value / GrossOutput_Row) %>% 
+      as.data.frame()
+    D24_Chemicals$D24_Chemicals <- D24_Chemicals$frac_Row 
+
+# Add to the manufacturing main aggregate fractions data set 
+    D_Manufacturing$D_AFSInputManuf <- D24_Chemicals$D24_Chemicals 
+```
+
+$~$
+
+**Figure 3. Share of manufacture of chemicals and chemical products attributable to AFS (manufacture of fertilizers and agrochemicals), distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(D24_Chemicals$D24_Chemicals, main="Share of manufacture of chemicals and chemical products \nattributable to AFS (manufacture of fertilizers and agrochemicals)",
+         xlab="Fraction")
+```
+
+$~$
+
+**Figure 4. Share of manufacturing attributable to the manufacture of agrifood production inputs, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(D_Manufacturing$D_AFSInputManuf, main="Share of manufacturing attributable to the \nmanufacture of agrifood production inputs",
+         xlab="Fraction")
+
+```
+
+$~$
+
+Textiles
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# D17, D18, D19: Textiles
+    D171819_Textiles <- IO_summed_inputs %>%
+      filter(ROW == "A01" & COL == "A05") %>%
+      select(c(ISO, Year, ROW, COL, Value, GrossOutput_Col)) %>%
+      mutate(frac_Col = Value / GrossOutput_Col) %>% # Recalculate the fraction with the aggregated domestic and imported inputs
+      as.data.frame()
+    D171819_Textiles$D17_Textiles <- D171819_Textiles$frac_Col # Create a redundant variable for extraction to compiled dataset  - the same fraction is used for 3 manufacturing 2-digit ISIC codes
+    D171819_Textiles$D18_WearingApparel <- D171819_Textiles$frac_Col # Create a redundant variable for extraction to compiled dataset - the same fraction is used for 3 manufacturing 2-digit ISIC codes
+    D171819_Textiles$D19_Leather <- D171819_Textiles$frac_Col # Create a redundant variable for extraction to compiled dataset  - the same fraction is used for 3 manufacturing 2-digit ISIC codes
+```
+
+$~$
+
+**Figure 5. Share of textiles attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(D171819_Textiles$D17_Textiles, main="Share of textiles attributable to AFS",
+         xlab="Fraction")
+```
+
+$~$
+
+Rubber
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# D25: Rubber
+D25_Rubber <-  IO_summed_inputs %>%
+  filter(ROW == "A01" & COL == "A07") %>%
+  select(c(ISO, Year, ROW, COL, Value, GrossOutput_Col)) %>%
+  mutate(frac_Col = Value / GrossOutput_Col) %>% # Recalculate the fraction with the aggregated domestic and imported inputs
+  as.data.frame()
+D25_Rubber$D25_Rubber <- D25_Rubber$frac_Col 
+```
+
+$~$
+
+**Figure 6. Share of manufacture of rubber and plastics products attributable to AFS (natural rubber), distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(D25_Rubber$D25_Rubber, main="Share of manufacture of rubber and plastics products \nattributable to AFS (natural rubber)",
+         xlab="Fraction")
+```
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# D29: Agriculture and food processing machinery
+    Machinery_select <- IO_summed_inputs %>%
+        filter(ROW == "A09" & (COL == "A01" | COL == "A02" | COL == "A04"))
+    D29_Machinery <- Machinery_select %>%
+        aggregate(cbind(Value, GrossOutput_Col) ~ ISO + Year + ROW, FUN = sum)
+        # Isolate the GrossOutput_Row 
+        Machinery_select <- Machinery_select %>% 
+          select(c(ISO, Year, ROW, GrossOutput_Row)) %>%
+          unique()
+        # Merge back in the gross output of the row
+        D29_Machinery <- left_join(D29_Machinery, Machinery_select, by = c("ISO", "Year", "ROW")) %>%
+      select(c(ISO, Year, ROW, Value, GrossOutput_Row)) %>%
+      mutate(frac_Row = Value / GrossOutput_Row) %>% # Recalculate the fraction with the aggregated domestic and imported inputs
+      as.data.frame()
+        
+    D29_Machinery$D29_Machinery <- D29_Machinery$frac_Row 
+```
+
+$~$
+
+**Figure 6. Share of manufacture of rubber and plastics products attributable to AFS (natural rubber), distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(D29_Machinery$D29_Machinery, main="Share of manufacture of machinery and equipment n.e.c. \nattributable to AFS (agricultural machinery)",
+         xlab="Fraction")
+```
+
+$~$
+
+Furniture
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# D36: Furniture
+    D36_Furniture <- IO_summed_inputs %>%
+      filter(ROW == "A06" & COL == "A11") %>%
+      select(c(ISO, Year, ROW, COL, Value, GrossOutput_Col)) %>%
+      mutate(frac_Col = Value / GrossOutput_Col) %>% # Recalculate the fraction with the aggregated domestic and imported inputs
+      as.data.frame()
+    D36_Furniture$D36_Furniture <- D36_Furniture$frac_Col 
+```
+
+$~$
+
+**Figure 7. Share of manufacture of furniture & manufacturing n.e.c. attributable to AFS (wood furniture), distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(D36_Furniture$D36_Furniture, main="Share of manufacture of furniture & manufacturing n.e.c. \nattributable to AFS (wood furniture)",
+         xlab="Fraction")
+```
+
+$~$
+
+Note that Electricity, Gas, and Water (Main Aggregate E) comes next in order. However, we need fractions from later categories to generate this disaggregation and therefore it is placed last in this section of individual fraction generation code. $~$
+
+$~$
+
+Trade
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# G: Trade
+# We calculate the numerator and denominator summations separately since there is a combination of columns and rows
+    # First we calculate the numerator
+    # Primary production into trade sectors, and trade sectors into primary production, plus the trade margin into final consumption
+        Trade_Numerator1 <- IO_summed_inputs %>%
+            filter((ROW == "A01" | ROW == "A02" | ROW == "A04") & 
+                     (COL == "A16" | COL == "A17")) %>%
+            aggregate(cbind(Value) ~ ISO + Year, FUN = sum) %>%
+          rename(Input_AFS = Value)
+        Trade_Numerator2 <- IO_summed_inputs %>%
+            filter((ROW == "A16" | ROW == "A17") & 
+                     (COL == "A01" | COL == "A02" | COL == "A04")) %>%
+            aggregate(cbind(Value) ~ ISO + Year, FUN = sum) %>%
+          rename(Input_AFS = Value)
+        Trade_Numerator <- rbind(Trade_Numerator1, Trade_Numerator2)
+        Trade_Numerator <- Trade_Numerator %>% aggregate(cbind(Input_AFS) ~ ISO + Year, FUN = sum)
+        rm(Trade_Numerator1, Trade_Numerator2)
+    # Now the denominator
+        Trade_Denominator <- IO_summed_outputs %>%
+          filter(ROW == "A16" | ROW == "A17") %>%
+          aggregate(cbind(Value) ~ ISO + Year, FUN = sum) %>%
+          mutate(Year = as.numeric(Year))
+    
+    # Now we want to subtract inputs from wholesale into retail (because it would be double counting otherwise)
+        Trade_WholetoRet <- IO_summed_inputs %>%
+          filter(ROW == "A16" & COL == "A17") %>%
+          select(c(ISO, Year, Value)) %>%
+          rename(Whole_to_retail = Value)
+
+    # Join with the denominator
+        Trade_Denominator <- left_join(Trade_Denominator, Trade_WholetoRet, by = c("ISO", "Year"))
+        Trade_Denominator <- Trade_Denominator %>%
+          mutate(Output_Trade = Value - Whole_to_retail)
+    
+    # Join with the numerator
+        G_Trade <- left_join(Trade_Numerator, Trade_Denominator, by = c("ISO", "Year")) 
+    
+    # Create the final fraction
+        G_Trade <- G_Trade %>%
+          mutate(frac_Col = Input_AFS / Output_Trade)
+    
+    G_Trade$G_Trade <- G_Trade$frac_Col 
+```
+
+$~$
+
+**Figure 8. Share of trade attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+hist(G_Trade$G_Trade, main="Share of trade attributable to AFS",
+     xlab="Fraction")
+```
+
+$~$
+
+Hotels and restaurants
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# H: Hotels and Restaurants
+    H_HotelsRestaurants <- IO_summed_inputs %>%
+        filter((ROW == "A01" | ROW == "A02" | ROW == "A04") & (COL == "A18")) %>%
+        aggregate(cbind(Value) ~ ISO + Year + COL + GrossOutput_Col, FUN = sum) %>%
+      mutate(frac_Col = Value / GrossOutput_Col) %>% # Recalculate the fraction with the aggregated inputs
+      as.data.frame()
+    H_HotelsRestaurants$H_HotelsRestaurants <- H_HotelsRestaurants$frac_Col 
+```
+
+$~$
+
+**Figure 9. Share of hotels and restaurants attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+hist(H_HotelsRestaurants$H_HotelsRestaurants, main="Share of hotels and restaurants attributable to AFS (restaurants)",
+     xlab="Fraction")
+```
+
+$~$
+
+Transport
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# I: Transport
+    Transport_select <- IO_summed_inputs %>%
+        filter(ROW == "A19" & (COL == "A01" | COL == "A02" | COL == "A04" | COL == "A16" | COL == "A17")) 
+        # Import wholesale and retail fraction
+            Trade_frac <- G_Trade %>% 
+              select(c(ISO, Year, G_Trade))
+    # Join
+        I_Transport <- left_join(Transport_select, Trade_frac, by = c("ISO", "Year"))
+            # Reduce value of Transport into Wholesale and Retail by the AFS fraction for wholesale and retail:
+            I_Transport <- I_Transport %>% 
+              mutate(Value = case_when((Col_Name == "Wholesale Trade" | Col_Name == "Retail Trade") ~ (Value * G_Trade),
+                                        TRUE ~ Value))
+    # Aggregate
+        I_Transport <- I_Transport %>%
+          aggregate(cbind(Value) ~ ISO + Year + ROW, FUN = sum)
+          # Merge back in the GrossOutput_Row
+          Transport_select <- Transport_select %>%
+            select(c(ISO, Year, GrossOutput_Row)) %>% unique()
+          I_Transport <- left_join(I_Transport, Transport_select, by = c("ISO", "Year")) %>%
+            # Recalculate the fraction with the aggregated domestic and imported inputs
+            mutate(frac_Row = Value / GrossOutput_Row) %>%
+            as.data.frame()
+  
+    I_Transport$I_Transport <- I_Transport$frac_Row 
+```
+
+$~$
+
+**Figure 10. Share of hotels and restaurants attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(I_Transport$I_Transport, main="Share of transport attributable to AFS",
+         xlab="Fraction")
+```
+
+$~$
+
+Rentals and public administration
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# K & L: Rentals and Public Administration
+    pubadmin_select <- IO_summed_inputs %>%
+        filter(ROW == "A22" & (COL == "A01" | COL == "A02" | COL == "A04"| COL == "A16" | COL == "A17")) 
+    KL_RentalsPubAdmin <- left_join(pubadmin_select, Trade_frac, by = c("ISO", "Year"))
+        # Reduce value of Transport into Wholesale and Retail by the AFS fraction for wholesale and retail:
+            KL_RentalsPubAdmin <- KL_RentalsPubAdmin %>% 
+              mutate(Value = case_when((Col_Name == "Wholesale Trade" | Col_Name == "Retail Trade") ~ (Value * G_Trade),
+                                        TRUE ~ Value))
+    
+    # Now aggregate as with the other fractions)) 
+        KL_RentalsPubAdmin <- KL_RentalsPubAdmin %>%
+        aggregate(cbind(Value) ~ ISO + Year + ROW, FUN = sum)
+    
+    # Merge back in GrossOutput_Row
+        pubadmin_select <- pubadmin_select %>%
+        select(c(ISO, Year, ROW, GrossOutput_Row)) %>% unique()
+        KL_RentalsPubAdmin <- left_join(KL_RentalsPubAdmin, pubadmin_select, by = c("ISO", "Year", "ROW")) %>%
+          # Recalculate the fraction with the aggregated domestic and imported inputs
+          mutate(frac_Row = Value / GrossOutput_Row) %>% 
+          as.data.frame()
+        
+    KL_RentalsPubAdmin$K_Rentals <- KL_RentalsPubAdmin$frac_Row 
+    KL_RentalsPubAdmin$L_PubAdmin <- KL_RentalsPubAdmin$frac_Row
+```
+
+$~$
+
+**Figure 11. Share of rental activity attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(KL_RentalsPubAdmin$K_Rental, main="Share of rental activity attributable to AFS",
+         xlab="Fraction")
+```
+
+$~$
+
+Health and social work
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# N: Health and Social Work
+    healthsoc_select <- IO_summed_inputs %>%
+        filter(ROW == "A23" & (COL == "A01" | COL == "A02" | COL == "A04"| COL == "A16" | COL == "A17")) 
+    N_HealthSocWork <- left_join(healthsoc_select, Trade_frac, by = c("ISO", "Year"))
+        # Reduce value of Transport into Wholesale and Retail by the AFS fraction for wholesale and retail:
+        N_HealthSocWork <- N_HealthSocWork %>% 
+          mutate(Value = case_when((Col_Name == "Wholesale Trade" | Col_Name == "Retail Trade") ~ (Value * G_Trade),
+                                    TRUE ~ Value))
+    
+    # Now aggregate as with the other fractions)) 
+        N_HealthSocWork <- N_HealthSocWork %>%
+        aggregate(cbind(Value) ~ ISO + Year + ROW, FUN = sum)
+    
+    # Merge back in GrossOutput_Row
+        healthsoc_select <- healthsoc_select %>%
+        select(c(ISO, Year, ROW, GrossOutput_Row)) %>% unique()
+        N_HealthSocWork <- left_join(N_HealthSocWork, healthsoc_select, by = c("ISO", "Year", "ROW")) %>%
+          # Recalculate the fraction with the aggregated domestic and imported inputs
+          mutate(frac_Row = Value / GrossOutput_Row) %>% as.data.frame()
+
+    N_HealthSocWork$N_HealthSocWork <- N_HealthSocWork$frac_Row 
+```
+
+$~$
+
+**Figure 12. Share of health and social work attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(N_HealthSocWork$N_HealthSocWork, main="Share of health and social work attributable to AFS",
+         xlab="Fraction")
+```
+
+$~$
+
+Electricity, gas, and water supply
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# E: Electricity, Gas, and Water Supply
+    Electric_select <- IO_summed_inputs %>%
+        filter(ROW == "A13" & (COL == "A01" | COL == "A02" | COL == "A04" | COL == "A16" | COL == "A17" | COL == "A18")) 
+
+        # Import wholesale and retail fraction 
+            Trade_frac <- G_Trade %>% 
+              select(c(ISO, Year, G_Trade))
+            
+        # Join
+            E_Electric <- left_join(Electric_select, Trade_frac, by = c("ISO", "Year"))
+
+        # Reduce value of Transport into Wholesale and Retail by the AFS fraction for wholesale and retail:
+            E_Electric <- E_Electric %>% 
+              mutate(Value = case_when((Col_Name == "Wholesale Trade" | Col_Name == "Retail Trade") ~ (Value * G_Trade),
+                                        TRUE ~ Value))
+        # Import restaurants fraction 
+            Resto_frac <- H_HotelsRestaurants %>% 
+              select(c(ISO, Year, H_HotelsRestaurants))
+            
+        # Join
+            E_Electric <- left_join(E_Electric, Resto_frac, by = c("ISO", "Year"))
+
+        # Reduce value of Hotels and Restaurants by the AFS fraction for hotels and restaurants:
+            E_Electric <- E_Electric %>% 
+              mutate(Value = case_when((Col_Name == "Hotels and Restaurants") ~ (Value * H_HotelsRestaurants),
+                                        TRUE ~ Value))
+        
+        # Aggregate
+            E_Electric <- E_Electric %>%
+              aggregate(cbind(Value) ~ ISO + Year + ROW, FUN = sum)
+              # Merge back in the GrossOutput_Row
+              Electric_select <- Electric_select %>%
+                select(c(ISO, Year, GrossOutput_Row)) %>% unique()
+              E_Electric <- left_join(E_Electric, Electric_select, by = c("ISO", "Year")) %>%
+          # Recalculate the fraction with the aggregated domestic and imported inputs
+                mutate(frac_Row = Value / GrossOutput_Row) %>% 
+                as.data.frame()
+  
+    E_Electric$E_Electric <- E_Electric$frac_Row 
+```
+
+$~$
+
+**Figure 13. Share of electricity, gas, and water supply attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(E_Electric$E_Electric, main="Share of electricity, gas, and water supply \nattributable to AFS",
+         xlab="Fraction")
+```
+
+$~$
+
+**Now, we create a new data frame that extracts the fraction for each sector.**
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Create simple data frames
+    C_Mining <- C_Mining %>% select(c("ISO", "Year", starts_with("C_")))
+    D_Manufacturing <- D_Manufacturing %>% select(c("ISO", "Year", starts_with("D_")))
+    D171819_Textiles <- D171819_Textiles %>% select(c("ISO", "Year", starts_with("D")))
+    D24_Chemicals <- D24_Chemicals  %>% select(c("ISO", "Year", starts_with("D")))
+    D25_Rubber <- D25_Rubber  %>% select(c("ISO", "Year", starts_with("D")))
+    D29_Machinery <- D29_Machinery  %>% select(c("ISO", "Year", starts_with("D")))
+    D36_Furniture <- D36_Furniture  %>% select(c("ISO", "Year", starts_with("D")))
+    G_Trade <- G_Trade %>% select(c("ISO", "Year", starts_with("G_")))
+    H_HotelsRestaurants <- H_HotelsRestaurants %>% select(c("ISO", "Year", starts_with("H_")))
+    I_Transport <- I_Transport %>% select(c("ISO", "Year", starts_with("I_")))
+    KL_RentalsPubAdmin <- KL_RentalsPubAdmin %>% select(c("ISO", "Year", starts_with("K_"), starts_with("L_")))
+    N_HealthSocWork <- N_HealthSocWork %>% select(c("ISO", "Year", starts_with("N_")))
+    E_Electric <- E_Electric %>% select(c("ISO", "Year", starts_with("E_")))
+
+# Create list of data frames
+    dflist <- list(C_Mining, D_Manufacturing, D171819_Textiles, D24_Chemicals, D25_Rubber, D29_Machinery, D36_Furniture, E_Electric, G_Trade, H_HotelsRestaurants, I_Transport, KL_RentalsPubAdmin, N_HealthSocWork)
+
+# Join
+    fractions_Rev3 <- dflist %>% reduce(full_join, by = c("ISO", "Year")) %>% unique()
+
+# Pivot the fractions long
+    fractions_Rev3 <- fractions_Rev3 %>%
+      group_by(ISO, Year) %>%
+      pivot_longer(cols = 3:19, values_to = "fraction_val", names_to = c("fraction_name"))
+
+# Create a wide by years data set
+    fractions_byyear_Rev3 <- fractions_Rev3 %>%
+      group_by(ISO, fraction_name) %>%
+      pivot_wider(values_from = "fraction_val", names_from = c("Year"))
+
+# Save the data frames
+    save(fractions_Rev3, file = file.path(data_in, "fractions_Rev3.Rdata"))
+    save(fractions_byyear_Rev3, file = file.path(data_in, "fractions_byyear_Rev3.Rdata"))
+```
+
+$~$
+
+**Now we repeat with ISIC Revision 4**
+
+Mining
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# B_Mining
+# Extract fractions to separate data frames 
+  ## Note: ROW and COL values refer to the Eora values (see EORA_ISIC data frame) and follow the fractions defined in the "transactions" data frame
+    B_Mining <- IO_data %>%
+      filter(ROW == "A03" & COL == "A01" & From != "Imp") %>%
+      select(c(ISO, Year, ROW, COL, Value, GrossOutput_Row)) %>%
+      mutate(frac_Row = Value / GrossOutput_Row) %>% # Recalculate fraction with summed output
+      as.data.frame()
+
+    B_Mining$B_Mining <- B_Mining$frac_Row # Create a redundant variable for extraction to compiled dataset
+```
+
+$~$
+
+**Figure 14. Share of mining attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(B_Mining$frac_Row, main="Share of mining attributable to AFS",
+         xlab="Fraction")
+```
+
+$~$
+
+Now we develop a fraction for the whole of the manufacturing main aggregate to be used for countries that do not have the more disaggregated 2-digit level data in the UNIDO database. This is done by combining the outcomes of two fractions (summation of the value added done in later step in Script #5, here we compute the two relevant fractions): the share of manufacturing that is downstream from agrifood primary production (e.g., food processing, wood, textiles) and second, the share of manufacturing that produces inputs used in primary production (e.g., fertilizer, agrochemicals).
+
+Manufacturing aggregate
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Manufacturing of agrifood products:
+    C_Manufacturing <- IO_summed_inputs %>%
+      # Select the rows and columns needed for the specific transaction fraction
+      filter((ROW == "A01" | ROW == "A02") & (COL == "A04" | COL == "A05" | COL == "A06" | COL == "A07" | COL == "A11")) %>%
+          # Sum the output of all the columns
+          aggregate(cbind(Value, GrossOutput_Col) ~ ISO + Year + ROW, FUN = sum)   %>% 
+          # Sum the input of the two rows
+          aggregate(Value ~ ISO + Year + GrossOutput_Col, FUN = sum) %>%
+          # Calculate the fraction
+          mutate(frac_Col = Value / GrossOutput_Col) %>%
+          as.data.frame()
+
+    C_Manufacturing$C_AFSManuf <- C_Manufacturing$frac_Col # Create a redundant variable for extraction to compiled data set
+```
+
+$~$
+
+**Figure 14. Share of manufacturing attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(C_Manufacturing$C_AFSManuf, main="Share of manufacturing attributable to the processing of AFS products",
+         xlab="Fraction")
+```
+
+$~$
+
+Agrochemicals
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# C20: Agrochemicals
+    C20_Chemicals <- IO_summed_inputs %>%
+      filter(ROW == "A07" & (COL == "A01" | COL == "A02")) %>%
+      select(c(ISO, Year, ROW, COL, Value, GrossOutput_Row)) %>%
+      # Sum columns
+      aggregate(Value ~ ISO + Year + ROW + GrossOutput_Row, FUN = sum) %>% 
+      # Calculate fraction
+      mutate(frac_Row = Value / GrossOutput_Row) %>% 
+      as.data.frame()
+    
+    C20_Chemicals$C20_Chemicals <- C20_Chemicals$frac_Row 
+    
+# Add to the manufacturing main aggregate fractions data set 
+    C_Manufacturing$C_AFSInputManuf <- C20_Chemicals$C20_Chemicals 
+```
+
+$~$
+
+**Figure 15. Share of manufacture of chemicals and chemical products attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(C20_Chemicals$C20_Chemicals, main="Share of manufacture of chemicals and chemical products \nattributable to AFS (manufacture of fertilizers and agrochemicals)",
+         xlab="Fraction")
+```
+
+$~$
+
+**Figure 16. Share of manufacturing attributable to manufacture of agrifood production inputs, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(C_Manufacturing$C_AFSInputManuf, main="Share of manufacturing attributable to the \nmanufacture of agrifood production inputs",
+         xlab="Fraction")
+```
+
+$~$
+
+Textiles
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# C13, C14, C15: Textiles
+    C131415_Textiles <- IO_summed_inputs %>%
+      filter(ROW == "A01" & COL == "A05") %>%
+      select(c(ISO, Year, Value, GrossOutput_Col)) %>%
+      mutate(frac_Col = Value / GrossOutput_Col) %>% # Recalculate the fraction with the aggregated domestic and imported inputs
+      as.data.frame()
+    C131415_Textiles$C13_Textiles <- C131415_Textiles$frac_Col # Create a redundant variable for extraction to compiled dataset  - the same fraction is used for 3 manufacturing 2-digit ISIC codes
+    C131415_Textiles$C14_WearingApparel <- C131415_Textiles$frac_Col # Create a redundant variable for extraction to compiled dataset - the same fraction is used for 3 manufacturing 2-digit ISIC codes
+    C131415_Textiles$C15_Leather <- C131415_Textiles$frac_Col # Create a redundant variable for extraction to compiled dataset  - the same fraction is used for 3 manufacturing 2-digit ISIC codes
+```
+
+$~$
+
+**Figure 17. Share of textiles attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+  hist(C131415_Textiles$C13_Textiles, main="Share of textiles attributable to AFS",
+       xlab="Fraction")
+```
+
+$~$
+
+Pharmaceuticals and Rubber
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# C21: Pharmaceuticals & C22: Rubber 
+    C2122_PharmaRubber <-  IO_summed_inputs %>%
+      filter(ROW == "A01" & COL == "A07") %>%
+      select(c(ISO, Year, Value, GrossOutput_Col)) %>%
+      mutate(frac_Col = Value / GrossOutput_Col) %>% # Recalculate the fraction with the aggregated domestic and imported inputs
+      as.data.frame()
+    C2122_PharmaRubber$C21_Pharma <- C2122_PharmaRubber$frac_Col 
+    C2122_PharmaRubber$C22_Rubber <- C2122_PharmaRubber$frac_Col 
+```
+
+$~$
+
+**Figure 18. Share of manufacture of rubber, plastics, and pharmaceutical products attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(C2122_PharmaRubber$C22_Rubber, main="Share of manufacture of rubber, plastics, and pharmaceutical products \nattributable to AFS (natural rubber, botanical inputs)",
+         xlab="Fraction")
+```
+
+$~$
+
+Agriculture and food processing machinery
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# C28: Agriculture and food processing machinery
+    Machinery_select <- IO_summed_inputs %>%
+        filter(ROW == "A09" & (COL == "A01" | COL == "A02" | COL == "A04"))
+    C28_Machinery <- Machinery_select %>%
+        aggregate(cbind(Value, GrossOutput_Col) ~ ISO + Year + ROW, FUN = sum)
+        # Isolate the GrossOutput_Row 
+        Machinery_select <- Machinery_select %>% 
+          select(c(ISO, Year, ROW, GrossOutput_Row)) %>%
+          unique()
+    
+# Merge C28_Machinery back in the gross output of the row
+    C28_Machinery <- left_join(C28_Machinery, Machinery_select, by = c("ISO", "Year", "ROW")) %>%
+      select(c(ISO, Year, Value, GrossOutput_Row)) %>%
+      mutate(frac_Row = Value / GrossOutput_Row) %>% # Recalculate the fraction with the aggregated domestic and imported inputs
+      as.data.frame()
+    
+    C28_Machinery$C28_Machinery <- C28_Machinery$frac_Row 
+```
+
+$~$
+
+**Figure 19. Share of manufacture of rubber, plastics, and pharmaceutical products attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(C28_Machinery$C28_Machinery, main="Share of manufacture of machinery and equipment n.e.c. \nattributable to AFS (agricultural machinery)", xlab="Fraction")
+```
+
+$~$
+
+Furniture
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# C31: Furniture
+    C31_Furniture <- IO_summed_inputs %>%
+      filter(ROW == "A06" & COL == "A11") %>%
+      select(c(ISO, Year, Value, GrossOutput_Col)) %>%
+      mutate(frac_Col = Value / GrossOutput_Col) %>% # Recalculate the fraction with the aggregated domestic and imported inputs
+      as.data.frame()
+
+    C31_Furniture$C31_Furniture <- C31_Furniture$frac_Col 
+```
+
+$~$
+
+**Figure 20. Share of manufacture of rubber, plastics, and pharmaceutical products attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+    hist(C31_Furniture$C31_Furniture, main="Share of manufacture of furniture & manufacturing n.e.c. \nattributable to AFS (wood furniture)", xlab="Fraction")
+```
+
+$~$
+
+Note that Electricity, Gas, Electricity, gas, steam and air conditioning supply (Main Aggregate D) and Water supply; sewerage, waste management and remediation activities (Main Aggregate E) come next in order. However, we need fractions from later categories to generate their disaggregation and therefore these categories are placed last in this section of individual fraction generation code.
+
+$~$
+
+Trade
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# G: Trade
+# Repeat as above with separate numerator and denominator, removal of double counting and calculation of final fraction
+    Trade_Numerator1 <- IO_summed_inputs %>%
+            filter((ROW == "A01" | ROW == "A02" | ROW == "A04") & 
+                     (COL == "A16" | COL == "A17")) %>%
+            aggregate(cbind(Value) ~ ISO + Year, FUN = sum) %>%
+          rename(Input_AFS = Value)
+        Trade_Numerator2 <- IO_summed_inputs %>%
+            filter((ROW == "A16" | ROW == "A17") & 
+                     (COL == "A01" | COL == "A02" | COL == "A04")) %>%
+            aggregate(cbind(Value) ~ ISO + Year, FUN = sum) %>%
+          rename(Input_AFS = Value)
+        Trade_Numerator <- rbind(Trade_Numerator1, Trade_Numerator2)
+        Trade_Numerator <- Trade_Numerator %>% aggregate(cbind(Input_AFS) ~ ISO + Year, FUN = sum)
+        rm(Trade_Numerator1, Trade_Numerator2)
+    Trade_Denominator <- IO_summed_outputs %>%
+      filter(ROW == "A16" | ROW == "A17") %>%
+      aggregate(cbind(Value) ~ ISO + Year, FUN = sum) %>%
+      mutate(Year = as.numeric(Year))
+    Trade_WholetoRet <- IO_summed_inputs %>%
+      filter(ROW == "A16" & COL == "A17") %>%
+      select(c(ISO, Year, Value)) %>%
+      rename(Whole_to_retail = Value)
+    Trade_Denominator <- left_join(Trade_Denominator, Trade_WholetoRet, by = c("ISO", "Year"))
+    Trade_Denominator <- Trade_Denominator %>%
+      mutate(Output_Trade = Value - Whole_to_retail)
+
+    G_Trade <- left_join(Trade_Numerator, Trade_Denominator, by = c("ISO", "Year")) 
+    G_Trade <- G_Trade %>%
+      mutate(frac_Col = Input_AFS / Output_Trade)
+    
+    G_Trade$G_Trade <- G_Trade$frac_Col 
+```
+
+$~$
+
+**Figure 20. Share of trade attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+  hist(G_Trade$G_Trade, main="Share of trade attributable to AFS",
+       xlab="Fraction")
+```
+
+$~$
+
+Transport
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# H: Transport
+    Transport_select <- IO_summed_inputs %>%
+        filter(ROW == "A19" & (COL == "A01" | COL == "A02" | COL == "A04" | COL == "A16" | COL == "A17")) 
+    
+    # Import wholesale and retail fraction
+        Trade_frac <- G_Trade %>% 
+          select(c(ISO, Year, G_Trade))
+    
+    # Join
+        H_Transport <- left_join(Transport_select, Trade_frac, by = c("ISO", "Year"))
+    
+    # Reduce value of Transport into Wholesale and Retail by the AFS fraction for wholesale and retail:
+        H_Transport <- H_Transport %>% 
+          mutate(Value = case_when((Col_Name == "Wholesale Trade" | Col_Name == "Retail Trade") ~ (Value * G_Trade),
+                                    TRUE ~ Value))
+    # Aggregate columns
+        H_Transport <- H_Transport %>%
+          aggregate(cbind(Value) ~ ISO + Year + ROW, FUN = sum)
+        
+        # Merge back in the GrossOutput_Row
+            Transport_select <- Transport_select %>%
+              select(c(ISO, Year, GrossOutput_Row)) %>% unique()
+            H_Transport <- left_join(H_Transport, Transport_select, by = c("ISO", "Year")) %>%
+              # Recalculate the fraction with the aggregated domestic and imported inputs
+              mutate(frac_Row = Value / GrossOutput_Row) %>% as.data.frame()
+  
+    H_Transport$H_Transport <- H_Transport$frac_Row 
+```
+
+$~$
+
+**Figure 21. Share of transport attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+hist(H_Transport$H_Transport, main="Share of transport attributable to AFS",
+     xlab="Fraction")
+```
+
+$~$
+
+Accommodation and food service Note: this category renames what is called "Hotels and restaurants" in ISIC Revision 3 but sub-components remain largely the same
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# I: Accommodation and food service 
+    I_AccomFood <- IO_summed_inputs %>%
+        filter((ROW == "A01" | ROW == "A02" | ROW == "A04") & (COL == "A18")) %>%
+        aggregate(cbind(Value) ~ ISO + Year + COL + GrossOutput_Col, FUN = sum) %>%
+      mutate(frac_Col = Value / GrossOutput_Col) %>% # Recalculate the fraction with the aggregated inputs
+      as.data.frame()
+
+    I_AccomFood$I_AccomFood <- I_AccomFood$frac_Col 
+```
+
+$~$
+
+**Figure 22. Share of accommodation and food service attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+hist(I_AccomFood$I_AccomFood, main="Share of accomodation and food service attributable \nto AFS (restaurants)",
+     xlab="Fraction")
+```
+
+$~$
+
+Profession, scientific, and technical activities
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# M: Professional, scientific, and technical activities (contains AFS codes previously classified under public administration in ISIC Revision 3)
+# And O: Public administration and defense
+    pubadmin_select <- IO_summed_inputs %>%
+        filter(ROW == "A22" & (COL == "A01" | COL == "A02" | COL == "A04"| COL == "A16" | COL == "A17")) 
+    
+    # Reduce value of Transport into Wholesale and Retail by the AFS fraction for wholesale and retail:
+        # Join with trade fraction
+            MO_ProfSciTechPubAd <- left_join(pubadmin_select, Trade_frac, by = c("ISO", "Year"))
+            MO_ProfSciTechPubAd <- MO_ProfSciTechPubAd %>% 
+              mutate(Value = case_when((Col_Name == "Wholesale Trade" | Col_Name == "Retail Trade") ~ (Value * G_Trade),
+                                        TRUE ~ Value))
+            
+    # Now aggregate as with the other fractions)) 
+        MO_ProfSciTechPubAd <- MO_ProfSciTechPubAd %>%
+        aggregate(cbind(Value) ~ ISO + Year + ROW, FUN = sum)
+    
+    # Merge back in GrossOutput_Row
+        pubadmin_select <- pubadmin_select %>%
+        select(c(ISO, Year, ROW, GrossOutput_Row)) %>% unique()
+        MO_ProfSciTechPubAd <- left_join(MO_ProfSciTechPubAd, pubadmin_select, by = c("ISO", "Year", "ROW")) %>%
+          mutate(frac_Row = Value / GrossOutput_Row) %>% # Recalculate the fraction with the aggregated domestic and imported inputs
+      as.data.frame()
+    
+    MO_ProfSciTechPubAd$M_ProfSciTech <- MO_ProfSciTechPubAd$frac_Row 
+    MO_ProfSciTechPubAd$O_PubAdmin <- MO_ProfSciTechPubAd$frac_Row 
+```
+
+$~$
+
+**Figure 23. Share of professional, scientific, and technical activities attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+hist(MO_ProfSciTechPubAd$M_ProfSciTech, main="Share of professional, scientific, and technical activities \nand public administration attributable to AFS",
+     xlab="Fraction")
+```
+
+$~$
+
+Electricity, gas, and water supply
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# D: Electricity, Gas
+# And E: Water supply
+    Electric_select <- IO_summed_inputs %>%
+        filter(ROW == "A13" & (COL == "A01" | COL == "A02" | COL == "A04" | COL == "A16" | COL == "A17" | COL == "A18")) 
+
+        # Import wholesale and retail fraction 
+            Trade_frac <- G_Trade %>% 
+              select(c(ISO, Year, G_Trade))
+        
+        # Join
+            DE_ElectricWater <- left_join(Electric_select, Trade_frac, by = c("ISO", "Year"))
+        
+        # Reduce value of Transport into Wholesale and Retail by the AFS fraction for wholesale and retail:
+            DE_ElectricWater <- DE_ElectricWater %>% 
+              mutate(Value = case_when((Col_Name == "Wholesale Trade" | Col_Name == "Retail Trade") ~ (Value * G_Trade),
+                                        TRUE ~ Value))
+
+        # Import restaurants fraction 
+            Resto_frac <- I_AccomFood %>% 
+              select(c(ISO, Year, I_AccomFood))
+        
+        # Join
+            DE_ElectricWater <- left_join(DE_ElectricWater, Resto_frac, by = c("ISO", "Year"))
+
+        # Reduce value of Hotels and Restaurants by the AFS fraction for hotels and restaurants:
+            DE_ElectricWater <- DE_ElectricWater %>% 
+              mutate(Value = case_when((Col_Name == "Hotels and Restaurants") ~ (Value * I_AccomFood),
+                                        TRUE ~ Value))
+
+        # Aggregate
+          DE_ElectricWater <- DE_ElectricWater %>%
+            aggregate(cbind(Value) ~ ISO + Year + ROW, FUN = sum)
+
+        # Merge back in the GrossOutput_Row
+            Electric_select <- Electric_select %>%
+              select(c(ISO, Year, GrossOutput_Row)) %>% unique()
+            DE_ElectricWater <- left_join(DE_ElectricWater, Electric_select, by = c("ISO", "Year")) %>%
+              # Recalculate the fraction with the aggregated domestic and imported inputs
+              mutate(frac_Row = Value / GrossOutput_Row) %>%
+              as.data.frame()
+  
+    DE_ElectricWater$D_Electric <- DE_ElectricWater$frac_Row 
+    DE_ElectricWater$E_Water <- DE_ElectricWater$frac_Row 
+```
+
+
+
+$~$
+
+**Figure 2e. Share of electricity, gas, and water supply attributable to AFS, distribution of fractions over all countries and years**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Confirm fraction is between 0 and 1 and visualize distribution
+hist(DE_ElectricWater$D_Electric, main="Share of electricity, gas, and water supply \nattributable to AFS",
+     xlab="Fraction")
+```
+
+$~$
+
+**Now, we create a new data frame that extracts the fraction for each sector.**
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Create simplified data frames
+    B_Mining <- B_Mining %>% select(c("ISO", "Year", starts_with("B_")))
+    C_Manufacturing <- C_Manufacturing %>% select(c("ISO", "Year", starts_with("C_")))
+    C131415_Textiles <- C131415_Textiles %>% select(c("ISO", "Year", starts_with("C")))
+    C20_Chemicals <- C20_Chemicals  %>% select(c("ISO", "Year", starts_with("C")))
+    C2122_PharmaRubber <- C2122_PharmaRubber  %>% select(c("ISO", "Year", starts_with("C")))
+    C28_Machinery <- C28_Machinery  %>% select(c("ISO", "Year", starts_with("C")))
+    C31_Furniture <- C31_Furniture  %>% select(c("ISO", "Year", starts_with("C")))
+    G_Trade <- G_Trade %>% select(c("ISO", "Year", starts_with("G_")))
+    H_Transport <- H_Transport %>% select(c("ISO", "Year", starts_with("H_")))
+    I_AccomFood <- I_AccomFood %>% select(c("ISO", "Year", starts_with("I_")))
+    MO_ProfSciTechPubAd <- MO_ProfSciTechPubAd %>% select(c("ISO", "Year", starts_with("M_"), starts_with("O_")))
+    DE_ElectricWater <- DE_ElectricWater %>% select(c("ISO", "Year", starts_with("D_"), starts_with("E_")))
+
+# Create list of data frames
+    dflist <- list(B_Mining, C_Manufacturing, C131415_Textiles, C20_Chemicals, C2122_PharmaRubber, C28_Machinery, C31_Furniture, DE_ElectricWater, G_Trade, H_Transport, I_AccomFood, MO_ProfSciTechPubAd)
+
+# Join all
+    fractions_Rev4 <- dflist %>% reduce(full_join, by = c("ISO", "Year")) %>% unique()
+
+# Pivot the fractions long
+    fractions_Rev4 <- fractions_Rev4 %>%
+      group_by(ISO, Year) %>%
+      pivot_longer(cols = 3:20, values_to = "fraction_val", names_to = c("fraction_name"))
+
+# Create a wide by years data set
+    fractions_byyear_Rev4 <- fractions_Rev4 %>%
+      group_by(ISO, fraction_name) %>%
+      pivot_wider(values_from = "fraction_val", names_from = c("Year"))
+
+# Save the data frames
+    save(fractions_Rev4, file = file.path(data_in, "fractions_Rev4.Rdata"))
+    save(fractions_byyear_Rev4, file = file.path(data_in, "fractions_byyear_Rev4.Rdata"))
+```
+
+$~$
+
+**References**
