@@ -1,0 +1,468 @@
+---
+title: "Value Added in Agrifood Systems - Step 1: Classifications"
+author: "Kate Schneider"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: html_document
+bibliography: "Agrifood Value Added.bib"
+---
+
+### *Overall Objectives*
+
+The goal of this project is to create a country-year level data set that identifies the value added from agrifood systems (AFS). To do so requires reconfiguring the data because its current organization according to the official International Standard Industrial Classification of Economic Activity (ISIC) system is not sufficient to separate AFS from non-AFS. This project has classified the ISIC codes into wholly agrifood, partly agrifood, and not agrifood. This has been done for ISIC Revisions 3, 3.1, and 4 down to the 4-digit level. This classification is contained in the Input Data sub-folder in the file "Classifications and metadata.xlsx". That Excel workbook contains additional metadata and classification information beyond the sheets that are use to compute the value added data series in this script. These classifications are imported here in Script #1.
+
+We use 5 R scripts to import, harmonize, and compile the different data sources used to derive the estimate of value added from AFS. These start with official statistics of value added to estimate the share that is attributable to agrifood systems (AFS). It includes official data from the United Nations Statistics Division (UNSD) System of National Accounts Main Aggregates (imported in Script #2) and the United Nations Industrial Development Organization (UNIDO) data on value added in the manufacturing sector at a more detailed level (imported in Script #3). The SNA and UNIDO data sets are available for different country-year combinations for ISIC Revision 3 and ISIC Revision 4. We harmonize the categories that are partly or wholly AFS according to a crosswalk created by this project and contained in the "ISIC3_ISIC4 AFS Only" sheet of the "Classifications and metadata.xlsx" file. This harmonization includes aggregating certain categories where they are combined in one ISIC Revision but not the other, in which case we use the more aggregated category by necessity. The harmonization table is imported and used in Scripts #2 and #3 where they define any harmonization steps that are undertaken in the initial data shaping. We also make use of auxiliary data from FAO that contain geographic and administrative classification of countries and areas (imported in Script #1).
+
+Next, Script #4 imports transaction tables from Eora Multi-Region Input-Output (MRIO) tables for 26 globally harmonized sectors. These tables are used to develop a fraction summarizing an inter-industry transaction relative to sectoral output that best approximates the share of the ISIC Main aggregates or 2-digit categories for which we have official statistics data and which are only partly attributable to agrifood systems. We use these fractions to disaggregate the value added data into its agrifood and non-agrifood components. These fractions are also defined by the project and are contained in the "Classifications and metadata.xlsx" file, imported in Script #4. These data were created by the ASTAR-Labor project and provided as a collaboration for this paper. They were created by first balancing the Eora-26 harmonized input-output (IO) tables for 1995-2021. The specific data files created for this project were reshaped from the balanced IO tables using the code contained in the replication report "4a_Eora extraction," which shows the python code used to extract the simplified tables from the balanced raw Eora-26 tables. 
+
+Script #5 merges the data sets and creates the final output data sets for the analysis. Final harmonization between ISIC Rev 3 and Rev 4 (e.g., renaming) is carried out in Script #5 after the data are merged with the fractions, since the fractions are defined per ISIC Revision to match with ISIC Item codes. The final data set contains a time series from 1995-2021 determined historically by the availability of the Eora-26 data and where the most recent year available for all data sets we use is 2021. To compile the final time series data set so that we have one record per country-year for each sector or sub-sector, we prioritize the ISIC Revision 4 series where country-years have both ISIC Revision 3 and ISIC Revision 4. We combine manufacturing data from UNIDO with main aggregates from the SNA database only within an ISIC Revision. Where there are no disaggregated manufacturing data for from UNIDO for the same ISIC Revision as the SNA data, then we estimate the disaggregation using the fraction method.
+
+Script #6 contains extensive analysis code, tables, and visualizations used to understand the data. A replication script specifically for the figures and tables in (each of) the working paper and manuscript for peer review publication are contained separately.
+
+Acronyms:
+
+-   AFS = Agrifood systems
+-   FAO = Food and Agriculture Organization of the United Nations
+-   IO = Input-Output
+-   ISIC = International Standard Industrial Classification of Economic Activity
+-   Eora = The multi-region input-output table (MRIO) model that provides a time series of high-resolution IO tables, specifically inter-industry transaction matrices used in our analysis
+-   Eora-26 = the specific variant of Eora data that is harmonized across countries into 26 aggregate sectors
+-   SNA = System of National Accounts
+-   UNIDO = United Nations Industrial Development Organization
+-   UN Stats = United Nations Statistics Division
+
+$~$ $~$
+
+### **Summary of Script 1**
+
+This script imports the geographic and administrative classifications of areas and countries. It includes official UN regional classifications and identifies member states and characterizes non-member states by their territorial affiliation and/or disputed status. Our final data set is limited to UN member states only.
+
+This script also imports the project-created classification of ISIC codes by agrifood system status: wholly AFS (all activities in that code are part of AFS, e.g., Agriculture, hunting, and forestry); partly AFS (some activities in that code are part of AFS but others are not, e.g., Retail trade); and not AFS (no activities are part of AFS, e.g., Financial inter-mediation).
+
+$~$
+
+```{r setup, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+### Setup required to knit this script into a markdown document
+
+    # Load the knitr package
+      library(knitr)
+    
+    # Set echo = FALSE for all code chunks will prevent the code from printing in the output file
+      knitr::opts_chunk$set(echo = FALSE)
+      
+# Set the root folder to the project root so that all file paths are relative to the main project folder
+    knitr::opts_knit$set('./')
+  
+# Set the treatment of numbers to numerical (avoids scientific notation from showing in results)
+    options(scipen = 999)
+
+# Load packages
+    # R studio should prompt the installation of any packages not loaded on the instance where this script has been opened
+    library(tidyverse)
+    library(Hmisc)
+    library(haven)
+    library(readxl)
+    library(labelled)
+    library(data.table)
+    library(psych)
+    library(kableExtra)
+    library(citr) ## To install from github: devtools::install_github("crsh/citr")
+    library(testthat)
+    library(pals)
+    library(countrycode)
+    library(here)
+
+# Set relative directory paths
+    data_in <- here::here("Input Data")
+    fig_out <- here::here("Figures")
+    support <- here::here("Support files and scripts")
+    data_out <- here::here("Output Datasets")
+
+# Create a "not in" operator
+    `%notin%` <- Negate(`%in%`) 
+
+# Note: "$~$" adds line breaks in the html report in the knitting process.
+
+```
+
+$~$
+
+### *Input data set 1: Area classification*
+
+The first step in this data set compilation process is to import classification variables that can be used to merge across data sets with different country/area identifiers and which are useful to include in the final data set for future users who may wish to group or analyze the data by different geographic levels. This data set also contains a variable that codes UN Member States so that non-member state areas can be excluded from the data set.
+
+We import a data set was created by the Food Systems Countdown Initiative by combining data from the following sources:
+
+1.  M49 codes, ISO3-alpha codes, and area groupings from <https://unstats.un.org/unsd/methodology/m49/> and recently updated and approved by the FAO in August 2023 (Version 15) [@faoStatisticalStandardSeries2023]. They can be found on the FAO website at the following links: <https://www.fao.org/statistics/caliper/en> and <https://stats.fao.org/caliper/browse/showvoc/#/datasets>
+2. Identification of territories and member states from the The Global Administrative Unit Layers (GAUL) additional attributes files from: <https://data.apps.fao.org/catalog/dataset/1c45d658-591c-455c-b29c-cda8bc161f72>. Specifically, we use the  "G2015_InternationalCountryCodesAttributes.xls" data set to identify member states and the status of non-member state territories. We need the member state variable to limit our final data set to UN Member states only.
+3.  All country names are harmonized to the M49 system name using the R package 'countrycode', version 1.5.0.
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+# Load UN Classifications data set (created for FSCI into data sets from online tables linked above)
+    UN_class <- read_excel(file.path(data_in, "GAUL2015_AdditionalAttributes/G2015_InternationalCountryCodesAttributes.xls"))
+    UN_class <- UN_class %>% select(c(1,7,9)) %>%
+      rename(country = ADM_NAME,
+             ISO = ISO3,
+             territoryof = STATUS) %>%
+      mutate_all(as.factor) %>%
+      mutate(UNmemberstate = case_when(territoryof == "Member State" ~ 1,
+                                   TRUE ~ 0))
+    table(UN_class$territoryof)
+    countrycodechanges <- UN_class
+    countrycodechanges$country <- countrycode::countrycode(countrycodechanges$country, origin = 'country.name', destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+    # Check country name changes
+      originalnames <- UN_class %>% select(c(country))   
+      fixednames <- countrycodechanges %>% select(c(country))  
+      check1 <- anti_join(originalnames, fixednames)
+      check2 <- anti_join(fixednames, originalnames)
+      # Confirmed no errors introduced  
+    
+    # Now run on the classification dataframe and replace the original names  
+        UN_class$country <- countrycode::countrycode(UN_class$country, origin = 'country.name', destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+
+      
+# Merge in M49 codes
+    M49 <- read_excel(file.path(data_in, "SSS_16-M49_Annex_regional_groupings_Aug23.xlsx"), range = ("B3:AA256"))
+    M49 <- M49 %>% 
+      rename(UN_contregion_code = "M 49 Region",
+             UN_continental_region = "...4",
+             UN_subregion_code = "M 49 Sub-region",
+             UN_subregion = "...6",
+             UN_intermedregion_code = "M 49 Intermediate Region", 
+             UN_intermediary_region = "...8",
+             m49_code = "Country or territory",
+             ISO = "...10", 
+             country = "...11") %>%
+      select(-c(1:2, 12:16, 18:26)) %>% # remove world columns and classification to LDCs, SDGs and FAO regional offices
+      slice(2:253) %>% # Remove first row (which is a second row of headings)
+      mutate_all(as.factor)
+    
+    # Check country code renaming
+       countrycodechanges <- M49
+       countrycodechanges$country <- countrycode::countrycode(countrycodechanges$country, origin = 'country.name', destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+    
+    # Check country name changes
+      originalnames <- M49 %>% select(c(country))   
+      fixednames <- countrycodechanges %>% select(c(country))  
+      check1 <- anti_join(originalnames, fixednames)
+      check2 <- anti_join(fixednames, originalnames)
+      # Confirmed no errors introduced 
+        # Noted that M49 introduces Kosovo and Zanzibar into the dataset
+    
+    # Now run on the classification dataframe and replace the original names  
+    M49$country <- countrycode::countrycode(M49$country, origin = 'country.name', destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+
+# Join data sets
+    # Check country names
+    joincheck <- anti_join(UN_class, M49, by = c("country"))
+        
+        # Fix the issues not successfully fixed by the countryname package
+        UN_class <- UN_class %>%
+          mutate(country = case_when(country == "The former Yugoslav Republic of Mac" & ISO == "MKD" ~ "North Macedonia",
+                 TRUE ~ country))
+        M49 <- M49 %>% mutate(country = case_when(country == "United Republic of Tanzania" & is.na(ISO) ~ "United Republic of Tanzania, Zanzibar", TRUE ~ country)) %>%
+          filter(!(country == "Serbia" & is.na(ISO)))
+        # The rest of the unmatched areas are territories or former states with no record in the M49 system. They are dropped for the purposes of this analysis and its focus on member states. 
+        print(joincheck$country)
+        
+# Clean up
+    rm(check1, check2, originalnames, fixednames, countrycodechanges)
+```
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+    Area_info <- left_join(M49, UN_class, by = c("ISO", "country"))
+    Area_info <- Area_info %>% 
+      relocate(country, m49_code, ISO, UNmemberstate) %>%
+      relocate(territoryof, .after = UN_intermediary_region) %>% 
+      mutate(UNmemberstate = case_when(is.na(UNmemberstate) ~ 0,
+                                       TRUE ~ UNmemberstate),
+             UNmemberstate = factor(UNmemberstate,
+                                    levels = c(0,1),
+                                    labels = c("No", "Yes")),
+             ISO = as.character(ISO),
+             country = as.factor(country))
+    levels(Area_info$country)
+
+# Remove intermediate data frames no longer needed
+    rm(UN_class, M49)
+```
+
+$~$
+
+**Table 1. Country list, UN Classification, and International Codes**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table
+    colnames <- c("Country", "M49", "ISO", "Member State?", "Continent","Territorial info") 
+    Area_info %>% 
+      select(c(country, m49_code, ISO, UNmemberstate, UN_continental_region, territoryof)) %>% arrange(country) %>%
+      kable(col.names = colnames, "html", caption = "Country list, UN Classification, and International Codes") %>%
+      kable_classic(full_width = F, html_font = "Cambria") %>%
+      kable_styling()
+    
+# Clean up
+    rm(colnames)
+
+```
+
+$~$ $~$
+
+### *Input data set 2: ISIC codes and classification to agrifood systems*
+
+The second step is to import the classification created by this project that classifies all ISIC codes into wholly, partly, and not AFS. This classification file was created by the project from the online tables provided by the UN Statistics Division (<https://unstats.un.org/unsd/classifications/Econ>).
+
+We carried out the classification for ISIC Revisions 3, 3.1, and 4. We use a combination of ISIC Revision 3 and ISIC Revision 4 to maximize country and time coverage. The System of National Accounts Value Added is not available for ISIC Revision 3.1. The "Classification and metadata.xlsx" file contains ISIC Revisions 3, 3.1, and 4 for future research and for use by others.
+
+We have coded all ISIC categories down to the 4-digit level by attribution to AFS as follows:
+
+-   0: Not AFS at all
+-   1: Completely AFS (total value is attributable to AFS)
+-   2: Partially AFS (this code contains a mix of AFS and non-AFS activities)
+
+**We start with ISIC Revision 3.**
+
+```{r, warning = FALSE, echo = FALSE, results = "hide", echo = TRUE}
+
+# Import ISIC Codes and classification to agrifood systems
+    ISICRev3 <- read_excel(file.path(data_in, "Classifications and metadata.xlsx"), sheet = "ISIC_Rev_3") %>% rename(Item = "Description") %>%
+      mutate(Item = as.factor(Item))
+
+```
+
+$~$
+
+**Table 2. System of National Accounts Main Aggregates, ISIC Rev 3, with Classification to Agrifood Systems**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create table of main aggregates and 2-digit categories with classification to AFS
+    colnames <- c("Code", "Description", "Classification to AFS (1 = completely, 2 = partial)") 
+    ISICRev3 %>% filter(Filter_1 == 1) %>%
+      select(-c(4:13)) %>% 
+      kable(., col.names = colnames, "html", caption = "System of National Accounts Main Aggregates, ISIC Rev 3, with Classification to Agrifood Systems") %>% kable_classic(full_width = T, html_font = "Cambria")
+    
+# Clean up
+    rm(colnames)
+
+```
+
+$~$
+
+**Table 3. System of National Accounts Main Aggregates and 2-digit level ISIC codes that are partly or wholly within AFS, ISIC Revision 3**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table of main aggregates and 2-digit categories with classification to AFS
+    colnames <- c("Code", "Description", "Classification to AFS (1 = completely, 2 = partial)", "Justification") 
+    ISICRev3 %>% relocate("Justification", .after = Is_AFS) %>%
+      filter(Is_AFS != 0 & (HasData == 1)) %>%
+      select(-c(5:13)) %>% 
+    kable(., col.names = colnames, "html", caption = "System of National Accounts Main Aggregates and 2-digit level ISIC codes that are partly or wholly within AFS, ISIC Revision 3") %>% kable_classic(full_width = T, html_font = "Cambria")
+    
+# Clean up
+    rm(colnames)
+```
+
+$~$
+
+**Table 4. ISIC Revision 3 codes to 4-digit level that are partly within agrifood systems and require estimating a share of value added attributable to AFS**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table of main aggregates and 2-digit categories with classification to AFS
+    colnames <- c("Code", "Description", "Classification to AFS (1 = completely, 2 = partial)", "Justification") 
+    table <- ISICRev3 %>% 
+      slice(23:528) %>%
+      filter((Is_AFS ==2 & Filter_1 == 1) | (Is_AFS !=0 & Filter_1 !=1)) %>%
+      relocate("Justification", .after = Is_AFS) %>%
+      select(-c(5:13)) %>% 
+      mutate(Justification = case_when(is.na(Justification) ~ "",
+                                       TRUE ~ Justification)) %>%
+      kable(., col.names = colnames, "html", caption = "ISIC Revision 3 codes to 4-digit level that are partly within agrifood systems and require estimating a share of value added attributable to AFS") %>% kable_classic(full_width = F, html_font = "Cambria") %>%
+      column_spec(1,width = "1in") %>%
+      column_spec(2,width = "3in") %>%
+      column_spec(3,width = "1in") %>%
+      column_spec(4,width = "3.5in")
+      kableExtra::add_footnote(table, c("Agriculture, Forestry, and Fishing not shown as all categories are wholly attributable to agrifood systems."))
+      table
+
+# Clean up
+    rm(colnames)
+```
+
+$~$ $~$
+
+**Next, we repeat the import of the codes and classification for ISIC Revision 4.**
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+# Import ISIC Codes and classification to agrifood systems
+    ISICRev4 <- read_excel(file.path(data_in, "Classifications and metadata.xlsx"), sheet = "ISIC_Rev_4") %>% rename(Item = "Description") %>%
+      mutate(Item = as.factor(Item))
+
+```
+
+**Table 5. System of National Accounts Main Aggregates, ISIC Rev 4, with Classification to AFS**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table of main aggregates and 2-digit categories with classification to AFS
+    colnames <- c("Code", "Description", "Classification to AFS (1 = completely, 2 = partial)") 
+    ISICRev4 %>% filter(Filter_1 == 1) %>%
+      select(-c(4:13)) %>% 
+      kable(., col.names = colnames, "html", caption = "System of National Accounts Main Aggregates, ISIC Rev 4, with Classification to AFS") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Clean up
+    rm(colnames)
+
+```
+
+$~$
+
+**Table 6. System of National Accounts Main Aggregates and 2-digit level ISIC codes that are partly or wholly within AFS, ISIC Rev 4**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table of main aggregates and 2-digit categories with classification to AFS
+    colnames <- c("Code", "Description", "Classification to AFS (1 = completely, 2 = partial)", "Justification") 
+    ISICRev4 %>% relocate("Justification", .after = Is_AFS) %>%
+      filter(Is_AFS != 0 & (HasData == 1)) %>%
+      select(-c(5:13)) %>% 
+    kable(., col.names = colnames, "html", caption = "System of National Accounts Main Aggregates and 2-digit level ISIC codes that are partly or wholly within AFS, ISIC Rev 4") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Clean up
+    rm(colnames)
+
+```
+
+$~$
+
+**Table 7. ISIC codes to 4-digit level that are partly within AFS and require estimating a share of value added attributable to agrifood systems, ISIC Rev 4**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table of main aggregates and 2-digit categories with classification to AFS
+colnames <- c("Code", "Description", "Classification to AFS (1 = completely, 2 = partial)", "Justification") 
+table <- ISICRev4 %>% 
+  slice(56:766) %>% # Exclude aggregate A which are all agrifood system
+  filter((Is_AFS ==2 & Filter_1 == 1) | (Is_AFS !=0 & Filter_1 !=1)) %>%
+  relocate("Justification", .after = Is_AFS) %>%
+  select(-c(5:13)) %>% 
+  mutate(Justification = case_when(is.na(Justification) ~ "",
+                                   TRUE ~ Justification)) %>%
+  kable(., col.names = colnames, "html", caption = "ISIC codes to 4-digit level that are partly within AFS and require estimating a share of value added attributable to agrifood systems, ISIC Rev 4") %>% kable_classic(full_width = F, html_font = "Cambria") %>%
+  column_spec(1,width = "1in") %>%
+  column_spec(2,width = "3in") %>%
+  column_spec(3,width = "1in") %>%
+  column_spec(4,width = "3.5in")
+  kableExtra::add_footnote(table, c("Agriculture, Forestry, and Fishing not shown as all categories are wholly attributable to agrifood systems."))
+  table
+    
+# Clean up
+    rm(colnames)
+
+```
+
+$~$ $~$
+
+**Next, we import the crosswalk created to harmonize only the AFS related codes between ISIC Rev 3 and ISIC Rev 4 to create a single time series of value added.**
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+# Import ISIC Codes and classification to agrifood systems
+    ISIC3_ISIC4 <- read_excel(file.path(data_in, "Classifications and metadata.xlsx"), sheet = "ISIC3_ISIC4 for AFS")
+ 
+```
+
+**Table 8. Crosswalk and harmonization actions to combine ISIC Rev 3 and Rev 4 AFS codes for AFS classification**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create a table
+    kable(ISIC3_ISIC4, "html", caption = "Crosswalk and harmonization actions to combine ISIC Rev 3 and Rev 4 AFS codes for AFS classification") %>% 
+      kable_classic(full_width = F, html_font = "Cambria") 
+
+```
+
+$~$
+
+**Lastly, we import the defined inter-industry transaction relationships that will be used to disaggregate partly AFS codes into their AFS and non-AFS shares.**
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+# Import ISIC Codes and classification to agrifood systems
+    EORA_ISIC <- read_excel(file.path(data_in, "Classifications and metadata.xlsx"), sheet = "EORA_ISIC") 
+    
+# Keep only necessary columns
+    EORA_ISIC <- EORA_ISIC %>% select(c(1:4)) %>% filter(!(is.na(ISIC_Rev3_Code)))
+    
+```
+
+$~$
+
+**Table 9. Eora-26 Sector Crosswalk with ISIC Codes**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table of EORA to ISIC Crosswalk
+    colnames <- c("EORA Code", "EORA Description", "ISIC 2-digit Code", "ISIC Description") 
+    EORA_ISIC %>% 
+      kable(., col.names = colnames, "html", caption = "Eora-26 Sector Crosswalk with ISIC Codes") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+```
+
+$~$
+
+The relationships used for each disaggregation fraction are taken from the "Classifications and metadata.xlsx" spreadsheet (in the "Input Data" folder).
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+# Import ISIC Codes and classification to agrifood systems - ISIC Revision 3
+    transactions_Rev3 <- read_excel(file.path(data_in, "Classifications and metadata.xlsx"), sheet = "Transactions_Rev_3", range = "A2:H530")
+
+# Filter only the rows with information (the level of classification for which we have data)
+    transactions_Rev3 <- transactions_Rev3 %>% filter(complete.cases(.)) 
+
+# Repeat for ISIC Revision 4: Codes and classification to agrifood systems - ISIC Revision 4
+    transactions_Rev4 <- read_excel(file.path(data_in, "Classifications and metadata.xlsx"), sheet = "Transactions_Rev_4", range = "A2:H768")
+    
+# Filter only the rows with information (the level of classification for which we have data)
+    transactions_Rev4 <- transactions_Rev4 %>% filter(complete.cases(.)) 
+
+```
+
+$~$
+
+**Table 10. Inter-industry transactions and fraction construction to estimate the portion of aggregate sectors attributable to agrifood systems, ISIC Revision 3**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table of main aggregates and 2-digit categories with classification to AFS
+    transactions_Rev3 %>% 
+      kable(., "html", caption = "Inter-industry transactions and fraction construction to estimate the portion of aggregate sectors attributable to agrifood systems, ISIC Revision 3") %>% kable_classic(full_width = T, html_font = "Cambria") %>% landscape(margin = c('1cm')) 
+
+```
+
+$~$
+
+**Table 11. Inter-industry transactions and fraction construction to estimate the portion of aggregate sectors attributable to agrifood systems, ISIC Revision 4**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table of main aggregates and 2-digit categories with classification to AFS
+    transactions_Rev4 %>% 
+      kable(., "html", caption = "Inter-industry transactions and fraction construction to estimate the portion of aggregate sectors attributable to agrifood systems, ISIC Revision 4") %>% kable_classic(full_width = T, html_font = "Cambria") %>% landscape(margin = c('1cm')) 
+
+```
+
+$~$
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Save data frames so they can be called in subsequent scripts
+    save(Area_info, file = file.path(data_in, "Area_info.RData"))
+    save(ISICRev3, file = file.path(data_in, "ISICRev3.RData"))
+    save(ISICRev4, file = file.path(data_in, "ISICRev4.RData"))
+    save(ISIC3_ISIC4, file = file.path(data_in, "ISIC3_ISIC4.RData"))
+    save(EORA_ISIC, file = file.path(data_in, "EORA_ISIC.RData"))
+    save(transactions_Rev3, file = file.path(data_in, "transactions_Rev3.RData"))
+    save(transactions_Rev4, file = file.path(data_in, "transactions_Rev4.RData"))
+
+```

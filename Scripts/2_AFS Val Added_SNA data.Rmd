@@ -1,0 +1,1542 @@
+---
+title: "Value Added in Agrifood Systems - Step 2: System of National Accounts Main Aggregates Data"
+author: "Kate Schneider Lecy"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: "Agrifood Value Added.bib"
+---
+### **Summary of Script 2** ###
+
+This script imports the official statistics Value Added data from the System of National Accounts. These data are provided at the Main Aggregate level (letter codes).
+
+*The following tables are imported:*
+
+-   GDP and its breakdown
+-   Population
+-   Exchange rates
+-   Table 2.1: Value added by Industry at current prices in national currency, ISIC Revision 3
+-   Table 2.4: Value added by Industry at current prices in national currency, ISIC Revision 4
+
+These data are available for the last 5 years through an API (<https://unstats.un.org/unsd/amaapi/swagger/index.html>), which requires looping over countries per indicator (series) to compile all the data. A script that accomplishes this is provided in the "Support files and scripts" folder.
+
+To access the full times series back to 1970, each indicator must be downloaded separately from <https://unstats.un.org/unsd/snaama/basic>. We manually downloaded these data in August 2023 and they are saved in the "UNStat SNA_8aug2023" subfolder under "Input Data". The date in the sub-folder name indicates the download date.
+
+Note that to get all the ISIC Revision 3 data, it requires 3 separate downloads due to download record limitations. Therefore, the first step in importing these data is to combine the three files that were downloaded. Since only 33 countries have produced these data according to ISIC Revision 4, all available records can be downloaded into 2 files.
+
+We import the data in current local currency. We convert to current US dollars using the official exchanges rates provided from the UN statistics portal when calculating final indicators (Script #5).
+
+Following the Correspondence Table for ISIC 3 to 4 specifically for agrifood systems ("ISIC3_ISIC4 for AFS") in the "Classifications and metadata" spreadsheet, we harmonize certain categories and give a harmonized name so that we cand create a time series that includes data according to both ISIC Rev 3 and Rev 4 to maximize time and country coverage. 
+
+
+```{r setup, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+### Setup required to knit this script into a markdown document
+
+    # Load the knitr package
+      library(knitr)
+    
+    # Set echo = FALSE for all code chunks will prevent the code from printing in the output file
+      knitr::opts_chunk$set(echo = FALSE)
+      
+# Set the root folder to the project root so that all file paths are relative to the main project folder
+    knitr::opts_knit$set('./')
+  
+# Set the treatment of numbers to numerical (avoids scientific notation from showing in results)
+    options(scipen = 999)
+
+# Load packages
+    # R studio should prompt the installation of any packages not loaded on the instance where this script has been opened
+    library(tidyverse)
+    library(Hmisc)
+    library(haven)
+    library(readxl)
+    library(labelled)
+    library(data.table)
+    library(psych)
+    library(kableExtra)
+    library(citr) ## To install from github: devtools::install_github("crsh/citr")
+    library(testthat)
+    library(pals)
+    library(here)
+
+# Set relative directory paths
+    data_in <- here::here("Input Data")
+    fig_out <- here::here("Figures")
+    support <- here::here("Support files and scripts")
+    data_out <- here::here("Output Datasets")
+
+# Create a "not in" operator
+    `%notin%` <- Negate(`%in%`) 
+    
+# Create a function to test that there are  no duplicates in the data frame
+    isUnique <- function(vector){
+           return(!any(duplicated(vector)))
+    }
+
+# Note: "$~$" adds line breaks in the html report in the knitting process.
+    
+```
+
+$~$
+
+### *Input data set 3: System of National Accounts Main Aggregates and other official statistics*
+
+$~$
+
+#### GDP, Population, and Exchange rates
+We start with the auxiliary data from the same official statistics source (UN Statistics, see "Classifications and metdata" workbook for further source documentation). These data include GDP, Population, and official Exchange Rates.
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+# GDP and its breakdown
+    GDP_Current <- read_excel(file.path(data_in, "UNStat SNA_8aug2023/Download-GDPcurrent-NCU-countries.xlsx"),
+                              sheet = "Download-GDPcurrent-NCU-countri",
+                              range = "A3:BD3717") %>%
+      rename(country = Country) %>%
+      pivot_longer(cols = 5:56, names_to = "year") %>%
+      select(-c(CountryID)) # this variable are the m49 codes but without leading zeros
+
+    # Check country name changes
+    countrycodechanges <- GDP_Current
+    countrycodechanges$country <- countrycode::countrycode(countrycodechanges$country, origin = 'country.name', 
+                                                 destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+
+      originalnames <- GDP_Current %>% select(c(country, year)) %>% unique()   
+      fixednames <- countrycodechanges %>% select(c(country, year)) %>% unique()   
+      check1 <- anti_join(originalnames, fixednames)
+      check2 <- anti_join(fixednames, originalnames)
+      # Error introduced: changes former Ethiopia and Sudan to current 
+      
+      # Remove historical states, the series of the current state has been backcast
+      GDP_Current <- GDP_Current %>% filter(!(country == "Ethiopia (Former)" | country == "Sudan (Former)" | country == "USSR (Former)")) 
+      
+    # Now run on the classification dataframe and replace the original names  
+    GDP_Current$country <- countrycode::countrycode(GDP_Current$country, origin = 'country.name', 
+                                                 destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+
+# Population and Exchange Rates 
+    PopEx <- read_excel(file.path(data_in, "UNStat SNA_8aug2023/Download-Xpop.xlsx"),
+                         sheet = "Download-XPop", range = "A3:BD663") %>%
+      rename(country = Country) %>%
+      pivot_longer(cols = 5:56, names_to = "year") %>%
+      relocate(Measure, .before = value) %>%
+      select(-c(CountryID))
+    
+      # Check country name changes
+        countrycodechanges <- PopEx
+        countrycodechanges$country <- countrycode::countrycode(countrycodechanges$country, origin = 'country.name', destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+
+      originalnames <- PopEx %>% select(c(country, year)) %>% unique()   
+      fixednames <- countrycodechanges %>% select(c(country, year)) %>% unique()   
+      check1 <- anti_join(originalnames, fixednames)
+      check2 <- anti_join(fixednames, originalnames)
+
+      # Remove historical states, the series of the current state has been backcast
+      PopEx <- PopEx %>% filter(!(country == "Ethiopia (Former)" | country == "Sudan (Former)" | country == "USSR (Former)")) 
+      
+      # Now run the countrycode name fix
+      PopEx$country <- countrycode::countrycode(PopEx$country, origin = 'country.name', destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+    
+    ExchangeRates <- PopEx %>% filter(Measure != "Population") %>% 
+      pivot_wider(names_from = Measure, values_from = value,
+                  values_fill = NA) 
+
+    Population <- PopEx %>% filter(Measure == "Population") %>%
+      select(-c(Currency, Measure)) %>%
+      rename(population = value)
+
+# Combine GDP, population, and exchange rate
+  # Open area info data frame created in Script #1
+      load(file.path(data_in, "Area_info.Rdata")) 
+      
+      # Fix country names
+      joincheck <- anti_join(GDP_Current, Area_info, by = "country") %>% 
+        select(country) %>% unique()
+      print(joincheck$country)
+      
+      # Drop remaining former states
+      GDP_Current <- GDP_Current %>% filter(!(country == "Czechoslovakia (Former)" |
+                                                country == "Yemen Arab Republic (Former)" |
+                                                country == "Yemen Democratic (Former)" |
+                                                country == "Yugoslavia (Former)" |
+                                                country == "Former Netherlands Antilles"))
+      # Now repeat check
+      joincheck <- anti_join(GDP_Current, Area_info, by = "country") %>% 
+        select(country) %>% unique()
+      print(joincheck$country)
+      
+      # Correct names not picked up by countrycode to match Area info country names
+      GDP_Current <- GDP_Current %>%
+        mutate(country = case_when(country == "China, Macao SAR" ~ "China, Macao",
+                                   country == "Micronesia (FS of)" ~ "Micronesia (Federated States of)",
+                                   country == "State of Palestine" ~ "Palestine",
+                                   country == "Zanzibar" ~ "United Republic of Tanzania, Zanzibar",
+                                   TRUE ~ country))
+      
+      Population <- Population %>%
+          mutate(country = case_when(country == "China, Macao SAR" ~ "China, Macao",
+                                     country == "Micronesia (FS of)" ~ "Micronesia (Federated States of)",
+                                     country == "State of Palestine" ~ "Palestine",
+                                     country == "Zanzibar" ~ "United Republic of Tanzania, Zanzibar",
+                                     TRUE ~ country))
+      
+      ExchangeRates <- ExchangeRates %>%
+          mutate(country = case_when(country == "China, Macao SAR" ~ "China, Macao",
+                                     country == "Micronesia (FS of)" ~ "Micronesia (Federated States of)",
+                                     country == "State of Palestine" ~ "Palestine",
+                                     country == "Zanzibar" ~ "United Republic of Tanzania, Zanzibar",
+                                     TRUE ~ country))          
+  # Create a check for the inner join - should return the number of countries in GDP_current minus the 6 former states and Kosovo
+      length(unique(GDP_Current$country)) # 212 minus Kosovo = 211
+      length(unique(Area_info$country)) # 251 - but will drop any not observed in SNA data
+
+  BasicInfo_GDP <- inner_join(GDP_Current, Area_info, by = "country") %>% # keep only countries in both
+    relocate(c("IndicatorName", "year", "value"), .after = territoryof) %>%
+    rename(GDP_breakdown = "IndicatorName")
+      # Check:  
+      ifelse(length(unique(BasicInfo_GDP$country)) == 211, "TRUE", "FALSE") # should be 211
+
+  BasicInfo_GDP <- left_join(BasicInfo_GDP, Population, by = c("country", "year")) %>%
+    mutate(GDP_breakdown = as.factor(GDP_breakdown)) %>%
+    filter(year >= 1995)
+      # Check:  
+      ifelse(length(unique(BasicInfo_GDP$country)) == 211, "TRUE", "FALSE") # should be 211
+      
+  # Merge area info into exchange rates to drop historic states
+      ExchangeRates <- inner_join(ExchangeRates, Area_info, by = "country") # keep only countries in both
+      # Check:  
+      ifelse(length(unique(BasicInfo_GDP$country)) == 211, "TRUE", "FALSE") # should be 211
+
+# Clean up
+    rm(GDP_Current, PopEx, Population, check1, check2, originalnames, fixednames, countrycodechanges)
+
+# Save data frames for use in subsequent scripts
+    save(BasicInfo_GDP, file = file.path(data_in, "BasicInfo_GDP.RData"))
+    save(ExchangeRates, file = file.path(data_in, "ExchangeRates.RData"))
+```
+
+$~$
+
+**Table 1. Variables imported into the 'Basic Information' dataframe**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create table of main aggregates and 2-digit categories with classification to AFS
+    kable(names(BasicInfo_GDP), col.names = "", "html", caption = "Variables imported into the 'Basic Information' dataframe") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+```
+
+$~$
+
+#### Value Added - ISIC Revision 3
+
+Next, we import the value added data using ISIC Revision 3.
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+# Notes: The UNData website limits downloads to the first 100,000 records. Downloading countries in tranches and merging is used here as a workaround in order to get all the records.
+
+# SNA Table 2.1: Value added by industry, current prices, national currency, ISIC Rev 3
+    ValAdd_Rev3_a <- read_csv(file.path(data_in, "UNStat SNA_8aug2023/UNdata_Export_ValAddedInd_A-H_Rev3.csv")) %>%
+      slice(1:99320) # Removes footnotes
+    ValAdd_Rev3_Footnotes <- read_csv(file.path(data_in, "UNStat SNA_8aug2023/UNdata_Export_ValAddedInd_A-H_Rev3.csv")) %>%
+      slice(99322:99567) %>% select(c(1:2)) %>%
+      rename("Footnote code" = "Group Code",
+             "Note" = "Country or Area Code")
+    ValAdd_Rev3_b <- read_csv(file.path(data_in, "UNStat SNA_8aug2023/UNdata_Export_ValAddedInd_I-R_Rev3.csv")) %>%
+      slice(1:85726) 
+    ValAdd_Rev3_c <- read_csv(file.path(data_in, "UNStat SNA_8aug2023/UNdata_Export_ValAddedInd_S-Z_Rev3.csv")) %>%
+      slice(1:53463) 
+    ValAdd_Rev3 <- rbind(ValAdd_Rev3_a, ValAdd_Rev3_b, ValAdd_Rev3_c) %>% 
+      rename(country = "Country or Area", ValueAdded = "Value") %>%
+      filter(Year >= 1995)
+    
+  # Fix country names
+          # Check country name changes
+          countrycodechanges <- ValAdd_Rev3
+          countrycodechanges$country <- countrycode::countrycode(countrycodechanges$country, origin = 'country.name', 
+                                                       destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+      
+            originalnames <- ValAdd_Rev3 %>% select(c(country, Year)) %>% unique()   
+            fixednames <- countrycodechanges %>% select(c(country, Year)) %>% unique()   
+            check1 <- anti_join(originalnames, fixednames)
+            check2 <- anti_join(fixednames, originalnames)
+            # Note current Ethiopia does not extend prior to 1993 and former Sudan series ends at 2010, which can be renamed and continue as the Sudan series (South Sudan also enters in 2011)
+            
+    ValAdd_Rev3$country <- countrycode::countrycode(ValAdd_Rev3$country, origin = 'country.name', 
+                                                 destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+    ValAdd_Rev3 <- ValAdd_Rev3 %>%
+      mutate(country = case_when(country == "China, Macao SAR" ~ "China, Macao",
+                                 country == "China, Hong Kong Special Administrative Region" ~ "China, Hong Kong SAR",
+                                 country == "China, Macao Special Administrative Region" ~ "China, Macao",
+                                 country == "Sint Maarten" ~ "Sint Maarten (Dutch part)",
+                                 country == "Micronesia (FS of)" ~ "Micronesia (Federated States of)",
+                                 country == "State of Palestine" ~ "Palestine",
+                                 country == "Zanzibar" ~ "United Republic of Tanzania, Zanzibar",
+                                 TRUE ~ country))
+  isUnique(ValAdd_Rev3)
+    
+# Clean up
+    rm(ValAdd_Rev3_a, ValAdd_Rev3_b, ValAdd_Rev3_c, check1, check2, originalnames, fixednames, countrycodechanges)
+```
+
+$~$
+
+Countries report data according to different SNA systems and some countries have multiple time series where they report under more than one SNA framework or have otherwise shifted methodology. For example, if there has been a change in currency or a switch from an older SNA to the newer SNA. Each series is back-cast from its generation for at least some years, while the old series is also preserved for at least some years of overlap [@unitednationsstatisticsdivisionMethodologyNationalAccounts2008]. However, not all countries have a complete time series over our period of interest in a single SNA framework. For example, Russia has data through 2013 in SNA1993, and has an overlapping SNA2008 series only for 2011-2013. In this first stage, we allow different SNA systems to complete the time series for a country. However in the following step, we select only a single time series per country, because combining series is not valid, and they are specific to SNA system (in other words there is no time series in Russia that covers the 1995-2010 period of SNA93 and continues into the 2011-2013 period where only SNA2008 is available). Therefore the selection of the SNA system is made by the decision rules for the selection of which series to keep. 
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+# Count records per SNA system
+    unique(ValAdd_Rev3$`SNA System`)
+    ValAdd_Rev3_SNA1993 <- ValAdd_Rev3 %>%
+      filter(`SNA System` == 1993)
+    count1993 <- ValAdd_Rev3_SNA1993 %>% group_by(country) %>% filter(!is.na(ValueAdded)) %>% distinct(country) %>% nrow()
+    ValAdd_Rev3_SNA2008 <- ValAdd_Rev3 %>%
+      filter(`SNA System` == 2008)
+    count2008 <- ValAdd_Rev3_SNA2008 %>% group_by(country) %>% filter(!is.na(ValueAdded)) %>% distinct(country) %>% nrow()
+    ValAdd_Rev3_SNA1968 <- ValAdd_Rev3 %>%
+      filter(`SNA System` == 1968) %>%
+      arrange(country)
+    count1968 <- ValAdd_Rev3_SNA1968 %>% group_by(country) %>% filter(!is.na(ValueAdded)) %>% distinct(country) %>% nrow()
+
+```
+
+$~$
+
+**Table 2. Country list, UN Classification, and International Codes**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Organize into data frame for formatted table
+    data <- data.frame(
+      SNA = c("1968", "1993", "2008"),
+      Unique_Countries = c(count1968, count1993, count2008)
+    )
+    data <- data %>%
+      rename("SNA System" = SNA,
+             "N Countries" = Unique_Countries)
+    
+# Create the table
+    kable(data, caption = "Number of countries recording each SNA System.") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Clean up
+    rm(data, count1968, count1993, count2008)
+
+```
+
+$~$
+
+**Select one data series per country.**
+In order to compile a data set with one time series per country, we established the following decision rules:
+
+-   First select on SNA system and take the most recent system available per country-year, but allowing for different SNAs to be combined over time if the most recent series does not extend all the way back to the beginning of our study period (1995). For example, Russia has SNA1993 from 1995-2013 but SNA2008 only 2011-2013.
+-   Next, within each SNA system identify countries with multiple time series. Determine which has the longest time series and most recent observations.
+-   Keep the time series with the most recent data point even if it has fewer records than the alternate time series.
+
+$~$
+
+**Table 3. Countries/Areas reporting data according to the 2008 System of National Accounts framework**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Create aggregate data frame with most recent SNA available per country
+
+# Conceptual steps:
+    # Start with the countries that have SNA 2008 data
+    # Use anti-join to identify a list of country-years that have SNA1993 data but not SNA2008 data
+    # Join from the SNA1993 data only countries not in the 2008 data
+
+# List countries with data following the SNA 2008
+  ValAdd_Rev3_SNA2008 %>% select(c(country, Year)) %>%
+  unique() %>%
+  kable(., col.names = c("Country", "Year"), "html", caption = "Countries/Areas reporting data according to the 2008 System of National Accounts framework") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+```
+
+$~$
+
+**Table 4. Country-years reporting data according to the 1993 System of National Accounts framework (but not 2008)**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Identify list of countries that exist in the SNA1993 data frame but not in the SNA2008 data frame
+    antijoin <- anti_join(ValAdd_Rev3_SNA1993, ValAdd_Rev3_SNA2008, by = c("country", "Year"))
+    antijoin <- antijoin %>% arrange(country)
+
+# List countries with data following the SNA 1993 (but not 2008)
+    antijoin %>% select(c("country", "Year")) %>% unique() %>%
+                          kable(., col.names = c("Country","Year"), "html", caption = "Countries/Areas reporting data according to the 1993 System of National Accounts framework (but not 2008)") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Append the 1993 country-years to the 2008 data set
+# We call this data set "df_latest" because it includes the series with more recent data. 
+    df_latest <- rbind(ValAdd_Rev3_SNA2008, antijoin)
+
+# Clean up
+    rm(antijoin)
+
+```
+
+$~$
+
+**Table 5. Countries/Areas reporting data according to the 1968 System of National Accounts framework (but not 1993 or 2008)**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Identify list of countries that have not updated from the 1968 SNA framework
+    antijoin <- anti_join(ValAdd_Rev3_SNA1968, df_latest, by = c("country", "Year"))
+
+# List countries with data following the SNA 1993 (but not 2008)
+    antijoin %>% select(c("country", "Year")) %>% unique() %>%
+    kable(., col.names = c("Country", "Year"), "html", caption = "Countries/Areas reporting data according to the 1968 System of National Accounts framework (but not 1993 or 2008)") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Append the 1993 countries to the 2008 data set
+    df_latest <- rbind(df_latest, antijoin)
+    df_latest <- df_latest %>% arrange(country)
+
+# Clean up
+    rm(antijoin, ValAdd_Rev3_SNA1968, ValAdd_Rev3_SNA1993, ValAdd_Rev3_SNA2008, ValAdd_Rev3)
+
+```
+
+$~$
+
+Now we only have one SNA system per country-year, but some countries still have multiple series within the country-year. The next step investigates remaining duplicate series.
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+
+# Identify remaining duplicate time series
+    seriescount <- df_latest %>%
+      group_by(country, Item, Year) %>%
+      summarise(unique_series_count = length(unique(Series))) %>%
+      filter(unique_series_count >1)
+    multseries <- unique(seriescount$country)
+    multseries_list <- list(multseries)
+    multseries_list <- sapply(multseries_list, trimws)
+    listmult <- df_latest %>% filter(country %in% multseries_list) %>%
+      filter(!is.na(ValueAdded)) %>% mutate(Year = as.numeric(Year)) %>%
+      group_by(country, Year) %>%
+      summarise(series = paste(unique(Series)))
+
+# Investigate wide by series
+    listmult_series <- listmult %>% arrange(Year) %>%
+      count(country, Year, series) %>%
+      pivot_wider(names_from = series, values_from = n) %>%
+      arrange(country) %>%
+      as.data.frame()
+    
+# Rename columns so they are not numbers
+    colnames(listmult_series)
+    prefix <- "Series_"  
+    columns_to_rename <- c("10", "20", "30", "100", "200", "1000", "1100", "300",
+                           "400", "50", "60", "40", "500", "600", "150", "350")  
+    new_column_names <- paste0(prefix, columns_to_rename)
+    listmult_series <- listmult_series %>%
+      rename_at(vars(columns_to_rename), ~ new_column_names)
+    colnames(listmult_series)
+      
+# Sum year coverage per series by country
+    listmult_time <- listmult %>% arrange(Year) %>%
+      count(country, Year, series) %>%
+      pivot_wider(names_from = Year, values_from = n) %>%
+      arrange(country, series) %>%
+      as.data.frame()
+    
+# Extract year columns (assuming all numeric columns with year names should be reordered)
+    year_columns <- grep("^\\d{4}$", colnames(listmult_time), value = TRUE)
+
+# Order year columns chronologically
+    year_columns_sorted <- sort(year_columns)
+
+# Reorder data frame columns
+    df_reordered <- listmult_time[c("country", "series", year_columns_sorted)]
+
+# Identify the series per country with the most recent data point
+
+    # Function to find the last non-missing column name
+        get_last_non_missing <- function(row) {
+          last_non_missing <- max(which(!is.na(row)))
+          if (is.na(last_non_missing)) {
+            return(NA)
+          } else {
+            return(names(row)[last_non_missing])
+          }
+        }
+  
+    # Apply the function row-wise
+        df_reordered$latestyear <- apply(df_reordered, 1, get_last_non_missing)
+
+# Identify the series per country with the longest time series  
+    listmult_time2 <- listmult_time %>% mutate(SUM_coverage = rowSums((listmult_time[,3:29]), na.rm = TRUE)) %>%
+      select(-c(3:29)) %>% group_by(country) %>%
+      pivot_wider(names_from = series, values_from = SUM_coverage)
+    listmult_time2 <- listmult_time2 %>% rowwise() %>%
+      mutate(maxtimecoverage = colnames(listmult_time2[,2:17])[which.max(c_across(1:16))]) %>%
+      select(-c(2:17))
+    coverage <- df_reordered %>% select(-c(3:29)) %>%
+      left_join(listmult_time2, by = c("country")) %>%
+      group_by(country) %>%
+      mutate(countrylatestyear = max(latestyear))
+
+# Identify any countries where the longest time series does not also have the most recent data point
+    coverage <- coverage %>%
+      mutate(match = case_when(series == maxtimecoverage & latestyear == countrylatestyear ~ 1,
+                               TRUE ~ 0)) %>%
+      group_by(country) %>% mutate(matchcheck = sum(match)) %>%
+      filter((match == 1 & matchcheck == 1) | (match == 0 & matchcheck == 0))
+    clearchoiceseries <- coverage %>% filter(match ==1) %>% select(1:2)
+    manualchooseseries <- coverage %>% filter(match ==0) %>% select(-c(contains("match", ignore.case = TRUE))) %>% arrange(country)
+
+    unique(manualchooseseries$country) # 25 countries have time longer but older time series
+      
+```
+
+$~$
+
+**Table 6. Countries where the most recent data point does not have the longest time series**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create table 
+    kable(manualchooseseries, caption = "Countries where the most recent data point does not have the longest time series", col.names = c("Country", "Series Name", "Latest year available (per series)", "Series with longest time coverage", "Latest year of data for the country")) %>%
+            kable_classic(full_width = T, html_font = "Cambria")
+
+```
+
+$~$
+
+In the case where the most recent data point is from a shorter time series, we keep the series with the most recent data. Note that this means that these 25 countries have more data available, but that cannot be aggregated into a valid time series. 
+
+Where there are breaks in the global dataset, the countries with multiple series are the likeliest culprits. A data frame of these countries is saved in the next chunk so that they can be investigated in analyses. A flag will be added to these countries in the final data aggregation (Script 5) noting these limitations.
+
+$~$
+
+**Table 7. Series selected for analysis for countries with multiple time series**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Select final series per country
+    manualchooseseries <- manualchooseseries %>% filter(latestyear == countrylatestyear) %>%
+          select(c(1:2))
+    seriestokeep <- rbind(clearchoiceseries, manualchooseseries) %>% arrange(country)
+    
+    multseries_latest3 <- manualchooseseries %>% select(c("country")) %>% unique() %>% as.data.frame()
+    multseries_longestlatest3 <- clearchoiceseries %>% select(c("country")) %>% unique() %>% as.data.frame()
+    # Save data frames for use in other scripts
+        save(multseries_latest3, file = file.path(data_in, "multseries_latest3.Rdata"))
+        save(multseries_longestlatest3, file = file.path(data_in, "multseries_longestlatest3.Rdata"))
+
+# Create table
+    kable(seriestokeep, caption = "Series selected for analysis for countries with multiple time series")  %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Clean up
+    rm(seriescount, multseries, multseries_list, listmult, listmult_series, prefix, columns_to_rename, new_column_names, listmult_series, listmult_time, year_columns, year_columns_sorted, df_reordered, listmult_time2, coverage, clearchoiceseries, manualchooseseries)
+
+```
+
+$~$
+
+Finalize data with one series per country. Having determined the series that is the best option for each country (either longest time series or most recent data), we proceed by dropping the other series so that there is only one series per country and therefore the records are unique at the country-ISIC code-year level.
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+
+# Filter out the series that will not be used
+    df_latest <- df_latest %>% left_join(y = seriestokeep, by = "country") %>%
+      mutate(series = as.numeric(series)) %>%
+      # Fill in the series variable for countries with only one series so that they are not dropped in the next step
+      mutate(series = case_when(is.na(series) ~ Series,
+             TRUE ~ series)) %>%
+      # Now filter for the series, so that the countries with multiple series will drop the series that was not selected above
+      filter(Series == series) %>%
+      # Now remove unneeded columns that have no variation or are metadata
+      select(-c(1,2,4,5, 10, 13, 15, 16)) 
+```
+
+$~$
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Investigate for any remaining duplication
+    duplicates <- df_latest %>%
+      filter(duplicated(df_latest[c("country", "Year", "Item", "Item Code")]) | duplicated(df_latest[c("country", "Year", "Item", "Item Code")], fromLast = TRUE))
+    # head(duplicates) # uncomment to view
+    # No duplicates remain
+
+# Duplicate rows with different item codes
+    duplicates <- df_latest %>%
+      filter(duplicated(df_latest[c("country", "Year", "Item")]) | duplicated(df_latest[c("country", "Year", "Item")], fromLast = TRUE))
+    head(duplicates)
+    
+# Duplicate entry for Japan's Series 200, Item "Plus statistical discrepancy", from 1970-1989 
+    df_latest %>% filter(country == "Japan") %>% view()
+
+# All other countries have one entry per year with Item Code 17 *OR* 18, but Japan has a line for each item code in 1970-1989
+    # Decision: Aggregate
+    Japan <- df_latest %>% filter(country == "Japan")
+    Japan_2 <- Japan %>% filter((Item == "Plus: Statistical discrepancy" & Year <= 1989 & Year >= 1970)) %>% 
+      group_by(Year) %>%
+      summarise(ValueAdded = sum(ValueAdded))
+    Japan_2["Item Code"] <- c(17)
+
+    # Remove Item Code 18 and replace Value Added for Item Code 17 with NA (to be replaced by the summarized value)
+    Japan <- Japan %>% mutate(ValueAdded = case_when(`Item Code` == 17 & Year < 1990 & Year >=1970 ~ NA,
+                              TRUE ~ ValueAdded)) 
+    Japan <- Japan %>% filter(!(Year >= 1970 & Year <= 1989 & `Item Code` == 18))
+    Japan <- Japan %>% left_join(Japan_2, by = c("Year", "Item Code")) %>%
+      mutate(ValueAdded.x = coalesce(ValueAdded.x, ValueAdded.y)) %>%
+      select(-ValueAdded.y) %>%
+      rename(ValueAdded = ValueAdded.x)
+    
+# Now merge back into main dataset
+    # First remove all Japan rows from dataset
+        df_latest <- df_latest %>% filter(country != "Japan") # remove all Japan records from dataset to re-add after aggregating statistical discrepancy
+    # Now add back the corrected Japan data
+        df_latest <- rbind(df_latest, Japan)
+        
+  isUnique(df_latest)
+
+# Clean up  
+    rm(duplicates, seriestokeep, Japan, Japan_2)
+
+```
+
+$~$
+
+**Note the limitations.**
+Finally, we have a data set with one time series per country, however, there are two inconsistencies across countries that are limitations to the data:
+
+1.  The duration of time series available differs by country.
+2.  The SNA available differs by country (SNA 1993 is most common, as shown above).
+
+**Table 8. Countries, Number of years with data, and SNA System in final data set**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Document the SNA system per country and number of years of coverage in the resulting data set
+   df_latest %>% group_by(country, Year) %>%  filter(row_number()==1) %>% ungroup() %>%
+      group_by(country) %>% aggregate(Year ~ country, FUN = length) %>%
+      left_join(select(df_latest, country, "SNA System"), by = "country") %>% 
+      group_by(country) %>% filter(row_number()==1) %>% arrange(country) %>%
+      kable(., col.names = c("Country/Area", "N Years", "SNA System"), "html", caption = "Countries, Number of years with data, and SNA System in final dataset") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+```
+
+$~$
+
+**Next, we fix Main Aggregates names.**
+Names need to be fixed where there are spelling errors to align the data into the correct groups by economic activity. Note that in addition to the Main Aggregates (A, B, C, D, etc), there are aggregate groupings that sum up multiple Main Aggregate categories for A+B, G+H, J+K, M+N+O. Some countries report the aggregate and its components, other report only the aggregate. We address this issue below in line with the defined harmonization actions to create Revision 3 series that can be combined with the ISIC 4 series.
+
+**Table 9. Main Aggregate categories after cleaning Item name discrepancies, ISIC Rev 3**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+# Fix industry names that should match but do not because of missing digit
+      df_latest <- df_latest %>%
+        mutate(Item = case_when(Item == "19_Agriculture, hunting and related service activities_1" ~ "19_Agriculture, hunting and related service activities_01",
+                                Item == "20_Forestry, logging and related service activities_2"  ~ "20_Forestry, logging and related service activities_02",
+                                TRUE ~ Item)) %>%
+        mutate(Item = as.factor(Item))
+    
+# Create table
+    kable(levels(df_latest$Item), col.names = "", caption = "Main Aggregate categories after cleaning Item name discrepancies, ISIC Rev 3")  %>% kable_classic(full_width = T, html_font = "Cambria")
+
+```
+
+$~$
+
+**Add the country geographic information and fix country names.**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Add the country geographic information
+    # Check join
+        join_check <- anti_join(x = df_latest, y = Area_info, by = c("country"))
+        join_check %>% group_by(country) %>%
+          summarise()
+        # Kosovo, Netherlands Antilles, and Serbia and Montenegro (historical) have no area info
+        
+# Join on country name (and we create a new data frame called "df_latest_winfo" that includes the country identifier and classifier information)
+    isUnique(df_latest)
+    df_latest_winfo <- left_join(x = df_latest, y = Area_info, by = c("country")) %>%
+      relocate(c("Year", "Currency", "ValueAdded"), .after = territoryof) %>% 
+      select(-c(9,11,13)) # Remove territory codes, keep only factor columns with names
+    names(df_latest_winfo)
+    isUnique(df_latest_winfo)
+    
+    dups <- df_latest_winfo[duplicated(df_latest_winfo),]
+    # Sudan
+    df_latest_winfo <- df_latest_winfo %>% unique() # Removes duplicate observations introduced by the joining of area info
+    
+    # Drop the historic states and Kosovo
+   df_latest_winfo %>% filter(is.na(UNmemberstate)) %>% 
+     distinct(country)
+   df_latest_winfo <- df_latest_winfo %>% filter(!(is.na(UNmemberstate)))
+
+# Confirm there are no remaining duplicates
+    duplicates_check <- df_latest_winfo %>% group_by(country, `SNA System`, m49_code, ISO, UNmemberstate,
+                                                       UN_continental_region, UN_subregion, UN_intermediary_region, territoryof, Year,
+                                                       Currency, Item) %>%
+      summarise(n = n(), .groups = "drop") %>% filter(n > 1L)
+
+# Clean up
+    rm(join_check, df_latest)
+```
+
+$~$
+
+**Document the years of data available for each country in the SNA Main Aggregates.**
+
+**Table 10. Years of National Accounts data available per country, ISIC Revision 3**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Filter and reshape data for table  
+    df_latest_winfo %>%
+            group_by(country) %>%
+            filter(Year %in% 1995:2021) %>%
+            mutate(minyear = min(Year),
+                   maxyear = max(Year)) %>%
+            select(c(country, minyear, maxyear)) %>%
+      unique() %>%
+      arrange(country) %>%
+      kable(caption = "Years of National Accounts data available per country, ISIC Revision 3",
+            col.names = c("Country", "From", "To")) %>% 
+    kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+**Now, we build the aggregate for agrifood systems.**
+
+**Table 11. Crosswalk and harmonization actions to combine ISIC Rev 3 and Rev 4 AFS codes for AFS classification**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# First, we revisit the table of harmonization actions.
+    load(file = file.path(data_in, "ISIC3_ISIC4.RData"))
+
+# Create table
+    kable(ISIC3_ISIC4, "html", caption = "Crosswalk and harmonization actions to combine ISIC Rev 3 and Rev 4 AFS codes for AFS classification") %>% 
+      kable_classic(full_width = F, html_font = "Cambria") 
+
+```
+
+$~$
+
+**Next list all the combinations of the Item Code, SNA93 Item Code, and Item variables.**
+
+**Table 12. Combinations of Item code, SNA93 Item Codes and their descriptions - for investigation**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create table
+      kable(df_latest_winfo %>%
+        distinct(`Item Code`, `SNA93 Item Code`, `Item`), 
+        caption = "Combinations of Item code, SNA93 Item Codes and their descriptions") %>% 
+  kable_classic(full_width = T, html_font = "Cambria")
+```
+
+**Correct Item codes where there are discrepancies (e.g., 1 and 01 representing the same thing are shown separately).**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Correct item codes in data frame
+    df_latest_winfo <- df_latest_winfo %>% 
+      mutate(`SNA93 Item Code` = case_when(`Item Code` == 19 & `SNA93 Item Code` == "1" ~ "01",
+                                           `Item Code` == 20 & `SNA93 Item Code` == "2" ~ "02",
+                                           TRUE ~ `SNA93 Item Code`)) %>%
+      mutate(ISIC_order = case_when(`SNA93 Item Code` == "A+B" ~ 1,
+                                    `SNA93 Item Code` == "A" ~ 2,
+                                    `SNA93 Item Code` == "01" ~ 3,
+                                    `SNA93 Item Code` == "02" ~ 4,
+                                    `SNA93 Item Code` == "B" ~ 5,
+                                    `SNA93 Item Code` == "C" ~ 6,
+                                    `SNA93 Item Code` == "D" ~ 7,
+                                    `SNA93 Item Code` == "E" ~ 8,
+                                    `SNA93 Item Code` == "F" ~ 9,
+                                    `SNA93 Item Code` == "G+H" ~ 10,
+                                    `SNA93 Item Code` == "G" ~ 11,
+                                    `SNA93 Item Code` == "H" ~ 12,
+                                    `SNA93 Item Code` == "I" ~ 13,
+                                    `SNA93 Item Code` == "60-63" ~ 14,
+                                    `SNA93 Item Code` == "64" ~ 15,
+                                    `SNA93 Item Code` == "J+K" ~ 16,
+                                    `SNA93 Item Code` == "J" ~ 17,
+                                    `SNA93 Item Code` == "K" ~ 18,
+                                    `SNA93 Item Code` == "L" ~ 19,
+                                    `SNA93 Item Code` == "M+N+O" ~ 20,
+                                    `SNA93 Item Code` == "M" ~ 21,
+                                    `SNA93 Item Code` == "N" ~ 22,
+                                    `SNA93 Item Code` == "O" ~ 23,
+                                    `SNA93 Item Code` == "P" ~ 24,
+                                    `SNA93 Item Code` == "P.119" & `Item Code`== 13 ~ 25,
+                                    `SNA93 Item Code` == "P.119" & `Item Code`== 33 ~ 26,
+                                    `SNA93 Item Code` == "B.1g" ~ 27,
+                                    `SNA93 Item Code` == "D.21-D.31" ~ 28,
+                                    `SNA93 Item Code` == "D.21" ~ 29,
+                                    `SNA93 Item Code` == "D.31" ~ 30,
+                                    `SNA93 Item Code` == NA ~ 21,
+                                    `SNA93 Item Code` == "B.1*g" ~ 32
+             ))
+    # Sort
+        df_latest_winfo <- df_latest_winfo %>%
+          arrange("country", "Year", "ISIC_order")
+```
+
+$~$
+
+**Table 13. Combinations of Item code, SNA93 Item Codes and their descriptions - Cleaned**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Print cleaned table
+    codes <- df_latest_winfo %>%
+            distinct(`Item Code`, `SNA93 Item Code`, `Item`, ISIC_order) %>%
+      arrange(ISIC_order)
+    
+      kable(codes[,1:3], 
+            caption = "Combinations of Item code, SNA93 Item Codes and their descriptions") %>% 
+      kable_classic(full_width = T, html_font = "Cambria")
+    
+```
+
+$~$
+
+**Next, we merge the SNA coding with the ISIC classification to AFS.**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Open ISIC Rev 3 data frame created in Script #1
+    load(file.path(data_in, "ISICRev3.Rdata"))
+
+# Merge with codes
+    codes <- codes %>% rename(Code = `SNA93 Item Code`) %>%
+      left_join(., ISICRev3, by = "Code")
+
+# Code the combined main aggregates for the Is_AFS variable
+    codes <- codes %>%
+      mutate(Is_AFS = case_when(Code == "A+B" ~ 1,
+                                Code == "01" ~ 1,
+                                Code == "02" ~ 1,
+                                Code == "G+H" ~ 2,
+                                Code == "60-63" ~ 2,
+                                Code == "64" ~ 2,
+                                Code == "J+K" ~ 2,
+                                Code == "M+N+O" ~ 2,
+                                is.na(Is_AFS) ~ 0,
+                                TRUE ~ Is_AFS))
+```
+
+$~$
+
+Now we address the presence of the combined categories. In most cases we want to drop these in favor of their component categories (and keeping both would be double counting), with two exceptions. First, from here forward we only use the combined agriculture and fisheries code ("A+B") because these main aggregates are combined into one under ISIC Rev 4. And second, we keep any combined categories if the country did not also report its components for that year so that we are not giving up data. 
+
+**First, we make sure every country has a combined record A+B for agriculture, forestry and fishing. And then we drop the disaggregate categories within this.**
+```{r, echo = TRUE, messages = FALSE, warning = FALSE, results = "hide"}
+# Check the summation
+    sum_agfish <- df_latest_winfo %>%
+      filter(`SNA93 Item Code` %in% c("A", "01", "02", "B", "A+B")) %>%
+      select(country, Year, `SNA93 Item Code`, `SNA System`, ValueAdded) %>%
+      pivot_wider(names_from = `SNA93 Item Code`, values_from = ValueAdded) %>%
+      filter(is.na("A+B")) 
+      # View(sum_agfish) 
+
+# No missing so we can drop all the "A", "01", "02" and "B" records
+
+  df_latest_winfo <- df_latest_winfo %>% 
+    filter(!(`SNA93 Item Code` %in% c("A", "01", "02", "B")))
+```
+
+$~$
+
+**Now we address the combined categories where we would prefer to use the component category data instead of the combined record, so that we drop the combined codes for only for the countries with component item values as well.**
+```{r, echo = TRUE, messages = FALSE, warning = FALSE, results = "hide"}
+# Check the combined categories
+    datacheck <- df_latest_winfo %>%
+      filter(`SNA93 Item Code` %in% c("G", "H", "G+H", "I", "60-63", "64", "J", "K", "J+K", "M+N+O", "M", "N", "O")) %>%
+      select(country, Year, `SNA93 Item Code`, `SNA System`, ValueAdded) %>% unique() 
+    datacheck <- datacheck %>% pivot_wider(names_from = `SNA93 Item Code`, values_from = ValueAdded) %>%
+      # replace NA with 0 so that the function will "see" the cell
+          mutate_at(c(4:16), ~replace(., is.na(.), 0))
+    
+# Confirm the variables
+    names(datacheck)
+    
+# Create the test
+    keep_combo_aggregates_Rev3 <- datacheck %>%
+      rowwise() %>% 
+      mutate(Check_GH = sum(G, H, na.rm = TRUE),
+             Check_I = sum(`60-63`,`64`, na.rm = TRUE),
+             Check_JK = sum(J, K, na.rm = TRUE),
+             Check_MNO = sum(M,N,O, na.rm = TRUE)) %>%
+      mutate(testGH = case_when(round(`G+H`, digits = 0) == round(Check_GH, digits = 0) ~ 1,
+                                TRUE ~ 0),
+             testI = case_when(round(`I`, digits = 0) == round(Check_I, digits = 0) ~ 1,
+                                TRUE ~ 0),
+             testJK = case_when(round(`J+K`, digits = 0) == round(Check_JK, digits = 0) ~ 1,
+                                TRUE ~ 0),
+             testMNO = case_when(round(`M+N+O`, digits = 0) == round(Check_MNO, digits = 0) ~ 1,
+                                TRUE ~ 0)) %>%
+      select(c(1,2,21:24))
+
+# Clean up
+    rm(datacheck)
+
+```
+
+$~$
+
+**Now extract the AFS categories into their own data frame, following the harmonization rules established above.**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Merge the data series with codes
+    AgriFood_Rev3 <-  left_join(df_latest_winfo, codes, by = c("ISIC_order", "Item Code")) %>%
+      select(-c(18,19,22:26,28:31)) %>%
+      rename(ISIC_Item = Item.y) %>% arrange(country, Year, ISIC_order)
+    
+    isUnique(AgriFood_Rev3)
+
+# Mark the aggregate categories as wholly, partly or not AFS
+# This assignment reflects the classification in the "Classification and metadata" spreadsheet assignment to AFS
+    AgriFood_Rev3 <- AgriFood_Rev3 %>%
+      mutate(Is_AFS = case_when(`SNA93 Item Code` == "A+B" ~ 1,
+                                `SNA93 Item Code` == "G+H" ~ 2,
+                                `SNA93 Item Code` == "60-63" ~ 2,
+                                `SNA93 Item Code` == "64" ~ 0,
+                                `SNA93 Item Code` == "J+K" ~ 2,
+                                `SNA93 Item Code` == "M+N+O" ~ 2,
+                                TRUE ~ Is_AFS))
+
+# Drop all the observations that are not AFS, except GDP
+    AgriFood_Rev3 <- AgriFood_Rev3 %>% filter(Is_AFS == 1 | Is_AFS == 2 | Item == "Equals: GROSS DOMESTIC PRODUCT")
+
+# Drop all the observations that are not AFS, except GDP
+    AgriFood_Rev3 <- AgriFood_Rev3 %>% 
+      filter(!(`SNA93 Item Code`== "A" | `SNA93 Item Code`== "01" | `SNA93 Item Code`== "02" | `SNA93 Item Code`== "B"))
+
+# Now, we will drop the combined categories unless the country does not report the uncombined items separately (e.g., Afghanistan for ag and fisheries reports only A+B but not A and B separately). We also keep only the transport code ("60-63") instead of Main Aggregate I unless the country does not report the disaggregated "60-63" and "64" codes for transportation and communications (respectively) separately.
+  
+# Merge in the data frame with the filter variables to identify when these aggregates should be kept
+    AgriFood_Rev3 <- left_join(AgriFood_Rev3, keep_combo_aggregates_Rev3, by = c("country", "Year"))
+    AgriFood_Rev3 <- AgriFood_Rev3 %>%
+      filter(!(testGH == 1 & `SNA93 Item Code` == "G+H")) %>% # keeps aggregate category only if the test for equivalence found the components did not sum to the combined amount (test variable == 0 when they are not equal, so here we do not want to exclude the combo records when the test == 1 indicating they ARE equal)
+      filter(!(testI == 1 & `SNA93 Item Code` == "I")) %>% 
+      filter(!(testI == 1 & `SNA93 Item Code` == "64")) %>%
+      filter(!(testJK == 1 & `SNA93 Item Code` == "J+K")) %>%
+      filter(!(testMNO == 1 & `SNA93 Item Code` == "M+N+O")) 
+    
+# Now remove any subordinate categories that are present where the aggregate has been retained
+    gh <- c("G", "H")
+    i64 <- c("I", "64")
+    jk <- c("J", "K")
+    mno <- c("M", "N", "O")
+
+    AgriFood_Rev3 <- AgriFood_Rev3 %>%
+      filter(!(testGH == 0 & (`SNA93 Item Code` %in% gh))) %>% # drops the individual categories if they are present where the aggregate category does not equal the subordinate categories and so the aggregate has been retained)
+      filter(!(testI == 0 & (`SNA93 Item Code` %in% i64))) %>% 
+      filter(!(testJK == 0 & (`SNA93 Item Code` %in% jk))) %>%
+      filter(!(testMNO == 0 & (`SNA93 Item Code` %in% mno))) %>%
+      select(-c(21:24))
+    
+# Drop the Other community, social and personal service activities main aggregate for lack of a fraction to disaggregate an AFS share. The only AFS activities under this main aggregate are washing and dry cleaning of furs and textiles.
+    AgriFood_Rev3 <- AgriFood_Rev3 %>% filter(Item != "Other community, social and personal service activities")
+
+# Reorganize the columns
+    AgriFood_sum_Rev3 <- AgriFood_Rev3 %>%
+        relocate(c(6:13), .after = "Justification") %>% 
+        relocate(c(9), .after = "Justification") %>%
+        select(-c(2,11,16:19)) %>%
+        relocate("ISIC_Item", .after = "Item") %>%
+        rename("SNA_Item" = "Item") %>%
+        relocate("Year", .before = "Currency") %>%
+        arrange(country)
+  
+  isUnique(AgriFood_sum_Rev3)
+
+# Save data frame for use in other scripts
+    save(AgriFood_sum_Rev3, file = file.path(data_in, "AgriFood_sum_Rev3.Rdata"))
+```
+
+$~$
+
+**Table 14. Final SNA Data set (input to disaggregation process), local currency - ISIC Rev 3**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create a table to show the data set
+    landscape(kable(head(AgriFood_sum_Rev3, 12),
+          caption = "Final SNA Dataset (input to disaggregation process), local currency") %>% 
+      kable_classic(full_width = T, html_font = "Cambria")) %>%
+      column_spec(1:9,width = ".75 in") %>%
+      column_spec(10,width = "3 in") %>%
+      column_spec(11:13,width = ".75 in")
+```
+
+$~$
+
+#### Value Added - ISIC Revision 4
+
+**Next, we import the value added data using ISIC Revision 4, which is only available for 33 countries.**
+```{r, warning = FALSE, echo = TRUE, include = FALSE, results = "hide"}
+# Import SNA Table 2.4: Value added by industry, current prices, national currency, ISIC Rev 4
+    ValAdd_Rev4a <- read_csv(file.path(data_in, "UNStat SNA_8aug2023/UNdata_Export_ValAddedInd_Rev4_A-Sp.csv")) %>%
+      slice(1:100001)   # Removes footnotes
+    ValAdd_Rev4_Footnotes <- read_csv(file.path(data_in, "UNStat SNA_8aug2023/UNdata_Export_ValAddedInd_Rev4_A-Sp.csv")) %>%
+      slice(100004:100087) %>% select(c(1:2)) %>%
+      rename("Footnote code" = "Group Code",
+             "Note" = "Country or Area Code")
+    ValAdd_Rev4b <- read_csv(file.path(data_in, "UNStat SNA_8aug2023/UNdata_Export_ValAddedInd_Rev4_Sr-Z.csv")) %>%
+      slice(1:15670) # Removes footnotes
+    
+    ValAdd_Rev4 <- rbind(ValAdd_Rev4a, ValAdd_Rev4b) %>% 
+      rename(country = "Country or Area", ValueAdded = "Value") %>%
+      filter(Year >= 1995)
+  
+  # Fix country names
+    # Check country name changes
+    countrycodechanges <- ValAdd_Rev4
+    countrycodechanges$country <- countrycode::countrycode(countrycodechanges$country, origin = 'country.name', destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+
+      originalnames <- ValAdd_Rev4 %>% select(c(country, Year)) %>% unique()   
+      fixednames <- countrycodechanges %>% select(c(country, Year)) %>% unique()   
+      check1 <- anti_join(originalnames, fixednames)
+      check2 <- anti_join(fixednames, originalnames)
+      # Confirm no errors introduced (manual inspection)
+    
+    ValAdd_Rev4$country <- countrycode::countrycode(ValAdd_Rev4$country, origin = 'country.name', 
+                                                 destination = 'un.name.en', warn = TRUE, nomatch = NULL)
+    ValAdd_Rev4 <- ValAdd_Rev4 %>%
+      mutate(country = case_when(country == "China, Macao SAR" ~ "China, Macao",
+                                 country == "China, Hong Kong Special Administrative Region" ~ "China, Hong Kong SAR",
+                                 country == "China, Macao Special Administrative Region" ~ "China, Macao",
+                                 country == "Sint Maarten" ~ "Sint Maarten (Dutch part)",
+                                 country == "Micronesia (FS of)" ~ "Micronesia (Federated States of)",
+                                 country == "State of Palestine" ~ "Palestine",
+                                 country == "Zanzibar" ~ "United Republic of Tanzania, Zanzibar",
+                                 TRUE ~ country))
+
+# Clean up
+    rm(ValAdd_Rev4a, ValAdd_Rev4b, check1, check2, originalnames, fixednames, countrycodechanges)
+```
+
+$~$
+
+Countries report data according to different SNA systems and some countries have multiple time series where they report under more than one SNA framework or have otherwise shifted methodology. For example, if there has been a change in currency or a switch from an older SNA to the newer SNA. Each series is back-cast from its generation to complete the historical series, while the old series is also preserved for at least some years of overlap [@unitednationsstatisticsdivisionMethodologyNationalAccounts2008].
+
+**Count records per SNA system.**
+```{r, warning = FALSE, echo = TRUE, include = FALSE, results = "hide"}
+# Count records per SNA system
+    unique(ValAdd_Rev4$`SNA System`)
+    ValAdd_Rev4_SNA1993 <- ValAdd_Rev4 %>%
+      filter(`SNA System` == 1993)
+    count1993 <- ValAdd_Rev4_SNA1993 %>% group_by(country) %>% filter(!is.na(ValueAdded)) %>% distinct(country) %>% nrow()
+    ValAdd_Rev4_SNA2008 <- ValAdd_Rev4 %>%
+      filter(`SNA System` == 2008)
+    count2008 <- ValAdd_Rev4_SNA2008 %>% group_by(country) %>% filter(!is.na(ValueAdded)) %>% distinct(country) %>% nrow()
+
+```
+
+$~$
+
+**Table 15. Number of countries recording each SNA System - ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Organize into data frame for formatted table
+    data <- data.frame(
+      SNA = c("1993", "2008"),
+      Unique_Countries = c(count1993, count2008)
+    )
+    data <- data %>%
+      rename("SNA System" = SNA,
+             "N Countries" = Unique_Countries)
+
+# Create the table
+    kable(data, caption = "Number of countries recording each SNA System - ISIC Rev 4.") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Clean up
+    rm(data, count1993, count2008)
+
+```
+
+$~$
+
+In order to compile a data set with one time series per country, we established the following decision rules:
+
+-   First select on SNA system and take the most recent system available per country-year, but allowing for different SNAs to be combined over time if the most recent series does not extend all the way back to the beginning of our study period (1995). For example, Russia has SNA1993 from 1995-2013 but SNA2008 only 2011-2013.
+-   Next, within a single SNA system identify countries with multiple time series. Determine which has the longest time series and most recent observations.
+-   Keep the time series with the most recent data point even if it has fewer records than the alternate time series.
+
+**Table 16. Countries/Areas reporting data according to the 2008 System of National Accounts framework - ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create aggregate data frame with most recent SNA available per country
+
+# Conceptual steps:
+    # Start with the countries that have SNA 2008 data
+    # Use anti-join to identify a list of countries that have SNA1993 data but not SNA2008 data
+    # Join from the SNA1993 data only countries not in the 2008 data
+
+# List countries with data following the SNA 2008
+  ValAdd_Rev4_SNA2008 %>% select(c(country, Year)) %>% unique() %>%
+  kable(., col.names = c("Country", "Year"), "html", caption = "Countries/Areas reporting data according to the 2008 System of National Accounts framework") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+```
+
+$~$
+
+**Identify list of countries that exist in the SNA1993 data frame but not in the SNA2008 data frame.**
+
+**Table 17. Countries/Areas reporting data according to the 1993 System of National Accounts framework (but not 2008) - ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Identify list of countries that exist in the SNA1993 data frame but not in the SNA2008 data frame
+    antijoin <- anti_join(ValAdd_Rev4_SNA1993, ValAdd_Rev4_SNA2008, by = c("country", "Year"))
+    antijoin <- antijoin %>% arrange(country)
+
+# List countries with data following the SNA 1993 (but not 2008)
+    antijoin %>% select(c("country", "Year")) %>% unique() %>%
+      kable(., col.names = c("Country", "Year"), "html", caption = "Country-years reporting data according to the 1993 System of National Accounts framework (but not 2008)") %>%
+      kable_classic(full_width = T, html_font = "Cambria")
+
+# Append the 1993 countries to the 2008 data set
+# We call this data set "df_latest" because it includes the series with more recent data. 
+    df_latest <- rbind(ValAdd_Rev4_SNA2008, antijoin)
+    isUnique(df_latest)
+
+# Clean up
+    rm(antijoin, ValAdd_Rev4_SNA2008, ValAdd_Rev4_SNA1993, ValAdd_Rev4) 
+```
+
+$~$
+
+Now we only have one SNA system per country-year, but some countries still have multiple series within the country-year. The next step investigates remaining duplicate series.
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Identify remaining duplicate time series
+    seriescount <- df_latest %>%
+      group_by(country, Item, Year) %>%
+      summarise(unique_series_count = length(unique(Series)))
+    seriescount <- seriescount %>%
+      filter(unique_series_count >1)
+    multseries <- unique(seriescount$country)
+    multseries_list <- list(multseries)
+    multseries_list <- sapply(multseries_list, trimws)
+    listmult <- df_latest %>% filter(country %in% multseries_list) %>%
+      filter(!is.na(ValueAdded)) %>% mutate(Year = as.numeric(Year)) %>%
+      group_by(country, Year) %>%
+      summarise(series = paste(unique(Series)))
+
+# Investigate wide by series
+    listmult_series <- listmult %>% arrange(Year) %>%
+      count(country, Year, series) %>%
+      pivot_wider(names_from = series, values_from = n) %>%
+      arrange(country) %>%
+      as.data.frame()
+    
+# Rename columns so they are not numbers
+    colnames(listmult_series)
+    prefix <- "Series_"  
+    columns_to_rename <- c("100", "200", "1000", "1100", "300", "1200", "250")  
+    new_column_names <- paste0(prefix, columns_to_rename)
+    listmult_series <- listmult_series %>%
+      rename_at(vars(columns_to_rename), ~ new_column_names)
+    colnames(listmult_series)
+      
+# Sum year coverage per series by country
+    listmult_time <- listmult %>% arrange(Year) %>%
+      count(country, Year, series) %>%
+      pivot_wider(names_from = Year, values_from = n) %>%
+      arrange(country, series) %>%
+      as.data.frame()
+    
+# Extract year columns (assuming all numeric columns with year names should be reordered)
+    year_columns <- grep("^\\d{4}$", colnames(listmult_time), value = TRUE)
+    
+# Order year columns chronologically
+    year_columns_sorted <- sort(year_columns)
+
+# Reorder dataframe columns
+    df_reordered <- listmult_time[c("country", "series", year_columns_sorted)]
+
+# Identify the series per country with the most recent data point
+
+    # Function to find the last non-missing column name
+      get_last_non_missing <- function(row) {
+        last_non_missing <- max(which(!is.na(row)))
+        if (is.na(last_non_missing)) {
+          return(NA)
+        } else {
+          return(names(row)[last_non_missing])
+        }
+      }
+
+    # Apply the function row-wise
+        df_reordered$latestyear <- apply(df_reordered, 1, get_last_non_missing)
+
+# Identify the series per country with the longest time series  
+    listmult_time2 <- listmult_time %>% mutate(SUM_coverage = rowSums((listmult_time[,3:30]), na.rm = TRUE)) %>%
+      select(-c(3:30)) %>% group_by(country) %>%
+      pivot_wider(names_from = series, values_from = SUM_coverage)
+    listmult_time2 <- listmult_time2 %>% rowwise() %>%
+      mutate(maxtimecoverage = colnames(listmult_time2[,2:8])[which.max(c_across(1:7))]) %>%
+      select(-c(2:8))
+    coverage <- df_reordered %>% select(-c(3:30)) %>%
+      left_join(listmult_time2, by = c("country")) %>%
+      group_by(country) %>%
+      mutate(countrylatestyear = max(latestyear))
+
+# Identify any countries where the longest time series does not also have the most recent data point
+    coverage <- coverage %>%
+      mutate(match = case_when(series == maxtimecoverage & latestyear == countrylatestyear ~ 1,
+                               TRUE ~ 0)) %>%
+      group_by(country) %>% mutate(matchcheck = sum(match)) %>%
+      filter((match == 1 & matchcheck == 1) | (match == 0 & matchcheck == 0))
+    clearchoiceseries <- coverage %>% filter(match ==1) %>% select(1:2)
+    manualchooseseries <- coverage %>% filter(match ==0) %>% select(-c(contains("match", ignore.case = TRUE))) %>% arrange(country)
+
+# Show the countries that have longer time series that do not have the most recent data point
+    unique(manualchooseseries$country) 
+```
+
+$~$
+
+**Table 18. Countries/Areas reporting data according to the 1993 System of National Accounts framework (but not 2008) - ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create table
+    kable(manualchooseseries, caption = "Countries where the most recent data point does not have the longest time series", col.names = c("Country", "Series Name", "Latest year available (per series)", "Series with longest time coverage", "Latest year of data for the country")) %>% kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+In the case where the most recent data point is from a shorter time series, we keep the series with the most recent data. Note that this means that these 6 countries/areas have more data available, but that cannot be aggregated into a valid time series. 
+
+Where there are breaks in the global dataset, the countries with multiple series are the likeliest culprits. A data frame of these countries is saved in the next chunk so that they can be investigated in analyses. A flag will be added to these countries in the final data aggregation (Script 5) noting these limitations.
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Identify the countries where the latest data point is not from the longest series
+    manualchooseseries <- manualchooseseries %>% filter(latestyear == countrylatestyear) %>%
+          select(c(1:2))
+
+# Create a data frame defining the choice
+    seriestokeep <- rbind(clearchoiceseries, manualchooseseries) %>% arrange(country)
+    isUnique(seriestokeep)
+        
+# Save the countries   
+    multseries_latest4 <- manualchooseseries %>% select(c("country")) %>% unique() %>% as.data.frame()
+    multseries_longestlatest4 <- clearchoiceseries %>% select(c("country")) %>% unique() %>% as.data.frame()
+    # Save data frames for use in other scripts
+        save(multseries_latest4, file = file.path(data_in, "multseries_latest4.Rdata"))
+        save(multseries_longestlatest4, file = file.path(data_in, "multseries_longestlatest4.Rdata"))
+```
+
+$~$
+
+**Table 19. Series selected for analysis for countries with multiple time series - ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create table
+    kable(seriestokeep, caption = "Series selected for analysis for countries with multiple time series")  %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Clean up
+    rm(seriescount, multseries, multseries_list, listmult, listmult_series, prefix, columns_to_rename, new_column_names, listmult_series, listmult_time, year_columns, year_columns_sorted, df_reordered, listmult_time2, coverage, clearchoiceseries, manualchooseseries)
+
+```
+
+$~$
+
+Having determined the series that is the best option for each country (either longest time series or most recent data), we proceed by dropping the other series so that there is only one series per country and therefore the records are unique at the country-ISIC code-year level.
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Filter out the series that will not be used
+    df_latest <- df_latest %>% left_join(y = seriestokeep, by = "country") %>%
+      mutate(series = as.numeric(series)) %>%
+      # Fill in the series variable for countries with only one series so that they are not dropped in the next step
+      mutate(series = case_when(is.na(series) ~ Series,
+             TRUE ~ series)) %>%
+      # Now filter for the series, so that the countries with multiple series will drop the series that was not selected above
+      filter(Series == series) %>%
+      # Now remove unneeded columns that have no variation or are metadata
+      select(-c(1,2,4,5, 10, 13, 15, 16)) 
+
+# Investigate for any remaining duplication
+    duplicates <- df_latest %>%
+      filter(duplicated(df_latest[c("country", "Year", "Item", "Item Code")]) | duplicated(df_latest[c("country", "Year", "Item", "Item Code")], fromLast = TRUE))
+    # View(duplicates) # Uncomment to view
+      # No duplicates 
+
+# Clean up
+    rm(duplicates)
+```
+
+$~$
+
+Finally, we have a data set with one time series per country, however, there are two inconsistencies across countries that are limitations to the data:
+
+1.  The duration of time series available differs by country.
+2.  The SNA available differs by country.
+
+**Table 20. Countries, Number of years with data, and SNA System in final data set - ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Document the SNA system per country and number of years of coverage in the resulting dataset
+    df_latest %>% group_by(country, Year) %>%  filter(row_number()==1) %>% ungroup() %>%
+      group_by(country) %>% aggregate(Year ~ country, FUN = length) %>%
+      left_join(select(df_latest, country, "SNA System"), by = "country") %>% 
+      group_by(country) %>% filter(row_number()==1) %>% arrange(country) %>%
+      kable(., col.names = c("Country/Area", "N Years", "SNA System"), "html", caption = "Countries, Number of years with data, and SNA System in final dataset") %>% kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+**Fix the country information.**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Add the country geographic information
+    # Check join
+    join_check <- anti_join(x = df_latest, y = Area_info, by = "country")
+    join_check %>% group_by(country) %>%
+      summarise()
+
+# Join on country name (and we create a new data frame called "df_latest_winfo" that includes the country identifier and classifier information)
+    isUnique(df_latest_winfo)
+    df_latest_winfo <- left_join(x = df_latest, y = Area_info, by = "country") %>%
+      relocate(c("Year", "Currency", "ValueAdded"), .after = territoryof) %>% 
+      select(-c(9,11,13)) # Remove territory codes, keep only factor columns with names
+    names(df_latest_winfo)
+    isUnique(df_latest_winfo)
+
+# Clean up
+    rm(join_check, df_latest)
+```
+
+$~$
+
+**Document the years of data available for each country in the SNA Main Aggregates.**
+
+**Table 21. Years of National Accounts data available per country, ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create table
+    df_latest_winfo %>%
+            group_by(country) %>%
+            filter(Year %in% 1995:2021) %>%
+            mutate(minyear = min(Year),
+                   maxyear = max(Year)) %>%
+            select(c(country, minyear, maxyear)) %>%
+      unique() %>%
+      arrange(country) %>%
+      kable(caption = "Years of National Accounts data available per country, ISIC Revision 4",
+            col.names = c("Country", "From", "To")) %>% 
+    kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+**Now, we build the aggregate for agrifood systems.**
+
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Reorder the SNA93 Item Code (Main Aggregate Code) logically
+    df_latest_winfo <- df_latest_winfo %>% 
+      mutate(ISIC_order = case_when(`SNA93 Item Code` == "A" ~ 1,
+                                    `SNA93 Item Code` == "01" ~ 2,
+                                    `SNA93 Item Code` == "02" ~ 3,
+                                    `SNA93 Item Code` == "03" ~ 4,
+                                    `SNA93 Item Code` == "B+C+D+E" ~ 5,
+                                    `SNA93 Item Code` == "B" ~ 6,
+                                    `SNA93 Item Code` == "C" ~ 7,
+                                    `SNA93 Item Code` == "D" ~ 8,
+                                    `SNA93 Item Code` == "E" ~ 9,
+                                    `SNA93 Item Code` == "F" ~ 10,
+                                    `SNA93 Item Code` == "G+H+I" ~ 11,
+                                    `SNA93 Item Code` == "G" ~ 12,
+                                    `SNA93 Item Code` == "H" ~ 13,
+                                    `SNA93 Item Code` == "I" ~ 14,
+                                    `SNA93 Item Code` == "J" ~ 15,
+                                    `SNA93 Item Code` == "K" ~ 16,
+                                    `SNA93 Item Code` == "L" ~ 17,
+                                    `SNA93 Item Code` == "M+N" ~ 18,
+                                    `SNA93 Item Code` == "M" ~ 19,
+                                    `SNA93 Item Code` == "N" ~ 20,
+                                    `SNA93 Item Code` == "O+P+Q" ~ 21,
+                                    `SNA93 Item Code` == "O" ~ 22,
+                                    `SNA93 Item Code` == "P" ~ 23,
+                                    `SNA93 Item Code` == "Q" ~ 24,
+                                    `SNA93 Item Code` == "R+S+T" ~ 25,
+                                    `SNA93 Item Code` == "R" ~ 26,
+                                    `SNA93 Item Code` == "S" ~ 27,
+                                    `SNA93 Item Code` == "T" ~ 28,
+                                    `SNA93 Item Code` == "P.119" & `Item Code`== 22 ~ 29,
+                                    `SNA93 Item Code` == "P.119" & `Item Code`== 28 ~ 30,
+                                    `SNA93 Item Code` == "B.1g" ~ 31,
+                                    `SNA93 Item Code` == "D.21-D.31" ~ 32,
+                                    `SNA93 Item Code` == "D.21" ~ 33,
+                                    `SNA93 Item Code` == "D.31" ~ 34,
+                                    `SNA93 Item Code` == NA ~ 35,
+                                    `SNA93 Item Code` == "B.1*g" ~ 36
+             ))
+# Sort
+    df_latest_winfo <- df_latest_winfo %>%
+      arrange("country", "Year", "ISIC_order")
+```
+
+$~$
+
+**Table 22. Combinations of Item code, SNA93 Item Codes and their descriptions, ISIC Rev 4 - for investigation**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# First list all the combinations of the Item Code, SNA93 Item Code, and Item variables
+    codes <- df_latest_winfo %>% distinct(`Item Code`, `SNA93 Item Code`, `Item`, `ISIC_order`) %>%
+      arrange(ISIC_order)
+    
+      kable(codes[,1:3], 
+            caption = "Combinations of Item code, SNA93 Item Codes and their descriptions") %>% 
+      kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+**Table 23. Main Aggregate categories, ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Identify industry names used (and combinations)
+    df_latest_winfo <- df_latest_winfo %>%
+      mutate(Item = as.factor(Item)) %>%
+      mutate(`SNA93 Item Code` = as.factor(`SNA93 Item Code`))
+  
+# Create table
+    df_latest_winfo %>% select(c("Item", "SNA93 Item Code")) %>% unique() %>%
+    kable(., col.names = c("Item","Item code"), caption = "Main Aggregate categories, ISIC Rev 4") %>%
+      kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+**Table 24. Combinations of Item code, SNA93 Item Codes and their descriptions, ISIC Rev 4 - corrected**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create corrected table
+    codes <- df_latest_winfo %>%
+            distinct(`Item Code`, `SNA93 Item Code`, `Item`, ISIC_order) %>%
+      arrange(ISIC_order)
+    
+      kable(codes[,1:3], 
+            caption = "Combinations of Item code, SNA93 Item Codes and their descriptions") %>% 
+      kable_classic(full_width = T, html_font = "Cambria")
+```
+
+$~$
+
+Next, we merge the SNA coding with the ISIC classification to AFS.
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Open ISIC Rev 4 data frame created in Script #1
+    load(file.path(data_in, "ISICRev4.Rdata"))
+
+# Join with the codes
+    codes <- codes %>% rename(Code = `SNA93 Item Code`) %>%
+      left_join(., ISICRev4, by = "Code") %>%
+      select(-c(Item.y)) %>% rename(Item = Item.x)
+
+# Code the combined main aggregates for the Is_AFS variable
+    codes <- codes %>%
+      mutate(Is_AFS = case_when(Code == "B+C+D+E" ~ 2,
+                                Code == "G+H+I" ~ 2,
+                                Code == "M+N" ~ 2,
+                                Code == "O+P+Q" ~ 2,
+                                Code == "R+S+T" ~ 0,
+                                is.na(Is_AFS) ~ 0,
+                                TRUE ~ Is_AFS))
+```
+
+$~$
+
+Now we address the presence of the combined categories.
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# First, we make sure every country has a combined record A for agriculture, forestry and fishing. And then we drop the disaggregate categories within this.
+    sum_agfish <- df_latest_winfo %>%
+      filter(`SNA93 Item Code` %in% c("A", "01", "02", "03")) %>%
+      select(country, Year, `SNA93 Item Code`, `SNA System`, ValueAdded) %>%
+      pivot_wider(names_from = `SNA93 Item Code`, values_from = ValueAdded) %>%
+      filter(is.na("A")) 
+      # View(sum_agfish) # No missing so we can drop all the "A", "01", "02", "03" records
+    rm(sum_agfish)
+
+# Now we address the combined categories where we would prefer to use the component category data instead of the combined record, so that we drop the combined codes for only the countries with the component item values as well
+    datacheck <- df_latest_winfo %>%
+      filter(`SNA93 Item Code` %in% c("B", "C", "D", "E", "B+C+D+E", "G", "H", "I", "G+H+I", "M", "N", "M+N", "O", "P", "Q", "O+P+Q",
+                                      "R", "S", "T", "R+S+T")) %>%
+      select(country, Year, `SNA93 Item Code`, `SNA System`, ValueAdded) 
+    datacheck <- datacheck %>% pivot_wider(names_from = `SNA93 Item Code`, values_from = ValueAdded) %>%
+      # replace NA with 0 so that the rowSums function will "see" the cell
+      mutate_at(c(4:23), ~replace(., is.na(.), 0))
+    names(datacheck)
+    keep_combo_aggregates_Rev4 <- datacheck %>% 
+      rowwise() %>% 
+      mutate(Check_BCDE = sum(B,C,D,E, na.rm = TRUE),
+        Check_GHI = sum(G,H,I, na.rm = TRUE),
+        Check_MN = sum(M,N, na.rm = TRUE),
+        Check_OPQ = sum(O,P,Q, na.rm = TRUE),
+        Check_RST = sum(R,S,`T`, na.rm = TRUE),
+        testBCDE = case_when(round(`B+C+D+E`, digits = 0) == round(Check_BCDE, digits = 0) ~ 1,
+                                TRUE ~ 0),
+        testGHI = case_when(round(`G+H+I`, digits = 0) == round(Check_GHI, digits = 0) ~ 1,
+                                TRUE ~ 0),
+        testMN = case_when(round(`M+N`, digits = 0) == round(Check_MN, digits = 0) ~ 1,
+                                TRUE ~ 0),
+        testOPQ = case_when(round(`O+P+Q`, digits = 0) == round(Check_OPQ, digits = 0) ~ 1,
+                                TRUE ~ 0),
+        testRST = case_when(round(`R+S+T`, digits = 0) == round(Check_RST, digits = 0) ~ 1,
+                                TRUE ~ 0)) %>%
+      select(c(1,2,29:33))
+
+# Clean up
+    rm(datacheck)
+
+```
+
+$~$
+
+Now extract the AFS categories into their own data frame as above, however for ISIC Revision 4, we will not aggregate main aggregate categories until a later step (Script #5) after we apply the fractions to disaggregate.
+```{r, warning = FALSE, messages = FALSE, echo = TRUE, results = "hide"}
+# Join with the codes
+    isUnique(df_latest_winfo)
+
+    AgriFood_Rev4 <-  left_join(df_latest_winfo, codes, by = c("ISIC_order", "Item Code")) %>%
+      select(-c(18,21:25,27:30)) %>%
+      rename(ISIC_Item = Item.y,
+             Item = Item.x) %>%
+      arrange(country, Year, ISIC_order)
+    isUnique(AgriFood_Rev4)
+
+# Mark the aggregate categories as wholly, partly or not AFS
+    # This assignment reflects the classification in the "Classification and metadata" spreadsheet assignment to AFS
+    AgriFood_Rev4 <- AgriFood_Rev4 %>%
+      mutate(Is_AFS = case_when(`SNA93 Item Code` == "01" ~ 1,
+                                `SNA93 Item Code` == "02" ~ 1,
+                                `SNA93 Item Code` == "03" ~ 1,
+                                `SNA93 Item Code` == "B+C+D+E" ~ 2,
+                                `SNA93 Item Code` == "G+H+I" ~ 2,
+                                `SNA93 Item Code` == "M+N" ~ 2,
+                                `SNA93 Item Code` == "O+P+Q" ~ 0,
+                                `SNA93 Item Code` == "R+S+T" ~ 0,
+                                TRUE ~ Is_AFS))
+
+# Drop all the observations that are not AFS, except GDP
+    AgriFood_Rev4 <- AgriFood_Rev4 %>% filter(Is_AFS == 1 | Is_AFS == 2 | Item == "Equals: GROSS DOMESTIC PRODUCT")
+
+# Drop all the agriculture sector disaggregate
+    AgriFood_Rev4 <- AgriFood_Rev4 %>% 
+      filter(!(`SNA93 Item Code`== "01" | `SNA93 Item Code`== "02" | `SNA93 Item Code`== "03"))
+
+# Drop the Administrative and support service activities main aggregate for lack of a fraction to disaggregate an AFS share. The only AFS activities under this main aggregate are employment activities (ISIC Code 78) used by agrifood systems.
+    AgriFood_Rev4 <- AgriFood_Rev4 %>% filter(Item != "Administrative and support service activities")
+
+# Now, we will drop the combined categories unless the country does not report the uncombined items separately. 
+  
+# Merge in the data frame with the filter variables to identify when these aggregates should be kept
+    AgriFood_Rev4 <- left_join(AgriFood_Rev4, keep_combo_aggregates_Rev4, by = c("country", "Year"))
+    # First remove the aggregates where the subordinate categories exist
+    AgriFood_Rev4 <- AgriFood_Rev4 %>%
+      filter(!(testBCDE == 1 & `SNA93 Item Code` == "B+C+D+E")) %>% # keeps aggregate category only if the test for equivalence found the components did not sum to the combined amount (test variable == 0 when they are not equal, so here we do not want to exclude the combo records when the test == 1 indicating they ARE equal)
+      filter(!(testGHI == 1 & `SNA93 Item Code` == "G+H+I")) %>% 
+      filter(!(testMN == 1 & `SNA93 Item Code` == "M+N")) %>%
+      filter(!(testOPQ == 1 & `SNA93 Item Code` == "O+P+Q")) %>%
+      filter(!(testRST == 1 & `SNA93 Item Code` == "R+S+T")) 
+    # Now remove any subordinate categories that are present where the aggregate has been retained
+    bcde <- c("B", "C", "D", "E")
+    ghi <- c("G", "H", "I")
+    mn <- c("M", "N")
+    opq <- c("O", "P", "Q")
+    rst <- c("R", "S", "T")
+
+    AgriFood_Rev4 <- AgriFood_Rev4 %>%
+      filter(!(testBCDE == 0 & (`SNA93 Item Code` %in% bcde))) %>% # drops the individual categories if they are present where the aggregate category does not equal the subordinate categories and so the aggregate has been retained)
+      filter(!(testGHI == 0 & (`SNA93 Item Code` %in% ghi))) %>% 
+      filter(!(testMN == 0 & (`SNA93 Item Code` %in% mn))) %>%
+      filter(!(testOPQ == 0 & (`SNA93 Item Code` %in% opq))) %>%
+      filter(!(testRST == 0 & (`SNA93 Item Code` %in% rst))) %>%
+      select(-c(21:25))
+
+# Reorganize the columns
+    AgriFood_sum_Rev4 <- AgriFood_Rev4 %>%
+        relocate(c(6:12), .after = "Justification") %>% 
+        relocate(c(9), .after = "Justification") %>%
+        select(-c(2,12,17:20)) %>%
+        relocate("ISIC_Item", .after = "Item") %>%
+        rename("SNA_Item" = "Item") %>%
+        arrange(country)
+    isUnique(AgriFood_sum_Rev4)
+    
+# Save data frame for use in other scripts
+    save(AgriFood_sum_Rev4, file = file.path(data_in, "AgriFood_sum_Rev4.Rdata"))
+```
+
+$~$
+
+**Table 25. Final SNA Data set (input to disaggregation process), local currency, ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Create a table to show the data set
+    landscape(kable(head(AgriFood_sum_Rev4, 12),
+          caption = "Final SNA Dataset (input to disaggregation process), local currency") %>% 
+      kable_classic(full_width = T, html_font = "Cambria")) %>%
+      column_spec(1:9,width = ".75 in") %>%
+      column_spec(10,width = "3 in") %>%
+      column_spec(11:13,width = ".75 in")
+```
+
+$~$
+
+**References**

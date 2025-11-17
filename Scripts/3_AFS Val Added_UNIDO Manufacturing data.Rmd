@@ -1,0 +1,460 @@
+---
+title: "Value Added in Agrifood Systems - Step 3: UNIDO Manufacturing sector 2-digit ISIC code level value added data"
+author: "Kate Schneider"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: "Agrifood Value Added.bib"
+---
+#### Summary of Script 3
+
+This script imports and cleans the data available at a more granular disaggregation for the Manufacturing Main Aggregate from UNIDO. We manually downloaded the ISIC Revision 3 data at the 2-digit level in January 2024 and they are saved in the "UNIDO INDSTAT2 ISIC Rev 3_15Jan2024" subfolder under "Input Data". We manually downloaded the ISIC Revision 4 data only available at the 4-digit level in January 2024 and they are saved in the "UNIDO INDSTAT4 ISIC Rev4_6Jan2024" subfolder under "Input Data". The date in the subfolder names indicates the download date. These data disaggregate the Manufacturing Aggregate, which is "D" in ISIC Revision 3 and "C" in ISIC Revision 4.
+
+*Tables imported:*
+
+-   INDSTAT 2, ISIC Revision 3: All countries and years, Value Added statistic in national currency from <https://stat.unido.org/content/dataset_description/indstat-2-2023%252c-isic-revision-3>
+-   INDSTAT 4, ISIC Revision 4: All countries and years from 1995 forward, Value Added statistic in national currency from: <https://stat.unido.org/database/INDSTAT%204%202023,%20ISIC%20Revision%204>
+
+The INDSTAT2 database harmonizes historical and new data to the ISIC Revision 3. Concordance tables are available at:
+
+-   Broad correspondence: <https://unece.org/fileadmin/DAM/stats/documents/ece/ces/ge.20/2006/mtg2/zip.8.e.pdf>
+-   4-digit level: <https://www.unescwa.org/sites/default/files/event/materials/event_detail_id_681_tablesbtwnisicrev.pdf>
+
+Finally, note that while there is a complete documentation User's Guide for INDSTAT2 (available for ISIC Rev 3 only), there is no such documentation for INDSTAT4 for either ISIC revision. The only documentation available is at the following site: <https://stat.unido.org/content/dataset_description/indstat-4-2023%252c-isic-revision-4>
+
+```{r setup, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+### Setup required to knit this script into a markdown document
+
+    # Load the knitr package
+      library(knitr)
+    
+    # Set echo = FALSE for all code chunks will prevent the code from printing in the output file
+      knitr::opts_chunk$set(echo = FALSE)
+      
+# Set the root folder to the project root so that all file paths are relative to the main project folder
+    knitr::opts_knit$set('./')
+  
+# Set the treatment of numbers to numerical (avoids scientific notation from showing in results)
+    options(scipen = 999)
+
+# Load packages
+    # R studio should prompt the installation of any packages not loaded on the instance where this script has been opened
+    library(tidyverse)
+    library(Hmisc)
+    library(haven)
+    library(readxl)
+    library(labelled)
+    library(data.table)
+    library(psych)
+    library(kableExtra)
+    library(citr) ## To install from github: devtools::install_github("crsh/citr")
+    library(testthat)
+    library(pals)
+    library(here)
+
+# Set relative directory paths
+    data_in <- here::here("Input Data")
+    fig_out <- here::here("Figures")
+    support <- here::here("Support files and scripts")
+    data_out <- here::here("Output Datasets")
+
+# Create a "not in" operator
+    `%notin%` <- Negate(`%in%`) 
+    
+# Create a function to test that there are  no duplicates in the data frame
+    isUnique <- function(vector){
+           return(!any(duplicated(vector)))
+    }
+    
+# Note: "$~$" adds line breaks in the html report in the knitting process.
+```
+
+$~$
+
+### *Input data set 4: UNIDO Manufacturing Sector Data*
+
+We start with ISIC Revision 3.
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+# Import the UNIDO Data
+    inst.classes <- c("factor","factor","factor","factor","factor","numeric","factor","factor","factor")
+    inst.names  <- c("ctable","country","year","isic","isiccomb","value","utable","source","unit")
+    inst        <- read.csv(file= file.path(data_in, "UNIDO INDSTAT2 ISIC Rev 3_15Jan2024/data.csv"), header=FALSE, col.names=inst.names, colClasses=inst.classes, na.strings="...")
+    
+    my_labels <- c(
+      ctable = "Table Code",
+      country = "Country Code",
+      year = "Year",
+      isic = "ISIC Code", # 2-digit code within manufacturing aggregate "D"
+      isiccomb = "ISIC Combination Code", # Indicates countries reporting only an aggregate of multiple 2-digit codes
+      value = "Value",
+      utable = "Table Definition code",
+      source = "Source Code",
+      unit = "Unit"
+    )
+    
+    listoflabels <- as.list(my_labels[match(names(inst), names(my_labels))])
+
+# Filter for the Value Added table
+    ManufVA_Rev3 <- inst %>% filter(ctable == 20) 
+
+# Filter the years included in this study
+    ManufVA_Rev3 <- ManufVA_Rev3 %>% filter(year %in% 1995:2021) 
+
+# Merge with geographic information
+    levels(ManufVA_Rev3$country)
+    ManufVA_Rev3 <- ManufVA_Rev3 %>% rename(m49_code = country)
+    ManufVA_Rev3 <- ManufVA_Rev3 %>% mutate(m49_code = as.character(m49_code))
+    
+# Open area info data frame created in Script #1
+    load(file.path(data_in, "Area_info.Rdata"))
+
+# Join area info with manufacturing data
+    Area_info <- Area_info %>% mutate(m49_code = as.character(m49_code))
+    ManufVA_Rev3 <- left_join(ManufVA_Rev3, Area_info, by = "m49_code") %>% 
+      select(-c(1,7:9,13:20))
+    ManufVA_Rev3 <- ManufVA_Rev3 %>% mutate(isic = as.character(isic))
+
+# Note that there is negative value added. This has been confirmed on the UNIDO database as correctly importing from the official statistics
+    ManufVA_Rev3 <- ManufVA_Rev3 %>% mutate(value = as.numeric(value))
+    range(ManufVA_Rev3$value, na.rm = TRUE)
+    
+    # M49 codes that do not match with area info
+    ManufVA_Rev3 %>% filter(is.na(country)) %>% distinct(m49_code)
+        # Codes no longer in use: 736 = former Sudan, 412 = Kosovo, 530 = former Netherlands Antilles, 891 = former Serbia and Montenegro
+    ManufVA_Rev3 <- ManufVA_Rev3 %>% 
+      filter(!(is.na(country)))
+    
+    isUnique(ManufVA_Rev3)
+
+# Clean up
+    rm(inst, inst.classes, inst.names)
+
+```
+
+$~$
+
+UNIDO data contain 2-digit level information for ISIC codes under the main aggregate category of "D". However, some countries report aggregated values that contain a combination of 2-digit level categories (Annex III in [@unidoINDSTAT22020ISIC2020]). We converted the ANNEX III table from the PDF file into a digital file, saved in (and called from in the code) the "INDSTAT_ISICComboCodes.Rdata" data frame in the "Support files and scripts" project subfolder. We do not have any approach to disaggregate these codes, we hereby document them as a limitation of the data.
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Merge the combination codes with the UNIDO data
+    load(file.path(support, "INDSTAT_ISICComboCodes.RData"))
+    ComboCodes <- table # rename the data frame
+      rm(table)
+    class(ComboCodes$isiccomb)
+    class(ManufVA_Rev3$isiccomb)
+    ManufVA_Rev3 <- ManufVA_Rev3 %>% mutate(isiccomb = as.character(isiccomb))
+    ManufVA_Rev3 <- left_join(ManufVA_Rev3, ComboCodes, by = "isiccomb")
+
+# Merge classification to AFS
+    # Open ISIC Rev 3 data frame created in Script #1
+        load(file.path(data_in, "ISICRev3.Rdata"))
+    
+# Merge classification with manufacturing data
+    Manuf_ISIC_Rev3 <- ISICRev3 %>% filter(row_number() %in% c(51:263)) %>%
+      rename("isic" = "Code")
+    ManufVA_Rev3 <- left_join(ManufVA_Rev3, Manuf_ISIC_Rev3, by = c("isic")) %>%
+      select(-c(12:16)) %>%
+      rename(ISIC_Item = "Item",
+             Year = "year")
+
+# Add columns present in AgriFood_sum so this data frame can be appended
+    # Open Agrifood_sum_Rev3 created in Script #2
+        load(file.path(data_in, "AgriFood_sum_Rev3.Rdata"))
+        isUnique(AgriFood_sum_Rev3)
+        
+    # Join
+        AFScols <- AgriFood_sum_Rev3 %>% select(c("ISO", "Year", "Currency")) %>%
+          unique() %>%
+          filter(!(is.na(ISO))) %>%
+          mutate(Year = as.factor(Year))
+        ManufVA_Rev3 <- left_join(ManufVA_Rev3, AFScols, by = c("ISO", "Year"))
+        isUnique(ManufVA_Rev3)
+
+# Remove main aggregate because all the 2-digit codes sum to the main aggregate
+    ManufVA_Rev3 <- ManufVA_Rev3 %>%
+      filter(isic != "D") %>%
+      # Make sure the country names are correct
+          mutate(country = case_when(country == "Venezuela, Bolivarian Republic of" ~ "Venezuela (Bolivarian Republic of)",
+                               country == "Côte D'Ivoire" ~ "Côte d'Ivoire",
+                               country == "Netherlands" ~ "Netherlands (Kingdom of the)",
+                               TRUE ~ country))
+  isUnique(ManufVA_Rev3)
+  
+# Save data frame 
+    save(ManufVA_Rev3, file = file.path(data_in, "ManufVA_Rev3.RData"))
+```
+
+$~$
+
+**Table 1. Classification and description of combined 2-digit categories reported by some countries in INDSTAT2 data - ISIC Rev 3**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Table of combination codes and description for inspection
+    descriptions <- ManufVA_Rev3 %>% select(isiccomb, isic, ISIC_Item, Is_AFS)
+    inspect_combo <- left_join(ComboCodes, descriptions, by = "isiccomb") %>%
+      group_by(isic) %>% filter(row_number() == 1) %>%
+      filter(!is.na(Is_AFS))
+
+# Clean up
+    rm(descriptions)
+    
+# Create table to show combination codes
+    kable(inspect_combo, col.names = c("Combination Code", "Combined Categories", "Classified under", "Description", "Is AFS? (1=yes, 2=partial, 0=No"), format = "html", caption = "Classification and description of combined 2-digit categories reported by some countries in INDSTAT2 data") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Clean up
+    rm(descriptions, inspect_combo)
+```
+
+$~$
+
+We repeat with ISIC Revision 4.
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Import the UNIDO Data
+    inst.classes <- c("factor","factor","factor","factor","factor","numeric","factor","factor","factor")
+    inst.names <- c("ctable","country","year","isic","isiccomb","value","utable","source","unit")
+    inst <- read.csv(file = file.path(data_in, "UNIDO INDSTAT4 ISIC Rev 4_6Jan2024/data.csv"), header=FALSE, col.names=inst.names, colClasses=inst.classes, na.strings="...")
+    
+    my_labels <- c(
+      ctable = "Table Code",
+      country = "Country Code",
+      year = "Year",
+      isic = "ISIC Code", # 2-digit code within manufacturing aggregate "D"
+      isiccomb = "ISIC Combination Code", # Indicates countries reporting only an aggregate of multiple 2-digit codes
+      value = "Value",
+      utable = "Table Definition code",
+      source = "Source Code",
+      unit = "Unit"
+    )
+    
+    labellist <- as.list(my_labels[match(names(inst), names(my_labels))])
+    
+# Filter for the Value Added table if other variables have been downloaded
+    ManufVA_Rev4 <- inst %>% filter(ctable == 20) 
+
+# Merge with geographic information
+    levels(ManufVA_Rev4$country)
+    ManufVA_Rev4 <- ManufVA_Rev4 %>% rename(m49_code = country)
+    ManufVA_Rev4 <- ManufVA_Rev4 %>% mutate(m49_code = as.character(m49_code))
+    ManufVA_Rev4 <- left_join(ManufVA_Rev4, Area_info, by = "m49_code") %>% select(-c(1,7:9,13:20))
+    ManufVA_Rev4 <- ManufVA_Rev4 %>% mutate(isic = as.character(isic))
+
+    # M49 codes that do not match with area info
+    ManufVA_Rev4 %>% filter(is.na(country)) %>% distinct(m49_code)
+        # Code 412 = Kosovo
+    ManufVA_Rev4 <- ManufVA_Rev4 %>% 
+      filter(!(is.na(country)))
+
+    
+# Clean up
+    rm(inst, inst.classes, inst.names)
+```
+
+$~$
+
+With the ISIC Revision 4 data, we have an additional challenge of interpreting the combined codes due to the lack of full documentation. We cannot use the INDSTAT User's Guide Annex III [@unidoINDSTAT22020ISIC2020] information because it does not contain the combination codes used in the INDSTAT4 database. Again, we have no method to disaggregate these codes but note the additional limitation here that we also do not have documentation of the categories we are unable to use in the analysis.
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# The following code demonstrates that we cannot use the combination codes from the INDSTAT2 documentation with the UNIDO INDSTAT4 data because the INDSTAT4 combination codes are not contained in that Annex documentation. 
+  # ManufVA_Rev4 <- ManufVA_Rev4 %>% mutate(isiccomb = as.character(isiccomb))
+  # ManufVA_Rev4 <- left_join(ManufVA_Rev4, ComboCodes, by = "isiccomb") # No matches when joining the data
+
+# Merge classification to AFS
+    # Open ISIC Rev 4 data frame created in Script #1
+        load(file.path(data_in, "ISICRev4.Rdata"))
+
+    # Join
+        Manuf_ISIC_Rev4 <- ISICRev4 %>% filter(row_number() %in% c(86:318)) %>%
+          rename("isic" = "Code")
+        ManufVA_Rev4 <- left_join(ManufVA_Rev4, Manuf_ISIC_Rev4, by = c("isic")) %>%
+          select(-c(12:16)) %>%
+          rename(ISIC_Item = "Item",
+                 Year = "year") 
+
+# Add columns present in AgriFood_sum so this dataframe can be appended
+    # Open Agrifood_sum data frame created in Script #2
+        load(file.path(data_in, "AgriFood_sum_Rev4.Rdata"))
+    
+    #
+        AFScols <- AgriFood_sum_Rev4 %>% select(c("ISO", "Currency")) %>%
+          unique()
+        ManufVA_Rev4 <- left_join(ManufVA_Rev4, AFScols, by = c("ISO"))
+
+# Filter out rows with no value added recorded
+    ManufVA_Rev4 <- ManufVA_Rev4 %>% filter(!(is.na(value)))
+    
+# Save data frame 
+    save(ManufVA_Rev4, file = file.path(data_in, "ManufVA_Rev4.RData"))
+
+# Now we want to remove the main aggregate and all the 4-digit level data because the 4-digit codes present sum up to the 3-digit codes. Some countries do not report all categories at the 4-digit level and some countries do not report all the 3-digit level codes and only report 4-digits. So we first have to ensure that all the 3-digit codes are present.
+    
+    # First we fill in the missing codes
+      df1 <- ManufVA_Rev4 %>%
+        select(c(country, Year)) %>% unique()
+      df2 <- Manuf_ISIC_Rev4 %>% select(-c(Justification))
+      completed <- crossing(df1,df2)
+      # show which country-code-year combinations were not present in the dataset:
+        codestofillin <- anti_join(completed, ManufVA_Rev4, by = c("country", "Year", "isic"))
+    
+    # Now that we've found the missing combinations of country-year-code, we merge those into the dataset
+      df1 <- ManufVA_Rev4 %>%
+        select(c("m49_code", "country", "ISO", "UNmemberstate")) %>%
+        unique()
+      codestofillin <- left_join(codestofillin, df1, by = c("country")) %>%
+        select(-c("Filter_2", "Filter_3", "Filter_4", "HasData")) %>%
+        mutate(isiccomb = "",
+               value = NA,
+               Currency = "") %>%
+        rename(ISIC_Item = Item)
+      codestofillin <- codestofillin[, names(ManufVA_Rev4)]
+      # Now add the missing rows to the main dataset
+        ManufVA_Rev4 <- rbind(ManufVA_Rev4, codestofillin)
+        ManufVA_Rev4 <- ManufVA_Rev4 %>%
+          arrange(country, Year, isic) %>%
+          # Create a flag for the added rows
+          mutate(flag = case_when(Currency == "" ~ 1,
+                                TRUE ~ 0)) 
+    
+        # Use the ISIC Codes data set to construct the linkage for summation
+        # First we sum (or carry) 4-digit codes to the 3 digit level
+            ISICRev4_manuf <- ISICRev4[86:326,] %>%
+              mutate(sum_to = paste(Code.1, Code.2, Code.3, sep = ""),
+                     sum_to = as.numeric(sum_to)) %>%
+              rename(isic = Code,
+                     ISIC_Item = Item) %>%
+              filter(Filter_3 !=1) %>%
+              # Now remove the main aggregate and 1-digit level codes
+              filter(Filter_1 !=1,
+                     Filter_2 !=1) %>%
+              select(1,2,14)
+         
+  # Merge the sum_to instruction into the manufacturing data frame
+      ManufVA_Rev4 <- left_join(ManufVA_Rev4, ISICRev4_manuf, by = c("isic", "ISIC_Item")) %>%
+        arrange(country, Year) %>%
+      # Make sure the country names are correct
+          mutate(country = case_when(country == "Venezuela, Bolivarian Republic of" ~ "Venezuela (Bolivarian Republic of)",
+                               country == "Côte D'Ivoire" ~ "Côte d'Ivoire",
+                               country == "Netherlands" ~ "Netherlands (Kingdom of the)",
+                               TRUE ~ country))
+  
+  # Aggregate by country, year, sum_to
+      Rev4_to3digitsfrom4 <- ManufVA_Rev4 %>%
+        filter(!(is.na(Code.4))) %>%
+        group_by(country, Year, sum_to) %>%
+        aggregate(value ~ country + Year + sum_to, FUN = sum, na.rm = TRUE) %>%
+        rename(recalculated_value = value) %>%
+        mutate(isic = as.character(sum_to)) %>%
+        select(-c(sum_to))
+      ManufVA_Rev4 <- left_join(ManufVA_Rev4, Rev4_to3digitsfrom4, by = c("country", "Year", "isic"))
+      
+      # First, test whether the 3-dig code equals the summed up 4-digits where the 3-digit code was present in the data
+      test <- ManufVA_Rev4 %>%
+        filter(!(is.na(Code.3)) & !(is.na(recalculated_value))) %>%
+        mutate(bigger3dig = case_when(value > recalculated_value ~ 1, TRUE ~ 0),
+               equal = case_when(value == recalculated_value ~ 1, TRUE ~ 0),
+               smaller3dig = case_when(value < recalculated_value ~ 1, TRUE ~ 0))
+      rm(test)
+      
+      # Now replace any missing 3-digit code data with the newly calculated or carried over value
+      # Or any 3-digit code that is smaller than the sum of the subordinate categories
+      ManufVA_Rev4 <- ManufVA_Rev4 %>%
+        mutate(value = case_when(is.na(value) ~ recalculated_value,
+                                 value < recalculated_value ~ recalculated_value,
+                                 TRUE ~ value)) %>%
+        select(-c(sum_to))
+      
+    # Now we remove all the 4-digit level data
+      ManufVA_Rev4 <- ManufVA_Rev4 %>%
+        rename(four_dig_ID = "Code.4") %>%
+        filter(is.na(four_dig_ID)) %>%
+        filter(isic != "C") %>%
+        select(-c(four_dig_ID, recalculated_value)) 
+    # Test for no duplicates 
+        isUnique(ManufVA_Rev4)
+
+# Now we aggregate the 3-digit level data to their 2-digit supra-ordinate categories so that it can be combined and visualized with the country-years for which we only have the 2-digit level ISIC Revision 3 data for the manufacturing sector
+  
+    # Again use the ISIC Codes data set to construct the linkage for summation
+        # Remove codes outside manufacturing and 3-digit level codes
+            ISICRev4_manuf <- ISICRev4[86:326,] %>%
+              mutate(sum_to = paste(Code.1, Code.2, sep = ""),
+                     sum_to = as.numeric(sum_to)) %>%
+              rename(isic = Code,
+                     ISIC_Item = Item) %>%
+              filter(Filter_4 !=1) %>%
+              # Now remove the main aggregate and 1-digit level codes
+              filter(Filter_1 !=1,
+                     Filter_2 !=1) %>%
+              select(1,2,14)
+         
+  # Merge the sum_to instruction into the manufacturing data frame
+      ManufVA_Rev4 <- left_join(ManufVA_Rev4, ISICRev4_manuf, by = c("isic", "ISIC_Item")) %>%
+        arrange(country, Year) %>%
+      # Make sure the country names are correct
+          mutate(country = case_when(country == "Venezuela, Bolivarian Republic of" ~ "Venezuela (Bolivarian Republic of)",
+                               country == "Côte D'Ivoire" ~ "Côte d'Ivoire",
+                               country == "Netherlands" ~ "Netherlands (Kingdom of the)",
+                               TRUE ~ country))
+  
+  # Aggregate by country, year, sum_to
+      Rev4_to2digitsfrom3 <- ManufVA_Rev4 %>%
+        group_by(country, Year, sum_to) %>%
+        aggregate(value ~ country + Year + sum_to, FUN = sum) %>%
+        rename(isic = sum_to)%>%
+        rename(recalculated_value = value) %>%
+        mutate(isic = as.character(isic))
+      ManufVA_Rev4 <- left_join(ManufVA_Rev4, Rev4_to2digitsfrom3, by = c("country", "Year", "isic"))
+      
+    # Now replace any missing 2-digit code data with the newly calculated or carried over value
+      ManufVA_Rev4 <- ManufVA_Rev4 %>%
+        mutate(value = recalculated_value)
+      
+    # Now we remove all the 3-digit level data
+      ManufVA_Rev4_aggregate <- ManufVA_Rev4 %>%
+        rename(three_dig_ID = "Code.3") %>%
+        filter(is.na(three_dig_ID)) %>%
+        filter(isic != "C") %>%
+        select(-c(three_dig_ID, sum_to, recalculated_value, Currency, flag))
+        # Test for no duplicates 
+        isUnique(ManufVA_Rev4_aggregate)
+        
+    # Filter out the country-year records for China that show in the dataset but had no data under the manufacturing main aggregate (C)
+      ManufVA_Rev4_aggregate <- ManufVA_Rev4_aggregate %>%
+        filter(!(is.na(value)))
+   
+# Now merge back in the rest of the variables
+    # ISIC Classification columns
+    ManufVA_Rev4_aggregate <- ManufVA_Rev4_aggregate %>% select(-c(4, 10:13)) %>%
+      rename(Code = isic)
+    ManufVA_Rev4_aggregate <- left_join(ManufVA_Rev4_aggregate, select(ISICRev4[86:326,], c(1,3,9:13)), by = "Code") %>%
+      # Make sure the country names are correct
+          mutate(country = case_when(country == "Venezuela, Bolivarian Republic of" ~ "Venezuela (Bolivarian Republic of)",
+                               country == "Côte D'Ivoire" ~ "Côte d'Ivoire",
+                               country == "Netherlands" ~ "Netherlands (Kingdom of the)",
+                               TRUE ~ country))
+    # Add currency
+      load(file.path(data_in, "ManufVA_Rev4.Rdata"))
+      currency <- ManufVA_Rev4 %>% select(2,6,16) %>% unique()
+      ManufVA_Rev4_aggregate <- left_join(ManufVA_Rev4_aggregate, currency, by = c("Year", "country"))
+
+# Save data frame 
+    save(ManufVA_Rev4_aggregate, file = file.path(data_in, "ManufVA_Rev4_aggregate.RData"))
+```
+
+$~$
+
+**Table 2. Classification and description of combined 3-digit categories reported by some countries in INDSTAT4 data - ISIC Rev 4**
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Table of combination codes and description for inspection
+    descriptions <- ManufVA_Rev4 %>% select(isiccomb, isic, ISIC_Item, Is_AFS)
+    inspect_combo <- descriptions %>%
+      group_by(isic) %>% filter(row_number() == 1) %>%
+      filter(!is.na(Is_AFS))
+
+# Create table to show combination codes
+    kable(inspect_combo, col.names = c("Combination Code", "Classified under", "Description", "Is AFS? (1=yes, 2=partial, 0=No"), format = "html", caption = "Classification and description of combined 3- and 4-digit categories reported by some countries in INDSTAT4 ISIC Rev 4 data") %>% kable_classic(full_width = T, html_font = "Cambria")
+
+# Clean up
+    rm(inspect_combo, ComboCodes, descriptions)
+  
+```
+
+$~$
+
+**References**

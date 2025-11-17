@@ -1,0 +1,243 @@
+---
+title: "6_AFS Val Added_Per worker"
+author: "Kate Schneider"
+date: "`r Sys.Date()`"
+output: html_document
+---
+### *Summary of Script*
+This script contains data management to combine the value added estimates with employment estimates and calculate a metric of value added per worker in agrifood systems (AFS). 
+
+```{r setup, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+### Setup required to knit this script into a markdown document
+
+    # Load the knitr package
+      library(knitr)
+    
+    # Set echo = FALSE for all code chunks will prevent the code from printing in the output file
+      knitr::opts_chunk$set(echo = FALSE)
+      
+# Set the root folder to the project root so that all file paths are relative to the main project folder
+    knitr::opts_knit$set('./')
+  
+# Set the treatment of numbers to numerical (avoids scientific notation from showing in results)
+    options(scipen = 999)
+
+# Load packages
+    # R studio should prompt the installation of any packages not loaded on the instance where this script has been opened
+    
+    # Data management packages
+    library(tidyverse)
+    library(haven)
+    library(here)
+    library(citr) ## To install from github: devtools::install_github("crsh/citr")
+
+# Set relative directory paths
+    data_in <- here::here("Input Data")
+    fig_out <- here::here("Figures")
+    support <- here::here("Support files and scripts")
+    data_out <- here::here("Output Datasets")
+
+# Create a "not in" operator
+    `%notin%` <- Negate(`%in%`) 
+
+# Note: "$~$" adds line breaks in the html report in the knitting process.
+
+```
+
+$~$
+
+Load the value added data set
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Load the data set
+    load(file = file.path(data_out, "AFS_ValueAdded.RData"))
+
+# Shorten country names for visualization 
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      mutate(country = case_when(country == "United Kingdom of Great Britain and Northern Ireland" ~ "United Kingdom",
+                                 country == "Bolivia (Plurinational State of)" ~ "Bolivia",
+                                 country == "Gambia (Republic of The)" ~ "The Gambia",
+                                 country == "Iran (Islamic Republic of)" ~ "Iran",
+                                 country == "United States of America" ~ "United States",
+                                 country == "United Republic of Tanzania" ~ "Tanzania",
+                                 country == "Lao People’s Democratic Republic" ~ "Lao PDR",
+                                 TRUE ~ country))
+
+# Revise ISIC categories for explanation
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      mutate(ISIC_Item = case_when(ISIC_Item == "Manufacturing" ~ "Manufacturing (where only aggregate data available)",
+                                   ISIC_Item == "Manufacturing, mining and quarrying and other industrial activities" ~ "Manufacturing, mining and quarrying and other industrial activity (Manufacturing share if disaggregate data are not available)",
+                                   TRUE ~ ISIC_Item))
+    
+
+# Revise ISIC categories for explanation
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      mutate(ISIC_Item = case_when(ISIC_Item == "Manufacturing" ~ "Manufacturing (where only aggregate data available)",
+                                   ISIC_Item == "Manufacturing, mining and quarrying and other industrial activities" ~ "Manufacturing, mining and quarrying and other industrial activity (Manufacturing share if disaggregate data are not available)",
+                                   TRUE ~ ISIC_Item))
+    
+# Reorder the ISIC Items
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      mutate(ISIC_order = case_when(ISIC_Item == "Agriculture, forestry and fishing" ~ 1,
+                                    ISIC_Item == "Manufacturing (where only aggregate data available)" ~ 2,
+                                    ISIC_Item == "Manufacture of food products and beverages" ~ 3,
+                                    ISIC_Item == "Manufacture of tobacco products" ~ 4,
+                                    ISIC_Item == "Manufacture of wood and wood products" ~ 5,
+                                    ISIC_Item == "Manufacture of paper and paper products" ~ 6,
+                                    ISIC_Item == "Manufacture of furniture" ~ 7,
+                                    ISIC_Item == "Manufacture of textiles" ~ 8,
+                                    ISIC_Item == "Manufacture of wearing apparel" ~ 9,
+                                    ISIC_Item == "Manufacture of leather and related products" ~ 10,
+                                    ISIC_Item == "Manufacture of rubber and plastics products" ~ 11,
+                                    ISIC_Item == "Manufacture of chemicals and chemical products" ~ 12,
+                                    ISIC_Item == "Manufacture of pharmaceuticals" ~ 13,
+                                    ISIC_Item == "Manufacture of machinery and equipment n.e.c." ~ 14,
+                                    ISIC_Item == "Manufacturing, mining and quarrying and other industrial activity (Manufacturing share if disaggregate data are not available)" ~ 15,
+                                    ISIC_Item == "Transportation and storage" ~ 16,
+                                    ISIC_Item == "Wholesale and retail trade" ~ 17,
+                                    ISIC_Item == "Food service" ~ 18,
+                                    ISIC_Item == "Electricity, gas, water" ~ 19,
+                                    ISIC_Item == "Health and social work" ~ 20,
+                                    ISIC_Item == "Mining and quarrying" ~ 21,
+                                    ISIC_Item == "Professional, scientific and technical activities" ~ 22,
+                                    ISIC_Item == "Public administration" ~ 23))
+    
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      unique()
+    
+  # Restrict to 2000-2019 as the years of dataset overlap
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      filter(Year %in% 2000:2019)
+    
+  # Select only the ISIC codes that match what is included in the employment dataset
+    isic_employ <- c("Agriculture, forestry and fishing", "Manufacture of food products and beverages",
+                     "Food service", "Manufacture of tobacco products", "Manufacture of textiles",
+                     "Manufacture of leather and related products", "Manufacture of wood and wood products", "Manufacture of paper and paper products", "Wholesale and retail trade", "Transportation and storage", "Manufacturing (where only aggregate data available)")
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      filter(ISIC_Item %in% isic_employ)
+    
+  # Develop an aggregate of agriculture and non-ag AFS
+    AFS_ValueAdded_aggregate <- AFS_ValueAdded %>%
+      select(c(1,2,5,6,16)) %>%
+      unique()
+    
+  # Now aggregate to only agriculture and the rest of AFS (nonag) and reshape to match employment data
+    AFS_ValueAdded_aggregate <- AFS_ValueAdded_aggregate %>%
+      pivot_wider(names_from = ISIC_Item, values_from = ValueAdded_cUSD) %>%
+      rename(ag_ValAdded = `Agriculture, forestry and fishing`) %>%
+      rowwise() %>%
+      mutate(nonag_ValAdded = sum(c_across(5:14), na.rm = TRUE)) %>%
+      select(1:4,15) %>%
+      rowwise() %>%
+      mutate(AFS_ValAdded = sum(c_across(4:5), na.rm = TRUE))
+
+```
+
+$~$
+
+Countries included in the 2019 value added analysis:
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+    # Create a table
+    countries2019 <- AFS_ValueAdded %>% select(country, Year) %>%
+      filter(Year == 2019) %>% unique() %>% select(-c("Year"))
+    table <- flextable(countries2019) %>% autofit()
+        
+    # Save table
+        save_as_docx(table, path = file.path(fig_out, "Countries in 2019 analysis.docx"))
+    
+# Create a list of the complete cases based on total value added to use with the ISIC level figure below
+summary(countries2019)
+```
+
+$~$
+
+Load the employment data set
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+  AFS_employment <- haven::read_dta(file.path(data_in, "AFS_employmentdata_2024.dta"))
+
+  # Restrict to 2000-2019 as the years of dataset overlap
+    AFS_employment <- AFS_employment %>%
+      filter(yr %in% 2000:2019)
+  
+  # Harmonize variable names and country names
+    AFS_employment <- AFS_employment %>%
+      rename(Year = yr,
+             ISO = AreaID) %>%
+      # Keep only ag and non-ag AFS variables
+      select(c(1:5,9,12))
+    colorder <- c("country", "ISO", "Year", "agr", "nonag_afs", "total_emp", "source_nonag")
+    AFS_employment <- AFS_employment[, colorder]
+    AFS_employment <- AFS_employment %>%
+      rename(ag_emp = agr)
+    
+  # Change unit to numbers (from thousands)
+    AFS_employment <- AFS_employment %>%
+      rowwise() %>%
+      mutate(across(4:6, ~ . * 1000))
+    AFS_employment <- remove_var_label(AFS_employment)
+    AFS_employment <- AFS_employment %>%
+      rowwise() %>%
+      mutate(afs_emp = sum(c_across(4:5), na.rm = TRUE)) %>%
+      relocate(afs_emp, .after = nonag_afs) %>%
+      rename(nonag_afs_emp = nonag_afs,
+             source_nonag_emp = source_nonag) %>% 
+      select(-c(country))
+
+```
+
+$~$
+
+Join the datasets and calculate per-worker statistics
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Join data  
+  VAperworker <- left_join(AFS_ValueAdded_aggregate, AFS_employment, by = c("Year", "ISO"))
+
+  # Filter out the country-years without employment or value added data or where these are zero 
+    VAperworker <- VAperworker %>%
+      filter(!(is.na(total_emp))) %>%
+      filter(!(is.na(AFS_ValAdded))) %>%
+      filter(!(AFS_ValAdded == 0 | afs_emp == 0))
+
+  # Calculate VA per worker
+    VAperworker <- VAperworker %>%
+      # Filter out any observations with missing or 0 value added or employment
+      mutate(ag_VA_perworker = ag_ValAdded / ag_emp,
+             nonagAFS_VA_perworker = nonag_ValAdded / nonag_afs_emp,
+             afs_VA_perworker = AFS_ValAdded / afs_emp) %>%
+  filter(!(is.na(afs_VA_perworker)))
+    
+    # Now create a flag to identify where AFS Val Added is only ag or only non-ag afs
+      VAperworker <- VAperworker %>%
+        mutate(VAperWorker_flag = case_when(!(is.na(afs_VA_perworker)) & (is.na(nonag_ValAdded) | is.na(nonag_afs_emp)) ~ "Ag only",
+                                !(is.na(afs_VA_perworker)) & (is.na(ag_ValAdded) | is.na(ag_emp)) ~ "Non-ag only",
+                                TRUE ~ NA)) %>%
+        mutate(afs_VA_perworker = case_when(round(afs_VA_perworker, 0) != round(ag_VA_perworker, 0) &
+                                              VAperWorker_flag == "Ag only" ~ NA,
+                                            round(afs_VA_perworker, 0) != round(nonagAFS_VA_perworker, 0) & VAperWorker_flag == "Non-ag only" ~ NA,
+                                            TRUE ~ afs_VA_perworker))
+      
+    # Calculate AFS employment as percent of total employment
+      VAperworker <- VAperworker %>%
+        mutate(afsemp_pctTot = (afs_emp/total_emp)*100,
+               agemp_pctTot = (ag_emp/total_emp)*100,
+               nonagAFS_pctTot = (nonag_afs_emp/total_emp)*100)
+
+# Merge back region and income group
+  reginc <- AFS_ValueAdded %>%
+    select("ISO", "UN_continental_region", "Income Level", "Year", "GDP_cUSD", "population") %>%
+    unique() %>%
+    mutate(GDP_percap = GDP_cUSD / population)
+  VAperworker <- left_join(VAperworker, reginc, by = c("ISO", "Year")) 
+  
+
+# Calculate ratio of VA per worker in primary production to rest of AFS
+  VAperworker <- VAperworker %>%
+    mutate(PPtoRest_VApw_ratio = case_when(ag_VA_perworker != 0 & nonagAFS_VA_perworker != 0 ~ (ag_VA_perworker/nonagAFS_VA_perworker),
+                                           TRUE ~ NA))
+# Clean up
+  rm(reginc, AFS_employment, AFS_ValueAdded, AFS_ValueAdded_aggregate, isic_employ)
+  
+# Save the dataset
+  saveRDS(VAperworker, file.path(data_out, "VAperworker_AFS.RDS"))
+  writexl::write_xlsx(VAperworker, path = file.path(data_out, "VAperworker_AFS.xlsx"))
+
+```

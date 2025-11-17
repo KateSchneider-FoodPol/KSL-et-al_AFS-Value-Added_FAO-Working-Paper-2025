@@ -1,0 +1,1473 @@
+---
+title: "Schneider_ESS Working Paper_Analysis Replication"
+author: "Kate Schneider Lecy"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+### *Summary of Script*
+This script contains the replication code to create the tables and figures presented in the ESS working paper by Schneider et al. entitled "Estimating output value added in the world's agrifood systems" 
+
+```{r setup, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+### Setup required to knit this script into a markdown document
+
+    # Load the knitr package
+      library(knitr)
+    
+    # Set echo = FALSE for all code chunks will prevent the code from printing in the output file
+      knitr::opts_chunk$set(echo = FALSE)
+      
+# Set the root folder to the project root so that all file paths are relative to the main project folder
+    knitr::opts_knit$set('./')
+  
+# Set the treatment of numbers to numerical (avoids scientific notation from showing in results)
+    options(scipen = 999)
+
+# Load packages
+    # R studio should prompt the installation of any packages not loaded on the instance where this script has been opened
+    
+    # Data management packages
+    library(tidyverse)
+    library(here)
+    library(labelled)
+    library(kableExtra)
+    library(purrr)
+    library(citr) ## To install from github: devtools::install_github("crsh/citr")
+    library(scales)
+    library(broom)
+    library(ggpubr)
+    
+    # Visualization and table packages
+    library(pals)
+    library(cowplot)
+    library(flextable)
+    library(ggplot2)
+
+# Set relative directory paths
+    data_in <- here::here("Input Data")
+    fig_out <- here::here("Figures")
+    support <- here::here("Support files and scripts")
+    data_out <- here::here("Output Datasets")
+
+# Create a "not in" operator
+    `%notin%` <- Negate(`%in%`) 
+
+# Note: "$~$" adds line breaks in the html report in the knitting process.
+
+# Color palette with 26 discrete differentiated values
+  unname(alphabet())
+  unname(pals::brewer.blues(13))
+  
+  # Set the colors to the specific ISIC category name so they are consistent across figures
+  # Even when only a subset of the ISIC codes are present
+  colors <- c("Agriculture, forestry and fishing" ="#005C31",
+              "Electricity, gas, water" = "#4C005C",
+              "Food service" = "#808080",
+              "Health and social work" = "#FFA8BB",
+              "Manufacture of chemicals and chemical products" = "#21618C",                
+              "Manufacture of food products and beverages" = "#2874A6",
+              "Manufacture of furniture" = "#A9CCE3",
+              "Manufacture of leather and related products" = "#1A5276",
+              "Manufacture of machinery and equipment n.e.c." = "#1B4F72",              
+              "Manufacture of paper and paper products" = "#D6EAF8",
+              "Manufacture of pharmaceuticals" = "#21618C",
+              "Manufacture of rubber and plastics products" = "#154360",
+              "Manufacture of textiles" = "#5499C7",
+              "Manufacture of tobacco products" = "#3498DB",
+              "Manufacture of wearing apparel" = "#2471A3",
+              "Manufacture of wood and wood products" = "#85C1E9",
+              "Manufacturing (where only aggregate data available)" = "#1B4F72",
+              "Manufacturing, mining and quarrying and other industrial activity (Manufacturing share if disaggregate data are not available)" = "#1B4F72",
+              "Mining and quarrying" = "#5EF1F2",
+              "Professional, scientific and technical activities" = "#FFFF80",
+              "Public administration" = "#F0A0FF",
+              "Transportation and storage" = "#C20088",
+              "Wholesale and retail trade" = "#00998F")
+
+```
+
+$~$
+
+# Data management
+
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+# Load the data set
+    load(file = file.path(data_out, "AFS_ValueAdded.RData"))
+
+# Shorten country names for visualization 
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      mutate(country = case_when(country == "United Kingdom of Great Britain and Northern Ireland" ~ "United Kingdom",
+                                 country == "Bolivia (Plurinational State of)" ~ "Bolivia",
+                                 country == "Gambia (Republic of The)" ~ "The Gambia",
+                                 country == "Iran (Islamic Republic of)" ~ "Iran",
+                                 country == "United States of America" ~ "United States",
+                                 country == "United Republic of Tanzania" ~ "Tanzania",
+                                 country == "Lao People’s Democratic Republic" ~ "Lao PDR",
+                                 TRUE ~ country))
+
+# Revise ISIC categories for explanation
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      mutate(ISIC_Item = case_when(ISIC_Item == "Manufacturing" ~ "Manufacturing (where only aggregate data available)",
+                                   ISIC_Item == "Manufacturing, mining and quarrying and other industrial activities" ~ "Manufacturing, mining and quarrying and other industrial activity (Manufacturing share if disaggregate data are not available)",
+                                   TRUE ~ ISIC_Item))
+    
+# Reorder the ISIC Items
+    AFS_ValueAdded <- AFS_ValueAdded %>%
+      mutate(ISIC_order = case_when(ISIC_Item == "Agriculture, forestry and fishing" ~ 1,
+                                    ISIC_Item == "Manufacturing (where only aggregate data available)" ~ 2,
+                                    ISIC_Item == "Manufacture of food products and beverages" ~ 3,
+                                    ISIC_Item == "Manufacture of tobacco products" ~ 4,
+                                    ISIC_Item == "Manufacture of wood and wood products" ~ 5,
+                                    ISIC_Item == "Manufacture of paper and paper products" ~ 6,
+                                    ISIC_Item == "Manufacture of furniture" ~ 7,
+                                    ISIC_Item == "Manufacture of textiles" ~ 8,
+                                    ISIC_Item == "Manufacture of wearing apparel" ~ 9,
+                                    ISIC_Item == "Manufacture of leather and related products" ~ 10,
+                                    ISIC_Item == "Manufacture of rubber and plastics products" ~ 11,
+                                    ISIC_Item == "Manufacture of chemicals and chemical products" ~ 12,
+                                    ISIC_Item == "Manufacture of pharmaceuticals" ~ 13,
+                                    ISIC_Item == "Manufacture of machinery and equipment n.e.c." ~ 14,
+                                    ISIC_Item == "Manufacturing, mining and quarrying and other industrial activity (Manufacturing share if disaggregate data are not available)" ~ 15,
+ISIC_Item == "Transportation and storage" ~ 16,
+                                    ISIC_Item == "Wholesale and retail trade" ~ 17,
+                                    ISIC_Item == "Food service" ~ 18,
+                                    ISIC_Item == "Electricity, gas, water" ~ 19,
+                                    ISIC_Item == "Health and social work" ~ 20,
+                                    ISIC_Item == "Mining and quarrying" ~ 21,
+                                    ISIC_Item == "Professional, scientific and technical activities" ~ 22,
+                                    ISIC_Item == "Public administration" ~ 23))
+    
+    
+# Create lists to filter countries for 2019 and time series analysis
+  # 2019: N=170
+  countries2019 <- AFS_ValueAdded %>% select(country, Year) %>%
+    filter(Year == 2019) %>% unique() %>% select(-c("Year"))
+  summary(countries2019)
+
+  # 1995 - 2019: N = 101
+  AFS_ValueAdded_CompleteCases <- AFS_ValueAdded %>%
+    filter(Year %in% 1995:2019) %>%
+    select(Year, country, UN_continental_region, ValueAdded_AFS_cUSD_Total) %>%
+    unique() %>% filter(!(is.na(ValueAdded_AFS_cUSD_Total))) %>%
+    # Limit to complete cases
+      pivot_wider(names_from = Year, values_from = ValueAdded_AFS_cUSD_Total,
+                  values_fill = NA) %>%
+      relocate("1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", .after = last_col()) %>%
+      filter(complete.cases(.))
+  completecases <- list(AFS_ValueAdded_CompleteCases$country)
+  summary(completecases)
+
+# Now load the VA per worker dataset
+  VAperworker <- readRDS(file.path(data_out, "VAperworker_AFS.RDS"))
+  
+  # Shorten country names for visualizations
+  VAperworker <- VAperworker %>%
+    mutate(country = case_when(country == "United Kingdom of Great Britain and Northern Ireland" ~ "United Kingdom",
+                               country == "Bolivia (Plurinational State of)" ~ "Bolivia",
+                               country == "Gambia (Republic of The)" ~ "The Gambia",
+                               country == "Iran (Islamic Republic of)" ~ "Iran",
+                               country == "United States of America" ~ "United States",
+                               country == "United Republic of Tanzania" ~ "Tanzania",
+                               country == "Lao People’s Democratic Republic" ~ "Lao PDR",
+                               TRUE ~ country))
+    
+# Create a list of countries with 2019 per worker data
+  countries_2019_pw <- VAperworker %>%
+    filter(!(is.na(afs_VA_perworker))) %>%
+      select(c(country, Year)) %>%
+      filter(Year == 2019) %>% select(c(country)) 
+    summary(countries_2019_pw$country) ## 159 countries
+    countries_2019_pw <- countries_2019_pw %>% pull(country)
+
+# Now complete cases with per worker data
+  completecases_df_pw <- VAperworker %>%
+    filter(!(is.na(afs_VA_perworker))) %>%
+    select(c(country, Year)) %>%
+    mutate(count = 1) %>%
+    pivot_wider(names_from = Year, values_from = count,
+                      values_fill = NA) %>%
+          relocate("2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", .after = last_col()) %>%
+          filter(complete.cases(.)) %>%
+    select(c(country)) %>% as.data.frame()
+
+# Create a list of the countries in complete cases for filtering time series visualizations
+  completecases_pw <- completecases_df_pw %>% pull(country)
+
+```
+
+$~$
+
+# Manuscript Tables and figures
+
+### Table 1: 
+This table is provided in the supplementary Excel workbook named "Classifications and Metadata.xlsx" found in the "Input Data" folder for this R project.
+
+$~$
+
+### Figure 1: Stability of the IO fractions over time (1995-2019)
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Set up the data
+    data <- AFS_ValueAdded %>% 
+      filter(!(fraction_val == 1),
+             !(fraction_name == "1"),
+             Year %in% 1995:2019,
+             country %in% unlist(completecases)) %>%
+      mutate(fraction = sub('.*_', '', fraction_name),
+             fraction = case_when(fraction == "AFSManuf" ~ "Agrifood Systems Manufacturing",
+                                  fraction == "HotelsRestaurants" ~ "Accommodation & Food service", 
+                                  fraction == "PubAdmin" ~ "Public administration",
+                                  fraction == "AccomFood" ~ "Accommodation & Food service",
+                                  fraction == "ProfSciTech" ~ "Professional, scientific, & technical activities",
+                                  fraction == "ElectricWater" ~ "Electricity, Gas, & Water",
+                                  fraction == "WearingApparel" ~ "Wearing Apparel",
+                                  fraction == "HealthSocWork" ~ "Health & Social work",
+                                  fraction == "Electric" ~ "Electricity, Gas, & Water",
+                                  TRUE ~ as.factor(fraction)),
+             Year = as.numeric(Year),
+             country = as.character(country))
+    
+# Create list of fractions
+    fraction_list <- unique(data$fraction)
+
+# Write a function for the regression
+    regress <- function(dat) {
+      model <- lm(fraction_val ~ Year + country, data = dat)
+      result <-  broom::tidy(model)
+      # Add 95% confidence interval to the result
+          conf_int <- broom::confint_tidy(model) # you can use broom::confint() for older versions
+          result <- cbind(result, conf_int)
+      return(result) # exits function
+    }
+
+# Run the regression in a loop over fractions
+    all_results <- data %>%
+      group_by(fraction) %>%
+      do(regress(.))
+
+# Remove coefficients for country and the intercepts
+    all_results <- all_results %>%
+      filter(!str_detect(term, "^country")) %>%
+      filter(term != "(Intercept)") %>%
+      rename(pval = "p.value")
+    
+# Add stars for p-value
+    all_results <- all_results %>%
+      mutate(star = case_when(pval < 0.001 ~ "***",
+                              pval >= 0.001 & pval < 0.01 ~ "**",
+                              pval >= 0.01 & pval < 0.05 ~ "*",
+                              pval >= 0.05 ~ "")) %>%
+      select(fraction, estimate, conf.low, conf.high, star) %>%
+      # create an ordering variable for the y-axis
+      mutate(order_var = case_when(fraction == "Agrifood Systems Manufacturing" ~ 1,
+                               fraction == "Furniture" ~ 2,
+                               fraction == "Leather" ~ 3,
+                               fraction == "Machinery" ~ 4,
+                               fraction == "Chemicals" ~ 5,
+                               fraction == "Wearing Apparel" ~ 6,
+                               fraction == "Textiles" ~ 7,
+                               fraction == "Rubber" ~ 8,
+                               fraction == "Accommodation & Food service" ~ 9,
+                               fraction == "Trade" ~ 10,
+                               fraction == "Transport" ~ 11,
+                               fraction == "Electricity, Gas, & Water" ~ 12,
+                               fraction == "Mining" ~ 13,
+                               fraction == "Professional, scientific, & technical activities" ~ 14,
+                               fraction == "Health & Social work" ~ 15,
+                               fraction == "Public administration" ~ 16,
+                               fraction == "Rentals" ~ 17,
+                               TRUE ~ NA_real_))
+
+# Plot the estimates
+    ggplot(all_results, aes(y = fct_reorder(fraction, order_var), x = estimate)) + 
+      geom_point() +
+      geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), width = 0.1) +
+      geom_text(aes(label = star, x = conf.high), hjust = -.1) +
+      scale_y_discrete(limits=rev) +
+      geom_vline(xintercept = 0) +
+      theme_classic() +
+      labs(y = "",
+           x = "Coefficient (95% Confidence Interval)",
+           caption = "*** p< 0.001, ** p< 0.01, * p < 0.05") + 
+      theme(plot.caption = element_text(hjust = -0.85))
+
+# Save the plot as .png
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 1.png"), plot = last_plot(), width = 7, units = c("in"), dpi = 300)    
+    
+# Clean up
+    rm(all_results, regress, data)
+```
+
+$~$
+
+### Table 2: Adapted from Davis et al (2023)
+
+$~$
+
+### Figure 2: Total value added from agrifood systems, by continent - 2019
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Total value added from agrifood systems, by continent - 2019
+    toplot <- AFS_ValueAdded %>% filter(Year == 2019) %>% 
+      group_by(UN_continental_region, ISIC_Item, ISIC_order) %>%
+      summarise(Sum_VA_AFS = sum(ValueAdded_cUSD, na.rm = TRUE)) %>%
+      filter(!(is.na(UN_continental_region))) %>%
+      filter(!(is.na(ISIC_Item))) %>%
+      mutate(Sum_VA_AFS = case_when(is.na(Sum_VA_AFS) ~ 0,
+                                     TRUE ~ Sum_VA_AFS)) %>%
+      mutate(Sum_VA_AFS = Sum_VA_AFS / 1000000000) %>% # Convert to billions
+      filter(!(Sum_VA_AFS == 0))
+  
+# Plot
+    plot1 <- ggplot(toplot, aes(fill = fct_reorder(ISIC_Item, ISIC_order), y = Sum_VA_AFS, x=UN_continental_region)) + 
+        geom_col() + 
+      # Color palette from the alphabet palette in the pals package, added manually
+      scale_fill_manual(labels = function(ISIC_Item) str_wrap(ISIC_Item, width = 30),
+                        values = colors) +
+      # Make the thousands separator a space per FAO formatting
+      scale_y_continuous(
+        labels = label_number(big.mark = " ")) +
+      
+      # set the left and right margins to 2 to remove unnecessary spacing in the final plot arrangement.
+      theme(plot.margin = margin(6, 2, 6, 2)) +
+      theme(legend.title = element_blank(),
+            legend.text = element_text(size = 6),
+            legend.position="none") +
+      guides(fill = guide_legend(override.aes = list(size = 0.1), ncol = 4)) +
+      labs(x = element_blank(), y = ("Current US$ (billions)"))
+
+    forlegend <- ggplot(toplot, aes(fill = fct_reorder(ISIC_Item, ISIC_order), y = Sum_VA_AFS, x=UN_continental_region)) + 
+        geom_col() + 
+      # Color palette from the alphabet palette in the pals package, added manually
+      scale_fill_manual(labels = function(ISIC_Item) str_wrap(ISIC_Item, width = 30),
+                        values = colors) +
+      
+      # set the left and right margins to 2 to remove unnecessary spacing in the final plot arrangement.
+      theme(plot.margin = margin(6, 2, 6, 2)) +
+      theme(legend.title = element_blank(),
+            legend.text = element_text(size = 6),
+            legend.position="bottom") +
+      guides(fill = guide_legend(override.aes = list(size = 0.1), ncol = 4)) +
+      labs(x = element_blank(), y = ("Current US$ (billions)"))
+    
+    legend <- get_legend(forlegend)
+
+# Now plot as shares
+    toplot <- AFS_ValueAdded %>% filter(Year == 2019) %>% 
+      group_by(UN_continental_region, ISIC_Item, ISIC_order) %>%
+      summarise(Sum_VA_AFS = sum(ValueAdded_cUSD, na.rm = TRUE)) %>%
+      filter(!(is.na(UN_continental_region))) %>%
+      filter(!(is.na(ISIC_Item))) %>%
+      mutate(Sum_VA_AFS = case_when(is.na(Sum_VA_AFS) ~ 0,
+                                     TRUE ~ Sum_VA_AFS)) %>%
+      mutate(Sum_VA_AFS = Sum_VA_AFS / 1000000000) %>% # Convert to billions
+      filter(!(Sum_VA_AFS == 0)) %>%
+  group_by(UN_continental_region) %>%
+    mutate(cont_total = sum(Sum_VA_AFS),
+           shares = (Sum_VA_AFS/cont_total)*100)
+  
+# Plot 
+    plot2 <- ggplot(toplot, aes(fill = fct_reorder(ISIC_Item, ISIC_order), y = shares, x=UN_continental_region)) + 
+        geom_col() + 
+      # Color palette from the alphabet palette in the pals package, added manually
+      scale_fill_manual(labels = function(ISIC_Item) str_wrap(ISIC_Item, width = 30),
+                        values = colors) +
+      
+      # set the left and right margins to 2 to remove unnecessary spacing in the final plot arrangement.
+      theme(plot.margin = margin(6, 2, 6, 2)) +
+      theme(legend.title = element_blank(),
+            legend.text = element_text(size = 6),
+            legend.position="none") +
+      guides(fill = guide_legend(override.aes = list(size = 0.1), ncol = 4)) +
+      labs(x = element_blank(), y = ("Share of total agrifood systems value added (%)"))
+
+# Combine
+    plots <- plot_grid(plot1, plot2, ncol = 2, rel_widths = c(1,1))
+    finalfig <- plot_grid(plots, legend, nrow = 2, rel_heights = c(2,1))
+
+# Save the plot as .png
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 2.png"), plot = last_plot(), 
+           width = 6.5, height = 8, units = c("in"),dpi = 300)
+        
+# Clean up
+    rm(toplot)
+```
+
+$~$ 
+
+### Table 2: Total value added per continent and overall in 2019
+```{r, warning = FALSE, echo = FALSE, message = FALSE}
+# Total value added from agrifood systems, by continent - 2019
+    tabledata <- AFS_ValueAdded %>% filter(Year == 2019) %>% group_by(UN_continental_region, ISIC_Item) %>%
+      summarise(Sum_VA_AFS = sum(ValueAdded_cUSD, na.rm = TRUE)) %>%
+      filter(!(is.na(UN_continental_region))) %>%
+      filter(!(is.na(ISIC_Item))) %>%
+      mutate(Sum_VA_AFS = case_when(is.na(Sum_VA_AFS) ~ 0,
+                                     TRUE ~ Sum_VA_AFS)) %>%
+      mutate(Sum_VA_AFS = Sum_VA_AFS / 1000000000) %>% # Convert to billions
+      pivot_wider(names_from = UN_continental_region, values_from = Sum_VA_AFS) %>%
+      filter(ISIC_Item != "Other community, social and personal service activities") %>%
+      rename("ISIC Category" = ISIC_Item) %>%
+      mutate("Category total" = rowSums(across(where(is.numeric)), na.rm = TRUE))  
+
+# Add continent totals
+    # Create a function to sum by column
+        add_totals <- function(x) x %>%
+            ungroup %>% 
+            bind_rows(summarise(., across(where(is.numeric), sum, na.rm = TRUE),
+                                across(where(is.factor), ~ "Total")))
+    
+    # Append to the data frame
+       tabledata <- tabledata %>% add_totals %>% 
+          
+    # Round everything to 2 digits
+        mutate_if(is.numeric, round, 2) %>%
+          
+    # Replace NA with --
+        mutate(across(.fns = ~ replace_na(as.character(.x), "--"))) %>%
+         filter(!("ISIC Category" == "--"))
+        
+    # Create a table
+        table <- flextable(tabledata) %>% autofit()
+        
+    # Save table
+        save_as_docx(table, path = file.path(fig_out, "ESSWP_Table 2.docx"))
+        
+# Clean up
+    rm(add_totals, tabledata, table)
+
+```
+
+$~$
+
+### Figure 3: Share of GDP from agrifood systems by AFS sector, country level data by income group, 2019
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Share of GDP from agrifood systems by AFS sector, country, and income group, 2019
+# Set up the data
+    toplot <- AFS_ValueAdded %>% filter(Year == 2019) %>% 
+      filter(!(is.na(VA_per_GDP))) %>% # Only show non-missing
+      select(c(country, VA_per_GDP, "Income Level", VA_per_GDP_TOTAL,
+               ISIC_Item, ISIC_order)) %>% 
+      mutate(VA_per_GDP = round(VA_per_GDP, digits = 1)) %>%
+      rename(incomelevel = "Income Level") %>%
+      filter(!(is.na(incomelevel))) %>%
+      mutate(incomelevel = factor(incomelevel,
+                                  levels = c("Low income",
+                                       "Lower middle income",
+                                       "Upper middle income",
+                                       "High income"))) %>%
+      # Rename income levels for FAO conventions:
+      mutate(incomelevel = case_when(incomelevel == "Lower middle income" ~ "Lower-middle income",
+                                     incomelevel == "Upper middle income" ~ "Upper-middle income",
+                                     TRUE ~ incomelevel))
+
+# Create a separate plot for each region with every country
+    # Create list of continents
+        incomegroup_list <- unique(toplot$incomelevel)
+
+    # Assign the plot code into a function
+        income_plot <- function(x){
+          ggplot(data = toplot %>% filter(incomelevel == x), 
+                 aes(y = fct_reorder(country, VA_per_GDP_TOTAL), x = VA_per_GDP)) + 
+          geom_col(aes(fill = fct_reorder(ISIC_Item, ISIC_order))) + 
+          scale_fill_manual(labels = function(ISIC_Item) str_wrap(ISIC_Item, width = 30),
+                            values = colors) +
+          theme_classic() +
+          # xlim(0,80) + # Put every income group on the same scale
+          theme(plot.margin = unit(c(0.1,0.2,0.1,0.2), "cm"),
+                legend.position="none",
+                axis.text.x = element_text(size = 6),
+                axis.text.y = element_text(size = 6)) +
+          guides(fill = FALSE) +
+          labs(x = "", y = "") +
+          ggtitle(paste0(x)) +
+          theme(plot.title = element_text(size = 8))
+          }
+
+    # Use the map function to run the plot function for every continent
+        plot_list <- map(incomegroup_list, income_plot)
+        
+# Get the legend
+    # Create the plot
+        p1 <- ggplot(data = toplot %>% filter(incomelevel == "High income"), aes(y=country, x=VA_per_GDP)) + 
+          geom_col(aes(fill = ISIC_Item)) + 
+          scale_fill_manual(labels = function(ISIC_Item) str_wrap(ISIC_Item, width = 30),
+                            values = colors) +
+          theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) +          
+          theme_classic() +
+          theme(legend.text = element_text(size = 8),
+            legend.position="right") +
+          guides(fill = guide_legend(title = "Sector (ISIC)", override.aes = list(size = 4),
+                                 ncol = 1,
+                                 keyheight = .5))
+
+    # Get the legend
+        legend <- get_legend(p1)
+
+    # Combine the plots with the income order going from low to high
+        order1 <- plot_list[[1]]
+        order2 <- plot_list[[3]]
+        order3 <- plot_list[[2]]
+        order4 <- plot_list[[4]]
+        newplotlist <- list(order1, order2, order3, order4)
+        plot1 <- plot_grid(plotlist = newplotlist, nrow = 2, align = "h")
+    
+    # Add a single x-axis label to the bottom right
+        text <- "Value added as a share of GDP (%)"
+        tgrob <- ggpubr::text_grob(text, size = 8, color = "black")
+        label <- as_ggplot(tgrob) + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) 
+        plot2 <- plot_grid(plot1, label, nrow = 2, rel_heights = c(30,0.85))
+
+    # Combine
+        plot_grid(plot2, legend, ncol = 2, rel_widths = c(3,1), align = "vh")
+        
+# Save the plot as .png (because elements are overlapping in viewer)
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 3.png"), plot = last_plot(), width = 7.5, height = 9.5, units = c("in"), dpi = 300)
+    
+# Clean up
+    rm(toplot, incomegroup_list, income_plot, plot_list, p1, tgrob, label, text, text2, label2, labels, plot2, legend)
+```
+
+$~$
+
+### Figure 4: Share of GDP from agrifood systems by GDP per capita with and without primary production, Country-level average 2019
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+
+    toplot <- AFS_ValueAdded %>% filter(Year %in% 2019) %>%
+      select(c("country", "GDP_cUSD", "population", "UN_continental_region", "VA_per_GDP_TOTAL")) %>% # Remove ISIC item level columns  
+      unique() %>% # De-duplicate (now that only total level data are left)
+      mutate(GDP_pc = (GDP_cUSD / population) / 1000) %>% # convert to thousands per capita
+      group_by(country, UN_continental_region) %>%
+      filter(!(is.na(VA_per_GDP_TOTAL))) %>%
+      filter(!(is.na(UN_continental_region))) %>% 
+  unique() %>% filter(!(is.na(GDP_pc))) 
+
+# Plot including primary production
+    withag <- ggplot(toplot, aes(color=UN_continental_region, y=VA_per_GDP_TOTAL, x=GDP_pc)) + 
+      geom_point(size = 2) + 
+      # Label the points >95th percentile of value added from AFS as a share of GDP
+      # geom_text(aes(label= ifelse(VA_per_GDP_TOTAL >
+      #                               quantile(VA_per_GDP_TOTAL, 0.9) |
+      #                               GDP_pc > quantile(GDP_pc, 0.9),
+      #    as.character(country),''), vjust="inward",hjust="inward")) +
+      scale_color_brewer(palette = "Set1") +
+      ylim(0,100) + # allow different y-axes across plots
+      theme_classic() +
+      labs(x = "GDP per capita (current USD, thousands)", y = ("Value added as share of GDP (%)")) + 
+      ggtitle("Including primary production") +
+      theme(legend.text = element_text(size = 8),
+            legend.position="none",
+            axis.title.x = element_text(size = 6),
+            axis.title.y = element_text(size = 6),
+            plot.title = element_text(size = 8)) +
+      guides(color = guide_legend(title = "Region", override.aes = list(size = 3)))
+    
+    toplot2 <- AFS_ValueAdded %>% filter(Year == 2019) %>%
+      filter(ISIC_Item != "Agriculture, forestry and fishing") %>%
+      # Recalculate the total value added from all sectors except agriculture, forestry, and fishing
+      # First recalculate the value added from the non-production AFS
+          group_by(country, UN_continental_region, Year, GDP, GDP_cUSD, population) %>%
+          filter(!(is.na(ValueAdded_LCU))) %>%
+          filter(!(is.na(UN_continental_region))) %>%
+          summarise(VAperGDP_noag = (sum(ValueAdded_LCU) / GDP)*100) %>%
+          mutate(GDP_pc = (GDP_cUSD / population) / 1000) %>% # convert to thousands per capita
+          group_by(country, UN_continental_region) %>%
+      unique() %>% filter(!(is.na(VAperGDP_noag))) %>%
+      filter(!(is.na(GDP_pc)))
+
+    
+    # Plot without primary production
+        withoutag <- ggplot(toplot2, aes(color=UN_continental_region, y=VAperGDP_noag, x=GDP_pc)) + 
+          geom_point(size = 2) + 
+          # Label the points >95th percentile of value added from AFS as a share of GDP
+          # geom_text(aes(label= ifelse(VAperGDP_noag > quantile(VAperGDP_noag, 0.9) | 
+          #                               GDP_pc > quantile(GDP_pc, 0.9),
+          #    as.character(country),''), vjust="inward",hjust="inward")) +
+          scale_color_brewer(palette = "Set1") +
+          ylim(0,20) + # allow different y-axes across plots
+          theme_classic() +
+          labs(x = "GDP per capita (current USD, thousands)", y = ("Value added as share of GDP (%)")) + 
+          ggtitle("Excluding primary production") +
+          theme(legend.text = element_text(size = 8),
+                legend.position="none",
+                axis.title.x = element_text(size = 6),
+                axis.title.y = element_text(size = 6),
+                plot.title = element_text(size = 8)) +
+          guides(color = guide_legend(title = "Region", override.aes = list(size = 3)))
+
+# Get the legend
+    plotforlegend <- ggplot(toplot2, aes(color=UN_continental_region, y=VAperGDP_noag, x=GDP_pc)) + 
+          geom_point(size = 2) + 
+          scale_color_brewer(palette = "Set1") +
+          theme_classic() +
+          labs(x = "GDP per capita (current USD, thousands)", y = ("Value added as share of GDP (%)")) + 
+          ggtitle("Including primary production") +
+          theme(legend.text = element_text(size = 8),
+                legend.position="bottom",
+                axis.title.x = element_text(size = 6),
+                axis.title.y = element_text(size = 6),
+                plot.title = element_text(size = 8)) +
+          guides(color = guide_legend(title = "Region", override.aes = list(size = 3)))
+    legend <- get_legend(plotforlegend)
+
+# Combine the plots    
+    plots <- cowplot::plot_grid(withag, withoutag, ncol = 2)
+    combo <- plot_grid(plots, legend, nrow = 2, rel_heights = c(1,.1))
+    combo
+    
+# Save the plot as .png
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 4.png"), plot = last_plot(), width = 7, units = c("in"),dpi = 300)
+    
+# Clean up 
+    rm(combo, plots, legend, plotforlegend, withoutag, withag, toplot, toplot2)
+
+```
+
+$~$
+
+### Figure 5: Top 10% outliers in terms of value added from outside primary production as a share of GDP.
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Recreate the data frame for Figure 3
+    toplot2 <- AFS_ValueAdded %>% filter(Year == 2019) %>%
+      filter(ISIC_Item != "Agriculture, forestry and fishing") %>%
+      # Recalculate the total value added from all sectors except agriculture, forestry, and fishing
+      # First recalculate the value added from the non-production AFS
+          group_by(country, UN_continental_region, Year, GDP, GDP_cUSD, population) %>%
+          filter(!(is.na(ValueAdded_LCU))) %>%
+          filter(!(is.na(UN_continental_region))) %>%
+          summarise(VAperGDP_noag = (sum(ValueAdded_LCU) / GDP)*100) %>%
+          mutate(GDP_pc = (GDP_cUSD / population) / 1000) %>% # convert to thousands per capita
+          group_by(country, UN_continental_region) %>%
+      unique() %>% filter(!(is.na(VAperGDP_noag))) %>%
+      filter(!(is.na(GDP_pc)))
+
+      # Now filter only the outliers (top 10%)
+          toplot2$pctle_90 <- quantile(toplot2$VAperGDP_noag, 0.9)
+          toplot2 <- toplot2 %>% filter(VAperGDP_noag > pctle_90 & !(is.na(VAperGDP_noag)))
+          
+      # Now use the complete dataset with ISIC level observations and use the outlier dataset to filter out the countries. Use only 2019 otherwise some countries will have a mix of aggregate manufacturing and disaggregated categories if UNIDO data is only available for a subset of the years and the resulting figure would be misleading
+          toplot3 <- AFS_ValueAdded %>%
+            filter(country %in% toplot2$country,
+               Year == 2019,
+               ISIC_Item != "Agriculture, forestry and fishing") %>%
+            filter(!(is.na(ValueAdded_LCU))) %>%
+            filter(!(is.na(UN_continental_region)))
+            
+            # Calculate a pseudo total to sort the graph
+               tots <- toplot3 %>% group_by(country) %>%
+               summarise(pseudototal = sum(VA_per_GDP, na.rm = TRUE)) %>%
+               ungroup()
+               
+               toplot3 <- left_join(toplot3, tots, by = "country")
+
+# Create a plot showing the composition of their AFS value added
+      p1 <- ggplot(data = toplot3, 
+             aes(y = fct_reorder(country, pseudototal), x = VA_per_GDP)) + 
+      geom_col(aes(fill = fct_reorder(ISIC_Item, ISIC_order))) + 
+      scale_fill_manual(labels = function(ISIC_Item) str_wrap(ISIC_Item, width = 30),
+                        values = colors) +
+      theme_classic() +
+      theme(plot.margin = unit(c(.5,.5,0,0), "cm"),
+            legend.position="none",
+            axis.text.x = element_text(size = 6),
+            axis.text.y = element_text(size = 6),
+            legend.text=element_text(size=6)) +
+      guides(fill = FALSE) +
+      labs(x = "Share of GDP (%)", y = "")
+      
+# Now get the legend separately
+    p2 <- ggplot(data = toplot3, 
+             aes(y = fct_reorder(country, pseudototal), x = VA_per_GDP)) + 
+      geom_col(aes(fill = fct_reorder(ISIC_Item, ISIC_order))) + 
+      scale_fill_manual(labels = function(ISIC_Item) str_wrap(ISIC_Item, width = 30),
+                        values = colors) +
+      theme_classic() +
+      theme(plot.margin = unit(c(.5,.5,0,0), "cm"),
+            legend.position="right",
+            axis.text.x = element_text(size = 6),
+            axis.text.y = element_text(size = 6),
+            legend.text=element_text(size=6)) +
+      guides(fill = guide_legend(title = "Sector (ISIC)", override.aes = list(size = 3),
+                             ncol = 1,
+                             keyheight = .5)) +
+      labs(x = "Share of GDP (%)", y = "")
+  legend <- get_legend(p2)
+
+# Combine plot and legend
+  plot_grid(p1, legend, ncol = 2, rel_widths = c(4,1))
+  
+# Save the plot as .png (because elements are overlapping in viewer)
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 5.png"), plot = last_plot(), width = 8, height = 7, units = c("in"), dpi = 300)
+    
+# Clean up
+    rm(toplot, toplot2, legend, p1, p2)
+```
+
+$~$
+
+### Figure 6: Value added over time, by sector, 1995-2019, limited to complete cases (N=101)
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+    toplot <- AFS_ValueAdded %>%
+      mutate(Year = as.numeric(Year)) %>%
+      group_by(Year, ISIC_Item, ISIC_order) %>%
+      filter(ISIC_Item != "Agriculture, forestry and fishing",
+             Year %in% 1995:2019,
+             country %in% unlist(completecases)) %>%
+      summarise(Ncountries = sum(!is.na(ValueAdded_cUSD)),
+                ValueAdded_cUSD = sum(ValueAdded_cUSD, na.rm = T)) %>%
+      mutate(ValueAdded_cUSD = ValueAdded_cUSD/1000000000) %>% # Convert to billions
+      filter(!(ValueAdded_cUSD==0))    
+  
+# second data frame to label only the end of the lines
+    toplot2 <- toplot %>% filter(Year == 2019)
+
+# Plot 
+    plot <- ggplot(toplot, aes(y=ValueAdded_cUSD, x=Year, fill = fct_reorder(ISIC_Item, ISIC_order))) +
+      geom_col(aes(fill = fct_reorder(ISIC_Item, ISIC_order))) + 
+      scale_fill_manual(labels = function(ISIC_Item) str_wrap(ISIC_Item, width = 30),
+                            values = colors) +
+            theme_classic() +
+      # Make the thousands separator a space per FAO formatting
+      scale_y_continuous(
+        labels = label_number(big.mark = " ")) +
+      theme(legend.position="none",
+            axis.text.x = element_text(size = 6),
+            axis.text.y = element_text(size = 6),
+            axis.title.y = element_text(size = 8)) +
+      labs(y = ("Value added from agrifood systems, current US$ (billions)")) 
+    
+    p1 <- ggplot(toplot, aes(y=ValueAdded_cUSD, x=Year, fill = fct_reorder(ISIC_Item, ISIC_order))) +
+      geom_col(aes(fill = fct_reorder(ISIC_Item, ISIC_order))) + 
+      scale_fill_manual(labels = function(ISIC_Item) str_wrap(ISIC_Item, width = 30),
+                            values = colors) +
+            theme_classic() +
+      theme(legend.text = element_text(size = 6),
+            legend.position="right") +
+      guides(fill = guide_legend(title = "Sector (ISIC)", override.aes = list(size = 3),
+                                 ncol = 1,
+                                 keyheight = .5))
+    legend <- get_legend(p1)
+
+# Combine plot and legend
+    plot_grid(plot, legend, nrow = 1, rel_widths = c(3,1))
+
+# Save the plot as .png
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 6.png"), plot = last_plot(), width = 7, units = c("in"),dpi = 300)    
+    
+# Clean up
+    rm(toplot, toplot2, legend, p1, p2)
+```
+
+$~$
+
+### Figure 7: Total value added by continent, 1995-2019, Complete cases only (N=101)
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Plot 
+    toplot <- AFS_ValueAdded %>%
+      filter(country %in% unlist(completecases),
+             Year %in% 1995:2019) %>%
+      mutate(Year = as.numeric(Year)) %>%
+      group_by(Year, UN_continental_region) %>%
+      summarise(ValueAdded_AFS_cUSD_Total = sum(ValueAdded_AFS_cUSD_Total, na.rm = TRUE)) %>%
+      mutate(ValueAdded_AFS_cUSD_Total = ValueAdded_AFS_cUSD_Total/1000000000) # Convert to billions
+
+    ggplot(toplot, aes(y=ValueAdded_AFS_cUSD_Total, x=Year, color = UN_continental_region)) +
+        geom_line(aes(color = UN_continental_region), size = 1) + 
+      scale_color_brewer(palette = "Set1") +
+      # Make the thousands separator a space per FAO formatting
+      scale_y_continuous(
+        labels = label_number(big.mark = " ")) +
+      theme_classic() +
+      theme(legend.text = element_text(size = 8),
+            legend.position="bottom",
+            axis.text.x = element_text(size = 6),
+            axis.text.y = element_text(size = 6),
+            axis.title.y = element_text(size = 8)) +
+      guides(color = guide_legend(title = "Region", override.aes = list(size = 3))) +
+      labs(y = ("Value added from agrifood systems, current USD (billions)")) 
+
+# Save the plot as .png
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 7.png"), plot = last_plot(), width = 7, units = c("in"),dpi = 300)    
+    
+    # The drop in the Americas from 2006-2007 is a halving of value added in the United States. The US started reporting ISIC Revision 4 in 2007. 
+    
+# Clean up
+    rm(toplot)
+```
+
+$~$
+
+### Table 3: VA per worker by continent
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+  Regional_Estimates <- VAperworker %>%
+    filter(Year == 2019 & country %in% countries_2019_pw) %>%
+    group_by(UN_continental_region) %>%
+    summarise(across(4:10, sum, na.rm = TRUE)) %>%
+    ungroup() %>%
+    mutate(`Primary production` = ag_ValAdded/ag_emp,
+           `Rest of agrifood systems` = nonag_ValAdded/nonag_afs_emp,
+           `Total AFS` = AFS_ValAdded/afs_emp) %>%
+    select(c(1,9:11)) %>%
+    mutate(across(2:4, round, 2)) %>%
+    rename(Region = UN_continental_region)
+
+  World <- VAperworker %>% ungroup() %>%
+    filter(Year == 2019 & country %in% countries_2019_pw) %>%
+    select(c(4:10)) %>%
+    summarise_all(sum, na.rm = TRUE) %>%
+    mutate(`Primary production` = ag_ValAdded/ag_emp,
+           `Rest of agrifood systems` = nonag_ValAdded/nonag_afs_emp,
+           `Total AFS` = AFS_ValAdded/afs_emp) %>%
+    select(c(8:10)) %>%
+    mutate_all(round, 2) %>%
+    mutate(Region = "World")
+  
+# Now create a table of VA per worker by continent, 2019
+  table <- rbind(Regional_Estimates, World) %>%
+    flextable() %>% autofit()
+  
+    # Save table
+        save_as_docx(table, path = file.path(fig_out, "ESSWP_Table 3.docx"))
+        
+```
+
+$~$
+
+### Figure 8 
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+  toplot <- VAperworker %>%
+    filter(Year == 2019 & country %in% countries_2019_pw) %>%
+    mutate(`Primary production` = ag_ValAdded/ag_emp,
+           `Rest of agrifood systems` = nonag_ValAdded/nonag_afs_emp,
+           `Total AFS` = AFS_ValAdded/afs_emp) %>%
+    select(c(1:3,19,25:27)) %>%
+    pivot_longer(5:6, names_to = "Type", values_to = "VA_perworker") %>%
+    mutate(VA_perworker = round(VA_perworker, 2)) 
+  
+  globalVAperworker <- ggplot(toplot, aes(y = VA_perworker, x = UN_continental_region, fill = Type)) +
+    geom_boxplot() +
+    scale_color_brewer(palette = "Paired") +
+    scale_y_continuous(
+    labels = label_number(big.mark = " ")) +
+    theme_classic() +
+    theme(legend.text = element_text(size = 12),
+          legend.position="none") +
+    labs(x = "", y = ("Value added per worker (current USD)")) 
+
+  forlegend <- ggplot(toplot, aes(y = VA_perworker, x = UN_continental_region, fill = Type)) +
+    geom_bar(position = position_stack(reverse = TRUE), stat="identity") +
+    scale_color_brewer(palette = "Paired") +
+    theme_classic() +
+    theme(legend.text = element_text(size = 9),
+          legend.position="right",
+          legend.direction = "horizontal",
+          legend.title = element_blank()) +
+    guides(color = guide_legend(title = "", override.aes = list(size = 3))) +
+    labs(x = "", y = ("Value added per worker (current USD)")) 
+  
+# Now workers
+    toplot2 <- VAperworker %>%
+      filter(Year == 2019 & country %in% countries_2019_pw) %>%
+      select(c(1:3, 7:10, 19)) %>%
+      rename(`Primary production` = ag_emp,
+             `Rest of agrifood systems` = nonag_afs_emp) %>%
+      pivot_longer(4:5, names_to = "Type", values_to = "N_workers") %>%
+      mutate(N_workers = N_workers / 1000000) 
+
+    toplot_pctTot <- VAperworker %>%
+      filter(Year == 2019 & country %in% countries_2019_pw) %>%
+      select(c(1:3, 16:18, 19)) %>%
+      rename(`Primary production` = agemp_pctTot,
+             `Rest of agrifood systems` = nonagAFS_pctTot,
+             `Total AFS` = afsemp_pctTot) %>%
+      group_by(UN_continental_region) %>%
+      summarise(across(c(4:6), median, na.rm = TRUE)) %>%
+      ungroup() %>%
+      pivot_longer(2:4, names_to = "% total employment", values_to = "Median_PCT")
+    
+    workers <- ggplot(toplot2) +
+      geom_bar(data = toplot2, aes(y = N_workers, x = UN_continental_region, fill = Type),
+               position = position_stack(reverse = TRUE), stat = "identity", show.legend = FALSE) +
+      scale_color_brewer(palette = "Paired") +
+      scale_y_continuous("Number of workers (millions)", sec.axis = sec_axis(~ ./8.5, name = "Median percent total employment")) +
+      geom_point(data = toplot_pctTot, 
+                 aes(y = Median_PCT*8.5, x = UN_continental_region, shape = `% total employment`, color = `% total employment`), 
+                 size = 4, show.legend = TRUE) +
+      scale_shape_manual(values = c(16, 15, 17)) +
+      scale_color_manual(values = c("gray", "gray40", "black")) +
+      theme_classic() +
+      guides(fill = "none") +
+      theme(legend.text = element_text(size = 7),
+            legend.position = c(0.8,.93),
+            legend.direction = "vertical",
+            legend.title = element_text(size = 7),
+            legend.background = element_rect(fill='transparent')) +
+      labs(x = "")  
+
+# Combine plots
+
+  legend <- cowplot::get_legend(forlegend)
+  plot <- cowplot::plot_grid(globalVAperworker, workers, ncol = 2, labels = c('A', 'B'), rel_widths = c(1,1))
+  cowplot::plot_grid(plot, legend, nrow = 2, rel_heights = c(10,1))
+  
+  # Save the plot as .png (because elements are overlapping in viewer)
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 8.png"), plot = last_plot(), width = 9.5, height = 7.5, units = c("in"), dpi = 300)
+    
+# Clean up
+    rm(toplot, toplot2, globalVAperworker, workers, forlegend, legend, plot)
+
+```
+
+$~$
+
+### Figure 9: VA per worker, country level data by income group, 2019
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Share of GDP from agrifood systems by AFS sector, country, and income group, 2019
+# Set up the data
+  toplot <- VAperworker %>%
+    filter(Year == 2019 & country %in% countries_2019_pw) %>%
+    select(c(1:3,14,19, 20, 24)) %>%
+    rename(incomelevel = "Income Level") %>%
+    filter(!(is.na(incomelevel))) %>%
+    mutate(incomelevel = factor(incomelevel,
+                                levels = c("Low income",
+                                     "Lower middle income",
+                                     "Upper middle income",
+                                     "High income"))) %>%
+    group_by(incomelevel) %>%
+    arrange(incomelevel, desc(afs_VA_perworker)) %>%
+    mutate(ordervar = 1:n()) %>%
+    ungroup() %>%
+    mutate(afs_VA_perworker = round(afs_VA_perworker, 2),
+           PPtoRest_VApw_ratio = round(PPtoRest_VApw_ratio, 2)) %>%
+  select(c(1,4,6,7,8)) %>%
+  # Rename income levels for FAO conventions:
+  mutate(incomelevel = case_when(incomelevel == "Lower middle income" ~ "Lower-middle income",
+                               incomelevel == "Upper middle income" ~ "Upper-middle income",
+                               TRUE ~ incomelevel))
+
+
+  toplot2 <- VAperworker %>%
+    filter(Year == 2019 & country %in% countries_2019_pw) %>%
+    select(c(1:3, 12:15,19, 20, 23)) %>%
+    rename(`Primary production` = ag_VA_perworker,
+           `Rest of agrifood systems` = nonagAFS_VA_perworker) %>%
+    rename(incomelevel = "Income Level") %>%
+    filter(!(is.na(incomelevel))) %>%
+    mutate(incomelevel = factor(incomelevel,
+                                levels = c("Low income",
+                                     "Lower middle income",
+                                     "Upper middle income",
+                                     "High income"))) %>%
+    pivot_longer(4:5, names_to = "Type", values_to = "VA_perworker") %>%
+    filter(!(is.na(VA_perworker))) %>%
+    mutate(VA_perworker = round(VA_perworker, 2),
+           Type = as.factor(Type)) %>%
+    select(c(1,7,9,10)) %>%
+  # Rename income levels for FAO conventions:
+  mutate(incomelevel = case_when(incomelevel == "Lower middle income" ~ "Lower-middle income",
+                               incomelevel == "Upper middle income" ~ "Upper-middle income",
+                               TRUE ~ incomelevel))
+
+# Create a separate plot for each region with every country
+    # Create list of income groups
+        incomegroup_list <- unique(toplot$incomelevel)
+    
+    # Assign the plot code into a function
+        income_plot <- function(x){
+          part1 <- ggplot(data = toplot %>% filter(incomelevel == x)) + 
+          geom_bar(data = toplot %>% filter(incomelevel == x),
+                 aes(y = forcats::fct_reorder(country, desc(ordervar)), 
+                     x = afs_VA_perworker),  
+                 stat = "identity",
+                 fill = "gray90", 
+                 show.legend = FALSE) + 
+          geom_point(data = toplot2 %>% filter(incomelevel == x),
+                     aes(y = country, x = VA_perworker,
+                         shape = Type, color = Type), 
+                     show.legend = FALSE) +
+          scale_shape_manual(values = c(15, 17)) +
+          theme_classic() +
+          theme(plot.margin = unit(c(0.1,0.2,0.1,0), "cm"),
+                legend.position="none",
+                axis.text.x = element_text(size = 5),
+                axis.text.y = element_text(size = 6)) +
+          guides(shape = FALSE, color = FALSE) +
+          labs(x = "", y = "") +
+          ggtitle(paste0(x)) +
+          theme(plot.title = element_text(size = 8))
+          
+          part2 <- ggplot(data = toplot %>% filter(incomelevel == x)) +
+            geom_text(aes(y = forcats::fct_reorder(country, desc(ordervar)), 
+                     x = 1,
+                     label = PPtoRest_VApw_ratio), 
+                     colour = "black", size = 1.9,
+                     hjust = 1) +
+            scale_x_continuous(position = "top", expand = c(0,0)) +
+            labs(x = "Ratio", y = "") +
+            theme_classic() +
+            theme(plot.margin = unit(c(0,0,0,0), "cm"),
+              legend.position="none",
+              axis.title.x = element_text(size = 6, hjust = 0.175),
+              axis.text.x = element_blank(),
+              axis.text.y = element_blank(),
+              axis.ticks.x=element_blank(), 
+              axis.ticks.y=element_blank(),
+              axis.line = element_blank())
+          
+          cowplot::plot_grid(part1, part2, ncol = 2, rel_widths = c(5,1),
+                             align = "h")
+          }
+        
+    # Use the map function to run the plot function for every continent
+        plot_list <- map(incomegroup_list, income_plot)
+        
+# Get the legend
+    # Create the plot
+        # to fake the fill legend, add a variable:
+        toplot <- toplot %>%
+          mutate(fillvar = "Total Agrifood Systems",
+                 fillvar = as.factor(fillvar))
+        p1 <- ggplot(data = toplot %>% filter(incomelevel == "Low income")) + 
+          geom_bar(data = toplot %>% filter(incomelevel == "Low income"),
+                 aes(y = forcats::fct_reorder(country, desc(ordervar)), 
+                     x = afs_VA_perworker, fill = fillvar),  
+                 stat = "identity") + 
+          geom_point(data = toplot2 %>% filter(incomelevel == "Low income"),
+                     aes(y = country, x = VA_perworker,
+                         shape = Type, color = Type), 
+                     size = 2, show.legend = TRUE) +
+          scale_shape_manual(values = c(15, 17)) +
+          scale_fill_manual("", values = c("gray90")) +
+          theme_classic() +
+          labs(x = "", y = "") +
+          theme(plot.title = element_text(size = 8),
+                plot.margin = unit(c(0,0,0,0), "cm"),
+                axis.text.x = element_text(size = 6),
+                axis.text.y = element_text(size = 6),
+                legend.position = "right",
+                legend.direction = "horizontal",
+                legend.spacing = unit(0.02, "cm"),
+                legend.title = element_blank()) +
+          guides(fill = guide_legend(override.aes = list(size = 4, shape = NA),
+                                     keyheight = .1),
+                 shape = guide_legend(override.aes = list(size = 4),
+                                 keyheight = .5),
+                 color = guide_legend(override.aes = list(size = 4),
+                                 keyheight = .5))
+
+    # Get the legend
+        legend <- cowplot::get_legend(p1)
+
+    # Combine the plots
+        plot1 <- cowplot::plot_grid(plotlist = plot_list, nrow = 2, align = "hv", rel_widths = c(1,1))
+    
+    # Add a single x-axis label to the bottom right
+        text <- "Value added per worker (current US$)"
+        tgrob <- text_grob(text, size = 8, color = "black")
+        label <- as_ggplot(tgrob) + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) 
+        plot2 <- cowplot::plot_grid(plot1, label, nrow = 2, rel_heights = c(30,0.85))
+
+    # Combine
+        cowplot::plot_grid(plot2, legend, ncol = 1, rel_heights = c(19,1), align = "vh")
+        
+# Save the plot as .png (because elements are overlapping in viewer)
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 9.png"), plot = last_plot(), width = 7.5, height = 9.5, units = c("in"), dpi = 300)
+    
+# Clean up
+    rm(toplot, incomegroup_list, income_plot, plot_list, p1, tgrob, label, text, text2, label2, labels, plot2, legend)
+  
+```
+
+$~$
+
+### Figure 10: VA per worker by GDP per capita, 1995 - 2019
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Set up the data
+  toplot <- VAperworker %>%
+    filter(country %in% completecases_pw)
+
+# Calculate the change in position for each country
+toplot <- toplot %>%
+  group_by(country) %>%
+  filter(!(is.na(afs_VA_perworker))) %>%
+  summarise(change = sqrt((log(GDP_percap)[which.max(Year)] - log(GDP_percap)[which.min(Year)])^2 + 
+                          (log(afs_VA_perworker)[which.max(Year)] - log(afs_VA_perworker)[which.min(Year)])^2), 
+            na.rm = TRUE) %>%
+  right_join(toplot, by = "country")
+
+# Determine the threshold for significant change (e.g., top 10% of changes)
+threshold <- quantile(toplot$change, 0.9)
+
+# Add a new column to differentiate significant changes
+toplot <- toplot %>%
+  mutate(significant = ifelse(change >= threshold, TRUE, FALSE),
+         color_category = ifelse(significant, as.character(country), "gray88"))
+
+# Filter for the latest year for each country
+latest_year_data <- toplot %>%
+  group_by(country) %>%
+  filter(Year == max(Year)) %>%
+  ungroup()
+
+# Scatterplot with labels for significant countries
+colors <- RColorBrewer::brewer.pal(n = 12, name = "Paired")
+ggplot() +
+  # Plot gray points first
+  geom_point(data = subset(toplot, color_category == "gray88"), 
+             aes(y = log(afs_VA_perworker), x = log(GDP_percap)), 
+             color = "gray88") +
+  geom_path(data = subset(toplot, color_category == "gray88"), 
+            aes(y = log(afs_VA_perworker), x = log(GDP_percap), group = country), 
+            color = "gray88") +
+  # Plot colored points on top
+  geom_point(data = subset(toplot, color_category != "gray88"), 
+             aes(y = log(afs_VA_perworker), x = log(GDP_percap), color = color_category)) +
+  geom_path(data = subset(toplot, color_category != "gray88"), 
+            aes(y = log(afs_VA_perworker), x = log(GDP_percap), group = country, color = color_category)) +
+  geom_text(data = subset(latest_year_data, significant == TRUE), 
+            aes(y = log(afs_VA_perworker), x = log(GDP_percap), label = country), 
+            hjust = 0, vjust = 0, size = 3) +  
+  geom_abline(a = 0, b = 1, linetype = "dashed", color = "gray25") +
+  geom_text(aes(y = 12, x = 11.67, label = "y = x"), 
+            hjust = 0, vjust = 0, size = 3, color = "gray25") +
+  theme(legend.position = "right",
+        legend.title = element_blank(),
+        legend.key.size = unit(4, "lines"),
+        legend.text = element_text(size = 14)) + 
+  theme_classic() +
+  labs(x = "Log GDP per capita",
+       y = "Log Value Added per worker in AFS") +
+  scale_color_manual(values = colors) +
+  theme(legend.title = element_blank())
+
+# Save the plot as .png (because elements are overlapping in viewer)
+    ggsave(file = file.path(fig_out, "ESSWP_Figure 10.png"), plot = last_plot(), width = 9.5, height = 7.5, units = c("in"), dpi = 300)
+
+# Clean up
+    rm(toplot, colors, latest_year_data, threshold)
+
+```
+
+
+# Supplementary Materials
+
+## Appendix A: "Classifications and Metadata.xlsx" - contained in the "Input Data" folder
+
+## Appendix B:
+
+### Table B1 and B2: Provided in "Classifications and Metadata.xlsx"
+
+### Table B3: Countries included in 2019 analysis
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+    # Create a table
+    countries2019 <- AFS_ValueAdded %>% select(country, Year) %>%
+      filter(Year == 2019) %>% unique() %>% select(-c("Year"))
+    table <- flextable(countries2019) %>% autofit()
+        
+    # Save table
+        save_as_docx(table, path = file.path(fig_out, "ESSWP_Table B3.docx"))
+        
+```
+
+### Table B4: Complete cases 1995 - 2021
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Set up the data: Summarize value added to the global level by continent
+    AFS_ValueAdded_CompleteCases <- AFS_ValueAdded %>%
+      filter(Year %in% 1995:2019) %>%
+      select(Year, country, UN_continental_region, ValueAdded_AFS_cUSD_Total) %>%
+      unique() %>% filter(!(is.na(ValueAdded_AFS_cUSD_Total))) %>%
+      # Limit to complete cases
+        pivot_wider(names_from = Year, values_from = ValueAdded_AFS_cUSD_Total,
+                    values_fill = NA) %>%
+        relocate("1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", .after = last_col()) %>%
+        filter(complete.cases(.))
+
+# Create table listing countries in the complete cases
+    kable(AFS_ValueAdded_CompleteCases %>% select(country), "html", caption = "Countries with complete data from 1995-2021") %>% 
+    kable_classic(full_width = F, html_font = "Cambria")
+    
+    # Create a table
+    tabledata <- AFS_ValueAdded_CompleteCases %>% select(country)
+    table <- flextable(tabledata) %>% autofit()
+        
+    # Save table
+        save_as_docx(table, path = file.path(fig_out, "ESSWP_Table B4.docx"))
+    
+```
+
+$~$
+
+### Table B5: Countries with VA per worker, 2019
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+
+data_2019 <- VAperworker %>%
+  filter(!(is.na(afs_VA_perworker))) %>%
+  select(c(country, Year)) %>%
+  group_by(country) %>%
+  mutate(From = min(Year),
+         To = max(Year)) %>%
+  filter(Year == From | Year == To) %>%
+  select(-c(Year)) %>%
+  unique() %>%
+  ungroup() %>%
+  rename(Country = country)
+summary(data_2019$Country)
+# N = 177
+
+  # Create table listing countries and year range
+    kable(data_2019, "html", caption = "Country-Years with data to calculate Value Added Per Worker") %>% 
+    kable_classic(full_width = F, html_font = "Cambria")
+    
+  # List countries with data in 2019
+    countries_2019_pw <- VAperworker %>%
+    filter(!(is.na(afs_VA_perworker))) %>%
+      select(c(country, Year)) %>%
+      filter(Year == 2019) %>% select(c(country)) 
+    summary(countries_2019_pw$country) ## 159 countries
+    countries_2019_pw <- countries_2019_pw %>% pull(country)
+    
+    kable(countries_2019_pw, "html", caption = "Countries with data in 2019") %>% 
+          kable_classic(full_width = F, html_font = "Cambria")
+    
+    # Create a table
+    fortable2019 <- as.data.frame(countries_2019_pw)
+    table <- flextable(fortable2019) %>% autofit()
+        
+    # Save table
+        save_as_docx(table, path = file.path(fig_out, "ESSWP_Table B5.docx"))
+```
+
+$~$
+
+### Table B6: VA per worker complete cases, 1995-2019
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+    table <- flextable(completecases_df_pw) %>% autofit()
+        
+    # Save table
+        save_as_docx(table, path = file.path(fig_out, "ESSWP_Table B6.docx"))
+        
+# Clean up
+  rm(table)
+
+```
+
+$~$
+
+### Table B7: Number of people employed in agrifood systems, 2019, by continent
+```{r, warning = FALSE, messages = FALSE, results = "hide", echo = TRUE}
+  summary <- VAperworker %>%
+    filter(Year == 2019 & country %in% countries_2019_pw) %>%
+    select(c(1:3, 7:10, 19)) %>%
+    mutate(ag_emp = ag_emp / 1000000,
+           nonag_afs_emp = nonag_afs_emp / 1000000) %>%
+    group_by(UN_continental_region) %>%
+    summarise(ag_emp = sum(ag_emp, na.rm = TRUE),
+              nonag_afs_emp = sum(nonag_afs_emp, na.rm = TRUE)) %>%
+    rename(`Primary production` = ag_emp,
+           `Rest of agrifood systems` = nonag_afs_emp) %>%
+    ungroup()
+  
+  summary2 <- VAperworker %>%
+    filter(Year == 2019 & country %in% countries_2019_pw) %>%
+    select(c(1:3, 7:10, 19)) %>%
+    mutate(ag_emp = ag_emp / 1000000,
+           nonag_afs_emp = nonag_afs_emp / 1000000) %>%
+    ungroup() %>%
+    summarise(ag_emp = sum(ag_emp, na.rm = TRUE),
+              nonag_afs_emp = sum(nonag_afs_emp, na.rm = TRUE)) %>%
+    rename(`Primary production` = ag_emp,
+           `Rest of agrifood systems` = nonag_afs_emp) %>%
+    mutate(UN_continental_region = "World") 
+  employment <- rbind(summary, summary2) 
+  employment$Total <- rowSums(employment[, c(2,3)])
+  employment <- employment %>%
+    mutate(`Primary production (% Total)` = (`Primary production`/Total)*100,
+           `Rest of AFS (% Total)` = (`Rest of agrifood systems`/Total)*100) %>%
+    mutate(across(2:6, ~round(., digits = 2)))
+  table <- flextable(employment) %>% autofit()
+        
+    # Save table
+        save_as_docx(table, path = file.path(fig_out, "ESSWP_Table B7.docx"))
+  
+  
+# Clean up
+  rm(summary, summary2, employment, table)
+  
+```
+
+$~$
+
+### Figure B1: Destination of primary production inputs, 2019
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Start with the IO data
+  IO_data_nomargins <- readRDS(file.path(data_out, "IO_data_nomargins.rds"))
+
+# Merge in the country name
+  countries <- AFS_ValueAdded %>% select(c(ISO, country)) %>% unique()
+  IO_data_nomargins <- left_join(IO_data_nomargins, countries, by = "ISO")
+  IO_data_nomargins <- IO_data_nomargins %>%
+    filter(!(is.na(country))) %>%
+    filter(country %in% unlist(completecases))
+
+# Relabel all the non-ag, non-food sectors to simplify
+nonag <- c("Mining and Quarrying",
+          "Petroleum, Chemical and Non-Metallic Mineral Products",
+          "Metal Products",
+          "Electrical and Machinery",
+          "Transport Equipment",
+          "Other Manufacturing",
+          "Recycling",
+          "Electricity, Gas and Water",
+          "Construction",
+          "Maintenance and Repair",
+          "Transport",
+          "Post and Telecommunications",
+          "Finacial Intermediation and Business Activities",
+          "Public Administration",
+          "Education, Health and Other Services",
+          "Private Households",
+          "Others",
+          "Re-export & Re-import")
+
+# Sum the whole world up by year
+  data <- IO_data_nomargins %>%
+    filter(Year <= 2019) %>%
+    group_by(Year, Col_Name) %>%
+    mutate(From = case_when(From != "imp" ~ "Domestic production",
+                            From == "imp" ~ "Imports")) %>%
+    ungroup() %>%
+    mutate(across(c("Row_Name", "Col_Name"), ~case_when(. %in% nonag | . %in% nonag ~ "Other", TRUE ~ .))) %>%
+    aggregate(Value ~ Year + Row_Name + Col_Name, FUN = sum) 
+
+# Keep only fisheries + agriculture inputs
+  toplot <- data %>%
+    filter(Row_Name %in% c("Agriculture", "Fishing")) %>%
+    mutate(Row_Name = "Primary production") %>%
+    aggregate(Value ~ Col_Name + Year, FUN = sum) 
+
+# Calculate percent
+  toplot <- toplot %>% 
+    rename(to = Col_Name) %>%
+    group_by(Year) %>%
+    mutate(total = sum(Value)) %>%
+    ungroup() %>%
+    mutate(val_pct = Value/total,
+           labels = scales::percent(val_pct %>% round(3)),
+           val_pct = val_pct*100) 
+
+# second data frame to label only the end of the lines
+    toplot2 <- toplot %>% filter(Year == 2019)
+
+# Set colors
+    colors_IOsectors <- c("#005C31","forestgreen", "#08468B","#808080", "#FFFF80", "#00998F", "#2171B5","darkturquoise", "#6BAED6" )
+    
+# Plot 
+    plot <- ggplot(toplot, aes(y=val_pct, x=Year, fill = to)) +
+      geom_col(aes(fill = to)) + 
+      geom_text(aes(label = if_else(Year == 2019, labels, ""), group = to), 
+                position = position_stack(vjust = 0.5)) +
+      scale_fill_manual(labels = function(to) str_wrap(to, width = 30),
+                            values = colors_IOsectors) +
+            theme_classic() +
+      theme(legend.position="none",
+            axis.text.x = element_text(size = 6),
+            axis.text.y = element_text(size = 6),
+            axis.title.y = element_text(size = 8)) +
+      labs(y = ("Share of primary production consumed (%)")) 
+    
+    p1 <- ggplot(toplot2, aes(y=val_pct, x=Year, fill = to)) +
+      geom_col(aes(fill = to)) + 
+      scale_fill_manual(labels = function(to) str_wrap(to, width = 30),
+                            values = colors_IOsectors) +
+            theme_classic() +
+      theme(legend.text = element_text(size = 10),
+            legend.position="right") +
+      guides(fill = guide_legend(title = "Sector (EORA)", 
+                                 override.aes = list(size = 3),
+                                 ncol = 1, keyheight = 0.5))
+    legend <- get_legend(p1)
+
+# Combine plot and legend
+    plot_grid(plot, legend, nrow = 1, rel_widths = c(7.5,3))
+
+# Save the plot as .png
+    ggsave(file = file.path(fig_out, "ESSWP_Figure B1.png"), plot = last_plot(), width = 8, height = 5, units = c("in"),dpi = 300)    
+
+```
+
+$~$
+
+### Figure B2: Source of manufacturing data
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Set up the data
+    tabledata <- AFS_ValueAdded %>% 
+      select(c(country, Year, manufacturing_flag)) %>%
+      arrange(country, Year) %>%
+      filter(!(is.na(manufacturing_flag))) %>%
+      group_by(country, manufacturing_flag) %>%
+      rename(Country = country) %>%
+      mutate(manufacturing_flag = case_when(
+        manufacturing_flag == "UNIDO Observed" ~ "UNIDO",
+        TRUE ~ manufacturing_flag)) %>%
+      unique() 
+
+# Print it as a heatmap
+    ggplot(tabledata, aes(y = factor(Country, levels = rev(levels(factor(Country)))), 
+                          x = factor(Year), fill = manufacturing_flag)) +
+      geom_tile() +
+      scale_fill_brewer(palette = "Paired") +
+      theme_classic() +
+      theme(axis.text.x = element_text(size = 6, angle = 90, vjust = 0.5),
+            axis.text.y = element_text(size = 4),
+            legend.position = "bottom") +
+      labs(x = "", y = "", fill = "Source of manufacturing data") 
+
+# Save the plot as .png
+    ggsave(file = file.path(fig_out, "ESSWP_Figure B2.png"), plot = last_plot(), width = 5, height = 8, units = c("in"),dpi = 300)    
+
+# Clean up
+    rm(tabledata)
+
+```
+
+$~$
+
+### Figure B3: ISIC revision used by country and year
+```{r, warning = FALSE, messages = FALSE, echo = TRUE}
+# Set up the data
+    tabledata <- AFS_ValueAdded %>% 
+      select(c(country, Year, ISIC_Revision)) %>%
+      rename(Country = country) %>%
+      unique() %>%
+      # Use pivot wider then longer to fill in the missing country-years so they show in the legend of the heatmap
+      pivot_wider(names_from = Year, values_from = ISIC_Revision) %>%
+      pivot_longer(2:28, names_to = "Year", values_to = "ISIC_Revision")
+
+  # Add an ISIC Revision level for no data
+    levels(tabledata$ISIC_Revision) <- c(levels(tabledata$ISIC_Revision), "No Data")
+    levels(tabledata$ISIC_Revision)
+
+  # Get hex colors  
+    RColorBrewer::brewer.pal(n=2, name = "Paired")
+    
+# Print it as a heatmap
+    ggplot(tabledata, 
+           aes(y = factor(Country, levels = rev(levels(factor(Country)))), 
+               x = factor(Year), fill = factor(ISIC_Revision))) +
+      geom_tile() +
+      scale_fill_manual(values = c("#A6CEE3", "#1F78B4"),
+                        na.value = c("white"),
+                        labels = c("Rev 3", "Rev 4", "No data"),
+                        drop = FALSE) +
+      theme_classic() +
+      theme(axis.text.x = element_text(size = 6, angle = 90, vjust = 0.5),
+            axis.text.y = element_text(size = 4),
+            legend.position = "bottom",
+            legend.key=element_rect(colour="darkslategray")) +
+      labs(x = "", y = "", fill = "ISIC Revision")
+    
+# Save the plot as .png
+    ggsave(file = file.path(fig_out, "ESSWP_Figure B3.png"), plot = last_plot(), width = 5, height = 8, units = c("in"),dpi = 300)    
+    
+# Clean up
+    rm(tabledata)
+```

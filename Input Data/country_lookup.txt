@@ -1,0 +1,1039 @@
+Country Name Variants		a3code
+Afghanistan	Afghanistan, Islamic State of	AFG
+Afghanistan	Afghanistan	AFG
+Aland Islands	?land Islands	ALA
+Albania	Albania	ALB
+Algeria	Algeria	DZA
+Algeria	DZ	DZA
+American Samoa	American Samoa	ASM
+American Samoa	Amer Samoa	ASM
+American Samoa	AMERICAN SAMOA	ASM
+Andorra	Andorra, Principality of	AND
+Andorra	Andorra	AND
+Angola	Angola	AGO
+Anguilla	Anguilla	AIA
+Antigua	ANTIGUA & BARBUDA	ATG
+Antigua	Antigua Barb	ATG
+Antigua	ANGUILLA ISL.	ATG
+Antigua	Antigua and Barbuda	ATG
+Antigua	ANTIGUA AND BARBUDA	ATG
+Antigua	ANTIGUA	ATG
+Argentina	Argentina	ARG
+Argentina	ar	ARG
+Armenia	Armenia	ARM
+Aruba	Aruba	ABW
+Australia	AU	AUS
+Australia	au	AUS
+Australia	Australia	AUS
+Austria	AT	AUT
+Austria	at	AUT
+Austria	Austria	AUT
+Azerbaijan	Azerbaijan, Republic of	AZE
+Azerbaijan	Azerbaidjan	AZE
+Azerbaijan	AZERBIJAN	AZE
+Azerbaijan	Azerbaijan	AZE
+Bahamas	Bahamas	BHS
+Bahamas	The Bahamas	BHS
+Bahamas	Bahamas, The	BHS
+Bahrain	Bahrain	BHR
+Bangladesh	Bangladesh	BGD
+Barbados	Barbados	BRB
+Belarus	Belarus	BLR
+Belarus	BELORUSIA	BLR
+Belarus	Byelarus	BLR
+Belgium	Belgium & Luxembourg	BEL
+Belgium	Bel-lux	BEL
+Belgium	Belgium	BEL
+Belgium	BE	BEL
+Belgium	Belgium + Luxembourg	BEL
+Belgium	be	BEL
+Belgium	Belgium, Luxembourg	BEL
+Belgium	Belgium/Luxembourg	BEL
+Belgium	BELGIUM-LUXEMBOURG	BEL
+Belize	Belize	BLZ
+Benin	Benin	BEN
+Bermuda	Bermuda	BMU
+Bhutan	Bhutan	BTN
+Bolivia	PLURINATIONAL STATE OF BOLIVIA	BOL
+Bolivia	Bolivia (Plurinational State of)	BOL
+Bolivia	Bolivia	BOL
+Bolivia	Bolivia	BOL
+Bolivia	Bolivia (Plurinat State)	BOL
+Bolivia	Bolivia	BOL
+Bolivia	Bolivia (Plurinat.State)	BOL
+Bosnia and Herzegovina	BOSNIA & HERZEGOVINA	BIH
+Bosnia and Herzegovina	BOSNIA-HERCEGOVINA	BIH
+Bosnia and Herzegovina	Bosnia Herzegovina	BIH
+Bosnia and Herzegovina	Bosnia and Herzegovina	BIH
+Bosnia and Herzegovina	Bosnia and Herzegovina	BIH
+Bosnia and Herzegovina	Bosnia Herzg	BIH
+Bosnia and Herzegovina	Bosnia and Herzegovina	BIH
+Bosnia and Herzegovina	Bosnia/Herz	BIH
+Bosnia and Herzegovina	BOSNIA AND HERZEGOVINA	BIH
+Bosnia and Herzegovina	Bosnia	BIH
+Bosnia and Herzegovina	Bosnia-Herzegovina	BIH
+Bosnia and Herzegovina	BOSNIA & HERZ.	BIH
+Bosnia and Herzegovina	BOSNIA-HERZEGOVINIA	BIH
+Botswana	Botswana	BWA
+Brazil	BR	BRA
+Brazil	br	BRA
+Brazil	Brazil	BRA
+British Virgin Islands	Br Virgin Is	VGB
+British Virgin Islands	BRITISH VIRGIN ISLANDS	VGB
+British Virgin Islands	Virgin Islands_British	VGB
+British Virgin Islands	Br. Virgin Isds	VGB
+British Virgin Islands	British Virgin Islands	VGB
+British Virgin Islands	VIRGIN IS.	VGB
+British Virgin Islands	Virgin Islands (British)	VGB
+Brunei	Brunei	BRN
+Brunei	BRUNEI (DARUSSALAM)	BRN
+Brunei	Brunei Darussalam	BRN
+Brunei	Brunei Darsm	BRN
+Bulgaria	bg	BGR
+Bulgaria	BG	BGR
+Bulgaria	Bulgaria	BGR
+Burkina Faso	Burkina Faso	BFA
+Burundi	Burundi	BDI
+Cambodia	Cambodia, Kingdom of	KHM
+Cambodia	Cambodia	KHM
+Cameroon	REPUBLIC OF CAMEROON	CMR
+Cameroon	Cameroon	CMR
+Canada	ca	CAN
+Canada	CA	CAN
+Canada	Canada	CAN
+Cape Verde	CAPEVERDE	CPV
+Cape Verde	Cape Verde	CPV
+Cape Verde	Cabo Verde	CPV
+Cape Verde	CAPE VERDE ISLANDS	CPV
+Cayman Islands	Cayman Isds	CYM
+Cayman Islands	CAYMAN ISLANDS	CYM
+Cayman Islands	Cayman Islands	CYM
+Cayman Islands	Cayman Is	CYM
+Central African Republic	Central African Rep	CAF
+Central African Republic	Cent Af Rep	CAF
+Central African Republic	Central African Rep.	CAF
+Central African Republic	CENTRAL AFRICAN REPUBLIC	CAF
+Central African Republic	Cent Afr Rep	CAF
+Central African Republic	CENT.AFR.REP.	CAF
+Central African Republic	Central African Republic	CAF
+Central African Republic	CENTRAL AFRICAN	CAF
+Chad	Chad	TCD
+Chile	cl	CHL
+Chile	Chile	CHL
+China	CHINA	CHN
+China	People's Rep. of China	CHN
+China	China (incl. Hong Kong, China)	CHN
+China	People's Republic of China	CHN
+China	China (People's Republic of)	CHN
+China	CN	CHN
+China	CHINA (MAINLAND)	CHN
+China	China, Main	CHN
+China	China	CHN
+China	CHINA, MAINLAND	CHN
+China	cn	CHN
+Colombia	Colombia	COL
+Comoros	COMOROS ISLANDS	COM
+Comoros	Comoros	COM
+Congo	Congo, Rep.	COG
+Congo	Republic of Congo	COG
+Congo	Republic of the Congo	COG
+Congo	Congo	COG
+Congo	CONGO	COG
+Congo	Congo, Republic of	COG
+Congo	Congo, Rep	COG
+Congo	Congo, Republic	COG
+Congo	R?ublique du Congo	COG
+Congo	Republique du Congo	COG
+Cook Islands	Cook Islands	COK
+Cook Islands	COOK ISLANDS	COK
+Cook Islands	Cook Is	COK
+Cook Islands	Cook Isds	COK
+Costa Rica	Costa Rica	CRI
+Cote dIvoire	C?¥te dIvoire	CIV
+Cote dIvoire	Côte d'Ivoire	CIV
+Cote dIvoire	C?¥te d'Ivoire	CIV
+Cote dIvoire	CÙte d\\'Ivoire	CIV
+Cote dIvoire	Ivory Coast	CIV
+Cote dIvoire	Ivory Coast (Cote D'Ivoire)	CIV
+Cote dIvoire	Cote Divoire	CIV
+Cote dIvoire	Cote d'Ivoir	CIV
+Cote dIvoire	Cote d'Ivoire	CIV
+Cote dIvoire	COTE D IVOIRE	CIV
+Cote dIvoire	C??????¬¥te d'Ivoire	CIV
+Cote dIvoire	CÙte d?Ivoire	CIV
+Cote dIvoire	CÙte d'Ivoire	CIV
+Cote dIvoire	C??te d'Ivoire	CIV
+Cote dIvoire	CÙte divoire	CIV
+Cote dIvoire	Côte d'Ivoire	CIV
+Croatia	Croatia	HRV
+Croatia	HR	HRV
+Cuba	Cuba	CUB
+Cyprus	Cyprus	CYP
+Cyprus	CY	CYP
+Cyprus	cy	CYP
+Czechoslovakia	Czechoslovakia	CSK
+Czechoslovakia	Czechoslovakia (Former)	CSK
+Czech Republic	Czech Repub	CZE
+Czech Republic	Czech Republic, Territory of	CZE
+Czech Republic	Czech Republic	CZE
+Czech Republic	cz	CZE
+Czech Republic	Czech Rep	CZE
+Czech Republic	CZECH REPUBLIC	CZE
+Czech Republic	CZECH REP.	CZE
+Czech Republic	CZ	CZE
+DR Congo	Congo, Democratic Republic of	COD
+DR Congo	D.R. of the Congo	COD
+DR Congo	Dem Rep of the Congo	COD
+DR Congo	Democratic Republic of the Congo	COD
+DR Congo	CONGO, DEM REPUBLIC OF	COD
+DR Congo	Congo, The Democratic Republic of the	COD
+DR Congo	Congo Dem Rep	COD
+DR Congo	Congo, Dem. Rep.	COD
+DR Congo	Dem. Rep. of Congo	COD
+DR Congo	Dem. Rep. of the Congo	COD
+DR Congo	Congo, Dem R	COD
+DR Congo	Congo, Dem Republic	COD
+DR Congo	Congo, Dem. Rep. of the	COD
+DR Congo	Congo, Democratic Republic of	COD
+DR Congo	DR Congo	COD
+DR Congo	Democratic Republic of Congo	COD
+DR Congo	Congo, Dem Rep	COD
+DR Congo	Congo_the Democratic Republic of the	COD
+DR Congo	DR Congo	COD
+DR Congo	Congo, Democratic Republic	COD
+DR Congo	DEMOCRATIC REPUBLIC OF THE CONGO (FORMERLY ZAIRE)	COD
+DR Congo	Democratic Republic of the Congo, previously Zaïre	COD
+DR Congo	Democratic Republic of the Congo, previously Zaire	COD
+DR Congo	Zaire	COD
+DR Congo	ZAR	COD
+DR Congo	Congo, Dem Rep of the	COD
+Denmark	Denmark	DNK
+Denmark	dk	DNK
+Denmark	DK	DNK
+Denmark	FAROE ISL.	DNK
+Djibouti	Djibouti	DJI
+Dominica	Dominica	DMA
+Dominican Republic	DOMINICAN REP.	DOM
+Dominican Republic	Dominican Rp	DOM
+Dominican Republic	DOMIN.REP.	DOM
+Dominican Republic	Dominican Republic	DOM
+Dominican Republic	Dominican Rep	DOM
+Dominican Republic	DOMINICAN REPUBLIC	DOM
+Ecuador	Ecuador	ECU
+Egypt	Egypt, Arab Rep.	EGY
+Egypt	Egypt	EGY
+El Salvador	ELSALVADO	SLV
+El Salvador	El Salvador	SLV
+Equatorial Guinea	Eq Guinea	GNQ
+Equatorial Guinea	EQUATORIAL GUINEA	GNQ
+Equatorial Guinea	Equatorial Guinea	GNQ
+Equatorial Guinea	Equatorial.Guinea	GNQ
+Eritrea	Eritrea	ERI
+Estonia	Estonia	EST
+Estonia	EE	EST
+Estonia	ee	EST
+Ethiopia	ETHIOPIA, FORMER AREA OF	ETH
+Ethiopia	Ethiopia (Former)	ETH
+Ethiopia	Ethiopia PDR	ETH
+Ethiopia	Ethiopia	ETH
+Ethiopia	ETHIO F AREA	ETH
+Ethiopia	Ethiopia, Territory of	ETH
+Ethiopia	Fmr Ethiopia	ETH
+Ethiopia	Ethiopia Pdr	ETH
+Faeroe Islands	FAEROE ISLANDS	FRO
+Falkland Islands	Falkland Islands (Islas Malvinas)	FLK
+Falkland Islands	Falkland Is	FLK
+Falkland Islands	FALKLAND IS (MALVINAS)	FLK
+Falkland Islands	Falkland Is(Malvinas)	FLK
+Falkland Islands	Falkland Islands	FLK
+Falkland Islands	Falkland Is.(Malvinas)	FLK
+Falkland Islands	Falkland Islands (Malvinas)	FLK
+Falkland Islands	FALKLAND	FLK
+Fiji	FIJI	FJI
+Fiji	Fiji Islands	FJI
+Fiji	Fiji	FJI
+Finland	fi	FIN
+Finland	Finland	FIN
+Former USSR	Former USSR	USR
+Former USSR	USSR (Former)	USR
+Former USSR	USSR IN ASIA	USR
+Former USSR	USSR, Territory of	USR
+Former USSR	USSR	USR
+Former USSR	USSR IN EUROPE	USR
+Former USSR	USSR ASIA	USR
+Former USSR	USSR, FORMER AREA OF	USR
+Former USSR	USSR EUROPE	USR
+Former USSR	USSR F AREA	USR
+France	CORSE ISL.	FRA
+France	ST. PIERRE & MIQUELON	FRA
+France	France (European Territory)	FRA
+France	France	FRA
+France	FRANCE (INCLUDING MONACO)	FRA
+France	fr	FRA
+France	FR	FRA
+French Guiana	French Guyana	GUF
+French Guiana	French Guiana	GUF
+French Guiana	FRENCH GUIANA	GUF
+French Guiana	Fr Guiana	GUF
+French Polynesia	FRENCH POLYNESIA	PYF
+French Polynesia	Fr Polynesia	PYF
+French Polynesia	Polynesia (French)	PYF
+French Polynesia	French Polynesia	PYF
+Gabon	Gabon	GAB
+Gambia	Gambia	GMB
+Gambia	Gambia, The	GMB
+Gambia	The Gambia	GMB
+Gaza Strip	PALESTINE	PSE
+Gaza Strip	GAZA	PSE
+Gaza Strip	State of Palestine	PSE
+Gaza Strip	Palestine, Occupied Tr	PSE
+Gaza Strip	Gaza Strip	PSE
+Gaza Strip	GAZA STRIP (PALESTINE)	PSE
+Gaza Strip	Occ. Palestinian Terr.	PSE
+Gaza Strip	West Bank and Gaza	PSE
+Gaza Strip	West Bank	PSE
+Gaza Strip	Occupied Palestinian Territory	PSE
+Georgia	Georgia	GEO
+Germany	FEDERAL REPUBLIC OF GERMANY	DEU
+Germany	DE	DEU
+Germany	Fmr Fed. Rep. of Germany	DEU
+Germany	de	DEU
+Germany	Germany	DEU
+Ghana	Ghana	GHA
+Gibraltar	Gibraltar	GIB
+Greece	gr	GRC
+Greece	Greece	GRC
+Greenland	Greenland	GRL
+Grenada	Grenada	GRD
+Grenada	GRENEDA	GRD
+Guadeloupe	Guadeloupe	GLP
+Guadeloupe	Guadeloupe (French)	GLP
+Guam	Guam	GUM
+Guam	Guam (USA)	GUM
+Guatemala	Guatemala	GTM
+Guernsey	Guernsey	GGY
+Guinea	Guinea	GIN
+Guinea-Bissau	Guinea-Bissau	GNB
+Guinea-Bissau	GUINEA BISEAU	GNB
+Guinea-Bissau	GUINEA-BISSAU	GNB
+Guinea-Bissau	GUINEA BISSAU	GNB
+Guinea-Bissau	Guineabissau	GNB
+Guyana	Guyana	GUY
+Haiti	Haiti	HTI
+Holy See	VATICAN CITY STATE	VAT
+Holy See	Holy See (Vatican City State)	VAT
+Holy See	Holy See	VAT
+Honduras	Honduras	HND
+Hong Kong	China: Hong Kong SAR	HKG
+Hong Kong	Hong Kong	HKG
+Hong Kong	Hong Kong SAR	HKG
+Hong Kong	Hong Kong (China)	HKG
+Hong Kong	Hong Kong	HKG
+Hong Kong	HONG KONG	HKG
+Hong Kong	HONG KONG SPECIAL ADMINSTRATIVE REGION OF CHI	HKG
+Hong Kong	hk	HKG
+Hong Kong	Hong Kong Special Administrative Region of China	HKG
+Hong Kong	Hong Kong SAR	HKG
+Hong Kong	China Hong Kong SAR	HKG
+Hong Kong	Hong Kong SAR, China	HKG
+Hong Kong	Hong Kong, China	HKG
+Hong Kong	CHINA, HONG KONG SAR	HKG
+Hong Kong	HONG KONG SPECIAL ADMINSTRATIVE REGION OF CHINA	HKG
+Hong Kong	Hong Kong	HKG
+Hong Kong	China,h.kong	HKG
+Hungary	hu	HUN
+Hungary	HU	HUN
+Hungary	Hungary	HUN
+Iceland	Iceland	ISL
+Iceland	is	ISL
+India	IN	IND
+India	in	IND
+India	India, excl. Sikkim	IND
+India	India	IND
+Indonesia	Indonesia	IDN
+Indonesia	ID	IDN
+Indonesia	id	IDN
+Indonesia	WEST TIMOR	IDN
+Iran	Iran (Islamic Rep of)	IRN
+Iran	Islamic Rep. of Iran	IRN
+Iran	ISLAMIC REPUBLIC OF IRAN	IRN
+Iran	Iran (Islamic Republic of)	IRN
+Iran	Iran (Islamic Rep. of)	IRN
+Iran	Iran, Islamic Rep	IRN
+Iran	Iran, Islamic Rep.	IRN
+Iran	IRAN, ISLAMIC REP OF	IRN
+Iran	IR	IRN
+Iran	Iran	IRN
+Iran	Iran, Islamic Republic of	IRN
+Iran	Islamic Republic of Iran	IRN
+Iraq	Iraq	IRQ
+Ireland	Republic of Ireland	IRL
+Ireland	IE	IRL
+Ireland	North Ireland	IRL
+Ireland	Ireland	IRL
+Ireland	ie	IRL
+Isle of Man	Man, Isle of	IMN
+Isle of Man	Isle Of Man	IMN
+Israel	Israel	ISR
+Israel	il	ISR
+Italy	Italy	ITA
+Italy	it	ITA
+Italy	IT	ITA
+Italy	ITALY (INCLUDING SAN MARINO)	ITA
+Jamaica	Jamaica	JAM
+Japan	Japan	JPN
+Japan	Japan	JPN
+Japan	JP	JPN
+Japan	jp	JPN
+Japan	Japan	JPN
+Japan	JAPAN (EXCLUDING THE RUYUKU ISLANDS	JPN
+Japan	JAPAN JAPAN (EXCLUDING THE RUYUKU ISLANDS)	JPN
+Jersey	Jersey	JEY
+Jordan	Jordan	JOR
+Kazakhstan	KAZAKSTAN	KAZ
+Kazakhstan	Kazakhstan	KAZ
+Kenya	Kenya	KEN
+Kiribati	Kiribati	KIR
+Kosovo	Invalid	KSV
+Kuwait	KW	KWT
+Kuwait	Kuwait	KWT
+Kyrgyzstan	Kyrgyz Republic	KGZ
+Kyrgyzstan	Kyrgyz Republic (Kyrgyzstan)	KGZ
+Kyrgyzstan	Kyrgyzstan	KGZ
+Kyrgyzstan	KRGYZSTAN	KGZ
+Laos	LAO PEOPLE S DEMOCRATIC REPUBLIC	LAO
+Laos	Lao People's DR	LAO
+Laos	Lao Peoples Dem. Rep.	LAO
+Laos	LAO PEOPLE'S DEMOCRATIC REPUBLIC	LAO
+Laos	Lao People's Democratic Republic	LAO
+Laos	Laos	LAO
+Laos	Lao People's Dem. Rep.	LAO
+Laos	Laos	LAO
+Laos	LAO	LAO
+Laos	Lao Peoples Democratic Republic	LAO
+Laos	Laos	LAO
+Laos	Lao P.D.R.	LAO
+Laos	Lao PDR	LAO
+Laos	Lao People's Dem Rep	LAO
+Latvia	LV	LVA
+Latvia	Latvia	LVA
+Latvia	lv	LVA
+Lebanon	Lebanon	LBN
+Lesotho	Lesotho	LSO
+Liberia	Liberia	LBR
+Libya	LIBYAN ARAB JAMAHIRIYAH	LBY
+Libya	Libyan Arab Jamahiriya	LBY
+Libya	LIBYAN ARAB JAMAHIRIYA	LBY
+Libya	Libya	LBY
+Liechtenstein	Liechtensten	LIE
+Liechtenstein	Liechtenstein	LIE
+Liechtenstein	LIECHTENSTEIN	LIE
+Lithuania	Lithuania	LTU
+Lithuania	lt	LTU
+Lithuania	LT	LTU
+Luxembourg	LU	LUX
+Luxembourg	Luxembourg	LUX
+Luxembourg	lu	LUX
+Luxembourg	LUXEMBURG	LUX
+Macao SAR	Macao SAR, China	MAC
+Macao SAR	China: Macao SAR	MAC
+Macao SAR	Macao	MAC
+Macao SAR	MACAU	MAC
+Macao SAR	MACAU SPECIAL ADMINSTRATIVE REGION OF CHINA	MAC
+Macao SAR	Macao Special Administrative Region of China	MAC
+Macao SAR	Macao SAR	MAC
+Macao SAR	China, Macao	MAC
+Macao SAR	CHINA, MACAO SAR	MAC
+Madagascar	Madagascar	MDG
+Malawi	Malawi	MWI
+Malaysia	my	MYS
+Malaysia	Malaysia	MYS
+Maldives	Maldives	MDV
+Mali	Mali	MLI
+Malta	mt	MLT
+Malta	MT	MLT
+Malta	Malta	MLT
+Marshall Islands	Marshall Is	MHL
+Marshall Islands	Marshall Isds	MHL
+Marshall Islands	Marshall Islands	MHL
+Marshall Islands	MARSHALL ISLANDS	MHL
+Martinique	Martinique	MTQ
+Martinique	Martinique (French)	MTQ
+Mauritania	Mauritania	MRT
+Mauritius	Mauritius	MUS
+Mayotte	Mayotte	MYT
+Mayotte	MAYOTTE ISLAND	MYT
+Mexico	mx	MEX
+Mexico	MX	MEX
+Mexico	Mexico	MEX
+Micronesia	Micronesia,FedStates of	FSM
+Micronesia	Micronesia..Federated.States.of.	FSM
+Micronesia	Micronesia, Fed. Sts.	FSM
+Micronesia	Micronesia (FS of)	FSM
+Micronesia	FS Micronesia	FSM
+Micronesia	Micronesia (Federated States of)	FSM
+Micronesia	Micronesia, Federated States of	FSM
+Micronesia	Micronesia	FSM
+Micronesia	Micronesia, Fed. Sts.	FSM
+Micronesia	Micronesia (Fed States of)	FSM
+Micronesia	MICRONESIA,FED STATES OF	FSM
+Micronesia	Micronesia,Fed.States of	FSM
+Micronesia	Micronesia, Fed States	FSM
+Micronesia	Federated States of Micronesia	FSM
+Moldova	Moldova	MDA
+Moldova	Republic of Moldova	MDA
+Moldova	Moldova Republic of	MDA
+Moldova	Moldova, Rep.	MDA
+Moldova	REPUBLIC OF MOLDOVA	MDA
+Moldova	Moldova Rep	MDA
+Moldova	MOLDOVA, REPUBLIC OF	MDA
+Moldova	MOLDOVA REP.	MDA
+Moldova	Rep of Moldova	MDA
+Moldova	Rep. of Moldova	MDA
+Moldova	Moldova Republic	MDA
+Moldova	Moldova, Rep	MDA
+Monaco	Monaco	MCO
+Mongolia	Mongolia	MNG
+Montenegro	Montenegro	MNE
+Montserrat	Montserrat	MSR
+Montserrat	MONTSERRAT ISLAND	MSR
+Morocco	Morocco	MAR
+Morocco	SPANISH NORTH AFRICA	MAR
+Mozambique	Mozambique	MOZ
+Myanmar	Myanmar (Burma)	MMR
+Myanmar	MYANMAR (FORMERLY BURMA)	MMR
+Myanmar	Myanmar	MMR
+Myanmar	Myanmar	MMR
+Myanmar	Myanmar	MMR
+Myanmar	Burma	MMR
+Namibia	Namibia	NAM
+Nauru	Nauru	NRU
+Nepal	Nepal	NPL
+Netherlands	Netherland	NLD
+Netherlands	Netherlands	NLD
+Netherlands	NL	NLD
+Netherlands	nl	NLD
+Netherlands Antilles	Netherlands Antilles	ANT
+Netherlands Antilles	Netherlands Antilles	ANT
+Netherlands Antilles	Nethantilles	ANT
+Netherlands Antilles	ANTILLES	ANT
+Netherlands Antilles	Netherlands Antilles (former)	ANT
+Netherlands Antilles	NETHERLAND ANTILLES AND ARUBA	ANT
+Netherlands Antilles	Netherlands Antilles	ANT
+Netherlands Antilles	Neth. Antilles	ANT
+Netherlands Antilles	NETHERLANDS ANTILLES	ANT
+Netherlands Antilles	NETHERLAND ANTILLES	ANT
+Netherlands Antilles	Netherlands Antilles	ANT
+Netherlands Antilles	Netherlands Antilles	ANT
+Netherlands Antilles	Neth. Antilles and Aruba	ANT
+New Caledonia	NEW CALEDONIA	NCL
+New Caledonia	New Caledonia	NCL
+New Caledonia	New Caledonia (French)	NCL
+New Caledonia	Newcaledonia	NCL
+New Zealand	New Zealand	NZL
+New Zealand	nz	NZL
+Nicaragua	Nicaragua	NIC
+Niger	Niger	NER
+Nigeria	Nigeria	NGA
+Niue	Niue	NIU
+Norfolk Island	Norfolk Is	NFK
+Norfolk Island	Norfolk Island	NFK
+Norfolk Island	Norfolk Isds	NFK
+Norfolk Island	NORFOLK ISLAND	NFK
+North Korea	KOREA DEM.	PRK
+North Korea	Korea, DPR	PRK
+North Korea	Korea DPR	PRK
+North Korea	Dem. People's Rep. of Korea	PRK
+North Korea	Dem People's Rep of Korea	PRK
+North Korea	Korea, Dem. People?s Rep.	PRK
+North Korea	Korea, Dem. People?s Rep.	PRK
+North Korea	Korea, Dem. People's Rep.	PRK
+North Korea	Korea, Dem. People’s Rep.	PRK
+North Korea	D.P.R. of Korea	PRK
+North Korea	Korea DPRP	PRK
+North Korea	Korea, North	PRK
+North Korea	North Korea	PRK
+North Korea	Dem. People's Republic of Korea	PRK
+North Korea	KOREA, DEM PEOPLE'S REP	PRK
+North Korea	DEMOCRATIC PEOPLE S REPUBLIC OF KOREA	PRK
+North Korea	Democratic People's Republic of Korea	PRK
+North Korea	North Korea	PRK
+North Korea	Korea, Democratic People's Republic	PRK
+North Korea	Korea, Dem. People's Rep	PRK
+North Korea	DPR of Korea	PRK
+North Korea	Democratic Peoples Republic of Korea	PRK
+North Korea	North Korea	PRK
+North Korea	Korea, Democratic People's Republic of	PRK
+North Korea	Korea D P Rp	PRK
+North Korea	Korea, Dem. Rep.	PRK
+North Korea	KOREA, DP	PRK
+Northern Mariana Islands	Northern Mariana Is.	MNP
+Northern Mariana Islands	N Marianas	MNP
+Northern Mariana Islands	Northern Mariana Islands	MNP
+Northern Mariana Islands	N. Mariana Isds	MNP
+Northern Mariana Islands	NORTHERN MARIANA IS	MNP
+Norway	no	NOR
+Norway	Norway	NOR
+Norway	NO	NOR
+Oman	Oman	OMN
+Pakistan	East and West Pakistan	PAK
+Pakistan	Pakistan	PAK
+Palau	Palau	PLW
+Palau	PALAU ISLAND	PLW
+Palau	Pacific Islands (Palau)	PLW
+Panama	Fmr Panama, excl.Canal Zone	PAN
+Panama	Panama	PAN
+Papua New Guinea	PAPUA NEW GUINEA	PNG
+Papua New Guinea	PAP N GUIN	PNG
+Papua New Guinea	Papua N Guin	PNG
+Papua New Guinea	Papua New Guinea	PNG
+Papua New Guinea	PAPUA NEW	PNG
+Paraguay	Paraguay	PRY
+Peru	Peru	PER
+Philippines	ph	PHL
+Philippines	Philippines	PHL
+Pitcairn	Pitcairn Island	PCN
+Pitcairn	PITCAIRN ISLANDS	PCN
+Pitcairn	Pitcairn Is	PCN
+Pitcairn	Pitcairn	PCN
+Poland	Poland	POL
+Poland	pl	POL
+Poland	PL	POL
+Portugal	PT	PRT
+Portugal	Portugal	PRT
+Portugal	ACORES	PRT
+Portugal	pt	PRT
+Portugal	MADEIRA	PRT
+Qatar	QA	QAT
+Qatar	Qatar	QAT
+Romania	RO	ROU
+Romania	ro	ROU
+Romania	Romania	ROU
+Romania	ROM	ROU
+Russia	Russian Fed	RUS
+Russia	Russia (Asian)	RUS
+Russia	Russia (Central Asian)	RUS
+Russia	Russia (European)	RUS
+Russia	ru	RUS
+Russia	Russian Federation	RUS
+Russia	Russia	RUS
+Russia	RU	RUS
+Russia	RUSSIA, FED.REP.	RUS
+Russia	RUSSIAN FEDERATION	RUS
+Rwanda	Rwanda	RWA
+RÈunion	REUNION ISLAND	REU
+RÈunion	Reunion	REU
+RÈunion	Rèunion	REU
+RÈunion	R??union	REU
+RÈunion	R?©union	REU
+RÈunion	RÈunion	REU
+RÈunion	Reunion (French)	REU
+RÈunion	R\\Èunion	REU
+Saint Helena	St Helena	SHN
+Saint Helena	St. Helena	SHN
+Saint Helena	SAINT HELENA	SHN
+Saint Kitts and Nevis	St Kitts Nev	KNA
+Saint Kitts and Nevis	St. Kitts and Nevis	KNA
+Saint Kitts and Nevis	St Kitts and Nevis	KNA
+Saint Kitts and Nevis	Saint Kitts and Nevis	KNA
+Saint Kitts and Nevis	ST.KITTS	KNA
+Saint Kitts and Nevis	ST. KITTS-NEVIS	KNA
+Saint Kitts and Nevis	Saint Kitts & Nevis Anguilla	KNA
+Saint Kitts and Nevis	SAINT KITTS AND NEVIS	KNA
+Saint Kitts and Nevis	ST. KITTS & NEVIS	KNA
+Saint Kitts and Nevis	Saint Kitts, Nevis and Anguilla	KNA
+Saint Lucia	SAINT LUCIA	LCA
+Saint Lucia	St. Lucia	LCA
+Saint Lucia	ST. LUCIA ISLAND	LCA
+Saint Lucia	Saint Lucia	LCA
+Saint Lucia	St Lucia	LCA
+Saint Pierre and Miquelon	SAINT PIERRE & MIQUELON	SPM
+Saint Pierre and Miquelon	Saint Pierre and Miquelon	SPM
+Saint Pierre and Miquelon	St Pier Mq	SPM
+Saint Pierre and Miquelon	St Pierre and Miquelon	SPM
+Saint Pierre and Miquelon	St. Pierre and Miquelon	SPM
+Saint Vincent and the Grenadines	St. Vincent and the Grenadines	VCT
+Saint Vincent and the Grenadines	Saint Vincent & Grenadines	VCT
+Saint Vincent and the Grenadines	SAINT VINCENT/GRENADINES	VCT
+Saint Vincent and the Grenadines	St Vincent	VCT
+Saint Vincent and the Grenadines	Saint Vincent and the Grenadines	VCT
+Saint Vincent and the Grenadines	ST. VINCENT	VCT
+Saint Vincent and the Grenadines	Saint Vincent and Grenadines	VCT
+Saint Vincent and the Grenadines	ST.VINCENT/GRENADINES	VCT
+Saint-Barthelemy	Saint-BarthÈlemy	BLM
+Saint-Barthelemy	Saint.Barth?lemy	BLM
+Saint-Barthelemy	Saint Barthelemy	BLM
+Saint-Martin (French part)	Saint-Martin (French part)	MAF
+Samoa	Western Samoa	WSM
+Samoa	Samoa	WSM
+San Marino	San Marino	SMR
+Sao Tome and Principe	Sâo Tomé e Principe	STP
+Sao Tome and Principe	SAO TOME & PRINCIPE	STP
+Sao Tome and Principe	S„o TomÈ and PrÌncipe	STP
+Sao Tome and Principe	Saint Tome (Sao Tome) and Principe	STP
+Sao Tome and Principe	SAO TOME	STP
+Sao Tome and Principe	Sao Tome and Principe	STP
+Sao Tome and Principe	Sao Tome and Principe	STP
+Sao Tome and Principe	Sao Tome Prn	STP
+Saudi Arabia	rw	SAU
+Saudi Arabia	Saudi Arabia	SAU
+Seaworld	SEAWORLD	SEA
+Senegal	Senegal	SEN
+Serbia	Yugoslavia	SRB
+Serbia	FEDERAL REPUBLIC OF YUGOSLAVIA	SRB
+Serbia	YUGOSLAVIA, FORMER AREA	SRB
+Serbia	Serbia-Monte	SRB
+Serbia	Yugoslavia (former)	SRB
+Serbia	Fmr Yugoslavia	SRB
+Serbia	YUG.FED.REP.	SRB
+Serbia	YUGOSLAVIA SFR	SRB
+Serbia	Former Yugoslavia	SRB
+Serbia	Yugoslavia, Territory of	SRB
+Serbia	YUGO F AREA	SRB
+Serbia	YUGOSLAVIA, FED REP OF	SRB
+Serbia	Former Yugoslavia (if no detail)	SRB
+Serbia	Serbia and Montenegro	SRB
+Serbia	Yugoslav SFR	SRB
+Serbia	Yugoslavia, Fed. Rep. of	SRB
+Serbia	Serbia/Montenegro	SRB
+Serbia	Serbia	SRB
+Seychelles	Seychelles	SYC
+Sierra Leone	Sierra Leone	SLE
+Singapore	Singapore	SGP
+Singapore	sg	SGP
+Slovakia	Slovak Republic	SVK
+Slovakia	Slovak Rep.	SVK
+Slovakia	SK	SVK
+Slovakia	sk	SVK
+Slovakia	Slovakia	SVK
+Slovenia	Slovenia	SVN
+Slovenia	SI	SVN
+Slovenia	si	SVN
+Solomon Islands	Solomon Islands	SLB
+Solomon Islands	SOLOMON ISLANDS	SLB
+Solomon Islands	Solomon Is	SLB
+Solomon Islands	SOLOMON IS.	SLB
+Solomon Islands	Solomon Isds	SLB
+Somalia	Somalia	SOM
+South Africa	South Africa, Rep.	ZAF
+South Africa	BOPHUTHATSWANA	ZAF
+South Africa	ZA	ZAF
+South Africa	za	ZAF
+South Africa	South Africa	ZAF
+South Korea	REPUBLIC OF KOREA	KOR
+South Korea	KOREA REP.	KOR
+South Korea	kr	KOR
+South Korea	Rep. of Korea	KOR
+South Korea	Korea, Republic	KOR
+South Korea	Korea Republic	KOR
+South Korea	South Korea	KOR
+South Korea	Dem. Peoples Rep. of Korea	KOR
+South Korea	Korea, Rep	KOR
+South Korea	Korea, South	KOR
+South Korea	Korea	KOR
+South Korea	Korea, Rep.	KOR
+South Korea	Rep of Korea	KOR
+South Korea	Korea Rep	KOR
+South Korea	KR	KOR
+South Korea	KOREA, REPUBLIC OF	KOR
+Spain	es	ESP
+Spain	CANARY ISLANDS	ESP
+Spain	ES	ESP
+Spain	Spain	ESP
+Sri Lanka	Sri Lanka	LKA
+Sri Lanka	SRILANKA	LKA
+Rest of World	WORLD (FORMER)	ROW
+Rest of World	WW	ROW
+Rest of World	world	ROW
+Rest of World	WORLD (FMR)	ROW
+Rest of World	Antarctica	ROW
+Sudan	Sudan	SUD
+South Sudan	South Sudan	SDS
+South Sudan	REPUBLIC OF SOUTH SUDAN	SDS
+Sudan	Sudan	SDN
+Sudan	REPUBLIC OF SUDAN	SDN
+Sudan	Sudan (former)	SDN
+Sudan	Sudan and South Sudan	SDN
+Suriname	SURINAM	SUR
+Suriname	Suriname	SUR
+Svalbard and Jan Mayen Islands	SVALBARD AND JAN MAYEN	SJM
+Svalbard and Jan Mayen Islands	Svalbard Is	SJM
+Svalbard and Jan Mayen Islands	Svalbard	SJM
+Svalbard and Jan Mayen Islands	Svalbard and Jan Mayen Islands	SJM
+Swaziland	Swaziland	SWZ
+Sweden	Sweden	SWE
+Sweden	se	SWE
+Sweden	SE	SWE
+Switzerland	ch	CHE
+Switzerland	CH	CHE
+Switzerland	Switzerland	CHE
+Syria	Syrian Arab Republic	SYR
+Syria	Syria	SYR
+Syria	Syrian Arab Rep	SYR
+Syria	SYRIAN ARAB REPUBLIC	SYR
+TFYR Macedonia	Former Yugoslav Republic of Macedonia	MKD
+TFYR Macedonia	Macedonia, FYR	MKD
+TFYR Macedonia	FORMER MACEDONIA	MKD
+TFYR Macedonia	FYR of Macedonia	MKD
+TFYR Macedonia	The former Yugoslav Republic of Macedonia	MKD
+TFYR Macedonia	MACEDONIA,THE FMR YUG RP	MKD
+TFYR Macedonia	Macedonia	MKD
+TFYR Macedonia	TFYR of Macedonia	MKD
+TFYR Macedonia	Macedonia, Fmr Yug Rp of	MKD
+TFYR Macedonia	Macedonia TFYR	MKD
+TFYR Macedonia	Macedonia, Former Yugoslav Republic of	MKD
+TFYR Macedonia	Macedonia, the former Yugoslav Republic of	MKD
+Taiwan	Taiwan	TWN
+Taiwan	China, Taiwan Prov of	TWN
+Taiwan	China, Taiwan Province of	TWN
+Taiwan	China, Taiwan	TWN
+Taiwan	Taiwan, China	TWN
+Taiwan	TW	TWN
+Taiwan	Taiwan_Province of China	TWN
+Taiwan	TAIWAN	TWN
+Taiwan	Taiwan	TWN
+Taiwan	tw	TWN
+Taiwan	Chinese Taipei	TWN
+Taiwan	Taipei	TWN
+Tajikistan	TAJIKSTAN	TJK
+Tajikistan	Tadjikistan	TJK
+Tajikistan	Tajikistan	TJK
+Tanzania	U.R. of Tanzania: Mainland	TZA
+Tanzania	Tanzania, United Rep. of	TZA
+Tanzania	Tanzania, United Republic	TZA
+Tanzania	Tanzania	TZA
+Tanzania	United Republic of Tanzania	TZA
+Tanzania	Tanzania, United Republic of	TZA
+Tanzania	Tanzania_United Republic of	TZA
+Tanzania	TANZANIA, UNITED REP OF	TZA
+Tanzania	UNITED REPUBLIC OF TANZANIA	TZA
+Tanzania	United Rep. of Tanzania	TZA
+Tanzania	Tanzania, United Rep.	TZA
+Tanzania	United Rep of Tanzania	TZA
+Thailand	Thailand	THA
+Thailand	th	THA
+Timor-Leste	Democratic Republic of Timor-Leste	TLS
+Timor-Leste	Timor-Leste	TLS
+Timor-Leste	East Timor	TLS
+Timor-Leste	TIMOR-LESTE (FORMERLY EAST TIMOR)	TLS
+Timor-Leste	TimorLeste	TLS
+Togo	Togo	TGO
+Tokelau	Tokelau	TKL
+Tonga	Tonga	TON
+Trinidad and Tobago	Trinidad Tob	TTO
+Trinidad and Tobago	TRINIDAD AND TOBAGO	TTO
+Trinidad and Tobago	Trinidad and Tobago	TTO
+Trinidad and Tobago	TRINIDAD & TOBAGO	TTO
+Trinidad and Tobago	TRINIDAD	TTO
+Tunisia	Tunisia	TUN
+Turkey	tr	TUR
+Turkey	TR	TUR
+Turkey	Turkey	TUR
+Turkmenistan	Turkmenistan	TKM
+Turks and Caicos Islands	TURKS AND CAICOS IS	TCA
+Turks and Caicos Islands	Turks and Caicos Islands	TCA
+Turks and Caicos Islands	Turks and Caicos Is.	TCA
+Turks and Caicos Islands	TURKS & CAICOS I.	TCA
+Turks and Caicos Islands	Turks and Caicos Isds	TCA
+Turks and Caicos Islands	Turks Caicos	TCA
+Tuvalu	Tuvalu	TUV
+Tuvalu	TUVALU ISLAND	TUV
+UAE	U. ARAB EMIR.	ARE
+UAE	United Arab Emirates	ARE
+UAE	United.Arab.Emirates..the.	ARE
+UAE	UNITED ARAB EMIRATES	ARE
+UAE	U.A.E	ARE
+UAE	Untd Arab Em	ARE
+UAE	AE	ARE
+UK	GB	GBR
+UK	Wales	GBR
+UK	Great Britain	GBR
+UK	GUERNSEY ISLD.	GBR
+UK	Great Britain and N.I.	GBR
+UK	United Kingdom of Great Britain and Northern Ireland	GBR
+UK	U.K.	GBR
+UK	gb	GBR
+UK	U.K	GBR
+UK	United Kingdom	GBR
+UK	UK	GBR
+UK	England	GBR
+UK	UNITED KINGDOM	GBR
+US Virgin Islands	United States Virgin Islands	VIR
+US Virgin Islands	Virgin Islands_USA	VIR
+US Virgin Islands	US Virgin Isds	VIR
+US Virgin Islands	US Virgin Islands	VIR
+US Virgin Islands	US VIRGIN ISLANDS	VIR
+US Virgin Islands	Virgin Islands	VIR
+US Virgin Islands	Virgin Islands (U.S.)	VIR
+US Virgin Islands	Virgin Islands (USA)	VIR
+US Virgin Islands	US Virgin Is	VIR
+USA	USA  LANAI ISL.	USA
+USA	United States	USA
+USA	USA  KAUAI ISL.	USA
+USA	US	USA
+USA	us	USA
+USA	USA  OAHU ISL.	USA
+USA	DIEGO GARCIA ISLAND	USA
+USA	USA  MAUI ISL.	USA
+USA	USA	USA
+USA	USA  HAWAII ISL.	USA
+USA	VIRGIN ISL.	USA
+USA	USA (before 1981)	USA
+USA	USA  MOLOKAI ISL.	USA
+USA	UNITED STATES OF AMERICA	USA
+USA	United States	USA
+USA	U.S.A	USA
+USA	United States of America	USA
+Uganda	Uganda	UGA
+Ukraine	UA	UKR
+Ukraine	Ukraine	UKR
+Uruguay	Uruguay	URY
+Uzbekistan	Uzbekistan	UZB
+Vanuatu	VANUATA	VUT
+Vanuatu	Vanuatu	VUT
+Venezuela	Venezuela,Bolivar Rep of	VEN
+Venezuela	Venezuela (Bolivarian Rep of)	VEN
+Venezuela	Venezuela, Boliv Rep of	VEN
+Venezuela	Venezuela, Bolivarian Republic of	VEN
+Venezuela	Venezuela, RB	VEN
+Venezuela	Venezuela	VEN
+Venezuela	Venezuela (Bolivarian Republic of)	VEN
+Viet Nam	REPUBLIC OF SOUTH VIETNAM	VNM
+Viet Nam	Viet Nam	VNM
+Viet Nam	Viet Nam	VNM
+Viet Nam	VN	VNM
+Viet Nam	DEMOCRATIC REPUBLIC OF VIETNAM	VNM
+Viet Nam	op	VNM
+Viet Nam	Fmr Rep. of Vietnam	VNM
+Viet Nam	Viet Nam	VNM
+Viet Nam	Viet Nam	VNM
+Viet Nam	Vietnam	VNM
+Viet Nam	Viet Nam	VNM
+Wallis and Futuna Islands	Wallis and Futuna Isds	WLF
+Wallis and Futuna Islands	Wallis Fut I	WLF
+Wallis and Futuna Islands	Wallis and Futuna Is.	WLF
+Wallis and Futuna Islands	Wallis and Futuna Islands	WLF
+Wallis and Futuna Islands	Wallis and Futuna	WLF
+Wallis and Futuna Islands	WALLIS AND FUTUNA IS	WLF
+Wallis and Futuna Islands	WALLIS & FUTUNA	WLF
+Western Sahara	Western.Sahara	ESH
+Western Sahara	Western Sahara	ESH
+Western Sahara	WESTERN SAHARA	ESH
+Western Sahara	Westn Sahara	ESH
+Yemen	Yemen, Rep.	YEM
+Yemen	Yemen, Republic of	YEM
+Yemen	Yemen	YEM
+Yemen	Yemen Arab Republic (Former)	YEM
+Yemen	Fmr Arab Rep. of Yemen	YEM
+Yemen	Yemen Dem	YMD
+Yemen	YEMEN, DEMOCRATIC	YMD
+Yemen	Fmr Dem. Yemen	YMD
+Yemen	Yemen Democratic (Former)	YMD
+Zambia	Zambia	ZMB
+Zimbabwe	Zimbabwe	ZWE
+RoW Asia and Pacific	WA	WWA
+RoW America	WL	WWL
+RoW Middle East	WM	WWM
+RoW Europe	WE	WWE
+RoW Africa	WF	WWF
+RoW Asia and Pacific	RoW Asia and Pacific	WWA
+RoW Asia and Pacific	Rest of Asia Pacific	WWA
+RoW America	RoW America	WWL
+RoW America	Rest of America	WWL
+RoW Middle East	RoW Middle East	WWM
+RoW Middle East	Middle East	WWM
+RoW Europe	RoW Europe	WWE
+RoW Europe	Rest of Europe	WWE
+RoW Africa	RoW Africa	WWF
+RoW Africa	Rest of Africa	WWF
+Rest of World	Rest of World	ROW
+Rest of World	Antarctica	ROW
+Rest of World	Bouvet Island	ROW
+Rest of World	British Indian Ocean Territory	ROW
+Rest of World	Christmas Island	ROW
+Rest of World	Christmas.Island	ROW
+Rest of World	Cocos (Keeling) Islands	ROW
+Rest of World	Faroe Islands	ROW
+Rest of World	France French Southern and Antarctic Lands	ROW
+Rest of World	Heard Island and McDonald Islands	ROW
+Rest of World	Holy See (Vatican City)	ROW
+Rest of World	Saint Martin	ROW
+Rest of World	South Georgia South Sandwich Islands	ROW
+Rest of World	Åland Islands	ROW
+Rest of World	Comoro Islands	ROW
+Rest of World	Disputed	ROW
+Rest of World	American.Samoa	ROW
+Rest of World	Antigua.and.Barbuda	ROW
+Bahamas	Bahamas..the.	BHS
+Bolivia	Bolivia..Plurinational.State.of.	BOL
+Bosnia and Herzegovina	Bosnia.and.Herzegovina	BIH
+British Virgin Islands	Virgin.Islands..British.	VGB
+Brunei	Brunei.Darussalam	BRN
+Burkina Faso	Burkina.Faso	BFA
+Cape Verde	Cabo.Verde	CPV
+Cayman Islands	Cayman.Islands..the.	CYM
+Central African Republic	Central.African.Republic..the.	CAF
+Congo	Congo..the.	COG
+Costa Rica	Costa.Rica	CRI
+Czech Republic	Czechia	CZE
+Dominican Republic	Dominican.Republic..the.	DOM
+DR Congo	Congo..the.Democratic.Republic.of.the.	COD
+El Salvador	El.Salvador	SLV
+Faeroe Islands	Faroe.Islands..the.	FRO
+Falkland Islands	Falkland.Islands..the...Malvinas.	FLK
+France	Metropolitan.France	FRA
+French Guiana	French.Guiana	GUF
+Gambia	Gambia..the.	GMB
+Guinea-Bissau	Guinea.Bissau	GNB
+Hong Kong	Hong.Kong	HKG
+Iran	Iran..Islamic.Republic.of.	IRN
+Laos	Lao.People.s.Democratic.Republic..the.	LAO
+Moldova	Moldova..the.Republic.of.	MDA
+Netherlands	Netherlands..the.	NLD
+New Zealand	New.Zealand	NZL
+Niger	Niger..the.	NER
+North Korea	Korea..the.Democratic.People.s.Republic.of.	PRK
+Papua New Guinea	Papua.New.Guinea	PNG
+Philippines	Philippines..the.	PHL
+Russia	Russian.Federation..the.	RUS
+Sao Tome and Principe	Sao.Tome.and.Principe	STP
+Saudi Arabia	Saudi.Arabia	SAU
+Sierra Leone	Sierra.Leone	SLE
+South Africa	South.Africa	ZAF
+South Korea	Korea..the.Republic.of.	KOR
+South Sudan	South.Sudan	SDS
+Sri Lanka	Sri.Lanka	LKA
+Sudan	Sudan..the.	SUD
+Taiwan	Taiwan..Province.of.China.	TWN
+Tanzania	Tanzania..United.Republic.of	TZA
+TFYR Macedonia	Macedonia..the.former.Yugoslav.Republic.of.	MKD
+Timor-Leste	Timor.Leste	TLS
+Trinidad and Tobago	Trinidad.and.Tobago	TTO
+Turks and Caicos Islands	Turks.and.Caicos.Islands..the.	TCA
+UK	United.Kingdom.of.Great.Britain.and.Northern.Ireland..the.	GBR
+US Virgin Islands	Virgin.Islands..U.S..	VIR
+USA	United.States.of.America..the.	USA
+Venezuela	Venezuela..Bolivarian.Republic.of.	VEN
+Viet Nam	Viet.Nam	VNM
+Rest of World	Bonaire..Sint.Eustatius.and.Saba	ROW
+Rest of World	Comoros..the.	ROW
+Rest of World	Cook.Islands..the.	ROW
+Rest of World	Cura?ao	ROW
+Rest of World	Isle.of.Man	ROW
+Rest of World	?land.Islands	ROW
+Rest of World	New.Caledonia	ROW
+Rest of World	Norfolk.Island	ROW
+Rest of World	Northern.Mariana.Islands..the.	ROW
+Rest of World	Palestine..State.of	ROW
+Rest of World	Puerto.Rico	ROW
+Rest of World	Saint.Kitts.and.Nevis	ROW
+Rest of World	Saint.Lucia	ROW
+Rest of World	Saint.Martin..French.part.	ROW
+Rest of World	Saint.Pierre.and.Miquelon	ROW
+Rest of World	Saint.Vincent.and.the.Grenadines	ROW
+Rest of World	San.Marino	ROW
+Rest of World	Sint.Maarten..Dutch.part.	ROW
+Rest of World	Solomon.Islands	ROW
+Rest of World	Svalbard.and.Jan.Mayen	ROW
+Rest of World	Syrian.Arab.Republic	ROW
+Rest of World	Wallis.and.Futuna	ROW

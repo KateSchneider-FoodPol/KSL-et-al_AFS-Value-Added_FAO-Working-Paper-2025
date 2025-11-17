@@ -1,0 +1,1140 @@
+AFG	AFG	Final demand	Household final consumption P.3h	
+AFG	AFG	Final demand	Non-profit institutions serving households P.3n	
+AFG	AFG	Final demand	Government final consumption P.3g	
+AFG	AFG	Final demand	Gross fixed capital formation P.51	
+AFG	AFG	Final demand	Changes in inventories P.52	
+AFG	AFG	Final demand	Acquisitions less disposals of valuables P.53	
+ALB	ALB	Final demand	Household final consumption P.3h	
+ALB	ALB	Final demand	Non-profit institutions serving households P.3n	
+ALB	ALB	Final demand	Government final consumption P.3g	
+ALB	ALB	Final demand	Gross fixed capital formation P.51	
+ALB	ALB	Final demand	Changes in inventories P.52	
+ALB	ALB	Final demand	Acquisitions less disposals of valuables P.53	
+DZA	DZA	Final demand	Household final consumption P.3h	
+DZA	DZA	Final demand	Non-profit institutions serving households P.3n	
+DZA	DZA	Final demand	Government final consumption P.3g	
+DZA	DZA	Final demand	Gross fixed capital formation P.51	
+DZA	DZA	Final demand	Changes in inventories P.52	
+DZA	DZA	Final demand	Acquisitions less disposals of valuables P.53	
+AND	AND	Final demand	Household final consumption P.3h	
+AND	AND	Final demand	Non-profit institutions serving households P.3n	
+AND	AND	Final demand	Government final consumption P.3g	
+AND	AND	Final demand	Gross fixed capital formation P.51	
+AND	AND	Final demand	Changes in inventories P.52	
+AND	AND	Final demand	Acquisitions less disposals of valuables P.53	
+AGO	AGO	Final demand	Household final consumption P.3h	
+AGO	AGO	Final demand	Non-profit institutions serving households P.3n	
+AGO	AGO	Final demand	Government final consumption P.3g	
+AGO	AGO	Final demand	Gross fixed capital formation P.51	
+AGO	AGO	Final demand	Changes in inventories P.52	
+AGO	AGO	Final demand	Acquisitions less disposals of valuables P.53	
+ATG	ATG	Final demand	Household final consumption P.3h	
+ATG	ATG	Final demand	Non-profit institutions serving households P.3n	
+ATG	ATG	Final demand	Government final consumption P.3g	
+ATG	ATG	Final demand	Gross fixed capital formation P.51	
+ATG	ATG	Final demand	Changes in inventories P.52	
+ATG	ATG	Final demand	Acquisitions less disposals of valuables P.53	
+ARG	ARG	Final demand	Household final consumption P.3h	
+ARG	ARG	Final demand	Non-profit institutions serving households P.3n	
+ARG	ARG	Final demand	Government final consumption P.3g	
+ARG	ARG	Final demand	Gross fixed capital formation P.51	
+ARG	ARG	Final demand	Changes in inventories P.52	
+ARG	ARG	Final demand	Acquisitions less disposals of valuables P.53	
+ARM	ARM	Final demand	Household final consumption P.3h	
+ARM	ARM	Final demand	Non-profit institutions serving households P.3n	
+ARM	ARM	Final demand	Government final consumption P.3g	
+ARM	ARM	Final demand	Gross fixed capital formation P.51	
+ARM	ARM	Final demand	Changes in inventories P.52	
+ARM	ARM	Final demand	Acquisitions less disposals of valuables P.53	
+ABW	ABW	Final demand	Household final consumption P.3h	
+ABW	ABW	Final demand	Non-profit institutions serving households P.3n	
+ABW	ABW	Final demand	Government final consumption P.3g	
+ABW	ABW	Final demand	Gross fixed capital formation P.51	
+ABW	ABW	Final demand	Changes in inventories P.52	
+ABW	ABW	Final demand	Acquisitions less disposals of valuables P.53	
+AUS	AUS	Final demand	Household final consumption P.3h	
+AUS	AUS	Final demand	Non-profit institutions serving households P.3n	
+AUS	AUS	Final demand	Government final consumption P.3g	
+AUS	AUS	Final demand	Gross fixed capital formation P.51	
+AUS	AUS	Final demand	Changes in inventories P.52	
+AUS	AUS	Final demand	Acquisitions less disposals of valuables P.53	
+AUT	AUT	Final demand	Household final consumption P.3h	
+AUT	AUT	Final demand	Non-profit institutions serving households P.3n	
+AUT	AUT	Final demand	Government final consumption P.3g	
+AUT	AUT	Final demand	Gross fixed capital formation P.51	
+AUT	AUT	Final demand	Changes in inventories P.52	
+AUT	AUT	Final demand	Acquisitions less disposals of valuables P.53	
+AZE	AZE	Final demand	Household final consumption P.3h	
+AZE	AZE	Final demand	Non-profit institutions serving households P.3n	
+AZE	AZE	Final demand	Government final consumption P.3g	
+AZE	AZE	Final demand	Gross fixed capital formation P.51	
+AZE	AZE	Final demand	Changes in inventories P.52	
+AZE	AZE	Final demand	Acquisitions less disposals of valuables P.53	
+BHS	BHS	Final demand	Household final consumption P.3h	
+BHS	BHS	Final demand	Non-profit institutions serving households P.3n	
+BHS	BHS	Final demand	Government final consumption P.3g	
+BHS	BHS	Final demand	Gross fixed capital formation P.51	
+BHS	BHS	Final demand	Changes in inventories P.52	
+BHS	BHS	Final demand	Acquisitions less disposals of valuables P.53	
+BHR	BHR	Final demand	Household final consumption P.3h	
+BHR	BHR	Final demand	Non-profit institutions serving households P.3n	
+BHR	BHR	Final demand	Government final consumption P.3g	
+BHR	BHR	Final demand	Gross fixed capital formation P.51	
+BHR	BHR	Final demand	Changes in inventories P.52	
+BHR	BHR	Final demand	Acquisitions less disposals of valuables P.53	
+BGD	BGD	Final demand	Household final consumption P.3h	
+BGD	BGD	Final demand	Non-profit institutions serving households P.3n	
+BGD	BGD	Final demand	Government final consumption P.3g	
+BGD	BGD	Final demand	Gross fixed capital formation P.51	
+BGD	BGD	Final demand	Changes in inventories P.52	
+BGD	BGD	Final demand	Acquisitions less disposals of valuables P.53	
+BRB	BRB	Final demand	Household final consumption P.3h	
+BRB	BRB	Final demand	Non-profit institutions serving households P.3n	
+BRB	BRB	Final demand	Government final consumption P.3g	
+BRB	BRB	Final demand	Gross fixed capital formation P.51	
+BRB	BRB	Final demand	Changes in inventories P.52	
+BRB	BRB	Final demand	Acquisitions less disposals of valuables P.53	
+BLR	BLR	Final demand	Household final consumption P.3h	
+BLR	BLR	Final demand	Non-profit institutions serving households P.3n	
+BLR	BLR	Final demand	Government final consumption P.3g	
+BLR	BLR	Final demand	Gross fixed capital formation P.51	
+BLR	BLR	Final demand	Changes in inventories P.52	
+BLR	BLR	Final demand	Acquisitions less disposals of valuables P.53	
+BEL	BEL	Final demand	Household final consumption P.3h	
+BEL	BEL	Final demand	Non-profit institutions serving households P.3n	
+BEL	BEL	Final demand	Government final consumption P.3g	
+BEL	BEL	Final demand	Gross fixed capital formation P.51	
+BEL	BEL	Final demand	Changes in inventories P.52	
+BEL	BEL	Final demand	Acquisitions less disposals of valuables P.53	
+BLZ	BLZ	Final demand	Household final consumption P.3h	
+BLZ	BLZ	Final demand	Non-profit institutions serving households P.3n	
+BLZ	BLZ	Final demand	Government final consumption P.3g	
+BLZ	BLZ	Final demand	Gross fixed capital formation P.51	
+BLZ	BLZ	Final demand	Changes in inventories P.52	
+BLZ	BLZ	Final demand	Acquisitions less disposals of valuables P.53	
+BEN	BEN	Final demand	Household final consumption P.3h	
+BEN	BEN	Final demand	Non-profit institutions serving households P.3n	
+BEN	BEN	Final demand	Government final consumption P.3g	
+BEN	BEN	Final demand	Gross fixed capital formation P.51	
+BEN	BEN	Final demand	Changes in inventories P.52	
+BEN	BEN	Final demand	Acquisitions less disposals of valuables P.53	
+BMU	BMU	Final demand	Household final consumption P.3h	
+BMU	BMU	Final demand	Non-profit institutions serving households P.3n	
+BMU	BMU	Final demand	Government final consumption P.3g	
+BMU	BMU	Final demand	Gross fixed capital formation P.51	
+BMU	BMU	Final demand	Changes in inventories P.52	
+BMU	BMU	Final demand	Acquisitions less disposals of valuables P.53	
+BTN	BTN	Final demand	Household final consumption P.3h	
+BTN	BTN	Final demand	Non-profit institutions serving households P.3n	
+BTN	BTN	Final demand	Government final consumption P.3g	
+BTN	BTN	Final demand	Gross fixed capital formation P.51	
+BTN	BTN	Final demand	Changes in inventories P.52	
+BTN	BTN	Final demand	Acquisitions less disposals of valuables P.53	
+BOL	BOL	Final demand	Household final consumption P.3h	
+BOL	BOL	Final demand	Non-profit institutions serving households P.3n	
+BOL	BOL	Final demand	Government final consumption P.3g	
+BOL	BOL	Final demand	Gross fixed capital formation P.51	
+BOL	BOL	Final demand	Changes in inventories P.52	
+BOL	BOL	Final demand	Acquisitions less disposals of valuables P.53	
+BIH	BIH	Final demand	Household final consumption P.3h	
+BIH	BIH	Final demand	Non-profit institutions serving households P.3n	
+BIH	BIH	Final demand	Government final consumption P.3g	
+BIH	BIH	Final demand	Gross fixed capital formation P.51	
+BIH	BIH	Final demand	Changes in inventories P.52	
+BIH	BIH	Final demand	Acquisitions less disposals of valuables P.53	
+BWA	BWA	Final demand	Household final consumption P.3h	
+BWA	BWA	Final demand	Non-profit institutions serving households P.3n	
+BWA	BWA	Final demand	Government final consumption P.3g	
+BWA	BWA	Final demand	Gross fixed capital formation P.51	
+BWA	BWA	Final demand	Changes in inventories P.52	
+BWA	BWA	Final demand	Acquisitions less disposals of valuables P.53	
+BRA	BRA	Final demand	Household final consumption P.3h	
+BRA	BRA	Final demand	Non-profit institutions serving households P.3n	
+BRA	BRA	Final demand	Government final consumption P.3g	
+BRA	BRA	Final demand	Gross fixed capital formation P.51	
+BRA	BRA	Final demand	Changes in inventories P.52	
+BRA	BRA	Final demand	Acquisitions less disposals of valuables P.53	
+VGB	VGB	Final demand	Household final consumption P.3h	
+VGB	VGB	Final demand	Non-profit institutions serving households P.3n	
+VGB	VGB	Final demand	Government final consumption P.3g	
+VGB	VGB	Final demand	Gross fixed capital formation P.51	
+VGB	VGB	Final demand	Changes in inventories P.52	
+VGB	VGB	Final demand	Acquisitions less disposals of valuables P.53	
+BRN	BRN	Final demand	Household final consumption P.3h	
+BRN	BRN	Final demand	Non-profit institutions serving households P.3n	
+BRN	BRN	Final demand	Government final consumption P.3g	
+BRN	BRN	Final demand	Gross fixed capital formation P.51	
+BRN	BRN	Final demand	Changes in inventories P.52	
+BRN	BRN	Final demand	Acquisitions less disposals of valuables P.53	
+BGR	BGR	Final demand	Household final consumption P.3h	
+BGR	BGR	Final demand	Non-profit institutions serving households P.3n	
+BGR	BGR	Final demand	Government final consumption P.3g	
+BGR	BGR	Final demand	Gross fixed capital formation P.51	
+BGR	BGR	Final demand	Changes in inventories P.52	
+BGR	BGR	Final demand	Acquisitions less disposals of valuables P.53	
+BFA	BFA	Final demand	Household final consumption P.3h	
+BFA	BFA	Final demand	Non-profit institutions serving households P.3n	
+BFA	BFA	Final demand	Government final consumption P.3g	
+BFA	BFA	Final demand	Gross fixed capital formation P.51	
+BFA	BFA	Final demand	Changes in inventories P.52	
+BFA	BFA	Final demand	Acquisitions less disposals of valuables P.53	
+BDI	BDI	Final demand	Household final consumption P.3h	
+BDI	BDI	Final demand	Non-profit institutions serving households P.3n	
+BDI	BDI	Final demand	Government final consumption P.3g	
+BDI	BDI	Final demand	Gross fixed capital formation P.51	
+BDI	BDI	Final demand	Changes in inventories P.52	
+BDI	BDI	Final demand	Acquisitions less disposals of valuables P.53	
+KHM	KHM	Final demand	Household final consumption P.3h	
+KHM	KHM	Final demand	Non-profit institutions serving households P.3n	
+KHM	KHM	Final demand	Government final consumption P.3g	
+KHM	KHM	Final demand	Gross fixed capital formation P.51	
+KHM	KHM	Final demand	Changes in inventories P.52	
+KHM	KHM	Final demand	Acquisitions less disposals of valuables P.53	
+CMR	CMR	Final demand	Household final consumption P.3h	
+CMR	CMR	Final demand	Non-profit institutions serving households P.3n	
+CMR	CMR	Final demand	Government final consumption P.3g	
+CMR	CMR	Final demand	Gross fixed capital formation P.51	
+CMR	CMR	Final demand	Changes in inventories P.52	
+CMR	CMR	Final demand	Acquisitions less disposals of valuables P.53	
+CAN	CAN	Final demand	Household final consumption P.3h	
+CAN	CAN	Final demand	Non-profit institutions serving households P.3n	
+CAN	CAN	Final demand	Government final consumption P.3g	
+CAN	CAN	Final demand	Gross fixed capital formation P.51	
+CAN	CAN	Final demand	Changes in inventories P.52	
+CAN	CAN	Final demand	Acquisitions less disposals of valuables P.53	
+CPV	CPV	Final demand	Household final consumption P.3h	
+CPV	CPV	Final demand	Non-profit institutions serving households P.3n	
+CPV	CPV	Final demand	Government final consumption P.3g	
+CPV	CPV	Final demand	Gross fixed capital formation P.51	
+CPV	CPV	Final demand	Changes in inventories P.52	
+CPV	CPV	Final demand	Acquisitions less disposals of valuables P.53	
+CYM	CYM	Final demand	Household final consumption P.3h	
+CYM	CYM	Final demand	Non-profit institutions serving households P.3n	
+CYM	CYM	Final demand	Government final consumption P.3g	
+CYM	CYM	Final demand	Gross fixed capital formation P.51	
+CYM	CYM	Final demand	Changes in inventories P.52	
+CYM	CYM	Final demand	Acquisitions less disposals of valuables P.53	
+CAF	CAF	Final demand	Household final consumption P.3h	
+CAF	CAF	Final demand	Non-profit institutions serving households P.3n	
+CAF	CAF	Final demand	Government final consumption P.3g	
+CAF	CAF	Final demand	Gross fixed capital formation P.51	
+CAF	CAF	Final demand	Changes in inventories P.52	
+CAF	CAF	Final demand	Acquisitions less disposals of valuables P.53	
+TCD	TCD	Final demand	Household final consumption P.3h	
+TCD	TCD	Final demand	Non-profit institutions serving households P.3n	
+TCD	TCD	Final demand	Government final consumption P.3g	
+TCD	TCD	Final demand	Gross fixed capital formation P.51	
+TCD	TCD	Final demand	Changes in inventories P.52	
+TCD	TCD	Final demand	Acquisitions less disposals of valuables P.53	
+CHL	CHL	Final demand	Household final consumption P.3h	
+CHL	CHL	Final demand	Non-profit institutions serving households P.3n	
+CHL	CHL	Final demand	Government final consumption P.3g	
+CHL	CHL	Final demand	Gross fixed capital formation P.51	
+CHL	CHL	Final demand	Changes in inventories P.52	
+CHL	CHL	Final demand	Acquisitions less disposals of valuables P.53	
+CHN	CHN	Final demand	Household final consumption P.3h	
+CHN	CHN	Final demand	Non-profit institutions serving households P.3n	
+CHN	CHN	Final demand	Government final consumption P.3g	
+CHN	CHN	Final demand	Gross fixed capital formation P.51	
+CHN	CHN	Final demand	Changes in inventories P.52	
+CHN	CHN	Final demand	Acquisitions less disposals of valuables P.53	
+COL	COL	Final demand	Household final consumption P.3h	
+COL	COL	Final demand	Non-profit institutions serving households P.3n	
+COL	COL	Final demand	Government final consumption P.3g	
+COL	COL	Final demand	Gross fixed capital formation P.51	
+COL	COL	Final demand	Changes in inventories P.52	
+COL	COL	Final demand	Acquisitions less disposals of valuables P.53	
+COG	COG	Final demand	Household final consumption P.3h	
+COG	COG	Final demand	Non-profit institutions serving households P.3n	
+COG	COG	Final demand	Government final consumption P.3g	
+COG	COG	Final demand	Gross fixed capital formation P.51	
+COG	COG	Final demand	Changes in inventories P.52	
+COG	COG	Final demand	Acquisitions less disposals of valuables P.53	
+CRI	CRI	Final demand	Household final consumption P.3h	
+CRI	CRI	Final demand	Non-profit institutions serving households P.3n	
+CRI	CRI	Final demand	Government final consumption P.3g	
+CRI	CRI	Final demand	Gross fixed capital formation P.51	
+CRI	CRI	Final demand	Changes in inventories P.52	
+CRI	CRI	Final demand	Acquisitions less disposals of valuables P.53	
+HRV	HRV	Final demand	Household final consumption P.3h	
+HRV	HRV	Final demand	Non-profit institutions serving households P.3n	
+HRV	HRV	Final demand	Government final consumption P.3g	
+HRV	HRV	Final demand	Gross fixed capital formation P.51	
+HRV	HRV	Final demand	Changes in inventories P.52	
+HRV	HRV	Final demand	Acquisitions less disposals of valuables P.53	
+CUB	CUB	Final demand	Household final consumption P.3h	
+CUB	CUB	Final demand	Non-profit institutions serving households P.3n	
+CUB	CUB	Final demand	Government final consumption P.3g	
+CUB	CUB	Final demand	Gross fixed capital formation P.51	
+CUB	CUB	Final demand	Changes in inventories P.52	
+CUB	CUB	Final demand	Acquisitions less disposals of valuables P.53	
+CYP	CYP	Final demand	Household final consumption P.3h	
+CYP	CYP	Final demand	Non-profit institutions serving households P.3n	
+CYP	CYP	Final demand	Government final consumption P.3g	
+CYP	CYP	Final demand	Gross fixed capital formation P.51	
+CYP	CYP	Final demand	Changes in inventories P.52	
+CYP	CYP	Final demand	Acquisitions less disposals of valuables P.53	
+CZE	CZE	Final demand	Household final consumption P.3h	
+CZE	CZE	Final demand	Non-profit institutions serving households P.3n	
+CZE	CZE	Final demand	Government final consumption P.3g	
+CZE	CZE	Final demand	Gross fixed capital formation P.51	
+CZE	CZE	Final demand	Changes in inventories P.52	
+CZE	CZE	Final demand	Acquisitions less disposals of valuables P.53	
+CIV	CIV	Final demand	Household final consumption P.3h	
+CIV	CIV	Final demand	Non-profit institutions serving households P.3n	
+CIV	CIV	Final demand	Government final consumption P.3g	
+CIV	CIV	Final demand	Gross fixed capital formation P.51	
+CIV	CIV	Final demand	Changes in inventories P.52	
+CIV	CIV	Final demand	Acquisitions less disposals of valuables P.53	
+PRK	PRK	Final demand	Household final consumption P.3h	
+PRK	PRK	Final demand	Non-profit institutions serving households P.3n	
+PRK	PRK	Final demand	Government final consumption P.3g	
+PRK	PRK	Final demand	Gross fixed capital formation P.51	
+PRK	PRK	Final demand	Changes in inventories P.52	
+PRK	PRK	Final demand	Acquisitions less disposals of valuables P.53	
+COD	COD	Final demand	Household final consumption P.3h	
+COD	COD	Final demand	Non-profit institutions serving households P.3n	
+COD	COD	Final demand	Government final consumption P.3g	
+COD	COD	Final demand	Gross fixed capital formation P.51	
+COD	COD	Final demand	Changes in inventories P.52	
+COD	COD	Final demand	Acquisitions less disposals of valuables P.53	
+DNK	DNK	Final demand	Household final consumption P.3h	
+DNK	DNK	Final demand	Non-profit institutions serving households P.3n	
+DNK	DNK	Final demand	Government final consumption P.3g	
+DNK	DNK	Final demand	Gross fixed capital formation P.51	
+DNK	DNK	Final demand	Changes in inventories P.52	
+DNK	DNK	Final demand	Acquisitions less disposals of valuables P.53	
+DJI	DJI	Final demand	Household final consumption P.3h	
+DJI	DJI	Final demand	Non-profit institutions serving households P.3n	
+DJI	DJI	Final demand	Government final consumption P.3g	
+DJI	DJI	Final demand	Gross fixed capital formation P.51	
+DJI	DJI	Final demand	Changes in inventories P.52	
+DJI	DJI	Final demand	Acquisitions less disposals of valuables P.53	
+DOM	DOM	Final demand	Household final consumption P.3h	
+DOM	DOM	Final demand	Non-profit institutions serving households P.3n	
+DOM	DOM	Final demand	Government final consumption P.3g	
+DOM	DOM	Final demand	Gross fixed capital formation P.51	
+DOM	DOM	Final demand	Changes in inventories P.52	
+DOM	DOM	Final demand	Acquisitions less disposals of valuables P.53	
+ECU	ECU	Final demand	Household final consumption P.3h	
+ECU	ECU	Final demand	Non-profit institutions serving households P.3n	
+ECU	ECU	Final demand	Government final consumption P.3g	
+ECU	ECU	Final demand	Gross fixed capital formation P.51	
+ECU	ECU	Final demand	Changes in inventories P.52	
+ECU	ECU	Final demand	Acquisitions less disposals of valuables P.53	
+EGY	EGY	Final demand	Household final consumption P.3h	
+EGY	EGY	Final demand	Non-profit institutions serving households P.3n	
+EGY	EGY	Final demand	Government final consumption P.3g	
+EGY	EGY	Final demand	Gross fixed capital formation P.51	
+EGY	EGY	Final demand	Changes in inventories P.52	
+EGY	EGY	Final demand	Acquisitions less disposals of valuables P.53	
+SLV	SLV	Final demand	Household final consumption P.3h	
+SLV	SLV	Final demand	Non-profit institutions serving households P.3n	
+SLV	SLV	Final demand	Government final consumption P.3g	
+SLV	SLV	Final demand	Gross fixed capital formation P.51	
+SLV	SLV	Final demand	Changes in inventories P.52	
+SLV	SLV	Final demand	Acquisitions less disposals of valuables P.53	
+ERI	ERI	Final demand	Household final consumption P.3h	
+ERI	ERI	Final demand	Non-profit institutions serving households P.3n	
+ERI	ERI	Final demand	Government final consumption P.3g	
+ERI	ERI	Final demand	Gross fixed capital formation P.51	
+ERI	ERI	Final demand	Changes in inventories P.52	
+ERI	ERI	Final demand	Acquisitions less disposals of valuables P.53	
+EST	EST	Final demand	Household final consumption P.3h	
+EST	EST	Final demand	Non-profit institutions serving households P.3n	
+EST	EST	Final demand	Government final consumption P.3g	
+EST	EST	Final demand	Gross fixed capital formation P.51	
+EST	EST	Final demand	Changes in inventories P.52	
+EST	EST	Final demand	Acquisitions less disposals of valuables P.53	
+ETH	ETH	Final demand	Household final consumption P.3h	
+ETH	ETH	Final demand	Non-profit institutions serving households P.3n	
+ETH	ETH	Final demand	Government final consumption P.3g	
+ETH	ETH	Final demand	Gross fixed capital formation P.51	
+ETH	ETH	Final demand	Changes in inventories P.52	
+ETH	ETH	Final demand	Acquisitions less disposals of valuables P.53	
+FJI	FJI	Final demand	Household final consumption P.3h	
+FJI	FJI	Final demand	Non-profit institutions serving households P.3n	
+FJI	FJI	Final demand	Government final consumption P.3g	
+FJI	FJI	Final demand	Gross fixed capital formation P.51	
+FJI	FJI	Final demand	Changes in inventories P.52	
+FJI	FJI	Final demand	Acquisitions less disposals of valuables P.53	
+FIN	FIN	Final demand	Household final consumption P.3h	
+FIN	FIN	Final demand	Non-profit institutions serving households P.3n	
+FIN	FIN	Final demand	Government final consumption P.3g	
+FIN	FIN	Final demand	Gross fixed capital formation P.51	
+FIN	FIN	Final demand	Changes in inventories P.52	
+FIN	FIN	Final demand	Acquisitions less disposals of valuables P.53	
+FRA	FRA	Final demand	Household final consumption P.3h	
+FRA	FRA	Final demand	Non-profit institutions serving households P.3n	
+FRA	FRA	Final demand	Government final consumption P.3g	
+FRA	FRA	Final demand	Gross fixed capital formation P.51	
+FRA	FRA	Final demand	Changes in inventories P.52	
+FRA	FRA	Final demand	Acquisitions less disposals of valuables P.53	
+PYF	PYF	Final demand	Household final consumption P.3h	
+PYF	PYF	Final demand	Non-profit institutions serving households P.3n	
+PYF	PYF	Final demand	Government final consumption P.3g	
+PYF	PYF	Final demand	Gross fixed capital formation P.51	
+PYF	PYF	Final demand	Changes in inventories P.52	
+PYF	PYF	Final demand	Acquisitions less disposals of valuables P.53	
+GAB	GAB	Final demand	Household final consumption P.3h	
+GAB	GAB	Final demand	Non-profit institutions serving households P.3n	
+GAB	GAB	Final demand	Government final consumption P.3g	
+GAB	GAB	Final demand	Gross fixed capital formation P.51	
+GAB	GAB	Final demand	Changes in inventories P.52	
+GAB	GAB	Final demand	Acquisitions less disposals of valuables P.53	
+GMB	GMB	Final demand	Household final consumption P.3h	
+GMB	GMB	Final demand	Non-profit institutions serving households P.3n	
+GMB	GMB	Final demand	Government final consumption P.3g	
+GMB	GMB	Final demand	Gross fixed capital formation P.51	
+GMB	GMB	Final demand	Changes in inventories P.52	
+GMB	GMB	Final demand	Acquisitions less disposals of valuables P.53	
+GEO	GEO	Final demand	Household final consumption P.3h	
+GEO	GEO	Final demand	Non-profit institutions serving households P.3n	
+GEO	GEO	Final demand	Government final consumption P.3g	
+GEO	GEO	Final demand	Gross fixed capital formation P.51	
+GEO	GEO	Final demand	Changes in inventories P.52	
+GEO	GEO	Final demand	Acquisitions less disposals of valuables P.53	
+DEU	DEU	Final demand	Household final consumption P.3h	
+DEU	DEU	Final demand	Non-profit institutions serving households P.3n	
+DEU	DEU	Final demand	Government final consumption P.3g	
+DEU	DEU	Final demand	Gross fixed capital formation P.51	
+DEU	DEU	Final demand	Changes in inventories P.52	
+DEU	DEU	Final demand	Acquisitions less disposals of valuables P.53	
+GHA	GHA	Final demand	Household final consumption P.3h	
+GHA	GHA	Final demand	Non-profit institutions serving households P.3n	
+GHA	GHA	Final demand	Government final consumption P.3g	
+GHA	GHA	Final demand	Gross fixed capital formation P.51	
+GHA	GHA	Final demand	Changes in inventories P.52	
+GHA	GHA	Final demand	Acquisitions less disposals of valuables P.53	
+GRC	GRC	Final demand	Household final consumption P.3h	
+GRC	GRC	Final demand	Non-profit institutions serving households P.3n	
+GRC	GRC	Final demand	Government final consumption P.3g	
+GRC	GRC	Final demand	Gross fixed capital formation P.51	
+GRC	GRC	Final demand	Changes in inventories P.52	
+GRC	GRC	Final demand	Acquisitions less disposals of valuables P.53	
+GRL	GRL	Final demand	Household final consumption P.3h	
+GRL	GRL	Final demand	Non-profit institutions serving households P.3n	
+GRL	GRL	Final demand	Government final consumption P.3g	
+GRL	GRL	Final demand	Gross fixed capital formation P.51	
+GRL	GRL	Final demand	Changes in inventories P.52	
+GRL	GRL	Final demand	Acquisitions less disposals of valuables P.53	
+GTM	GTM	Final demand	Household final consumption P.3h	
+GTM	GTM	Final demand	Non-profit institutions serving households P.3n	
+GTM	GTM	Final demand	Government final consumption P.3g	
+GTM	GTM	Final demand	Gross fixed capital formation P.51	
+GTM	GTM	Final demand	Changes in inventories P.52	
+GTM	GTM	Final demand	Acquisitions less disposals of valuables P.53	
+GIN	GIN	Final demand	Household final consumption P.3h	
+GIN	GIN	Final demand	Non-profit institutions serving households P.3n	
+GIN	GIN	Final demand	Government final consumption P.3g	
+GIN	GIN	Final demand	Gross fixed capital formation P.51	
+GIN	GIN	Final demand	Changes in inventories P.52	
+GIN	GIN	Final demand	Acquisitions less disposals of valuables P.53	
+GUY	GUY	Final demand	Household final consumption P.3h	
+GUY	GUY	Final demand	Non-profit institutions serving households P.3n	
+GUY	GUY	Final demand	Government final consumption P.3g	
+GUY	GUY	Final demand	Gross fixed capital formation P.51	
+GUY	GUY	Final demand	Changes in inventories P.52	
+GUY	GUY	Final demand	Acquisitions less disposals of valuables P.53	
+HTI	HTI	Final demand	Household final consumption P.3h	
+HTI	HTI	Final demand	Non-profit institutions serving households P.3n	
+HTI	HTI	Final demand	Government final consumption P.3g	
+HTI	HTI	Final demand	Gross fixed capital formation P.51	
+HTI	HTI	Final demand	Changes in inventories P.52	
+HTI	HTI	Final demand	Acquisitions less disposals of valuables P.53	
+HND	HND	Final demand	Household final consumption P.3h	
+HND	HND	Final demand	Non-profit institutions serving households P.3n	
+HND	HND	Final demand	Government final consumption P.3g	
+HND	HND	Final demand	Gross fixed capital formation P.51	
+HND	HND	Final demand	Changes in inventories P.52	
+HND	HND	Final demand	Acquisitions less disposals of valuables P.53	
+HKG	HKG	Final demand	Household final consumption P.3h	
+HKG	HKG	Final demand	Non-profit institutions serving households P.3n	
+HKG	HKG	Final demand	Government final consumption P.3g	
+HKG	HKG	Final demand	Gross fixed capital formation P.51	
+HKG	HKG	Final demand	Changes in inventories P.52	
+HKG	HKG	Final demand	Acquisitions less disposals of valuables P.53	
+HUN	HUN	Final demand	Household final consumption P.3h	
+HUN	HUN	Final demand	Non-profit institutions serving households P.3n	
+HUN	HUN	Final demand	Government final consumption P.3g	
+HUN	HUN	Final demand	Gross fixed capital formation P.51	
+HUN	HUN	Final demand	Changes in inventories P.52	
+HUN	HUN	Final demand	Acquisitions less disposals of valuables P.53	
+ISL	ISL	Final demand	Household final consumption P.3h	
+ISL	ISL	Final demand	Non-profit institutions serving households P.3n	
+ISL	ISL	Final demand	Government final consumption P.3g	
+ISL	ISL	Final demand	Gross fixed capital formation P.51	
+ISL	ISL	Final demand	Changes in inventories P.52	
+ISL	ISL	Final demand	Acquisitions less disposals of valuables P.53	
+IND	IND	Final demand	Household final consumption P.3h	
+IND	IND	Final demand	Non-profit institutions serving households P.3n	
+IND	IND	Final demand	Government final consumption P.3g	
+IND	IND	Final demand	Gross fixed capital formation P.51	
+IND	IND	Final demand	Changes in inventories P.52	
+IND	IND	Final demand	Acquisitions less disposals of valuables P.53	
+IDN	IDN	Final demand	Household final consumption P.3h	
+IDN	IDN	Final demand	Non-profit institutions serving households P.3n	
+IDN	IDN	Final demand	Government final consumption P.3g	
+IDN	IDN	Final demand	Gross fixed capital formation P.51	
+IDN	IDN	Final demand	Changes in inventories P.52	
+IDN	IDN	Final demand	Acquisitions less disposals of valuables P.53	
+IRN	IRN	Final demand	Household final consumption P.3h	
+IRN	IRN	Final demand	Non-profit institutions serving households P.3n	
+IRN	IRN	Final demand	Government final consumption P.3g	
+IRN	IRN	Final demand	Gross fixed capital formation P.51	
+IRN	IRN	Final demand	Changes in inventories P.52	
+IRN	IRN	Final demand	Acquisitions less disposals of valuables P.53	
+IRQ	IRQ	Final demand	Household final consumption P.3h	
+IRQ	IRQ	Final demand	Non-profit institutions serving households P.3n	
+IRQ	IRQ	Final demand	Government final consumption P.3g	
+IRQ	IRQ	Final demand	Gross fixed capital formation P.51	
+IRQ	IRQ	Final demand	Changes in inventories P.52	
+IRQ	IRQ	Final demand	Acquisitions less disposals of valuables P.53	
+IRL	IRL	Final demand	Household final consumption P.3h	
+IRL	IRL	Final demand	Non-profit institutions serving households P.3n	
+IRL	IRL	Final demand	Government final consumption P.3g	
+IRL	IRL	Final demand	Gross fixed capital formation P.51	
+IRL	IRL	Final demand	Changes in inventories P.52	
+IRL	IRL	Final demand	Acquisitions less disposals of valuables P.53	
+ISR	ISR	Final demand	Household final consumption P.3h	
+ISR	ISR	Final demand	Non-profit institutions serving households P.3n	
+ISR	ISR	Final demand	Government final consumption P.3g	
+ISR	ISR	Final demand	Gross fixed capital formation P.51	
+ISR	ISR	Final demand	Changes in inventories P.52	
+ISR	ISR	Final demand	Acquisitions less disposals of valuables P.53	
+ITA	ITA	Final demand	Household final consumption P.3h	
+ITA	ITA	Final demand	Non-profit institutions serving households P.3n	
+ITA	ITA	Final demand	Government final consumption P.3g	
+ITA	ITA	Final demand	Gross fixed capital formation P.51	
+ITA	ITA	Final demand	Changes in inventories P.52	
+ITA	ITA	Final demand	Acquisitions less disposals of valuables P.53	
+JAM	JAM	Final demand	Household final consumption P.3h	
+JAM	JAM	Final demand	Non-profit institutions serving households P.3n	
+JAM	JAM	Final demand	Government final consumption P.3g	
+JAM	JAM	Final demand	Gross fixed capital formation P.51	
+JAM	JAM	Final demand	Changes in inventories P.52	
+JAM	JAM	Final demand	Acquisitions less disposals of valuables P.53	
+JPN	JPN	Final demand	Household final consumption P.3h	
+JPN	JPN	Final demand	Non-profit institutions serving households P.3n	
+JPN	JPN	Final demand	Government final consumption P.3g	
+JPN	JPN	Final demand	Gross fixed capital formation P.51	
+JPN	JPN	Final demand	Changes in inventories P.52	
+JPN	JPN	Final demand	Acquisitions less disposals of valuables P.53	
+JOR	JOR	Final demand	Household final consumption P.3h	
+JOR	JOR	Final demand	Non-profit institutions serving households P.3n	
+JOR	JOR	Final demand	Government final consumption P.3g	
+JOR	JOR	Final demand	Gross fixed capital formation P.51	
+JOR	JOR	Final demand	Changes in inventories P.52	
+JOR	JOR	Final demand	Acquisitions less disposals of valuables P.53	
+KAZ	KAZ	Final demand	Household final consumption P.3h	
+KAZ	KAZ	Final demand	Non-profit institutions serving households P.3n	
+KAZ	KAZ	Final demand	Government final consumption P.3g	
+KAZ	KAZ	Final demand	Gross fixed capital formation P.51	
+KAZ	KAZ	Final demand	Changes in inventories P.52	
+KAZ	KAZ	Final demand	Acquisitions less disposals of valuables P.53	
+KEN	KEN	Final demand	Household final consumption P.3h	
+KEN	KEN	Final demand	Non-profit institutions serving households P.3n	
+KEN	KEN	Final demand	Government final consumption P.3g	
+KEN	KEN	Final demand	Gross fixed capital formation P.51	
+KEN	KEN	Final demand	Changes in inventories P.52	
+KEN	KEN	Final demand	Acquisitions less disposals of valuables P.53	
+KWT	KWT	Final demand	Household final consumption P.3h	
+KWT	KWT	Final demand	Non-profit institutions serving households P.3n	
+KWT	KWT	Final demand	Government final consumption P.3g	
+KWT	KWT	Final demand	Gross fixed capital formation P.51	
+KWT	KWT	Final demand	Changes in inventories P.52	
+KWT	KWT	Final demand	Acquisitions less disposals of valuables P.53	
+KGZ	KGZ	Final demand	Household final consumption P.3h	
+KGZ	KGZ	Final demand	Non-profit institutions serving households P.3n	
+KGZ	KGZ	Final demand	Government final consumption P.3g	
+KGZ	KGZ	Final demand	Gross fixed capital formation P.51	
+KGZ	KGZ	Final demand	Changes in inventories P.52	
+KGZ	KGZ	Final demand	Acquisitions less disposals of valuables P.53	
+LAO	LAO	Final demand	Household final consumption P.3h	
+LAO	LAO	Final demand	Non-profit institutions serving households P.3n	
+LAO	LAO	Final demand	Government final consumption P.3g	
+LAO	LAO	Final demand	Gross fixed capital formation P.51	
+LAO	LAO	Final demand	Changes in inventories P.52	
+LAO	LAO	Final demand	Acquisitions less disposals of valuables P.53	
+LVA	LVA	Final demand	Household final consumption P.3h	
+LVA	LVA	Final demand	Non-profit institutions serving households P.3n	
+LVA	LVA	Final demand	Government final consumption P.3g	
+LVA	LVA	Final demand	Gross fixed capital formation P.51	
+LVA	LVA	Final demand	Changes in inventories P.52	
+LVA	LVA	Final demand	Acquisitions less disposals of valuables P.53	
+LBN	LBN	Final demand	Household final consumption P.3h	
+LBN	LBN	Final demand	Non-profit institutions serving households P.3n	
+LBN	LBN	Final demand	Government final consumption P.3g	
+LBN	LBN	Final demand	Gross fixed capital formation P.51	
+LBN	LBN	Final demand	Changes in inventories P.52	
+LBN	LBN	Final demand	Acquisitions less disposals of valuables P.53	
+LSO	LSO	Final demand	Household final consumption P.3h	
+LSO	LSO	Final demand	Non-profit institutions serving households P.3n	
+LSO	LSO	Final demand	Government final consumption P.3g	
+LSO	LSO	Final demand	Gross fixed capital formation P.51	
+LSO	LSO	Final demand	Changes in inventories P.52	
+LSO	LSO	Final demand	Acquisitions less disposals of valuables P.53	
+LBR	LBR	Final demand	Household final consumption P.3h	
+LBR	LBR	Final demand	Non-profit institutions serving households P.3n	
+LBR	LBR	Final demand	Government final consumption P.3g	
+LBR	LBR	Final demand	Gross fixed capital formation P.51	
+LBR	LBR	Final demand	Changes in inventories P.52	
+LBR	LBR	Final demand	Acquisitions less disposals of valuables P.53	
+LBY	LBY	Final demand	Household final consumption P.3h	
+LBY	LBY	Final demand	Non-profit institutions serving households P.3n	
+LBY	LBY	Final demand	Government final consumption P.3g	
+LBY	LBY	Final demand	Gross fixed capital formation P.51	
+LBY	LBY	Final demand	Changes in inventories P.52	
+LBY	LBY	Final demand	Acquisitions less disposals of valuables P.53	
+LIE	LIE	Final demand	Household final consumption P.3h	
+LIE	LIE	Final demand	Non-profit institutions serving households P.3n	
+LIE	LIE	Final demand	Government final consumption P.3g	
+LIE	LIE	Final demand	Gross fixed capital formation P.51	
+LIE	LIE	Final demand	Changes in inventories P.52	
+LIE	LIE	Final demand	Acquisitions less disposals of valuables P.53	
+LTU	LTU	Final demand	Household final consumption P.3h	
+LTU	LTU	Final demand	Non-profit institutions serving households P.3n	
+LTU	LTU	Final demand	Government final consumption P.3g	
+LTU	LTU	Final demand	Gross fixed capital formation P.51	
+LTU	LTU	Final demand	Changes in inventories P.52	
+LTU	LTU	Final demand	Acquisitions less disposals of valuables P.53	
+LUX	LUX	Final demand	Household final consumption P.3h	
+LUX	LUX	Final demand	Non-profit institutions serving households P.3n	
+LUX	LUX	Final demand	Government final consumption P.3g	
+LUX	LUX	Final demand	Gross fixed capital formation P.51	
+LUX	LUX	Final demand	Changes in inventories P.52	
+LUX	LUX	Final demand	Acquisitions less disposals of valuables P.53	
+MAC	MAC	Final demand	Household final consumption P.3h	
+MAC	MAC	Final demand	Non-profit institutions serving households P.3n	
+MAC	MAC	Final demand	Government final consumption P.3g	
+MAC	MAC	Final demand	Gross fixed capital formation P.51	
+MAC	MAC	Final demand	Changes in inventories P.52	
+MAC	MAC	Final demand	Acquisitions less disposals of valuables P.53	
+MDG	MDG	Final demand	Household final consumption P.3h	
+MDG	MDG	Final demand	Non-profit institutions serving households P.3n	
+MDG	MDG	Final demand	Government final consumption P.3g	
+MDG	MDG	Final demand	Gross fixed capital formation P.51	
+MDG	MDG	Final demand	Changes in inventories P.52	
+MDG	MDG	Final demand	Acquisitions less disposals of valuables P.53	
+MWI	MWI	Final demand	Household final consumption P.3h	
+MWI	MWI	Final demand	Non-profit institutions serving households P.3n	
+MWI	MWI	Final demand	Government final consumption P.3g	
+MWI	MWI	Final demand	Gross fixed capital formation P.51	
+MWI	MWI	Final demand	Changes in inventories P.52	
+MWI	MWI	Final demand	Acquisitions less disposals of valuables P.53	
+MYS	MYS	Final demand	Household final consumption P.3h	
+MYS	MYS	Final demand	Non-profit institutions serving households P.3n	
+MYS	MYS	Final demand	Government final consumption P.3g	
+MYS	MYS	Final demand	Gross fixed capital formation P.51	
+MYS	MYS	Final demand	Changes in inventories P.52	
+MYS	MYS	Final demand	Acquisitions less disposals of valuables P.53	
+MDV	MDV	Final demand	Household final consumption P.3h	
+MDV	MDV	Final demand	Non-profit institutions serving households P.3n	
+MDV	MDV	Final demand	Government final consumption P.3g	
+MDV	MDV	Final demand	Gross fixed capital formation P.51	
+MDV	MDV	Final demand	Changes in inventories P.52	
+MDV	MDV	Final demand	Acquisitions less disposals of valuables P.53	
+MLI	MLI	Final demand	Household final consumption P.3h	
+MLI	MLI	Final demand	Non-profit institutions serving households P.3n	
+MLI	MLI	Final demand	Government final consumption P.3g	
+MLI	MLI	Final demand	Gross fixed capital formation P.51	
+MLI	MLI	Final demand	Changes in inventories P.52	
+MLI	MLI	Final demand	Acquisitions less disposals of valuables P.53	
+MLT	MLT	Final demand	Household final consumption P.3h	
+MLT	MLT	Final demand	Non-profit institutions serving households P.3n	
+MLT	MLT	Final demand	Government final consumption P.3g	
+MLT	MLT	Final demand	Gross fixed capital formation P.51	
+MLT	MLT	Final demand	Changes in inventories P.52	
+MLT	MLT	Final demand	Acquisitions less disposals of valuables P.53	
+MRT	MRT	Final demand	Household final consumption P.3h	
+MRT	MRT	Final demand	Non-profit institutions serving households P.3n	
+MRT	MRT	Final demand	Government final consumption P.3g	
+MRT	MRT	Final demand	Gross fixed capital formation P.51	
+MRT	MRT	Final demand	Changes in inventories P.52	
+MRT	MRT	Final demand	Acquisitions less disposals of valuables P.53	
+MUS	MUS	Final demand	Household final consumption P.3h	
+MUS	MUS	Final demand	Non-profit institutions serving households P.3n	
+MUS	MUS	Final demand	Government final consumption P.3g	
+MUS	MUS	Final demand	Gross fixed capital formation P.51	
+MUS	MUS	Final demand	Changes in inventories P.52	
+MUS	MUS	Final demand	Acquisitions less disposals of valuables P.53	
+MEX	MEX	Final demand	Household final consumption P.3h	
+MEX	MEX	Final demand	Non-profit institutions serving households P.3n	
+MEX	MEX	Final demand	Government final consumption P.3g	
+MEX	MEX	Final demand	Gross fixed capital formation P.51	
+MEX	MEX	Final demand	Changes in inventories P.52	
+MEX	MEX	Final demand	Acquisitions less disposals of valuables P.53	
+MCO	MCO	Final demand	Household final consumption P.3h	
+MCO	MCO	Final demand	Non-profit institutions serving households P.3n	
+MCO	MCO	Final demand	Government final consumption P.3g	
+MCO	MCO	Final demand	Gross fixed capital formation P.51	
+MCO	MCO	Final demand	Changes in inventories P.52	
+MCO	MCO	Final demand	Acquisitions less disposals of valuables P.53	
+MNG	MNG	Final demand	Household final consumption P.3h	
+MNG	MNG	Final demand	Non-profit institutions serving households P.3n	
+MNG	MNG	Final demand	Government final consumption P.3g	
+MNG	MNG	Final demand	Gross fixed capital formation P.51	
+MNG	MNG	Final demand	Changes in inventories P.52	
+MNG	MNG	Final demand	Acquisitions less disposals of valuables P.53	
+MNE	MNE	Final demand	Household final consumption P.3h	
+MNE	MNE	Final demand	Non-profit institutions serving households P.3n	
+MNE	MNE	Final demand	Government final consumption P.3g	
+MNE	MNE	Final demand	Gross fixed capital formation P.51	
+MNE	MNE	Final demand	Changes in inventories P.52	
+MNE	MNE	Final demand	Acquisitions less disposals of valuables P.53	
+MAR	MAR	Final demand	Household final consumption P.3h	
+MAR	MAR	Final demand	Non-profit institutions serving households P.3n	
+MAR	MAR	Final demand	Government final consumption P.3g	
+MAR	MAR	Final demand	Gross fixed capital formation P.51	
+MAR	MAR	Final demand	Changes in inventories P.52	
+MAR	MAR	Final demand	Acquisitions less disposals of valuables P.53	
+MOZ	MOZ	Final demand	Household final consumption P.3h	
+MOZ	MOZ	Final demand	Non-profit institutions serving households P.3n	
+MOZ	MOZ	Final demand	Government final consumption P.3g	
+MOZ	MOZ	Final demand	Gross fixed capital formation P.51	
+MOZ	MOZ	Final demand	Changes in inventories P.52	
+MOZ	MOZ	Final demand	Acquisitions less disposals of valuables P.53	
+MMR	MMR	Final demand	Household final consumption P.3h	
+MMR	MMR	Final demand	Non-profit institutions serving households P.3n	
+MMR	MMR	Final demand	Government final consumption P.3g	
+MMR	MMR	Final demand	Gross fixed capital formation P.51	
+MMR	MMR	Final demand	Changes in inventories P.52	
+MMR	MMR	Final demand	Acquisitions less disposals of valuables P.53	
+NAM	NAM	Final demand	Household final consumption P.3h	
+NAM	NAM	Final demand	Non-profit institutions serving households P.3n	
+NAM	NAM	Final demand	Government final consumption P.3g	
+NAM	NAM	Final demand	Gross fixed capital formation P.51	
+NAM	NAM	Final demand	Changes in inventories P.52	
+NAM	NAM	Final demand	Acquisitions less disposals of valuables P.53	
+NPL	NPL	Final demand	Household final consumption P.3h	
+NPL	NPL	Final demand	Non-profit institutions serving households P.3n	
+NPL	NPL	Final demand	Government final consumption P.3g	
+NPL	NPL	Final demand	Gross fixed capital formation P.51	
+NPL	NPL	Final demand	Changes in inventories P.52	
+NPL	NPL	Final demand	Acquisitions less disposals of valuables P.53	
+NLD	NLD	Final demand	Household final consumption P.3h	
+NLD	NLD	Final demand	Non-profit institutions serving households P.3n	
+NLD	NLD	Final demand	Government final consumption P.3g	
+NLD	NLD	Final demand	Gross fixed capital formation P.51	
+NLD	NLD	Final demand	Changes in inventories P.52	
+NLD	NLD	Final demand	Acquisitions less disposals of valuables P.53	
+ANT	ANT	Final demand	Household final consumption P.3h	
+ANT	ANT	Final demand	Non-profit institutions serving households P.3n	
+ANT	ANT	Final demand	Government final consumption P.3g	
+ANT	ANT	Final demand	Gross fixed capital formation P.51	
+ANT	ANT	Final demand	Changes in inventories P.52	
+ANT	ANT	Final demand	Acquisitions less disposals of valuables P.53	
+NCL	NCL	Final demand	Household final consumption P.3h	
+NCL	NCL	Final demand	Non-profit institutions serving households P.3n	
+NCL	NCL	Final demand	Government final consumption P.3g	
+NCL	NCL	Final demand	Gross fixed capital formation P.51	
+NCL	NCL	Final demand	Changes in inventories P.52	
+NCL	NCL	Final demand	Acquisitions less disposals of valuables P.53	
+NZL	NZL	Final demand	Household final consumption P.3h	
+NZL	NZL	Final demand	Non-profit institutions serving households P.3n	
+NZL	NZL	Final demand	Government final consumption P.3g	
+NZL	NZL	Final demand	Gross fixed capital formation P.51	
+NZL	NZL	Final demand	Changes in inventories P.52	
+NZL	NZL	Final demand	Acquisitions less disposals of valuables P.53	
+NIC	NIC	Final demand	Household final consumption P.3h	
+NIC	NIC	Final demand	Non-profit institutions serving households P.3n	
+NIC	NIC	Final demand	Government final consumption P.3g	
+NIC	NIC	Final demand	Gross fixed capital formation P.51	
+NIC	NIC	Final demand	Changes in inventories P.52	
+NIC	NIC	Final demand	Acquisitions less disposals of valuables P.53	
+NER	NER	Final demand	Household final consumption P.3h	
+NER	NER	Final demand	Non-profit institutions serving households P.3n	
+NER	NER	Final demand	Government final consumption P.3g	
+NER	NER	Final demand	Gross fixed capital formation P.51	
+NER	NER	Final demand	Changes in inventories P.52	
+NER	NER	Final demand	Acquisitions less disposals of valuables P.53	
+NGA	NGA	Final demand	Household final consumption P.3h	
+NGA	NGA	Final demand	Non-profit institutions serving households P.3n	
+NGA	NGA	Final demand	Government final consumption P.3g	
+NGA	NGA	Final demand	Gross fixed capital formation P.51	
+NGA	NGA	Final demand	Changes in inventories P.52	
+NGA	NGA	Final demand	Acquisitions less disposals of valuables P.53	
+NOR	NOR	Final demand	Household final consumption P.3h	
+NOR	NOR	Final demand	Non-profit institutions serving households P.3n	
+NOR	NOR	Final demand	Government final consumption P.3g	
+NOR	NOR	Final demand	Gross fixed capital formation P.51	
+NOR	NOR	Final demand	Changes in inventories P.52	
+NOR	NOR	Final demand	Acquisitions less disposals of valuables P.53	
+PSE	PSE	Final demand	Household final consumption P.3h	
+PSE	PSE	Final demand	Non-profit institutions serving households P.3n	
+PSE	PSE	Final demand	Government final consumption P.3g	
+PSE	PSE	Final demand	Gross fixed capital formation P.51	
+PSE	PSE	Final demand	Changes in inventories P.52	
+PSE	PSE	Final demand	Acquisitions less disposals of valuables P.53	
+OMN	OMN	Final demand	Household final consumption P.3h	
+OMN	OMN	Final demand	Non-profit institutions serving households P.3n	
+OMN	OMN	Final demand	Government final consumption P.3g	
+OMN	OMN	Final demand	Gross fixed capital formation P.51	
+OMN	OMN	Final demand	Changes in inventories P.52	
+OMN	OMN	Final demand	Acquisitions less disposals of valuables P.53	
+PAK	PAK	Final demand	Household final consumption P.3h	
+PAK	PAK	Final demand	Non-profit institutions serving households P.3n	
+PAK	PAK	Final demand	Government final consumption P.3g	
+PAK	PAK	Final demand	Gross fixed capital formation P.51	
+PAK	PAK	Final demand	Changes in inventories P.52	
+PAK	PAK	Final demand	Acquisitions less disposals of valuables P.53	
+PAN	PAN	Final demand	Household final consumption P.3h	
+PAN	PAN	Final demand	Non-profit institutions serving households P.3n	
+PAN	PAN	Final demand	Government final consumption P.3g	
+PAN	PAN	Final demand	Gross fixed capital formation P.51	
+PAN	PAN	Final demand	Changes in inventories P.52	
+PAN	PAN	Final demand	Acquisitions less disposals of valuables P.53	
+PNG	PNG	Final demand	Household final consumption P.3h	
+PNG	PNG	Final demand	Non-profit institutions serving households P.3n	
+PNG	PNG	Final demand	Government final consumption P.3g	
+PNG	PNG	Final demand	Gross fixed capital formation P.51	
+PNG	PNG	Final demand	Changes in inventories P.52	
+PNG	PNG	Final demand	Acquisitions less disposals of valuables P.53	
+PRY	PRY	Final demand	Household final consumption P.3h	
+PRY	PRY	Final demand	Non-profit institutions serving households P.3n	
+PRY	PRY	Final demand	Government final consumption P.3g	
+PRY	PRY	Final demand	Gross fixed capital formation P.51	
+PRY	PRY	Final demand	Changes in inventories P.52	
+PRY	PRY	Final demand	Acquisitions less disposals of valuables P.53	
+PER	PER	Final demand	Household final consumption P.3h	
+PER	PER	Final demand	Non-profit institutions serving households P.3n	
+PER	PER	Final demand	Government final consumption P.3g	
+PER	PER	Final demand	Gross fixed capital formation P.51	
+PER	PER	Final demand	Changes in inventories P.52	
+PER	PER	Final demand	Acquisitions less disposals of valuables P.53	
+PHL	PHL	Final demand	Household final consumption P.3h	
+PHL	PHL	Final demand	Non-profit institutions serving households P.3n	
+PHL	PHL	Final demand	Government final consumption P.3g	
+PHL	PHL	Final demand	Gross fixed capital formation P.51	
+PHL	PHL	Final demand	Changes in inventories P.52	
+PHL	PHL	Final demand	Acquisitions less disposals of valuables P.53	
+POL	POL	Final demand	Household final consumption P.3h	
+POL	POL	Final demand	Non-profit institutions serving households P.3n	
+POL	POL	Final demand	Government final consumption P.3g	
+POL	POL	Final demand	Gross fixed capital formation P.51	
+POL	POL	Final demand	Changes in inventories P.52	
+POL	POL	Final demand	Acquisitions less disposals of valuables P.53	
+PRT	PRT	Final demand	Household final consumption P.3h	
+PRT	PRT	Final demand	Non-profit institutions serving households P.3n	
+PRT	PRT	Final demand	Government final consumption P.3g	
+PRT	PRT	Final demand	Gross fixed capital formation P.51	
+PRT	PRT	Final demand	Changes in inventories P.52	
+PRT	PRT	Final demand	Acquisitions less disposals of valuables P.53	
+QAT	QAT	Final demand	Household final consumption P.3h	
+QAT	QAT	Final demand	Non-profit institutions serving households P.3n	
+QAT	QAT	Final demand	Government final consumption P.3g	
+QAT	QAT	Final demand	Gross fixed capital formation P.51	
+QAT	QAT	Final demand	Changes in inventories P.52	
+QAT	QAT	Final demand	Acquisitions less disposals of valuables P.53	
+KOR	KOR	Final demand	Household final consumption P.3h	
+KOR	KOR	Final demand	Non-profit institutions serving households P.3n	
+KOR	KOR	Final demand	Government final consumption P.3g	
+KOR	KOR	Final demand	Gross fixed capital formation P.51	
+KOR	KOR	Final demand	Changes in inventories P.52	
+KOR	KOR	Final demand	Acquisitions less disposals of valuables P.53	
+MDA	MDA	Final demand	Household final consumption P.3h	
+MDA	MDA	Final demand	Non-profit institutions serving households P.3n	
+MDA	MDA	Final demand	Government final consumption P.3g	
+MDA	MDA	Final demand	Gross fixed capital formation P.51	
+MDA	MDA	Final demand	Changes in inventories P.52	
+MDA	MDA	Final demand	Acquisitions less disposals of valuables P.53	
+ROU	ROU	Final demand	Household final consumption P.3h	
+ROU	ROU	Final demand	Non-profit institutions serving households P.3n	
+ROU	ROU	Final demand	Government final consumption P.3g	
+ROU	ROU	Final demand	Gross fixed capital formation P.51	
+ROU	ROU	Final demand	Changes in inventories P.52	
+ROU	ROU	Final demand	Acquisitions less disposals of valuables P.53	
+RUS	RUS	Final demand	Household final consumption P.3h	
+RUS	RUS	Final demand	Non-profit institutions serving households P.3n	
+RUS	RUS	Final demand	Government final consumption P.3g	
+RUS	RUS	Final demand	Gross fixed capital formation P.51	
+RUS	RUS	Final demand	Changes in inventories P.52	
+RUS	RUS	Final demand	Acquisitions less disposals of valuables P.53	
+RWA	RWA	Final demand	Household final consumption P.3h	
+RWA	RWA	Final demand	Non-profit institutions serving households P.3n	
+RWA	RWA	Final demand	Government final consumption P.3g	
+RWA	RWA	Final demand	Gross fixed capital formation P.51	
+RWA	RWA	Final demand	Changes in inventories P.52	
+RWA	RWA	Final demand	Acquisitions less disposals of valuables P.53	
+WSM	WSM	Final demand	Household final consumption P.3h	
+WSM	WSM	Final demand	Non-profit institutions serving households P.3n	
+WSM	WSM	Final demand	Government final consumption P.3g	
+WSM	WSM	Final demand	Gross fixed capital formation P.51	
+WSM	WSM	Final demand	Changes in inventories P.52	
+WSM	WSM	Final demand	Acquisitions less disposals of valuables P.53	
+SMR	SMR	Final demand	Household final consumption P.3h	
+SMR	SMR	Final demand	Non-profit institutions serving households P.3n	
+SMR	SMR	Final demand	Government final consumption P.3g	
+SMR	SMR	Final demand	Gross fixed capital formation P.51	
+SMR	SMR	Final demand	Changes in inventories P.52	
+SMR	SMR	Final demand	Acquisitions less disposals of valuables P.53	
+STP	STP	Final demand	Household final consumption P.3h	
+STP	STP	Final demand	Non-profit institutions serving households P.3n	
+STP	STP	Final demand	Government final consumption P.3g	
+STP	STP	Final demand	Gross fixed capital formation P.51	
+STP	STP	Final demand	Changes in inventories P.52	
+STP	STP	Final demand	Acquisitions less disposals of valuables P.53	
+SAU	SAU	Final demand	Household final consumption P.3h	
+SAU	SAU	Final demand	Non-profit institutions serving households P.3n	
+SAU	SAU	Final demand	Government final consumption P.3g	
+SAU	SAU	Final demand	Gross fixed capital formation P.51	
+SAU	SAU	Final demand	Changes in inventories P.52	
+SAU	SAU	Final demand	Acquisitions less disposals of valuables P.53	
+SEN	SEN	Final demand	Household final consumption P.3h	
+SEN	SEN	Final demand	Non-profit institutions serving households P.3n	
+SEN	SEN	Final demand	Government final consumption P.3g	
+SEN	SEN	Final demand	Gross fixed capital formation P.51	
+SEN	SEN	Final demand	Changes in inventories P.52	
+SEN	SEN	Final demand	Acquisitions less disposals of valuables P.53	
+SRB	SRB	Final demand	Household final consumption P.3h	
+SRB	SRB	Final demand	Non-profit institutions serving households P.3n	
+SRB	SRB	Final demand	Government final consumption P.3g	
+SRB	SRB	Final demand	Gross fixed capital formation P.51	
+SRB	SRB	Final demand	Changes in inventories P.52	
+SRB	SRB	Final demand	Acquisitions less disposals of valuables P.53	
+SYC	SYC	Final demand	Household final consumption P.3h	
+SYC	SYC	Final demand	Non-profit institutions serving households P.3n	
+SYC	SYC	Final demand	Government final consumption P.3g	
+SYC	SYC	Final demand	Gross fixed capital formation P.51	
+SYC	SYC	Final demand	Changes in inventories P.52	
+SYC	SYC	Final demand	Acquisitions less disposals of valuables P.53	
+SLE	SLE	Final demand	Household final consumption P.3h	
+SLE	SLE	Final demand	Non-profit institutions serving households P.3n	
+SLE	SLE	Final demand	Government final consumption P.3g	
+SLE	SLE	Final demand	Gross fixed capital formation P.51	
+SLE	SLE	Final demand	Changes in inventories P.52	
+SLE	SLE	Final demand	Acquisitions less disposals of valuables P.53	
+SGP	SGP	Final demand	Household final consumption P.3h	
+SGP	SGP	Final demand	Non-profit institutions serving households P.3n	
+SGP	SGP	Final demand	Government final consumption P.3g	
+SGP	SGP	Final demand	Gross fixed capital formation P.51	
+SGP	SGP	Final demand	Changes in inventories P.52	
+SGP	SGP	Final demand	Acquisitions less disposals of valuables P.53	
+SVK	SVK	Final demand	Household final consumption P.3h	
+SVK	SVK	Final demand	Non-profit institutions serving households P.3n	
+SVK	SVK	Final demand	Government final consumption P.3g	
+SVK	SVK	Final demand	Gross fixed capital formation P.51	
+SVK	SVK	Final demand	Changes in inventories P.52	
+SVK	SVK	Final demand	Acquisitions less disposals of valuables P.53	
+SVN	SVN	Final demand	Household final consumption P.3h	
+SVN	SVN	Final demand	Non-profit institutions serving households P.3n	
+SVN	SVN	Final demand	Government final consumption P.3g	
+SVN	SVN	Final demand	Gross fixed capital formation P.51	
+SVN	SVN	Final demand	Changes in inventories P.52	
+SVN	SVN	Final demand	Acquisitions less disposals of valuables P.53	
+SOM	SOM	Final demand	Household final consumption P.3h	
+SOM	SOM	Final demand	Non-profit institutions serving households P.3n	
+SOM	SOM	Final demand	Government final consumption P.3g	
+SOM	SOM	Final demand	Gross fixed capital formation P.51	
+SOM	SOM	Final demand	Changes in inventories P.52	
+SOM	SOM	Final demand	Acquisitions less disposals of valuables P.53	
+ZAF	ZAF	Final demand	Household final consumption P.3h	
+ZAF	ZAF	Final demand	Non-profit institutions serving households P.3n	
+ZAF	ZAF	Final demand	Government final consumption P.3g	
+ZAF	ZAF	Final demand	Gross fixed capital formation P.51	
+ZAF	ZAF	Final demand	Changes in inventories P.52	
+ZAF	ZAF	Final demand	Acquisitions less disposals of valuables P.53	
+SDS	SDS	Final demand	Household final consumption P.3h	
+SDS	SDS	Final demand	Non-profit institutions serving households P.3n	
+SDS	SDS	Final demand	Government final consumption P.3g	
+SDS	SDS	Final demand	Gross fixed capital formation P.51	
+SDS	SDS	Final demand	Changes in inventories P.52	
+SDS	SDS	Final demand	Acquisitions less disposals of valuables P.53	
+ESP	ESP	Final demand	Household final consumption P.3h	
+ESP	ESP	Final demand	Non-profit institutions serving households P.3n	
+ESP	ESP	Final demand	Government final consumption P.3g	
+ESP	ESP	Final demand	Gross fixed capital formation P.51	
+ESP	ESP	Final demand	Changes in inventories P.52	
+ESP	ESP	Final demand	Acquisitions less disposals of valuables P.53	
+LKA	LKA	Final demand	Household final consumption P.3h	
+LKA	LKA	Final demand	Non-profit institutions serving households P.3n	
+LKA	LKA	Final demand	Government final consumption P.3g	
+LKA	LKA	Final demand	Gross fixed capital formation P.51	
+LKA	LKA	Final demand	Changes in inventories P.52	
+LKA	LKA	Final demand	Acquisitions less disposals of valuables P.53	
+SUD	SUD	Final demand	Household final consumption P.3h	
+SUD	SUD	Final demand	Non-profit institutions serving households P.3n	
+SUD	SUD	Final demand	Government final consumption P.3g	
+SUD	SUD	Final demand	Gross fixed capital formation P.51	
+SUD	SUD	Final demand	Changes in inventories P.52	
+SUD	SUD	Final demand	Acquisitions less disposals of valuables P.53	
+SUR	SUR	Final demand	Household final consumption P.3h	
+SUR	SUR	Final demand	Non-profit institutions serving households P.3n	
+SUR	SUR	Final demand	Government final consumption P.3g	
+SUR	SUR	Final demand	Gross fixed capital formation P.51	
+SUR	SUR	Final demand	Changes in inventories P.52	
+SUR	SUR	Final demand	Acquisitions less disposals of valuables P.53	
+SWZ	SWZ	Final demand	Household final consumption P.3h	
+SWZ	SWZ	Final demand	Non-profit institutions serving households P.3n	
+SWZ	SWZ	Final demand	Government final consumption P.3g	
+SWZ	SWZ	Final demand	Gross fixed capital formation P.51	
+SWZ	SWZ	Final demand	Changes in inventories P.52	
+SWZ	SWZ	Final demand	Acquisitions less disposals of valuables P.53	
+SWE	SWE	Final demand	Household final consumption P.3h	
+SWE	SWE	Final demand	Non-profit institutions serving households P.3n	
+SWE	SWE	Final demand	Government final consumption P.3g	
+SWE	SWE	Final demand	Gross fixed capital formation P.51	
+SWE	SWE	Final demand	Changes in inventories P.52	
+SWE	SWE	Final demand	Acquisitions less disposals of valuables P.53	
+CHE	CHE	Final demand	Household final consumption P.3h	
+CHE	CHE	Final demand	Non-profit institutions serving households P.3n	
+CHE	CHE	Final demand	Government final consumption P.3g	
+CHE	CHE	Final demand	Gross fixed capital formation P.51	
+CHE	CHE	Final demand	Changes in inventories P.52	
+CHE	CHE	Final demand	Acquisitions less disposals of valuables P.53	
+SYR	SYR	Final demand	Household final consumption P.3h	
+SYR	SYR	Final demand	Non-profit institutions serving households P.3n	
+SYR	SYR	Final demand	Government final consumption P.3g	
+SYR	SYR	Final demand	Gross fixed capital formation P.51	
+SYR	SYR	Final demand	Changes in inventories P.52	
+SYR	SYR	Final demand	Acquisitions less disposals of valuables P.53	
+TWN	TWN	Final demand	Household final consumption P.3h	
+TWN	TWN	Final demand	Non-profit institutions serving households P.3n	
+TWN	TWN	Final demand	Government final consumption P.3g	
+TWN	TWN	Final demand	Gross fixed capital formation P.51	
+TWN	TWN	Final demand	Changes in inventories P.52	
+TWN	TWN	Final demand	Acquisitions less disposals of valuables P.53	
+TJK	TJK	Final demand	Household final consumption P.3h	
+TJK	TJK	Final demand	Non-profit institutions serving households P.3n	
+TJK	TJK	Final demand	Government final consumption P.3g	
+TJK	TJK	Final demand	Gross fixed capital formation P.51	
+TJK	TJK	Final demand	Changes in inventories P.52	
+TJK	TJK	Final demand	Acquisitions less disposals of valuables P.53	
+THA	THA	Final demand	Household final consumption P.3h	
+THA	THA	Final demand	Non-profit institutions serving households P.3n	
+THA	THA	Final demand	Government final consumption P.3g	
+THA	THA	Final demand	Gross fixed capital formation P.51	
+THA	THA	Final demand	Changes in inventories P.52	
+THA	THA	Final demand	Acquisitions less disposals of valuables P.53	
+MKD	MKD	Final demand	Household final consumption P.3h	
+MKD	MKD	Final demand	Non-profit institutions serving households P.3n	
+MKD	MKD	Final demand	Government final consumption P.3g	
+MKD	MKD	Final demand	Gross fixed capital formation P.51	
+MKD	MKD	Final demand	Changes in inventories P.52	
+MKD	MKD	Final demand	Acquisitions less disposals of valuables P.53	
+TGO	TGO	Final demand	Household final consumption P.3h	
+TGO	TGO	Final demand	Non-profit institutions serving households P.3n	
+TGO	TGO	Final demand	Government final consumption P.3g	
+TGO	TGO	Final demand	Gross fixed capital formation P.51	
+TGO	TGO	Final demand	Changes in inventories P.52	
+TGO	TGO	Final demand	Acquisitions less disposals of valuables P.53	
+TTO	TTO	Final demand	Household final consumption P.3h	
+TTO	TTO	Final demand	Non-profit institutions serving households P.3n	
+TTO	TTO	Final demand	Government final consumption P.3g	
+TTO	TTO	Final demand	Gross fixed capital formation P.51	
+TTO	TTO	Final demand	Changes in inventories P.52	
+TTO	TTO	Final demand	Acquisitions less disposals of valuables P.53	
+TUN	TUN	Final demand	Household final consumption P.3h	
+TUN	TUN	Final demand	Non-profit institutions serving households P.3n	
+TUN	TUN	Final demand	Government final consumption P.3g	
+TUN	TUN	Final demand	Gross fixed capital formation P.51	
+TUN	TUN	Final demand	Changes in inventories P.52	
+TUN	TUN	Final demand	Acquisitions less disposals of valuables P.53	
+TUR	TUR	Final demand	Household final consumption P.3h	
+TUR	TUR	Final demand	Non-profit institutions serving households P.3n	
+TUR	TUR	Final demand	Government final consumption P.3g	
+TUR	TUR	Final demand	Gross fixed capital formation P.51	
+TUR	TUR	Final demand	Changes in inventories P.52	
+TUR	TUR	Final demand	Acquisitions less disposals of valuables P.53	
+TKM	TKM	Final demand	Household final consumption P.3h	
+TKM	TKM	Final demand	Non-profit institutions serving households P.3n	
+TKM	TKM	Final demand	Government final consumption P.3g	
+TKM	TKM	Final demand	Gross fixed capital formation P.51	
+TKM	TKM	Final demand	Changes in inventories P.52	
+TKM	TKM	Final demand	Acquisitions less disposals of valuables P.53	
+USR	USR	Final demand	Household final consumption P.3h	
+USR	USR	Final demand	Non-profit institutions serving households P.3n	
+USR	USR	Final demand	Government final consumption P.3g	
+USR	USR	Final demand	Gross fixed capital formation P.51	
+USR	USR	Final demand	Changes in inventories P.52	
+USR	USR	Final demand	Acquisitions less disposals of valuables P.53	
+UGA	UGA	Final demand	Household final consumption P.3h	
+UGA	UGA	Final demand	Non-profit institutions serving households P.3n	
+UGA	UGA	Final demand	Government final consumption P.3g	
+UGA	UGA	Final demand	Gross fixed capital formation P.51	
+UGA	UGA	Final demand	Changes in inventories P.52	
+UGA	UGA	Final demand	Acquisitions less disposals of valuables P.53	
+UKR	UKR	Final demand	Household final consumption P.3h	
+UKR	UKR	Final demand	Non-profit institutions serving households P.3n	
+UKR	UKR	Final demand	Government final consumption P.3g	
+UKR	UKR	Final demand	Gross fixed capital formation P.51	
+UKR	UKR	Final demand	Changes in inventories P.52	
+UKR	UKR	Final demand	Acquisitions less disposals of valuables P.53	
+ARE	ARE	Final demand	Household final consumption P.3h	
+ARE	ARE	Final demand	Non-profit institutions serving households P.3n	
+ARE	ARE	Final demand	Government final consumption P.3g	
+ARE	ARE	Final demand	Gross fixed capital formation P.51	
+ARE	ARE	Final demand	Changes in inventories P.52	
+ARE	ARE	Final demand	Acquisitions less disposals of valuables P.53	
+GBR	GBR	Final demand	Household final consumption P.3h	
+GBR	GBR	Final demand	Non-profit institutions serving households P.3n	
+GBR	GBR	Final demand	Government final consumption P.3g	
+GBR	GBR	Final demand	Gross fixed capital formation P.51	
+GBR	GBR	Final demand	Changes in inventories P.52	
+GBR	GBR	Final demand	Acquisitions less disposals of valuables P.53	
+TZA	TZA	Final demand	Household final consumption P.3h	
+TZA	TZA	Final demand	Non-profit institutions serving households P.3n	
+TZA	TZA	Final demand	Government final consumption P.3g	
+TZA	TZA	Final demand	Gross fixed capital formation P.51	
+TZA	TZA	Final demand	Changes in inventories P.52	
+TZA	TZA	Final demand	Acquisitions less disposals of valuables P.53	
+USA	USA	Final demand	Household final consumption P.3h	
+USA	USA	Final demand	Non-profit institutions serving households P.3n	
+USA	USA	Final demand	Government final consumption P.3g	
+USA	USA	Final demand	Gross fixed capital formation P.51	
+USA	USA	Final demand	Changes in inventories P.52	
+USA	USA	Final demand	Acquisitions less disposals of valuables P.53	
+URY	URY	Final demand	Household final consumption P.3h	
+URY	URY	Final demand	Non-profit institutions serving households P.3n	
+URY	URY	Final demand	Government final consumption P.3g	
+URY	URY	Final demand	Gross fixed capital formation P.51	
+URY	URY	Final demand	Changes in inventories P.52	
+URY	URY	Final demand	Acquisitions less disposals of valuables P.53	
+UZB	UZB	Final demand	Household final consumption P.3h	
+UZB	UZB	Final demand	Non-profit institutions serving households P.3n	
+UZB	UZB	Final demand	Government final consumption P.3g	
+UZB	UZB	Final demand	Gross fixed capital formation P.51	
+UZB	UZB	Final demand	Changes in inventories P.52	
+UZB	UZB	Final demand	Acquisitions less disposals of valuables P.53	
+VUT	VUT	Final demand	Household final consumption P.3h	
+VUT	VUT	Final demand	Non-profit institutions serving households P.3n	
+VUT	VUT	Final demand	Government final consumption P.3g	
+VUT	VUT	Final demand	Gross fixed capital formation P.51	
+VUT	VUT	Final demand	Changes in inventories P.52	
+VUT	VUT	Final demand	Acquisitions less disposals of valuables P.53	
+VEN	VEN	Final demand	Household final consumption P.3h	
+VEN	VEN	Final demand	Non-profit institutions serving households P.3n	
+VEN	VEN	Final demand	Government final consumption P.3g	
+VEN	VEN	Final demand	Gross fixed capital formation P.51	
+VEN	VEN	Final demand	Changes in inventories P.52	
+VEN	VEN	Final demand	Acquisitions less disposals of valuables P.53	
+VNM	VNM	Final demand	Household final consumption P.3h	
+VNM	VNM	Final demand	Non-profit institutions serving households P.3n	
+VNM	VNM	Final demand	Government final consumption P.3g	
+VNM	VNM	Final demand	Gross fixed capital formation P.51	
+VNM	VNM	Final demand	Changes in inventories P.52	
+VNM	VNM	Final demand	Acquisitions less disposals of valuables P.53	
+YEM	YEM	Final demand	Household final consumption P.3h	
+YEM	YEM	Final demand	Non-profit institutions serving households P.3n	
+YEM	YEM	Final demand	Government final consumption P.3g	
+YEM	YEM	Final demand	Gross fixed capital formation P.51	
+YEM	YEM	Final demand	Changes in inventories P.52	
+YEM	YEM	Final demand	Acquisitions less disposals of valuables P.53	
+ZMB	ZMB	Final demand	Household final consumption P.3h	
+ZMB	ZMB	Final demand	Non-profit institutions serving households P.3n	
+ZMB	ZMB	Final demand	Government final consumption P.3g	
+ZMB	ZMB	Final demand	Gross fixed capital formation P.51	
+ZMB	ZMB	Final demand	Changes in inventories P.52	
+ZMB	ZMB	Final demand	Acquisitions less disposals of valuables P.53	
+ZWE	ZWE	Final demand	Household final consumption P.3h	
+ZWE	ZWE	Final demand	Non-profit institutions serving households P.3n	
+ZWE	ZWE	Final demand	Government final consumption P.3g	
+ZWE	ZWE	Final demand	Gross fixed capital formation P.51	
+ZWE	ZWE	Final demand	Changes in inventories P.52	
+ZWE	ZWE	Final demand	Acquisitions less disposals of valuables P.53	
+ROW	ROW	Final demand	Household final consumption P.3h	
+ROW	ROW	Final demand	Non-profit institutions serving households P.3n	
+ROW	ROW	Final demand	Government final consumption P.3g	
+ROW	ROW	Final demand	Gross fixed capital formation P.51	
+ROW	ROW	Final demand	Changes in inventories P.52	
+ROW	ROW	Final demand	Acquisitions less disposals of valuables P.53	

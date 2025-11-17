@@ -1,0 +1,32 @@
+---
+title: "AFS ValueAdded References"
+author: "Kate Schneider"
+date: "2023-08-16"
+output: html_document
+---
+
+This script creates a .bib file with all references used across the scripts in this project. 
+
+```{r setup, include=FALSE, echo = FALSE, warning = FALSE, messages = FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = 'C:/Users/Kate S/OneDrive - Johns Hopkins/AFS Value Added 2023')
+
+# Load packages
+library(dplyr)
+library(tidyverse)
+library(citr) ## To install from github: devtools::install_github("crsh/citr")
+
+# Set relative directory paths
+  scripts <- file.path(".", "Scripts")
+  support <- file.path(".", "Support files and scripts")
+
+# Citation management
+citr::tidy_bib_file(
+  rmd_file = c("Scripts/2_AFS Val Added_SNA data.rmd", "Scripts/3_AFS Val Added_UNIDO Manufacturing data.rmd",
+               "Scripts/4_AFS Val Added_EORA data and fraction calculation.rmd"),
+  messy_bibliography = "Scripts/Agrifood Value Added.bib", #updated by Zotero
+  file = file.path(support, "references.bib") #.bib file with only references actually referenced
+)
+
+```

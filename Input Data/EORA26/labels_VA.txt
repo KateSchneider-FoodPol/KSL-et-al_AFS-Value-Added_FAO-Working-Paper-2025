@@ -1,0 +1,6 @@
+Primary input	Compensation of employees D.1	
+Primary input	Taxes on production D.29	
+Primary input	Subsidies on production D.39	
+Primary input	Net operating surplus B.2n	
+Primary input	Net mixed income B.3n	
+Primary input	Consumption of fixed capital K.1	
