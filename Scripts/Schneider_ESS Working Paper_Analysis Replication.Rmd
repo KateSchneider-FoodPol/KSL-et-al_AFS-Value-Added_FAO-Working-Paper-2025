@@ -332,7 +332,7 @@ $~$
             legend.text = element_text(size = 6),
             legend.position="none") +
       guides(fill = guide_legend(override.aes = list(size = 0.1), ncol = 4)) +
-      labs(x = element_blank(), y = ("Current US$ (billions)"))
+      labs(x = element_blank(), y = ("Current USD (billions)"))
 
     forlegend <- ggplot(toplot, aes(fill = fct_reorder(ISIC_Item, ISIC_order), y = Sum_VA_AFS, x=UN_continental_region)) + 
         geom_col() + 
@@ -346,7 +346,7 @@ $~$
             legend.text = element_text(size = 6),
             legend.position="bottom") +
       guides(fill = guide_legend(override.aes = list(size = 0.1), ncol = 4)) +
-      labs(x = element_blank(), y = ("Current US$ (billions)"))
+      labs(x = element_blank(), y = ("Current USD (billions)"))
     
     legend <- get_legend(forlegend)
 
@@ -732,7 +732,7 @@ $~$
             axis.text.x = element_text(size = 6),
             axis.text.y = element_text(size = 6),
             axis.title.y = element_text(size = 8)) +
-      labs(y = ("Value added from agrifood systems, current US$ (billions)")) 
+      labs(y = ("Value added from agrifood systems, current USD (billions)")) 
     
     p1 <- ggplot(toplot, aes(y=ValueAdded_cUSD, x=Year, fill = fct_reorder(ISIC_Item, ISIC_order))) +
       geom_col(aes(fill = fct_reorder(ISIC_Item, ISIC_order))) + 
@@ -985,6 +985,8 @@ $~$
                          shape = Type, color = Type), 
                      show.legend = FALSE) +
           scale_shape_manual(values = c(15, 17)) +
+          # Make the thousands separator a space per FAO formatting 
+          scale_x_continuous( labels = label_number(big.mark = " ")) +
           theme_classic() +
           theme(plot.margin = unit(c(0.1,0.2,0.1,0), "cm"),
                 legend.position="none",
@@ -1035,6 +1037,8 @@ $~$
                      aes(y = country, x = VA_perworker,
                          shape = Type, color = Type), 
                      size = 2, show.legend = TRUE) +
+          # Make the thousands separator a space per FAO formatting 
+          scale_x_continuous( labels = label_number(big.mark = " ")) +
           scale_shape_manual(values = c(15, 17)) +
           scale_fill_manual("", values = c("gray90")) +
           theme_classic() +
@@ -1061,7 +1065,7 @@ $~$
         plot1 <- cowplot::plot_grid(plotlist = plot_list, nrow = 2, align = "hv", rel_widths = c(1,1))
     
     # Add a single x-axis label to the bottom right
-        text <- "Value added per worker (current US$)"
+        text <- "Value added per worker (current USD)"
         tgrob <- text_grob(text, size = 8, color = "black")
         label <- as_ggplot(tgrob) + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) 
         plot2 <- cowplot::plot_grid(plot1, label, nrow = 2, rel_heights = c(30,0.85))
