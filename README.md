@@ -6,7 +6,7 @@ Purpose: Replicate the workflow to create the dataset and analyses for Schneider
 
 Last updated: 17 November 2025
 
-License: CC-BY-NC-SA-4.0 (see https://creativecommons.org/licenses/by-nc-sa/4.0/ for terms)
+License: CC-BY-4.0 (see https://creativecommons.org/licenses/by/4.0/  for terms)
 
 Archived Dataset DOI: 
 
