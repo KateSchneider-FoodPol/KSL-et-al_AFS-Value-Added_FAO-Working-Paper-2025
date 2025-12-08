@@ -1,4 +1,5 @@
 The designations employed and the presentation of material in this information product do not imply the expression of any opinion whatsoever on the part of the Food and Agriculture Organization of the United Nations (FAO) concerning the legal or development status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries. The mention of specific companies or products of manufacturers, whether or not these have been patented, does not imply that these have been endorsed or recommended by FAO in preference to others of a similar nature that are not mentioned.
+
 The views expressed in this information product are those of the author(s) and do not necessarily reflect the views or policies of FAO. 
 
 © FAO, 2025
@@ -10,4 +11,5 @@ Under the terms of this licence, this work may be copied, redistributed and adap
 Any dispute arising under this licence that cannot be settled amicably shall be referred to arbitration in accordance with the Arbitration Rules of the United Nations Commission on International Trade Law (UNCITRAL). The parties shall be bound by any arbitration award rendered as a result of such arbitration as the final adjudication of such a dispute.
 Third-party materials. This Creative Commons licence CC BY 4.0 does not apply to non-FAO copyright materials included in this publication. Users wishing to reuse material from this work that is attributed to a third party, such as tables, figures or images, are responsible for determining whether permission is needed for that reuse and for obtaining permission from the copyright holder. The risk of claims resulting from infringement of any third-party-owned component in the work rests solely with the user.
 FAO photographs. FAO photographs that may appear in this work are not subject to the above-mentioned Creative Commons licence. Queries for the use of any FAO photographs should be submitted to: photo-library@fao.org. 
+
 Sales, rights and licensing. FAO information products are available on the FAO website (www.fao.org/publications) and print copies can be purchased through the distributors listed there. For general enquiries about FAO publications please contact: publications@fao.org. Queries regarding rights and licensing of publications should be submitted to: copyright@fao.org. 
